@@ -40,7 +40,9 @@ class RegisterViewController: UIViewController {
             
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error{
-                    print(e)
+                    let alert = UIAlertController(title: "uh oh", message: e.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in }))
+                    self.present(alert, animated: true, completion: nil)
                 } else {
                     self.performSegue(withIdentifier: "RegisterToMain", sender: self)
                 }

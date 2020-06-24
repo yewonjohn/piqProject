@@ -37,6 +37,9 @@
                                     <constraint firstAttribute="height" constant="50" id="GLi-OI-RWn"/>
                                 </constraints>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SH0-4Z-xnj"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Wc-gTJ" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
                                 <rect key="frame" x="50" y="696" width="314" height="50"/>
@@ -44,7 +47,7 @@
                                     <constraint firstAttribute="height" constant="50" id="4Pr-yd-KMK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVj-xe-OE4" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
                                 <rect key="frame" x="50" y="636" width="314" height="50"/>
@@ -87,6 +90,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="9AF-xK-d8s"/>
                     <connections>
+                        <outlet property="emailTextField" destination="aVj-xe-OE4" id="DgM-F2-BD7"/>
+                        <outlet property="passwordTextField" destination="lyw-Wc-gTJ" id="RBl-2q-pAt"/>
                         <segue destination="24d-Fd-wGV" kind="show" identifier="LoginToRegister" id="tUF-zb-NS1"/>
                         <segue destination="N3k-EI-wXm" kind="show" identifier="LoginToMain" id="l3Z-la-LRT"/>
                     </connections>
@@ -104,7 +109,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvZ-lp-Qpf" customClass="LoginButton" customModule="YummyTummy" customModuleProvider="target">
-                                <rect key="frame" x="30" y="454" width="354" height="30"/>
+                                <rect key="frame" x="30" y="469" width="354" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="zzQ-ok-zUm"/>
                                 </constraints>
@@ -114,15 +119,15 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfU-DY-JQE" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
-                                <rect key="frame" x="50" y="358" width="314" height="50"/>
+                                <rect key="frame" x="50" y="373" width="314" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="py1-tY-m6V"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BoK-Ns-gkO" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
-                                <rect key="frame" x="50" y="298" width="314" height="50"/>
+                                <rect key="frame" x="50" y="313" width="314" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="L98-Id-7LG"/>
                                 </constraints>
@@ -135,7 +140,6 @@
                             <constraint firstItem="ZvZ-lp-Qpf" firstAttribute="top" secondItem="XfU-DY-JQE" secondAttribute="bottom" constant="46" id="0L1-EC-Gmc"/>
                             <constraint firstItem="CeP-mL-JUo" firstAttribute="trailing" secondItem="XfU-DY-JQE" secondAttribute="trailing" constant="50" id="120-MW-Eoa"/>
                             <constraint firstItem="CeP-mL-JUo" firstAttribute="trailing" secondItem="BoK-Ns-gkO" secondAttribute="trailing" constant="50" id="2HX-kc-L09"/>
-                            <constraint firstItem="BoK-Ns-gkO" firstAttribute="top" secondItem="CeP-mL-JUo" secondAttribute="top" constant="210" id="6pn-rA-vkN"/>
                             <constraint firstItem="XfU-DY-JQE" firstAttribute="top" secondItem="BoK-Ns-gkO" secondAttribute="bottom" constant="10" id="FBE-Pu-fnm"/>
                             <constraint firstItem="BoK-Ns-gkO" firstAttribute="leading" secondItem="CeP-mL-JUo" secondAttribute="leading" constant="50" id="OeS-Ne-kiB"/>
                             <constraint firstItem="XfU-DY-JQE" firstAttribute="leading" secondItem="CeP-mL-JUo" secondAttribute="leading" constant="50" id="Ogf-PC-r4b"/>
@@ -174,6 +178,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="m2Y-5i-1rv"/>
+        <segue reference="l3Z-la-LRT"/>
     </inferredMetricsTieBreakers>
 </document>
