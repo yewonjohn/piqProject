@@ -14,27 +14,25 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
+    
     let backgroundImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared().isEnabled = true
-        
-        // Do any additional setup after loading the view.
-        setBackground()
+        //setting background
+        Background().setAuthBackground(view,backgroundImageView)
+    }
+    //navigation bar management
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    func setBackground(){
-        view.addSubview(backgroundImageView)
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        backgroundImageView.image = UIImage(named: "tacosImg")
-        backgroundImageView.alpha = 0.5
-        view.sendSubviewToBack(backgroundImageView)
-    }
     @IBAction func goSignUp(_ sender: Any) {
         self.performSegue(withIdentifier: "LoginToRegister", sender: self)
     }
