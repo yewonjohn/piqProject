@@ -13,10 +13,14 @@ import SwiftyJSON
 class RestaurantManager{
 //    latitude: Double,
 //    longitude: Double,
+//    location: String,
 //    category: String,
-//    limit: Int,
 //    sortBy: String,
-//    locale: String
+//    term: String,
+//    categories: String,
+//    price: Int,
+
+
     func getLocalRestaurants(){
         var businesses: [Businesses]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
@@ -35,13 +39,11 @@ class RestaurantManager{
                 let businessArray = json["businesses"].arrayValue
                 
                 for business in businessArray {
-//                    var categories: [Categories]? = []
-                    var categories1 = business["categories"].arrayValue
-                    for category in categories1{
+                    let categories = business["categories"].arrayValue
+                    for category in categories{
                         var cat = Categories()
                         cat.alias = category["alias"].stringValue
                         cat.title = category["title"].stringValue
-//                        categories?.append(cat)
                         
                         let business1 = Businesses(name: json["name"].stringValue,
                                                   id: json["id"].stringValue,
@@ -59,6 +61,8 @@ class RestaurantManager{
                                                   categories: cat,
                                                   url: json["url"].stringValue,
                                                   img_url: json["image_url"].stringValue)
+                        
+                        print(business1.categories)
                     }
                 }
 
