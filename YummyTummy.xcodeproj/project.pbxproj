@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0E0D5B8FCFD0C318080C49DB /* Pods_YummyTummy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B103807F845363B50FDA2892 /* Pods_YummyTummy.framework */; };
+		442297FE24A394FD000F846A /* RestaurantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442297FD24A394FD000F846A /* RestaurantManager.swift */; };
 		44712D7B24A268650083B1AB /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44712D7924A268650083B1AB /* AuthTextField.swift */; };
 		44712D7C24A268650083B1AB /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44712D7A24A268650083B1AB /* LoginButton.swift */; };
 		44712D7E24A26CF40083B1AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44712D7D24A26CF40083B1AB /* Constants.swift */; };
+		4476A20D24A416600009719D /* Businesses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4476A20C24A416600009719D /* Businesses.swift */; };
 		44D201BC249D76F70074F315 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BB249D76F70074F315 /* AppDelegate.swift */; };
 		44D201BE249D76F70074F315 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BD249D76F70074F315 /* SceneDelegate.swift */; };
 		44D201C0249D76F70074F315 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BF249D76F70074F315 /* LoginViewController.swift */; };
@@ -47,9 +49,11 @@
 
 /* Begin PBXFileReference section */
 		04B627AA226B0141F645C741 /* Pods-YummyTummy-YummyTummyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YummyTummy-YummyTummyUITests.debug.xcconfig"; path = "Target Support Files/Pods-YummyTummy-YummyTummyUITests/Pods-YummyTummy-YummyTummyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		442297FD24A394FD000F846A /* RestaurantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantManager.swift; sourceTree = "<group>"; };
 		44712D7924A268650083B1AB /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		44712D7A24A268650083B1AB /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		44712D7D24A26CF40083B1AB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4476A20C24A416600009719D /* Businesses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Businesses.swift; sourceTree = "<group>"; };
 		44D201B8249D76F70074F315 /* YummyTummy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YummyTummy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D201BB249D76F70074F315 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44D201BD249D76F70074F315 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 		44712D7524A267D80083B1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				442297FD24A394FD000F846A /* RestaurantManager.swift */,
+				4476A20C24A416600009719D /* Businesses.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -482,6 +488,8 @@
 				44E79B5B24A2E5C000DDC48E /* RestaurantsViewController.swift in Sources */,
 				44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */,
 				44E79B6224A2FEAB00DDC48E /* Background.swift in Sources */,
+				442297FE24A394FD000F846A /* RestaurantManager.swift in Sources */,
+				4476A20D24A416600009719D /* Businesses.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

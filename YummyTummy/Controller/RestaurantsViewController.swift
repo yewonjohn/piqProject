@@ -7,17 +7,24 @@
 //
 
 import UIKit
-import IQKeyboardManager
+import CoreLocation
 
 class RestaurantsViewController: UIViewController {
+    var locationManager = CLLocationManager()
     let backgroundImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        IQKeyboardManager.shared().isEnabled = true
 
-        // Do any additional setup after loading the view.
         setBackground()
+        locationManager.requestWhenInUseAuthorization()
+        var currentLoc: CLLocation!
+        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+        CLLocationManager.authorizationStatus() == .authorizedAlways) {
+           currentLoc = locationManager.location
+           print(currentLoc.coordinate.latitude)
+           print(currentLoc.coordinate.longitude)
+        }
     }
 
     func setBackground(){

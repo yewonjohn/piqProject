@@ -160,11 +160,11 @@
             </objects>
             <point key="canvasLocation" x="871" y="-218"/>
         </scene>
-        <!--View Controller-->
+        <!--Restaurants View Controller-->
         <scene sceneID="g5E-eN-GpB">
             <objects>
-                <viewController id="N3k-EI-wXm" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8kJ-8L-JvP">
+                <viewController id="N3k-EI-wXm" customClass="RestaurantsViewController" customModule="YummyTummy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8kJ-8L-JvP" customClass="r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -178,6 +178,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="l3Z-la-LRT"/>
+        <segue reference="m2Y-5i-1rv"/>
     </inferredMetricsTieBreakers>
 </document>
