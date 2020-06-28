@@ -28,7 +28,6 @@
 		44E79B6224A2FEAB00DDC48E /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B6124A2FEAB00DDC48E /* Background.swift */; };
 		44F9509424A56D0E0088748F /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F9509324A56D0E0088748F /* SwipeCardView.swift */; };
 		44F9509624A56D480088748F /* StackContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F9509524A56D480088748F /* StackContainerView.swift */; };
-		44F9509824A56D7F0088748F /* SwipeCardsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F9509724A56D7F0088748F /* SwipeCardsDataSource.swift */; };
 		44F9509A24A56DE60088748F /* CardsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F9509924A56DE60088748F /* CardsDataModel.swift */; };
 		4BE73A5949F5507FF024758C /* Pods_YummyTummyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1A600F76AA0BF1D211DBAE /* Pods_YummyTummyTests.framework */; };
 		C5E054E37EA1757CB3FB0796 /* Pods_YummyTummy_YummyTummyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE307FD6A3BE055410BE2173 /* Pods_YummyTummy_YummyTummyUITests.framework */; };
@@ -79,7 +78,6 @@
 		44E79B6124A2FEAB00DDC48E /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		44F9509324A56D0E0088748F /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
 		44F9509524A56D480088748F /* StackContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackContainerView.swift; sourceTree = "<group>"; };
-		44F9509724A56D7F0088748F /* SwipeCardsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardsDataSource.swift; sourceTree = "<group>"; };
 		44F9509924A56DE60088748F /* CardsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsDataModel.swift; sourceTree = "<group>"; };
 		4C1A600F76AA0BF1D211DBAE /* Pods_YummyTummyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YummyTummyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B0BB38AD5F26C3AB05323B1 /* Pods-YummyTummyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YummyTummyTests.debug.xcconfig"; path = "Target Support Files/Pods-YummyTummyTests/Pods-YummyTummyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -245,7 +243,6 @@
 			children = (
 				44712D7D24A26CF40083B1AB /* Constants.swift */,
 				44E79B6124A2FEAB00DDC48E /* Background.swift */,
-				44F9509724A56D7F0088748F /* SwipeCardsDataSource.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -495,7 +492,6 @@
 				44D201BC249D76F70074F315 /* AppDelegate.swift in Sources */,
 				44F9509424A56D0E0088748F /* SwipeCardView.swift in Sources */,
 				44E79B5924A2E54200DDC48E /* RegisterViewController.swift in Sources */,
-				44F9509824A56D7F0088748F /* SwipeCardsDataSource.swift in Sources */,
 				44F9509624A56D480088748F /* StackContainerView.swift in Sources */,
 				44F9509A24A56DE60088748F /* CardsDataModel.swift in Sources */,
 				44D201BE249D76F70074F315 /* SceneDelegate.swift in Sources */,

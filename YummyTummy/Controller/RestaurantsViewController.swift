@@ -39,7 +39,7 @@ class RestaurantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Expense Tracker"
+        title = "YUMMY AROUND U!"
         stackContainer.dataSource = self
 
         setBackground()
@@ -54,13 +54,14 @@ class RestaurantsViewController: UIViewController {
     }
     
     //MARK: - Configurations
+    //SETS CONTAINER CONSTRAINTS
     func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60).isActive = true
+        stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
         stackContainer.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        stackContainer.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        stackContainer.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
-    
+    //SETS RESET NAVIGATIONAL BUTTON
     func configureNavigationBarButtonItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetTapped))
     }
@@ -82,6 +83,8 @@ class RestaurantsViewController: UIViewController {
         view.sendSubviewToBack(backgroundImageView)
     }
 }
+//MARK: - DataSource for StackContainerView
+
 extension RestaurantsViewController : SwipeCardsDataSource {
 
     func numberOfCardsToShow() -> Int {

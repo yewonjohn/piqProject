@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SwipeCardsDelegate {
+    func swipeDidEnd(on view: SwipeCardView)
+}
+
 class SwipeCardView : UIView {
    
     //MARK: - Properties
