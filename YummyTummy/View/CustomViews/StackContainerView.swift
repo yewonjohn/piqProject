@@ -45,7 +45,6 @@ class StackContainerView: UIView, SwipeCardsDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     func reloadData() {
         removeAllCardViews()
         guard let datasource = dataSource else { return }

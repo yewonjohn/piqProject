@@ -17,8 +17,10 @@ class SwipeCardView : UIView {
     //MARK: - Properties
     var swipeView : UIView!
     var shadowView : UIView!
+    var imageContainView: UIView!
     var imageView: UIImageView!
   
+    var titleLabel = UILabel()
     var label = UILabel()
     var moreButton = UIButton()
     
@@ -45,7 +47,9 @@ class SwipeCardView : UIView {
         configureShadowView()
         configureSwipeView()
         configureLabelView()
+        configureImageContainerView()
         configureImageView()
+        configureTitleView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -85,6 +89,41 @@ class SwipeCardView : UIView {
         swipeView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor).isActive = true
         swipeView.topAnchor.constraint(equalTo: shadowView.topAnchor).isActive = true
     }
+    func configureImageContainerView() {
+        imageContainView = UIView()
+        imageContainView.clipsToBounds = true
+        swipeView.addSubview(imageContainView)
+        imageContainView.translatesAutoresizingMaskIntoConstraints = false
+        imageContainView.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
+        imageContainView.topAnchor.constraint(equalTo: swipeView.topAnchor).isActive = true
+        imageContainView.widthAnchor.constraint(equalTo: self.swipeView.widthAnchor, multiplier: 1.0).isActive = true
+        imageContainView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+    }
+    
+    func configureImageView() {
+        imageView = UIImageView()
+        imageContainView.addSubview(imageView)
+        imageView.contentMode = .scaleAspectFill
+//        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.centerXAnchor.constraint(equalTo: imageContainView.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: imageContainView.centerYAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalTo: self.imageContainView.widthAnchor, multiplier: 1.0).isActive = true
+        imageView.heightAnchor.constraint(equalTo: self.imageContainView.heightAnchor, multiplier: 1.0).isActive = true
+    }
+    
+    func configureTitleView() {
+        imageContainView.addSubview(titleLabel)
+//        titleLabel.backgroundColor = .white
+        titleLabel.textColor = .black
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.leftAnchor.constraint(equalTo: imageContainView.leftAnchor).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: imageContainView.rightAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: imageContainView.bottomAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 85).isActive = true
+    }
     
     func configureLabelView() {
         swipeView.addSubview(label)
@@ -98,18 +137,6 @@ class SwipeCardView : UIView {
         label.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor).isActive = true
         label.heightAnchor.constraint(equalToConstant: 85).isActive = true
         
-    }
-    
-    func configureImageView() {
-        imageView = UIImageView()
-        swipeView.addSubview(imageView)
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-
-        imageView.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: swipeView.centerYAnchor, constant: -30).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
     }
     
     func configureButton() {

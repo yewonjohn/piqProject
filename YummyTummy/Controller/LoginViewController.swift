@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
         IQKeyboardManager.shared().isEnabled = true
         //setting background
         Background().setAuthBackground(view,backgroundImageView)
-        RestaurantManager().getLocalRestaurants()
+        //RestaurantManager().getLocalRestaurants()
     }
     //navigation bar management
     override func viewWillAppear(_ animated: Bool) {

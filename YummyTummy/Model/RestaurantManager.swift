@@ -35,9 +35,8 @@ class RestaurantManager{
             case .success:
                 print("Success!")
                 let json: JSON = JSON(responseObject.data)
-                
                 let businessArray = json["businesses"].arrayValue
-                
+
                 for business in businessArray {
                     let categories = business["categories"].arrayValue
                     for category in categories{
@@ -45,24 +44,24 @@ class RestaurantManager{
                         cat.alias = category["alias"].stringValue
                         cat.title = category["title"].stringValue
                         
-                        let business1 = Businesses(name: json["name"].stringValue,
-                                                  id: json["id"].stringValue,
-                                                  rating: json["rating"].floatValue,
-                                                  reviewCount: json["review_count"].intValue,
-                                                  price: json["price"].stringValue,
-                                                  distance: json["distance"].doubleValue,
-                                                  address: json["location"]["address1"].stringValue,
-                                                  zipcode: json["location"]["zip_code"].stringValue,
-                                                  city: json["location"]["city"].stringValue,
-                                                  country: json["location"]["country"].stringValue,
-                                                  state: json["location"]["state"].stringValue,
-                                                  isClosed: json["is_closed"].boolValue,
-                                                  phone: json["phone"].stringValue,
+                        let business1 = Businesses(name: business["name"].stringValue,
+                                                  id: business["id"].stringValue,
+                                                  rating: business["rating"].floatValue,
+                                                  reviewCount: business["review_count"].intValue,
+                                                  price: business["price"].stringValue,
+                                                  distance: business["distance"].doubleValue,
+                                                  address: business["location"]["address1"].stringValue,
+                                                  zipcode: business["location"]["zip_code"].stringValue,
+                                                  city: business["location"]["city"].stringValue,
+                                                  country: business["location"]["country"].stringValue,
+                                                  state: business["location"]["state"].stringValue,
+                                                  isClosed: business["is_closed"].boolValue,
+                                                  phone: business["phone"].stringValue,
                                                   categories: cat,
-                                                  url: json["url"].stringValue,
-                                                  img_url: json["image_url"].stringValue)
+                                                  url: business["url"].stringValue,
+                                                  img_url: business["image_url"].stringValue)
                         
-                        print(business1.categories)
+                        print(business1.img_url)
                     }
                 }
 
