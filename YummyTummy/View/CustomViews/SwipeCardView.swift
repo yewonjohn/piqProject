@@ -13,22 +13,23 @@ protocol SwipeCardsDelegate {
 }
 
 class SwipeCardView : UIView {
-   
+    
     //MARK: - Properties
-    var swipeView : UIView!
     var shadowView : UIView!
+    var swipeView : UIView!
     var imageContainView: UIView!
     var imageView: UIImageView!
-  
     var titleLabel = UILabel()
+    var ratingsView: UIImageView!
+    var ratingsCountView = UILabel()
     var label = UILabel()
     var moreButton = UIButton()
     
     var delegate : SwipeCardsDelegate?
-
+    
     var divisor : CGFloat = 0
     let baseView = UIView()
-
+    
     
     
     var dataSource : CardsDataModel? {
@@ -42,7 +43,7 @@ class SwipeCardView : UIView {
     
     
     //MARK: - Init
-     override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
         configureShadowView()
         configureSwipeView()
@@ -50,6 +51,8 @@ class SwipeCardView : UIView {
         configureImageContainerView()
         configureImageView()
         configureTitleView()
+        configureRatingsView()
+        configureRatingsCountView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -104,7 +107,7 @@ class SwipeCardView : UIView {
         imageView = UIImageView()
         imageContainView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFill
-//        imageView.contentMode = .scaleAspectFit
+        //        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.centerXAnchor.constraint(equalTo: imageContainView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: imageContainView.centerYAnchor).isActive = true
@@ -114,15 +117,38 @@ class SwipeCardView : UIView {
     
     func configureTitleView() {
         imageContainView.addSubview(titleLabel)
-//        titleLabel.backgroundColor = .white
-        titleLabel.textColor = .black
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        titleLabel.text = "Tenafly Coffee"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.leftAnchor.constraint(equalTo: imageContainView.leftAnchor).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: imageContainView.leftAnchor, constant: 10).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: imageContainView.rightAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: imageContainView.bottomAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 85).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: -4).isActive = true
+    }
+    
+    func configureRatingsView() {
+        ratingsView = UIImageView()
+        ratingsView.image = UIImage(named: "regular_4_half")
+        swipeView.addSubview(ratingsView)
+        ratingsView.contentMode = .scaleAspectFit
+        ratingsView.translatesAutoresizingMaskIntoConstraints = false
+        ratingsView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor).isActive = true
+        ratingsView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
+        ratingsView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        ratingsView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func configureRatingsCountView() {
+        swipeView.addSubview(ratingsCountView)
+        ratingsCountView.textColor = .black
+        ratingsCountView.textAlignment = .left
+        ratingsCountView.font = UIFont.systemFont(ofSize: 16)
+        ratingsCountView.text = "3453 Reviews"
+        ratingsCountView.translatesAutoresizingMaskIntoConstraints = false
+        ratingsCountView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: 15).isActive = true
+        ratingsCountView.leftAnchor.constraint(equalTo: ratingsView.rightAnchor, constant: 8).isActive = true
+        
     }
     
     func configureLabelView() {
@@ -150,9 +176,9 @@ class SwipeCardView : UIView {
         moreButton.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
         moreButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         moreButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    
+        
     }
-
+    
     func configureTapGesture() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
     }
@@ -174,7 +200,7 @@ class SwipeCardView : UIView {
         
         let distanceFromCenter = ((UIScreen.main.bounds.width / 2) - card.center.x)
         divisor = ((UIScreen.main.bounds.width / 2) / 0.61)
-       
+        
         switch sender.state {
         case .ended:
             if (card.center.x) > 400 {
@@ -211,5 +237,5 @@ class SwipeCardView : UIView {
     @objc func handleTapGesture(sender: UITapGestureRecognizer){
     }
     
-  
+    
 }
