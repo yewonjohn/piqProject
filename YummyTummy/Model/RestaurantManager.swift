@@ -21,8 +21,8 @@ class RestaurantManager{
 //    price: Int,
 
 
-    func getLocalRestaurants(){
-        var businesses: [Businesses]? = []
+    func getLocalRestaurants() -> [BusinessModel]{
+        var businesses: [BusinessModel]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
         let requestParams: Parameters = ["term": "cafe", "location": "Montreal, QC"]
 
@@ -38,31 +38,31 @@ class RestaurantManager{
                 let businessArray = json["businesses"].arrayValue
 
                 for business in businessArray {
+                    var categoryArr = [Categories]()
+                    
                     let categories = business["categories"].arrayValue
                     for category in categories{
                         var cat = Categories()
                         cat.alias = category["alias"].stringValue
                         cat.title = category["title"].stringValue
-                        
-                        let business1 = Businesses(name: business["name"].stringValue,
+                        categoryArr.append(cat)
+                    }
+                        let business1 = BusinessModel(name: business["name"].stringValue,
                                                   id: business["id"].stringValue,
                                                   rating: business["rating"].floatValue,
                                                   reviewCount: business["review_count"].intValue,
                                                   price: business["price"].stringValue,
                                                   distance: business["distance"].doubleValue,
-                                                  address: business["location"]["address1"].stringValue,
-                                                  zipcode: business["location"]["zip_code"].stringValue,
-                                                  city: business["location"]["city"].stringValue,
-                                                  country: business["location"]["country"].stringValue,
-                                                  state: business["location"]["state"].stringValue,
+                                                  address: business["location"]["display_address"].stringValue,
                                                   isClosed: business["is_closed"].boolValue,
                                                   phone: business["phone"].stringValue,
-                                                  categories: cat,
+                                                  categories: categoryArr,
                                                   url: business["url"].stringValue,
-                                                  img_url: business["image_url"].stringValue)
-                        
-                        print(business1.img_url)
-                    }
+                                                  img_url: business["image_url"].stringValue,
+                                                  isOpen: business["hours"]["is_open_now"].boolValue
+                                                )
+
+                    businesses?.append(business1)
                 }
 
                 
@@ -71,7 +71,8 @@ class RestaurantManager{
                 print(error)
             }
         }
-        
+        //FIX THIS FORCE UNWRAP LATER
+        return businesses!
     }
     
     

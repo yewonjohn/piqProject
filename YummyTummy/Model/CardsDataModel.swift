@@ -9,14 +9,18 @@
 import UIKit
 struct CardsDataModel {
     
-    var bgColor: UIColor
-    var text : String
-    var image : String
+    var name : String?
+    var id: String?
+    var rating: Float?
+    var reviewCount: Int?
+    var price: String?
+    var distance: Double?
+    var address: String?
+    var isClosed: Bool?
+    var phone: String?
+    var categories: [Categories]
+    var url: String?
+    var img_url: String?
+    var isOpen: Bool?
       
-    init(bgColor: UIColor, text: String, image: String) {
-        self.bgColor = bgColor
-        self.text = text
-        self.image = image
-    
-    }
 }

@@ -12,12 +12,14 @@ import CoreLocation
 class RestaurantsViewController: UIViewController {
     
       //MARK: - Properties
-      var viewModelData = [CardsDataModel(bgColor: UIColor(red:0.96, green:0.81, blue:0.46, alpha:1.0), text: "Hamburger", image: "rest1"),
-                           CardsDataModel(bgColor: UIColor(red:0.29, green:0.64, blue:0.96, alpha:1.0), text: "Puppy", image: "puppy"),
-                           CardsDataModel(bgColor: UIColor(red:0.29, green:0.63, blue:0.49, alpha:1.0), text: "Poop", image: "poop"),
-                           CardsDataModel(bgColor: UIColor(red:0.69, green:0.52, blue:0.38, alpha:1.0), text: "Panda", image: "panda"),
-                           CardsDataModel(bgColor: UIColor(red:0.90, green:0.99, blue:0.97, alpha:1.0), text: "Subway", image: "subway"),
-                           CardsDataModel(bgColor: UIColor(red:0.83, green:0.82, blue:0.69, alpha:1.0), text: "Robot", image: "robot")]
+    
+//    var viewModelData = [CardsDataModel
+//    ]
+    
+    var viewModelData = [BusinessModel(name: "Don Chicken", id: "123", rating: 4.5, reviewCount: 56, price: "$$", distance: 2330.5000, address: "193 Knickerbocker rd. Englewood, NJ, USA", isClosed: false, phone: "347-598-0607", categories: [Categories(alias: "chicken", title: "Fried Chicken"), Categories(alias: "chicen", title: "Korean")], url:"https://www.yelp.com/biz/oh-my-deer-montr%C3%A9al?adjust_creative=4QwbeG0sCgsCEshx-FWfWg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=4QwbeG0sCgsCEshx-FWfWg", img_url: "https://s3-media1.fl.yelpcdn.com/bphoto/hFO2kqbZtm9KRrDxTGqY-Q/o.jpg", isOpen: true)
+    ]
+    
+    
       var stackContainer : StackContainerView!
     
       
@@ -31,6 +33,9 @@ class RestaurantsViewController: UIViewController {
           configureStackContainer()
           stackContainer.translatesAutoresizingMaskIntoConstraints = false
           configureNavigationBarButtonItem()
+        
+        //API HERE
+        
       }
     
     var locationManager = CLLocationManager()
@@ -39,7 +44,6 @@ class RestaurantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "YUMMY AROUND U!"
         stackContainer.dataSource = self
 
         setBackground()
@@ -51,6 +55,7 @@ class RestaurantsViewController: UIViewController {
            //print(currentLoc.coordinate.latitude)
            //print(currentLoc.coordinate.longitude)
         }
+        
     }
     
     //MARK: - Configurations

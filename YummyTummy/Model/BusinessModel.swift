@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Businesses{
+struct BusinessModel{
     
     var name : String?
     var id: String?
@@ -17,19 +17,16 @@ struct Businesses{
     var price: String?
     var distance: Double?
     var address: String?
-    var zipcode: String?
-    var city: String?
-    var country: String?
-    var state: String?
     var isClosed: Bool?
     var phone: String?
-    var categories: Categories
+    var categories: [Categories]
     var url: String?
     var img_url: String?
-    
+    var isOpen: Bool?
 }
 
 struct Categories{
     var alias: String?
     var title: String?
 }
+

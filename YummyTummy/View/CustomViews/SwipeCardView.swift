@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol SwipeCardsDelegate {
     func swipeDidEnd(on view: SwipeCardView)
@@ -22,6 +23,10 @@ class SwipeCardView : UIView {
     var titleLabel = UILabel()
     var ratingsView: UIImageView!
     var ratingsCountView = UILabel()
+    var dollarSignsView = UILabel()
+    var categoriesView = UILabel()
+    var isOpenView = UILabel()
+    var phoneView = UILabel()
     var label = UILabel()
     var moreButton = UIButton()
     
@@ -32,12 +37,18 @@ class SwipeCardView : UIView {
     
     
     
-    var dataSource : CardsDataModel? {
+    var dataSource : BusinessModel? {
         didSet {
-            swipeView.backgroundColor = dataSource?.bgColor
-            label.text = dataSource?.text
-            guard let image = dataSource?.image else { return }
+            swipeView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//            label.text = dataSource?.text
+            guard let image = dataSource?.img_url else { return }
             imageView.image = UIImage(named: image)
+            titleLabel.text = dataSource?.name
+            ratingsCountView.text = "\(dataSource?.reviewCount ?? 0) Reviews"
+            dollarSignsView.text = "\(dataSource?.price ?? "$") •"
+            phoneView.text = dataSource?.phone
+            let url = URL(string: dataSource?.img_url ?? "")
+            imageView.kf.setImage(with: url)
         }
     }
     
@@ -53,6 +64,10 @@ class SwipeCardView : UIView {
         configureTitleView()
         configureRatingsView()
         configureRatingsCountView()
+        configureDollarSignsView()
+        configureCategoriesView()
+        configureisOpenView()
+        configurePhoneView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -72,7 +87,6 @@ class SwipeCardView : UIView {
         shadowView.layer.shadowOpacity = 0.8
         shadowView.layer.shadowRadius = 4.0
         addSubview(shadowView)
-        
         shadowView.translatesAutoresizingMaskIntoConstraints = false
         shadowView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         shadowView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -85,7 +99,6 @@ class SwipeCardView : UIView {
         swipeView.layer.cornerRadius = 15
         swipeView.clipsToBounds = true
         shadowView.addSubview(swipeView)
-        
         swipeView.translatesAutoresizingMaskIntoConstraints = false
         swipeView.leftAnchor.constraint(equalTo: shadowView.leftAnchor).isActive = true
         swipeView.rightAnchor.constraint(equalTo: shadowView.rightAnchor).isActive = true
@@ -120,7 +133,6 @@ class SwipeCardView : UIView {
         titleLabel.textColor = .white
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        titleLabel.text = "Tenafly Coffee"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leftAnchor.constraint(equalTo: imageContainView.leftAnchor, constant: 10).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: imageContainView.rightAnchor).isActive = true
@@ -144,11 +156,51 @@ class SwipeCardView : UIView {
         ratingsCountView.textColor = .black
         ratingsCountView.textAlignment = .left
         ratingsCountView.font = UIFont.systemFont(ofSize: 16)
-        ratingsCountView.text = "3453 Reviews"
         ratingsCountView.translatesAutoresizingMaskIntoConstraints = false
-        ratingsCountView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: 15).isActive = true
+        ratingsCountView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: 16).isActive = true
         ratingsCountView.leftAnchor.constraint(equalTo: ratingsView.rightAnchor, constant: 8).isActive = true
-        
+    }
+    
+    func configureDollarSignsView() {
+        swipeView.addSubview(dollarSignsView)
+        dollarSignsView.textColor = .black
+        dollarSignsView.textAlignment = .left
+        dollarSignsView.font = UIFont.systemFont(ofSize: 18)
+        dollarSignsView.translatesAutoresizingMaskIntoConstraints = false
+        dollarSignsView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
+        dollarSignsView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
+    }
+    
+    func configureCategoriesView() {
+        swipeView.addSubview(categoriesView)
+        categoriesView.textColor = .black
+        categoriesView.textAlignment = .left
+        categoriesView.font = UIFont.systemFont(ofSize: 18)
+        categoriesView.text = "Korean, American"
+        categoriesView.translatesAutoresizingMaskIntoConstraints = false
+        categoriesView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
+        categoriesView.leftAnchor.constraint(equalTo: dollarSignsView.rightAnchor, constant: 4).isActive = true
+    }
+    
+    func configureisOpenView() {
+        swipeView.addSubview(isOpenView)
+        isOpenView.textColor = .red
+        isOpenView.textAlignment = .left
+        isOpenView.font = UIFont.boldSystemFont(ofSize: 18)
+        isOpenView.text = "Closed now •"
+        isOpenView.translatesAutoresizingMaskIntoConstraints = false
+        isOpenView.topAnchor.constraint(equalTo: dollarSignsView.bottomAnchor, constant: 10).isActive = true
+        isOpenView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
+    }
+    
+    func configurePhoneView() {
+        swipeView.addSubview(phoneView)
+        phoneView.textColor = .black
+        phoneView.textAlignment = .left
+        phoneView.font = UIFont.systemFont(ofSize: 18)
+        phoneView.translatesAutoresizingMaskIntoConstraints = false
+        phoneView.topAnchor.constraint(equalTo: dollarSignsView.bottomAnchor, constant: 10).isActive = true
+        phoneView.leftAnchor.constraint(equalTo: isOpenView.rightAnchor, constant: 4).isActive = true
     }
     
     func configureLabelView() {
@@ -162,7 +214,6 @@ class SwipeCardView : UIView {
         label.rightAnchor.constraint(equalTo: swipeView.rightAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor).isActive = true
         label.heightAnchor.constraint(equalToConstant: 85).isActive = true
-        
     }
     
     func configureButton() {
