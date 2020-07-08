@@ -168,16 +168,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bG-8x-ObV" customClass="LoginButton" customModule="YummyTummy" customModuleProvider="target">
-                                <rect key="frame" x="142" y="786" width="131" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Find me some food"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bG-8x-ObV" customClass="LoginButton" customModule="YummyTummy" customModuleProvider="target">
+                                <rect key="frame" x="40" y="792" width="334" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nbU-R7-FVH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Find me some food!"/>
                                 <connections>
                                     <action selector="goToCards:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="TS3-LZ-DbJ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="trailing" secondItem="0bG-8x-ObV" secondAttribute="trailing" constant="40" id="8wV-4L-r1m"/>
+                            <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="bottom" secondItem="0bG-8x-ObV" secondAttribute="bottom" constant="20" id="l62-Lp-6aN"/>
+                            <constraint firstItem="0bG-8x-ObV" firstAttribute="leading" secondItem="ilZ-Qz-HQ0" secondAttribute="leading" constant="40" id="mBQ-BX-iYP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ilZ-Qz-HQ0"/>
                     </view>
                     <navigationItem key="navigationItem" id="LnE-S0-fYe">
@@ -195,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vHn-6e-UTN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1684" y="-476"/>
+            <point key="canvasLocation" x="1682.608695652174" y="-476.11607142857139"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="MKr-oN-Lfz">

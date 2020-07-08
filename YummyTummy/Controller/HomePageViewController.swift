@@ -84,6 +84,10 @@ class MenuListController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if(items[indexPath.row] == "Favorites"){
+            self.performSegue(withIdentifier: "MainToFavorites", sender: self)
+        }
     }
     
 }
