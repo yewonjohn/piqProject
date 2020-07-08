@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreLocation
+
 
 class RestaurantManager{
 //    latitude: Double,
@@ -21,16 +23,16 @@ class RestaurantManager{
 //    price: Int,
 
 
-    func getLocalRestaurants() -> [BusinessModel]{
+    func getLocalRestaurants(latitude: Double, longitude: Double, completion: @escaping ((_ businesses:[BusinessModel])->Void)){
         var businesses: [BusinessModel]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
-        let requestParams: Parameters = ["term": "cafe", "location": "Montreal, QC"]
+        let requestParams: Parameters = ["latitude": latitude, "longitude": longitude]
 
         let apiKey = "XoLZTUzyXFYVkxV7QjDpxU0gkHSdGbUNmGPtMtIQcOdPzpQDF5iGA5kCBGkX7QFYrd8He5_OSg_mrLFeKfvOyd3_bZ8A7gHsyiwu0DUvDTAlpag_ctqd7j9B7DDtXnYx"
         let headers: HTTPHeaders = ["Authorization" : "Bearer \(apiKey)"]
 
         
-        AF.request(url, method: .get, parameters: requestParams, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300).validate(contentType: ["application/json"]).responseJSON { (responseObject) in
+        AF.request(url, method: .get, parameters: requestParams, encoding: URLEncoding.default, headers: headers).validate().responseJSON { (responseObject) in
             switch responseObject.result {
             case .success:
                 print("Success!")
@@ -47,7 +49,7 @@ class RestaurantManager{
                         cat.title = category["title"].stringValue
                         categoryArr.append(cat)
                     }
-                        let business1 = BusinessModel(name: business["name"].stringValue,
+                        let businessUnit = BusinessModel(name: business["name"].stringValue,
                                                   id: business["id"].stringValue,
                                                   rating: business["rating"].floatValue,
                                                   reviewCount: business["review_count"].intValue,
@@ -58,21 +60,18 @@ class RestaurantManager{
                                                   phone: business["phone"].stringValue,
                                                   categories: categoryArr,
                                                   url: business["url"].stringValue,
-                                                  img_url: business["image_url"].stringValue,
-                                                  isOpen: business["hours"]["is_open_now"].boolValue
+                                                  img_url: business["image_url"].stringValue
                                                 )
 
-                    businesses?.append(business1)
+                    businesses?.append(businessUnit)
                 }
-
-                
                 
             case let .failure(error):
                 print(error)
             }
+            //FIX THIS FORCE UNWRAP LATER
+            completion(businesses!)
         }
-        //FIX THIS FORCE UNWRAP LATER
-        return businesses!
     }
     
     

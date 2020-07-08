@@ -11,51 +11,52 @@ import CoreLocation
 
 class RestaurantsViewController: UIViewController {
     
-      //MARK: - Properties
+    //MARK: - Properties
     
-//    var viewModelData = [CardsDataModel
-//    ]
-    
-    var viewModelData = [BusinessModel(name: "Don Chicken", id: "123", rating: 4.5, reviewCount: 56, price: "$$", distance: 2330.5000, address: "193 Knickerbocker rd. Englewood, NJ, USA", isClosed: false, phone: "347-598-0607", categories: [Categories(alias: "chicken", title: "Fried Chicken"), Categories(alias: "chicen", title: "Korean")], url:"https://www.yelp.com/biz/oh-my-deer-montr%C3%A9al?adjust_creative=4QwbeG0sCgsCEshx-FWfWg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=4QwbeG0sCgsCEshx-FWfWg", img_url: "https://s3-media1.fl.yelpcdn.com/bphoto/hFO2kqbZtm9KRrDxTGqY-Q/o.jpg", isOpen: true)
-    ]
+    var viewModelData = [BusinessModel]()
+    var stackContainer : StackContainerView!
     
     
-      var stackContainer : StackContainerView!
+    //MARK: - Init
     
-      
-      //MARK: - Init
-      
-      override func loadView() {
-          view = UIView()
-          view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-          stackContainer = StackContainerView()
-          view.addSubview(stackContainer)
-          configureStackContainer()
-          stackContainer.translatesAutoresizingMaskIntoConstraints = false
-          configureNavigationBarButtonItem()
+    override func loadView() {
         
-        //API HERE
+        //making navigation bar transparent
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
         
-      }
+        view = UIView()
+        view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
+        stackContainer = StackContainerView()
+        view.addSubview(stackContainer)
+        configureStackContainer()
+        stackContainer.translatesAutoresizingMaskIntoConstraints = false
+        configureNavigationBarButtonItem()
+        
+    }
     
     var locationManager = CLLocationManager()
     let backgroundImageView = UIImageView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        stackContainer.dataSource = self
-
         setBackground()
         locationManager.requestWhenInUseAuthorization()
         var currentLoc: CLLocation!
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-        CLLocationManager.authorizationStatus() == .authorizedAlways) {
-           currentLoc = locationManager.location
-           //print(currentLoc.coordinate.latitude)
-           //print(currentLoc.coordinate.longitude)
+            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+            currentLoc = locationManager.location
+            
+            //calling API for all the Cards Data
+            RestaurantManager().getLocalRestaurants(latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude) { (businessModelArray) in
+                self.viewModelData = businessModelArray
+                self.stackContainer.dataSource = self
+                
+            }
         }
-        
     }
     
     //MARK: - Configurations
@@ -75,7 +76,7 @@ class RestaurantsViewController: UIViewController {
     @objc func resetTapped() {
         stackContainer.reloadData()
     }
-
+    
     func setBackground(){
         view.addSubview(backgroundImageView)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +92,7 @@ class RestaurantsViewController: UIViewController {
 //MARK: - DataSource for StackContainerView
 
 extension RestaurantsViewController : SwipeCardsDataSource {
-
+    
     func numberOfCardsToShow() -> Int {
         return viewModelData.count
     }
@@ -106,5 +107,5 @@ extension RestaurantsViewController : SwipeCardsDataSource {
         return nil
     }
     
-
+    
 }

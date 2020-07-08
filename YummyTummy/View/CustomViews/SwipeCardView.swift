@@ -27,8 +27,10 @@ class SwipeCardView : UIView {
     var categoriesView = UILabel()
     var isOpenView = UILabel()
     var phoneView = UILabel()
+    var addressView = UILabel()
     var label = UILabel()
     var moreButton = UIButton()
+    
     
     var delegate : SwipeCardsDelegate?
     
@@ -39,16 +41,67 @@ class SwipeCardView : UIView {
     
     var dataSource : BusinessModel? {
         didSet {
-            swipeView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-//            label.text = dataSource?.text
+            swipeView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
             guard let image = dataSource?.img_url else { return }
             imageView.image = UIImage(named: image)
             titleLabel.text = dataSource?.name
+            addressView.text = dataSource?.address
+            print(dataSource?.address)
             ratingsCountView.text = "\(dataSource?.reviewCount ?? 0) Reviews"
             dollarSignsView.text = "\(dataSource?.price ?? "$") •"
+            if dataSource?.price == ""{
+                dollarSignsView.text = "? •"
+            }
             phoneView.text = dataSource?.phone
             let url = URL(string: dataSource?.img_url ?? "")
             imageView.kf.setImage(with: url)
+            
+            //SETTING STORE OPEN/CLOSED
+            if dataSource?.isClosed == true{
+                isOpenView.text = "Closed now •"
+                isOpenView.textColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+                
+            } else {
+                isOpenView.text = "Open now •"
+            isOpenView.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            }
+            //SETTING RATINGS BAR
+            switch dataSource?.rating {
+            case 0.0:
+                ratingsView.image = UIImage(named: "regular_0")
+            case 0.5:
+                ratingsView.image = UIImage(named: "regular_0_half")
+            case 1.0:
+                ratingsView.image = UIImage(named: "regular_1")
+            case 1.5:
+                ratingsView.image = UIImage(named: "regular_1_half")
+            case 2.0:
+                ratingsView.image = UIImage(named: "regular_2")
+            case 2.5:
+                ratingsView.image = UIImage(named: "regular_2_half")
+            case 3.0:
+                ratingsView.image = UIImage(named: "regular_3")
+            case 3.5:
+                ratingsView.image = UIImage(named: "regular_3_half")
+            case 4.0:
+                ratingsView.image = UIImage(named: "regular_4")
+            case 4.5:
+                ratingsView.image = UIImage(named: "regular_4_half")
+            case 5.0:
+                ratingsView.image = UIImage(named: "regular_5")
+            default:
+                ratingsView.image = UIImage(named: "regular_0")
+            }
+            //SETTING CATEGORIES
+            var categoriesStr: String = ""
+            var counter = 0
+            for category in dataSource!.categories {
+                if(counter != (dataSource?.categories.count)!-1){
+                    categoriesStr += category.title! + ", "
+                } else {categoriesStr += category.title!}
+                counter+=1
+            }
+            categoriesView.text = categoriesStr
         }
     }
     
@@ -68,6 +121,7 @@ class SwipeCardView : UIView {
         configureCategoriesView()
         configureisOpenView()
         configurePhoneView()
+        configureAddressView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -141,7 +195,7 @@ class SwipeCardView : UIView {
     
     func configureRatingsView() {
         ratingsView = UIImageView()
-        ratingsView.image = UIImage(named: "regular_4_half")
+        ratingsView.image = UIImage(named: "regular_0")
         swipeView.addSubview(ratingsView)
         ratingsView.contentMode = .scaleAspectFit
         ratingsView.translatesAutoresizingMaskIntoConstraints = false
@@ -177,9 +231,11 @@ class SwipeCardView : UIView {
         categoriesView.textAlignment = .left
         categoriesView.font = UIFont.systemFont(ofSize: 18)
         categoriesView.text = "Korean, American"
+        categoriesView.numberOfLines = 0
         categoriesView.translatesAutoresizingMaskIntoConstraints = false
         categoriesView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
         categoriesView.leftAnchor.constraint(equalTo: dollarSignsView.rightAnchor, constant: 4).isActive = true
+        categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 10).isActive = true
     }
     
     func configureisOpenView() {
@@ -189,7 +245,7 @@ class SwipeCardView : UIView {
         isOpenView.font = UIFont.boldSystemFont(ofSize: 18)
         isOpenView.text = "Closed now •"
         isOpenView.translatesAutoresizingMaskIntoConstraints = false
-        isOpenView.topAnchor.constraint(equalTo: dollarSignsView.bottomAnchor, constant: 10).isActive = true
+        isOpenView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         isOpenView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
     }
     
@@ -199,8 +255,18 @@ class SwipeCardView : UIView {
         phoneView.textAlignment = .left
         phoneView.font = UIFont.systemFont(ofSize: 18)
         phoneView.translatesAutoresizingMaskIntoConstraints = false
-        phoneView.topAnchor.constraint(equalTo: dollarSignsView.bottomAnchor, constant: 10).isActive = true
+        phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         phoneView.leftAnchor.constraint(equalTo: isOpenView.rightAnchor, constant: 4).isActive = true
+    }
+    
+    func configureAddressView() {
+        swipeView.addSubview(addressView)
+        addressView.textColor = .black
+        addressView.textAlignment = .left
+        addressView.font = UIFont.systemFont(ofSize: 18)
+        addressView.translatesAutoresizingMaskIntoConstraints = false
+        addressView.topAnchor.constraint(equalTo: isOpenView.bottomAnchor, constant: 10).isActive = true
+        addressView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
     }
     
     func configureLabelView() {

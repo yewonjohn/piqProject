@@ -26,5 +26,7 @@ class SignUpButton: UIButton {
         backgroundColor = .clear
         titleLabel?.font    = UIFont(name: Fonts.avenirNextCondensedDemiBold, size: 18)
         layer.cornerRadius  = frame.size.height/2
+        tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
+
     }
 }

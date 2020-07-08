@@ -27,5 +27,6 @@ class LoginButton: UIButton {
         titleLabel?.font    = UIFont(name: Fonts.avenirNextCondensedDemiBold, size: 22)
         layer.cornerRadius  = frame.size.height/2
         setTitleColor(.white, for: .normal)
+        tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
     }
 }

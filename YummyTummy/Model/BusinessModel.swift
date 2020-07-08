@@ -18,11 +18,15 @@ struct BusinessModel{
     var distance: Double?
     var address: String?
     var isClosed: Bool?
-    var phone: String?
+    var phone: String? {
+        didSet{
+//            let phoneArr = Array(arrayLiteral: phone)
+//            self.phone = "\(phoneArr[0])\(phoneArr[1]) (\(phoneArr[3])\(phoneArr[4])\(phoneArr[5]))-\(phoneArr[6])\(phoneArr[7])\(phoneArr[8])-\(phoneArr[9])\(phoneArr[10])\(phoneArr[11])"
+        }
+    }
     var categories: [Categories]
     var url: String?
     var img_url: String?
-    var isOpen: Bool?
 }
 
 struct Categories{

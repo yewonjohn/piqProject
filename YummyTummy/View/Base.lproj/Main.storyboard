@@ -41,7 +41,7 @@
                                     <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SH0-4Z-xnj"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Wc-gTJ" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123123q" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Wc-gTJ" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
                                 <rect key="frame" x="50" y="696" width="314" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Pr-yd-KMK"/>
@@ -49,7 +49,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVj-xe-OE4" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="yewonjohnkim@gmail.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVj-xe-OE4" customClass="AuthTextField" customModule="YummyTummy" customModuleProvider="target">
                                 <rect key="frame" x="50" y="636" width="314" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="cF7-Ji-O8N"/>
@@ -93,7 +93,7 @@
                         <outlet property="emailTextField" destination="aVj-xe-OE4" id="DgM-F2-BD7"/>
                         <outlet property="passwordTextField" destination="lyw-Wc-gTJ" id="RBl-2q-pAt"/>
                         <segue destination="24d-Fd-wGV" kind="show" identifier="LoginToRegister" id="tUF-zb-NS1"/>
-                        <segue destination="N3k-EI-wXm" kind="show" identifier="LoginToMain" id="l3Z-la-LRT"/>
+                        <segue destination="fvK-Bj-i0g" kind="show" identifier="LoginToMain" id="XKc-xF-yZK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -153,12 +153,82 @@
                     <connections>
                         <outlet property="emailTextField" destination="BoK-Ns-gkO" id="VfD-BF-VNS"/>
                         <outlet property="passwordTextField" destination="XfU-DY-JQE" id="CUB-nA-twB"/>
-                        <segue destination="N3k-EI-wXm" kind="show" identifier="RegisterToMain" id="m2Y-5i-1rv"/>
+                        <segue destination="fvK-Bj-i0g" kind="show" identifier="RegisterToMain" id="YzQ-Mu-wf5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xbk-2z-4hM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="871" y="-218"/>
+            <point key="canvasLocation" x="748" y="-578"/>
+        </scene>
+        <!--Home Page View Controller-->
+        <scene sceneID="ocr-oe-QDD">
+            <objects>
+                <viewController id="fvK-Bj-i0g" customClass="HomePageViewController" customModule="YummyTummy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9C7-J7-xR6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bG-8x-ObV" customClass="LoginButton" customModule="YummyTummy" customModuleProvider="target">
+                                <rect key="frame" x="142" y="786" width="131" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Find me some food"/>
+                                <connections>
+                                    <action selector="goToCards:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="TS3-LZ-DbJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ilZ-Qz-HQ0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LnE-S0-fYe">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="BHG-Rn-Pnd">
+                            <color key="tintColor" red="0.60609471800000003" green="0.110549219" blue="0.1215417162" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="didTapMenu" destination="fvK-Bj-i0g" id="rQb-1Y-rpg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="N3k-EI-wXm" kind="show" identifier="MainToCards" id="t5M-kX-SwH"/>
+                        <segue destination="RmI-wa-hFa" kind="show" identifier="HomeToFavorites" id="YFM-WL-ZPY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vHn-6e-UTN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="-476"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="MKr-oN-Lfz">
+            <objects>
+                <tableViewController id="RmI-wa-hFa" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9NW-Y4-iuW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wLU-0y-fzU">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wLU-0y-fzU" id="dfW-ho-Wac">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RmI-wa-hFa" id="EH1-QU-9aV"/>
+                            <outlet property="delegate" destination="RmI-wa-hFa" id="QCQ-Vu-zbn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Pva-bc-ovQ">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="LQ9-3z-0ad">
+                            <color key="tintColor" red="0.60609471800000003" green="0.110549219" blue="0.1215417162" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WcN-ft-SzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1806" y="344"/>
         </scene>
         <!--Restaurants View Controller-->
         <scene sceneID="g5E-eN-GpB">
@@ -174,10 +244,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j6t-kk-XGv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1745" y="239"/>
+            <point key="canvasLocation" x="2801" y="-476"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="m2Y-5i-1rv"/>
+        <segue reference="XKc-xF-yZK"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
+    </resources>
 </document>
