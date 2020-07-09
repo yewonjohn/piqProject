@@ -22,6 +22,8 @@
 		44D201D3249D76F90074F315 /* YummyTummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201D2249D76F90074F315 /* YummyTummyTests.swift */; };
 		44D201DE249D76F90074F315 /* YummyTummyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201DD249D76F90074F315 /* YummyTummyUITests.swift */; };
 		44DA293424B7B527003974AE /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA293324B7B527003974AE /* FavoritesViewController.swift */; };
+		44DA293724B7D359003974AE /* FavoritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44DA293524B7D359003974AE /* FavoritesCell.xib */; };
+		44DA293824B7D359003974AE /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA293624B7D359003974AE /* FavoritesCell.swift */; };
 		44E79B5524A2DB0C00DDC48E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44E79B5424A2DB0C00DDC48E /* GoogleService-Info.plist */; };
 		44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5624A2E0F900DDC48E /* SignUpButton.swift */; };
 		44E79B5924A2E54200DDC48E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5824A2E54200DDC48E /* RegisterViewController.swift */; };
@@ -74,6 +76,8 @@
 		44D201DD249D76F90074F315 /* YummyTummyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummyTummyUITests.swift; sourceTree = "<group>"; };
 		44D201DF249D76F90074F315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44DA293324B7B527003974AE /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		44DA293524B7D359003974AE /* FavoritesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesCell.xib; sourceTree = "<group>"; };
+		44DA293624B7D359003974AE /* FavoritesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		44E79B5424A2DB0C00DDC48E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44E79B5624A2E0F900DDC48E /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		44E79B5824A2E54200DDC48E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 		44712D7824A2682D0083B1AB /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				44DA293624B7D359003974AE /* FavoritesCell.swift */,
+				44DA293524B7D359003974AE /* FavoritesCell.xib */,
 				44712D7924A268650083B1AB /* AuthTextField.swift */,
 				44E79B5624A2E0F900DDC48E /* SignUpButton.swift */,
 				44712D7A24A268650083B1AB /* LoginButton.swift */,
@@ -362,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44DA293724B7D359003974AE /* FavoritesCell.xib in Resources */,
 				44D201C8249D76F90074F315 /* LaunchScreen.storyboard in Resources */,
 				44E79B5524A2DB0C00DDC48E /* GoogleService-Info.plist in Resources */,
 				44D201C3249D76F70074F315 /* Main.storyboard in Resources */,
@@ -504,6 +511,7 @@
 				44DA293424B7B527003974AE /* FavoritesViewController.swift in Sources */,
 				44712D7E24A26CF40083B1AB /* Constants.swift in Sources */,
 				44E79B5B24A2E5C000DDC48E /* RestaurantsViewController.swift in Sources */,
+				44DA293824B7D359003974AE /* FavoritesCell.swift in Sources */,
 				44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */,
 				44F05A1C24B641440083F56C /* MenuListController.swift in Sources */,
 				44A6E33924B5194B008E4D19 /* HomePageViewController.swift in Sources */,

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoritesCell" rowHeight="103" id="KGk-i7-Jjw" customClass="FavoritesCell" customModule="YummyTummy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="515" height="103"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="515" height="103"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rest1" translatesAutoresizingMaskIntoConstraints="NO" id="NO2-sY-9Rj" userLabel="Image">
+                        <rect key="frame" x="0.0" y="0.0" width="155" height="103"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3HA-MA-dFt">
+                        <rect key="frame" x="155" y="0.0" width="360" height="103"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BonChon Chicken" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfW-Gd-g5J" userLabel="Title">
+                                <rect key="frame" x="5" y="5" width="149" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="regular_5" translatesAutoresizingMaskIntoConstraints="NO" id="e73-JF-vht" userLabel="Ratings">
+                                <rect key="frame" x="5" y="31" width="105" height="18"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="124 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxG-w1-xGd" userLabel="Ratings Count">
+                                <rect key="frame" x="115" y="31" width="88" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$$$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIb-bt-MKF">
+                                <rect key="frame" x="5" y="54" width="32" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXk-5T-W2o">
+                                <rect key="frame" x="40" y="54" width="7" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken, Korean, Brunch &amp; Breakfast" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VnL-oE-Ueo">
+                                <rect key="frame" x="50" y="54" width="252" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="e73-JF-vht" firstAttribute="top" secondItem="kfW-Gd-g5J" secondAttribute="bottom" constant="5" id="3On-Ma-sAo"/>
+                            <constraint firstItem="e73-JF-vht" firstAttribute="leading" secondItem="3HA-MA-dFt" secondAttribute="leading" constant="5" id="BEZ-FZ-fpp"/>
+                            <constraint firstItem="kfW-Gd-g5J" firstAttribute="leading" secondItem="3HA-MA-dFt" secondAttribute="leading" constant="5" id="JV8-95-9db"/>
+                            <constraint firstAttribute="trailing" secondItem="kfW-Gd-g5J" secondAttribute="trailing" constant="206" id="M7B-Nn-cgL"/>
+                            <constraint firstAttribute="trailing" secondItem="sIb-bt-MKF" secondAttribute="trailing" constant="323" id="NfR-qs-xPL"/>
+                            <constraint firstAttribute="trailing" secondItem="e73-JF-vht" secondAttribute="trailing" constant="250" id="Oys-Ub-bq8"/>
+                            <constraint firstItem="iXk-5T-W2o" firstAttribute="leading" secondItem="sIb-bt-MKF" secondAttribute="trailing" constant="3" id="YZD-o6-OmW"/>
+                            <constraint firstAttribute="trailing" secondItem="HxG-w1-xGd" secondAttribute="trailing" constant="157" id="bkQ-ee-J6a"/>
+                            <constraint firstItem="HxG-w1-xGd" firstAttribute="top" secondItem="kfW-Gd-g5J" secondAttribute="bottom" constant="5" id="fXm-94-d4c"/>
+                            <constraint firstItem="VnL-oE-Ueo" firstAttribute="leading" secondItem="iXk-5T-W2o" secondAttribute="trailing" constant="3" id="iPB-D4-kar"/>
+                            <constraint firstItem="VnL-oE-Ueo" firstAttribute="top" secondItem="e73-JF-vht" secondAttribute="bottom" constant="5" id="isB-0D-8Fr"/>
+                            <constraint firstItem="sIb-bt-MKF" firstAttribute="top" secondItem="e73-JF-vht" secondAttribute="bottom" constant="5" id="k8x-ms-VBS"/>
+                            <constraint firstItem="sIb-bt-MKF" firstAttribute="leading" secondItem="3HA-MA-dFt" secondAttribute="leading" constant="5" id="luN-7O-0jR"/>
+                            <constraint firstItem="kfW-Gd-g5J" firstAttribute="top" secondItem="3HA-MA-dFt" secondAttribute="top" constant="5" id="qCi-zQ-6pO"/>
+                            <constraint firstItem="HxG-w1-xGd" firstAttribute="leading" secondItem="e73-JF-vht" secondAttribute="trailing" constant="5" id="wZw-NN-BGS"/>
+                            <constraint firstItem="iXk-5T-W2o" firstAttribute="top" secondItem="e73-JF-vht" secondAttribute="bottom" constant="5" id="yLV-AK-i9n"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="NO2-sY-9Rj" secondAttribute="trailing" constant="360" id="GCb-pe-lZe"/>
+                    <constraint firstItem="NO2-sY-9Rj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KmW-r9-0SG"/>
+                    <constraint firstItem="NO2-sY-9Rj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Mey-xC-I64"/>
+                    <constraint firstItem="3HA-MA-dFt" firstAttribute="leading" secondItem="NO2-sY-9Rj" secondAttribute="trailing" id="SG0-m0-plz"/>
+                    <constraint firstAttribute="bottom" secondItem="NO2-sY-9Rj" secondAttribute="bottom" id="Suo-7V-CC6"/>
+                    <constraint firstAttribute="trailing" secondItem="3HA-MA-dFt" secondAttribute="trailing" id="Ugs-5R-SBC"/>
+                    <constraint firstAttribute="bottom" secondItem="3HA-MA-dFt" secondAttribute="bottom" id="t8W-d9-9Nx"/>
+                    <constraint firstItem="3HA-MA-dFt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ufF-qe-mef"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="favoritesCategories" destination="VnL-oE-Ueo" id="WDj-ED-oa6"/>
+                <outlet property="favoritesImage" destination="NO2-sY-9Rj" id="CWd-VX-QPu"/>
+                <outlet property="favoritesPrice" destination="sIb-bt-MKF" id="QgD-bg-4Do"/>
+                <outlet property="favoritesRatingCount" destination="HxG-w1-xGd" id="Vvb-ic-TZU"/>
+                <outlet property="favoritesRatings" destination="e73-JF-vht" id="vUf-fG-pHp"/>
+                <outlet property="favoritesTitle" destination="kfW-Gd-g5J" id="ZKC-47-4vc"/>
+            </connections>
+            <point key="canvasLocation" x="232.60869565217394" y="94.754464285714278"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="regular_5" width="102" height="18"/>
+        <image name="rest1" width="1000" height="666"/>
+    </resources>
+</document>
