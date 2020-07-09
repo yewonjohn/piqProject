@@ -11,23 +11,27 @@ import IQKeyboardManager
 import FirebaseAuth
 import SideMenu
 
-class HomePageViewController: UIViewController {
-    let backgroundImageView = UIImageView()
+class HomePageViewController: UIViewController, MenuControllerDelegate{
     
-    var menu: SideMenuNavigationController?
+    let backgroundImageView = UIImageView()
+    var sideMenu: SideMenuNavigationController?
+    
+    let favoritesVC = FavoritesViewController()
 
     @IBAction func goToCards(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "MainToCards", sender: self)
+        self.performSegue(withIdentifier: "HomeToCards", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menu = SideMenuNavigationController(rootViewController: MenuListController())
-        menu?.leftSide = true
+        let menu = MenuListController(with: ["Home","Favorites"])
+        
+        sideMenu = SideMenuNavigationController(rootViewController: menu)
+        sideMenu?.leftSide = true
 //        menu?.setNavigationBarHidden(true, animated: false)
         
-        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.leftMenuNavigationController = sideMenu
         SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
         //making navigation bar transparent
@@ -42,52 +46,41 @@ class HomePageViewController: UIViewController {
         
         
         Background().setAuthBackground(view,backgroundImageView)
-        
-        
-        
+        addChildVCs()
     }
     @IBAction func didTapMenu(){
-        present(menu!,animated: true)
+        present(sideMenu!,animated: true)
+    }
+    
+    func addChildVCs(){
+        addChild(favoritesVC)
+        view.addSubview(favoritesVC.view)
+        favoritesVC.view.frame = view.bounds
+        
+        favoritesVC.didMove(toParent: self)
+        favoritesVC.view.isHidden = true
+    }
+    
+    func didSelectMenuItem(named: String) {
+        sideMenu?.dismiss(animated: true, completion: { [weak self] in 
+            
+            self?.title = named
+            
+            if named == "Home"{
+                self?.favoritesVC.view.isHidden = true
+                
+            }
+            else if named == "Favorites"{
+                self?.favoritesVC.view.isHidden = false
+            }
+        })
     }
 }
 
-class MenuListController: UITableViewController{
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = #colorLiteral(red: 0.9204136133, green: 0.9190739989, blue: 0.9415156245, alpha: 1)
+    
+    
+    
 
-    }
-    var items = ["Home","Favorites"]
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = items[indexPath.row]
-        cell.backgroundColor = #colorLiteral(red: 0.9204136133, green: 0.9190739989, blue: 0.9415156245, alpha: 1)
-        cell.imageView?.tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
 
-        if(items[indexPath.row] == "Favorites"){
-            cell.imageView?.image = UIImage(systemName: "star")
-        }
-        if(items[indexPath.row] == "Home"){
-            cell.imageView?.image = UIImage(systemName: "house")
-        }
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if(items[indexPath.row] == "Favorites"){
-            self.performSegue(withIdentifier: "MainToFavorites", sender: self)
-        }
-    }
-    
-}
+

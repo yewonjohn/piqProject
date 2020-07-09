@@ -197,46 +197,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="N3k-EI-wXm" kind="show" identifier="MainToCards" id="t5M-kX-SwH"/>
-                        <segue destination="RmI-wa-hFa" kind="show" identifier="HomeToFavorites" id="YFM-WL-ZPY"/>
+                        <segue destination="N3k-EI-wXm" kind="show" identifier="HomeToCards" id="t5M-kX-SwH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vHn-6e-UTN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1682.608695652174" y="-476.11607142857139"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="MKr-oN-Lfz">
-            <objects>
-                <tableViewController id="RmI-wa-hFa" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9NW-Y4-iuW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wLU-0y-fzU">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wLU-0y-fzU" id="dfW-ho-Wac">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="RmI-wa-hFa" id="EH1-QU-9aV"/>
-                            <outlet property="delegate" destination="RmI-wa-hFa" id="QCQ-Vu-zbn"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="Pva-bc-ovQ">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="LQ9-3z-0ad">
-                            <color key="tintColor" red="0.60609471800000003" green="0.110549219" blue="0.1215417162" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WcN-ft-SzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1806" y="344"/>
         </scene>
         <!--Restaurants View Controller-->
         <scene sceneID="g5E-eN-GpB">
