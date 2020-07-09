@@ -10,7 +10,9 @@ import UIKit
 
 class FavoritesViewController: UITableViewController{
     
+    let backgroundImageView = UIImageView()
+    
     override func viewDidLoad() {
-        view.backgroundColor = .blue
+        Background().setAuthBackground(view,backgroundImageView)
     }
 }

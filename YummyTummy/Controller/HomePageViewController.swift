@@ -26,6 +26,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         super.viewDidLoad()
         
         let menu = MenuListController(with: ["Home","Favorites"])
+        menu.delegate = self
         
         sideMenu = SideMenuNavigationController(rootViewController: menu)
         sideMenu?.leftSide = true
@@ -62,18 +63,17 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     }
     
     func didSelectMenuItem(named: String) {
-        sideMenu?.dismiss(animated: true, completion: { [weak self] in 
+        sideMenu?.dismiss(animated: true, completion: nil)
+        
+        title = named
+        
+        if named == "Home"{
+            favoritesVC.view.isHidden = true
             
-            self?.title = named
-            
-            if named == "Home"{
-                self?.favoritesVC.view.isHidden = true
-                
-            }
-            else if named == "Favorites"{
-                self?.favoritesVC.view.isHidden = false
-            }
-        })
+        }
+        else if named == "Favorites"{
+            favoritesVC.view.isHidden = false
+        }
     }
 }
 

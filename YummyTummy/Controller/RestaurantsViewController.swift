@@ -16,7 +16,6 @@ class RestaurantsViewController: UIViewController {
     var viewModelData = [BusinessModel]()
     var stackContainer : StackContainerView!
     
-    
     //MARK: - Init
     
     override func loadView() {
@@ -106,6 +105,5 @@ extension RestaurantsViewController : SwipeCardsDataSource {
     func emptyView() -> UIView? {
         return nil
     }
-    
     
 }
