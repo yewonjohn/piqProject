@@ -19,7 +19,7 @@ struct FavoritesModel{
     var distance: Double?
     var isClosed: Bool?
     var phone: String?
-    var categories: [String]
+    var categories: String?
     var url: String?
     var img_url: String?
 }

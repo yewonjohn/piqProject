@@ -66,7 +66,7 @@ class BusinessViewController: UIViewController {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
         stackContainer.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        stackContainer.heightAnchor.constraint(equalToConstant: 600).isActive = true
+        stackContainer.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     //SETS RESET NAVIGATIONAL BUTTON
     func configureResetNavigationBarButtonItem() {

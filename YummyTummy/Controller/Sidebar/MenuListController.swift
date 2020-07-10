@@ -21,7 +21,6 @@ class MenuListController: UITableViewController{
         self.menuItems = menuItems
         super.init(nibName: nil, bundle: nil)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-
     }
     
     required init?(coder: NSCoder) {

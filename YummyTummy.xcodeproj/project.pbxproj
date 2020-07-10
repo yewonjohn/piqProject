@@ -25,6 +25,7 @@
 		44DA293724B7D359003974AE /* FavoritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44DA293524B7D359003974AE /* FavoritesCell.xib */; };
 		44DA293824B7D359003974AE /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA293624B7D359003974AE /* FavoritesCell.swift */; };
 		44DA293A24B7E137003974AE /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA293924B7E137003974AE /* FavoritesModel.swift */; };
+		44DA294224B8E7AB003974AE /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA294124B8E7AB003974AE /* FavoritesManager.swift */; };
 		44E79B5524A2DB0C00DDC48E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44E79B5424A2DB0C00DDC48E /* GoogleService-Info.plist */; };
 		44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5624A2E0F900DDC48E /* SignUpButton.swift */; };
 		44E79B5924A2E54200DDC48E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5824A2E54200DDC48E /* RegisterViewController.swift */; };
@@ -80,6 +81,7 @@
 		44DA293524B7D359003974AE /* FavoritesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesCell.xib; sourceTree = "<group>"; };
 		44DA293624B7D359003974AE /* FavoritesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		44DA293924B7E137003974AE /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
+		44DA294124B8E7AB003974AE /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		44E79B5424A2DB0C00DDC48E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44E79B5624A2E0F900DDC48E /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		44E79B5824A2E54200DDC48E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				44D201BB249D76F70074F315 /* AppDelegate.swift */,
 				44D201BD249D76F70074F315 /* SceneDelegate.swift */,
 				44D201C1249D76F70074F315 /* Main.storyboard */,
+				44DA294024B8E78D003974AE /* Database */,
 				44712D7524A267D80083B1AB /* Model */,
 				44712D7624A267E30083B1AB /* View */,
 				44712D7724A267EA0083B1AB /* Controller */,
@@ -291,6 +294,14 @@
 				44E79B5A24A2E5C000DDC48E /* BusinessViewController.swift */,
 			);
 			path = Cards;
+			sourceTree = "<group>";
+		};
+		44DA294024B8E78D003974AE /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				44DA294124B8E7AB003974AE /* FavoritesManager.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		44E79B5E24A2FDAA00DDC48E /* Util */ = {
@@ -554,6 +565,7 @@
 				44DA293424B7B527003974AE /* FavoritesViewController.swift in Sources */,
 				44712D7E24A26CF40083B1AB /* Constants.swift in Sources */,
 				44E79B5B24A2E5C000DDC48E /* BusinessViewController.swift in Sources */,
+				44DA294224B8E7AB003974AE /* FavoritesManager.swift in Sources */,
 				44DA293824B7D359003974AE /* FavoritesCell.swift in Sources */,
 				44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */,
 				44F05A1C24B641440083F56C /* MenuListController.swift in Sources */,

@@ -17,9 +17,9 @@ protocol BusinessCardsDelegate {
 
 class BusinessCardView : UIView {
     
-    let db = Firestore.firestore()
+    let favoritesManager = FavoritesManager()
     
-    //MARK: - Properties
+    //MARK: - UI Properties
     var shadowView : UIView!
     var swipeView : UIView!
     var imageContainView: UIView!
@@ -35,6 +35,7 @@ class BusinessCardView : UIView {
     var label = UILabel()
     var favoriteButton = UIButton()
     
+    var categoryTitles = ""
     
     var delegate : BusinessCardsDelegate?
     
@@ -94,39 +95,21 @@ class BusinessCardView : UIView {
                 ratingsView.image = UIImage(named: "regular_0")
             }
             //SETTING CATEGORIES
-            var categoriesStr: String = ""
             var counter = 0
             for category in dataSource!.categories {
                 if(counter != (dataSource?.categories.count)!-1){
-                    categoriesStr += category.title! + ", "
-                } else {categoriesStr += category.title!}
+                    categoryTitles += category.title! + ", "
+                } else {categoryTitles += category.title!}
                 counter+=1
             }
-            categoriesView.text = categoriesStr
+            categoriesView.text = categoryTitles
             favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         }
     }
-//    var userEmail: String?
-//    var name : String?
-//    var id: String?
-//    var rating: Float?
-//    var reviewCount: Int?
-//    var price: String?
-//    var distance: Double?
-//    var isClosed: Bool?
-//    var phone: String?
-//    var categories: [String]
-//    var url: String?
-//    var img_url: String?
+
     @objc func addToFavorites(){
         if let data = dataSource, let user = Auth.auth().currentUser?.email{
-            db.collection("favorites").addDocument(data: ["user":user,"business_id":data.id,"name":data.name,"ratings":data.rating,"reviewCount":data.reviewCount,"price":data.price,"distance":data.distance,"phone":data.phone,"isClosed":data.isClosed,"url":data.url,"img_url":data.img_url]) { (error) in
-                if let e = error{
-                    print("there was an issue saving favorites, \(e)")
-                } else{
-                    print("succesfully saved favorites")
-                }
-            }
+            favoritesManager.addToFavorites(user: user, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoryTitles)
         }
     }
     
@@ -317,7 +300,7 @@ class BusinessCardView : UIView {
         
         switch sender.state {
         case .ended:
-            if (card.center.x) > 100 {
+            if (card.center.x) > 200 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 10.0) {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
@@ -325,7 +308,7 @@ class BusinessCardView : UIView {
                     self.layoutIfNeeded()
                 }
                 return
-            }else if card.center.x < -5 {
+            }else if card.center.x < -35 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 10.0) {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
