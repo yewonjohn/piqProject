@@ -8,12 +8,16 @@
 
 import UIKit
 import Kingfisher
+import FirebaseFirestore
+import Firebase
 
-protocol SwipeCardsDelegate {
-    func swipeDidEnd(on view: SwipeCardView)
+protocol BusinessCardsDelegate {
+    func swipeDidEnd(on view: BusinessCardView)
 }
 
-class SwipeCardView : UIView {
+class BusinessCardView : UIView {
+    
+    let db = Firestore.firestore()
     
     //MARK: - Properties
     var shadowView : UIView!
@@ -29,14 +33,13 @@ class SwipeCardView : UIView {
     var phoneView = UILabel()
     var addressView = UILabel()
     var label = UILabel()
-    var moreButton = UIButton()
+    var favoriteButton = UIButton()
     
     
-    var delegate : SwipeCardsDelegate?
+    var delegate : BusinessCardsDelegate?
     
     var divisor : CGFloat = 0
     let baseView = UIView()
-    
     
     
     var dataSource : BusinessModel? {
@@ -45,8 +48,6 @@ class SwipeCardView : UIView {
             guard let image = dataSource?.img_url else { return }
             imageView.image = UIImage(named: image)
             titleLabel.text = dataSource?.name
-            addressView.text = dataSource?.address
-            print(dataSource?.address)
             ratingsCountView.text = "\(dataSource?.reviewCount ?? 0) Reviews"
             dollarSignsView.text = "\(dataSource?.price ?? "$") •"
             if dataSource?.price == ""{
@@ -102,6 +103,30 @@ class SwipeCardView : UIView {
                 counter+=1
             }
             categoriesView.text = categoriesStr
+            favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        }
+    }
+//    var userEmail: String?
+//    var name : String?
+//    var id: String?
+//    var rating: Float?
+//    var reviewCount: Int?
+//    var price: String?
+//    var distance: Double?
+//    var isClosed: Bool?
+//    var phone: String?
+//    var categories: [String]
+//    var url: String?
+//    var img_url: String?
+    @objc func addToFavorites(){
+        if let data = dataSource, let user = Auth.auth().currentUser?.email{
+            db.collection("favorites").addDocument(data: ["user":user,"business_id":data.id,"name":data.name,"ratings":data.rating,"reviewCount":data.reviewCount,"price":data.price,"distance":data.distance,"phone":data.phone,"isClosed":data.isClosed,"url":data.url,"img_url":data.img_url]) { (error) in
+                if let e = error{
+                    print("there was an issue saving favorites, \(e)")
+                } else{
+                    print("succesfully saved favorites")
+                }
+            }
         }
     }
     
@@ -111,7 +136,6 @@ class SwipeCardView : UIView {
         super.init(frame: .zero)
         configureShadowView()
         configureSwipeView()
-        configureLabelView()
         configureImageContainerView()
         configureImageView()
         configureTitleView()
@@ -121,7 +145,6 @@ class SwipeCardView : UIView {
         configureCategoriesView()
         configureisOpenView()
         configurePhoneView()
-        configureAddressView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -258,42 +281,16 @@ class SwipeCardView : UIView {
         phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         phoneView.leftAnchor.constraint(equalTo: isOpenView.rightAnchor, constant: 4).isActive = true
     }
-    
-    func configureAddressView() {
-        swipeView.addSubview(addressView)
-        addressView.textColor = .black
-        addressView.textAlignment = .left
-        addressView.font = UIFont.systemFont(ofSize: 18)
-        addressView.translatesAutoresizingMaskIntoConstraints = false
-        addressView.topAnchor.constraint(equalTo: isOpenView.bottomAnchor, constant: 10).isActive = true
-        addressView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
-    }
-    
-    func configureLabelView() {
-        swipeView.addSubview(label)
-        label.backgroundColor = .white
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.leftAnchor.constraint(equalTo: swipeView.leftAnchor).isActive = true
-        label.rightAnchor.constraint(equalTo: swipeView.rightAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor).isActive = true
-        label.heightAnchor.constraint(equalToConstant: 85).isActive = true
-    }
-    
+
     func configureButton() {
-        label.addSubview(moreButton)
-        moreButton.translatesAutoresizingMaskIntoConstraints = false
+        swipeView.addSubview(favoriteButton)
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: "plus-tab")?.withRenderingMode(.alwaysTemplate)
-        moreButton.setImage(image, for: .normal)
-        moreButton.tintColor = UIColor.red
+        favoriteButton.setImage(image, for: .normal)
+        favoriteButton.tintColor = UIColor.red
         
-        moreButton.rightAnchor.constraint(equalTo: label.rightAnchor, constant: -15).isActive = true
-        moreButton.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
-        moreButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        moreButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
+        favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -30).isActive = true
+        favoriteButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -30).isActive = true
     }
     
     func configureTapGesture() {
@@ -310,7 +307,7 @@ class SwipeCardView : UIView {
     
     //MARK: - Handlers
     @objc func handlePanGesture(sender: UIPanGestureRecognizer){
-        let card = sender.view as! SwipeCardView
+        let card = sender.view as! BusinessCardView
         let point = sender.translation(in: self)
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         card.center = CGPoint(x: centerOfParentContainer.x + point.x, y: centerOfParentContainer.y + point.y)
@@ -320,17 +317,17 @@ class SwipeCardView : UIView {
         
         switch sender.state {
         case .ended:
-            if (card.center.x) > 400 {
+            if (card.center.x) > 100 {
                 delegate?.swipeDidEnd(on: card)
-                UIView.animate(withDuration: 0.2) {
+                UIView.animate(withDuration: 10.0) {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
                 }
                 return
-            }else if card.center.x < -65 {
+            }else if card.center.x < -5 {
                 delegate?.swipeDidEnd(on: card)
-                UIView.animate(withDuration: 0.2) {
+                UIView.animate(withDuration: 10.0) {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()

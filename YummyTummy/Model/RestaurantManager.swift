@@ -55,7 +55,6 @@ class RestaurantManager{
                                                   reviewCount: business["review_count"].intValue,
                                                   price: business["price"].stringValue,
                                                   distance: business["distance"].doubleValue,
-                                                  address: business["location"]["display_address"].stringValue,
                                                   isClosed: business["is_closed"].boolValue,
                                                   phone: business["phone"].stringValue,
                                                   categories: categoryArr,

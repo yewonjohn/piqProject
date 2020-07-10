@@ -16,7 +16,6 @@ struct BusinessModel{
     var reviewCount: Int?
     var price: String?
     var distance: Double?
-    var address: String?
     var isClosed: Bool?
     var phone: String? {
         didSet{

@@ -8,28 +8,28 @@
 
 import UIKit
 
-protocol SwipeCardsDataSource {
+protocol BusinessCardsDataSource {
     func numberOfCardsToShow() -> Int
-    func card(at index: Int) -> SwipeCardView
+    func card(at index: Int) -> BusinessCardView
     func emptyView() -> UIView?
     
 }
 
-class StackContainerView: UIView, SwipeCardsDelegate {
+class StackContainerView: UIView, BusinessCardsDelegate {
 
     //MARK: - Properties
     var numberOfCardsToShow: Int = 0
     var cardsToBeVisible: Int = 3
-    var cardViews : [SwipeCardView] = []
+    var cardViews : [BusinessCardView] = []
     var remainingcards: Int = 0
     
     let horizontalInset: CGFloat = 10.0
     let verticalInset: CGFloat = 10.0
     
-    var visibleCards: [SwipeCardView] {
-        return subviews as? [SwipeCardView] ?? []
+    var visibleCards: [BusinessCardView] {
+        return subviews as? [BusinessCardView] ?? []
     }
-    var dataSource: SwipeCardsDataSource? {
+    var dataSource: BusinessCardsDataSource? {
         didSet {
             reloadData()
         }
@@ -61,7 +61,7 @@ class StackContainerView: UIView, SwipeCardsDelegate {
 
     //MARK: - Configurations
 
-    private func addCardView(cardView: SwipeCardView, atIndex index: Int) {
+    private func addCardView(cardView: BusinessCardView, atIndex index: Int) {
         cardView.delegate = self
         addCardFrame(index: index, cardView: cardView)
         cardViews.append(cardView)
@@ -69,7 +69,7 @@ class StackContainerView: UIView, SwipeCardsDelegate {
         remainingcards -= 1
     }
     
-    func addCardFrame(index: Int, cardView: SwipeCardView) {
+    func addCardFrame(index: Int, cardView: BusinessCardView) {
         var cardViewFrame = bounds
         let horizontalInset = (CGFloat(index) * self.horizontalInset)
         let verticalInset = CGFloat(index) * self.verticalInset
@@ -88,7 +88,7 @@ class StackContainerView: UIView, SwipeCardsDelegate {
         cardViews = []
     }
     
-    func swipeDidEnd(on view: SwipeCardView) {
+    func swipeDidEnd(on view: BusinessCardView) {
         guard let datasource = dataSource else { return }
         view.removeFromSuperview()
 

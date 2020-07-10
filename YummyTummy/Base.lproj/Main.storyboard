@@ -204,10 +204,10 @@
             </objects>
             <point key="canvasLocation" x="1682.608695652174" y="-476.11607142857139"/>
         </scene>
-        <!--Restaurants View Controller-->
+        <!--Business View Controller-->
         <scene sceneID="g5E-eN-GpB">
             <objects>
-                <viewController id="N3k-EI-wXm" customClass="RestaurantsViewController" customModule="YummyTummy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N3k-EI-wXm" customClass="BusinessViewController" customModule="YummyTummy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8kJ-8L-JvP" customClass="r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

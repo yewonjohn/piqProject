@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class RestaurantsViewController: UIViewController {
+class BusinessViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -32,7 +32,7 @@ class RestaurantsViewController: UIViewController {
         view.addSubview(stackContainer)
         configureStackContainer()
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
-        configureNavigationBarButtonItem()
+        configureResetNavigationBarButtonItem()
         
     }
     
@@ -42,14 +42,16 @@ class RestaurantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackground()
+        Background().setAuthBackground(view,backgroundImageView)
+        //asking for location
         locationManager.requestWhenInUseAuthorization()
         var currentLoc: CLLocation!
+        //if location is granted..
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == .authorizedAlways) {
             currentLoc = locationManager.location
             
-            //calling API for all the Cards Data
+            //calling API for all the Cards Data using location
             RestaurantManager().getLocalRestaurants(latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude) { (businessModelArray) in
                 self.viewModelData = businessModelArray
                 self.stackContainer.dataSource = self
@@ -67,7 +69,7 @@ class RestaurantsViewController: UIViewController {
         stackContainer.heightAnchor.constraint(equalToConstant: 600).isActive = true
     }
     //SETS RESET NAVIGATIONAL BUTTON
-    func configureNavigationBarButtonItem() {
+    func configureResetNavigationBarButtonItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetTapped))
     }
     
@@ -75,29 +77,17 @@ class RestaurantsViewController: UIViewController {
     @objc func resetTapped() {
         stackContainer.reloadData()
     }
-    
-    func setBackground(){
-        view.addSubview(backgroundImageView)
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        backgroundImageView.image = UIImage(named: "tacosImg")
-        backgroundImageView.alpha = 0.5
-        view.sendSubviewToBack(backgroundImageView)
-    }
 }
 //MARK: - DataSource for StackContainerView
 
-extension RestaurantsViewController : SwipeCardsDataSource {
+extension BusinessViewController : BusinessCardsDataSource {
     
     func numberOfCardsToShow() -> Int {
         return viewModelData.count
     }
     
-    func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView()
+    func card(at index: Int) -> BusinessCardView {
+        let card = BusinessCardView()
         card.dataSource = viewModelData[index]
         return card
     }
