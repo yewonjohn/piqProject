@@ -23,12 +23,17 @@ class FavoritesViewController: UITableViewController{
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
-        
-        Background().setAuthBackground(view,backgroundImageView)
-        
+                
         tableView.register(UINib(nibName: "FavoritesCell", bundle: nil), forCellReuseIdentifier: "FavoritesCell")
         
         favoritesManager.delegate = self
+        favoritesManager.loadFavorites()
+        
+        Background().setFavBackground(view,backgroundImageView)
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         favoritesManager.loadFavorites()
     }
 
@@ -47,9 +52,8 @@ class FavoritesViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //set current cell with "Coming Cell" at the current index
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
+
         
-        cell.backgroundColor = .white
-        cell.alpha = 1
         //setting fetched cell text
         if(favoritesArray[indexPath.row].userEmail == Auth.auth().currentUser?.email){
             cell.favoritesTitle.text = favoritesArray[indexPath.row].name
@@ -120,7 +124,6 @@ extension FavoritesViewController: FavoritesManagerDelegate{
     func didFailAddingFavorites(error: Error) {
         print("something went wrong is saving favorites :(, \(error)")
     }
-    
     
     
 }

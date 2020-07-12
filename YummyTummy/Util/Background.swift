@@ -22,4 +22,17 @@ class Background{
         backgroundImageView.alpha = 0.5
         view.sendSubviewToBack(backgroundImageView)
     }
+    
+    func setFavBackground(_ view: UIView,_ backgroundImageView: UIImageView){
+        view.addSubview(backgroundImageView)
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        backgroundImageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        view.sendSubviewToBack(backgroundImageView)
+    }
+    
+    
 }

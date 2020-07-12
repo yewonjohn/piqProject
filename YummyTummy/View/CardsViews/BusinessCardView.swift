@@ -110,6 +110,22 @@ class BusinessCardView : UIView {
     @objc func addToFavorites(){
         if let data = dataSource, let user = Auth.auth().currentUser?.email{
             favoritesManager.addToFavorites(user: user, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoryTitles)
+            
+            favoriteButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            UIView.animate(withDuration: 2.0,
+                                       delay: 0,
+                                       usingSpringWithDamping: CGFloat(0.20),
+                                       initialSpringVelocity: CGFloat(6.0),
+                                       options: UIView.AnimationOptions.allowUserInteraction,
+                                       animations: {
+                                        self.favoriteButton.transform = CGAffineTransform.identity
+                                        self.favoriteButton.tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
+                                        self.favoriteButton.layer.borderWidth = 1
+                                        self.favoriteButton.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+                },
+                                       completion: { _ in }
+            )
+            
         }
     }
     
@@ -270,8 +286,11 @@ class BusinessCardView : UIView {
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: "plus-tab")?.withRenderingMode(.alwaysTemplate)
         favoriteButton.setImage(image, for: .normal)
-        favoriteButton.tintColor = UIColor.red
-        
+        favoriteButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        favoriteButton.layer.borderWidth = 1
+        favoriteButton.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        favoriteButton.layer.cornerRadius  = 7
+
         favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -30).isActive = true
         favoriteButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -30).isActive = true
     }

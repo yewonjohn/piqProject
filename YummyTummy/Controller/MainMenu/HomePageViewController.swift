@@ -45,7 +45,6 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         self.navigationItem.setHidesBackButton(true, animated: false)
 
         
-        
         Background().setAuthBackground(view,backgroundImageView)
         addChildVCs()
     }
