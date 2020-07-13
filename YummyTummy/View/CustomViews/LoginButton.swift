@@ -23,10 +23,10 @@ class LoginButton: UIButton {
     
     
     private func setupButton() {
-        backgroundColor     = Colors.tropicBlue
+        backgroundColor     = #colorLiteral(red: 0.9098039216, green: 0.3137254902, blue: 0.3568627451, alpha: 1)
         titleLabel?.font    = UIFont(name: Fonts.avenirNextCondensedDemiBold, size: 22)
         layer.cornerRadius  = frame.size.height/2
         setTitleColor(.white, for: .normal)
-        tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
+//        tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
     }
 }
