@@ -25,12 +25,12 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let menu = MenuListController(with: ["Home","Favorites"])
+        let menu = MenuListController(with: ["Home","Favorites","Logout"])
         menu.delegate = self
         
         sideMenu = SideMenuNavigationController(rootViewController: menu)
         sideMenu?.leftSide = true
-//        menu?.setNavigationBarHidden(true, animated: false)
+        sideMenu?.setNavigationBarHidden(true, animated: false)
         
         SideMenuManager.default.leftMenuNavigationController = sideMenu
         SideMenuManager.default.addPanGestureToPresent(toView: self.view)
@@ -73,7 +73,26 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         else if named == "Favorites"{
             favoritesVC.view.isHidden = false
         }
+        else if named == "Logout"{
+            
+            let firebaseAuth = Auth.auth()
+            do {
+              try firebaseAuth.signOut()
+                _ = navigationController?.popViewController(animated: true)
+
+            } catch let signOutError as NSError {
+              print ("Error signing out: %@", signOutError)
+            }
+              
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.window! = UIWindow(frame: UIScreen.main.bounds)
+//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//            let view = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//            appDelegate.window!.rootViewController = view
+        }
     }
+    
 }
 
     

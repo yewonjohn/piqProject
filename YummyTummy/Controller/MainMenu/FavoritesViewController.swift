@@ -19,18 +19,17 @@ class FavoritesViewController: UITableViewController{
     override func viewDidLoad() {
         
         //making navigation bar transparent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.view.backgroundColor = UIColor.clear
                 
         tableView.register(UINib(nibName: "FavoritesCell", bundle: nil), forCellReuseIdentifier: "FavoritesCell")
         
         favoritesManager.delegate = self
         favoritesManager.loadFavorites()
         
-        Background().setFavBackground(view,backgroundImageView)
-
+        view.backgroundColor = #colorLiteral(red: 0.8972918391, green: 0.8919581175, blue: 0.9013919234, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {

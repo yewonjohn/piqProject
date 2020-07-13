@@ -51,6 +51,9 @@ class MenuListController: UITableViewController{
         if(menuItems[indexPath.row] == "Home"){
             cell.imageView?.image = UIImage(systemName: "house")
         }
+        if(menuItems[indexPath.row] == "Logout"){
+            cell.imageView?.image = UIImage(systemName: "arrowshape.turn.up.left")
+        }
         return cell
     }
     

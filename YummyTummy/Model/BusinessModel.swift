@@ -19,8 +19,9 @@ struct BusinessModel{
     var isClosed: Bool?
     var phone: String? {
         didSet{
-//            let phoneArr = Array(arrayLiteral: phone)
-//            self.phone = "\(phoneArr[0])\(phoneArr[1]) (\(phoneArr[3])\(phoneArr[4])\(phoneArr[5]))-\(phoneArr[6])\(phoneArr[7])\(phoneArr[8])-\(phoneArr[9])\(phoneArr[10])\(phoneArr[11])"
+            let phoneArr = Array(arrayLiteral: phone)
+            self.phone = "\(phoneArr[0])\(phoneArr[1]) (\(phoneArr[3])\(phoneArr[4])\(phoneArr[5]))-\(phoneArr[6])\(phoneArr[7])\(phoneArr[8])-\(phoneArr[9])\(phoneArr[10])\(phoneArr[11])"
+            print("triggered")
         }
     }
     var categories: [Categories]

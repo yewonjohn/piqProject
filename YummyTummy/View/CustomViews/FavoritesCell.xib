@@ -22,7 +22,7 @@
                             <constraint firstAttribute="width" secondItem="NO2-sY-9Rj" secondAttribute="height" multiplier="158:103" id="zYz-yJ-aSB"/>
                         </constraints>
                     </imageView>
-                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3HA-MA-dFt">
+                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3HA-MA-dFt" userLabel="ContainerView">
                         <rect key="frame" x="158" y="0.0" width="310" height="103"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BonChon Chicken" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfW-Gd-g5J" userLabel="Title">
@@ -59,8 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.89640919750000003" green="0.89207871829999996" blue="0.9007396768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="e73-JF-vht" firstAttribute="top" secondItem="kfW-Gd-g5J" secondAttribute="bottom" constant="5" id="3On-Ma-sAo"/>
                             <constraint firstItem="e73-JF-vht" firstAttribute="leading" secondItem="3HA-MA-dFt" secondAttribute="leading" constant="5" id="BEZ-FZ-fpp"/>
