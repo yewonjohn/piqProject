@@ -31,7 +31,7 @@ class MenuListController: UITableViewController{
         super.viewDidLoad()
         
         tableView.separatorStyle = .none
-        tableView.backgroundColor = #colorLiteral(red: 1, green: 0.8287023902, blue: 0.3496767282, alpha: 0.5)
+        tableView.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
 
     }
     
@@ -42,8 +42,8 @@ class MenuListController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = menuItems[indexPath.row]
-        cell.backgroundColor = #colorLiteral(red: 1, green: 0.8287023902, blue: 0.3496767282, alpha: 0.5)
-        cell.imageView?.tintColor = #colorLiteral(red: 0.9098039216, green: 0.3137254902, blue: 0.3568627451, alpha: 1)
+        cell.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
+        cell.imageView?.tintColor = #colorLiteral(red: 0.9098039216, green: 0.2901960784, blue: 0.3725490196, alpha: 1)
 
         if(menuItems[indexPath.row] == "Favorites"){
             cell.imageView?.image = UIImage(systemName: "star")

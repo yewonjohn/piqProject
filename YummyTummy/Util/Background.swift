@@ -19,8 +19,8 @@ class Background{
         backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 //        backgroundImageView.image = UIImage(named: "tacosImg")
-        backgroundImageView.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.8352941176, blue: 0.431372549, alpha: 1)
-        backgroundImageView.alpha = 0.5
+        backgroundImageView.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
+//        backgroundImageView.alpha = 0.5
         view.sendSubviewToBack(backgroundImageView)
     }
     

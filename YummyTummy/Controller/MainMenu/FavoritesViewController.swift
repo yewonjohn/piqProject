@@ -29,7 +29,7 @@ class FavoritesViewController: UITableViewController{
         favoritesManager.delegate = self
         favoritesManager.loadFavorites()
         
-        view.backgroundColor = #colorLiteral(red: 1, green: 0.8287023902, blue: 0.3496767282, alpha: 0.5)
+        view.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {

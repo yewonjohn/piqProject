@@ -25,7 +25,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let menu = MenuListController(with: ["Home","Favorites","Logout"])
+        let menu = MenuListController(with: ["","Home","Favorites","Logout"])
         menu.delegate = self
         
         sideMenu = SideMenuNavigationController(rootViewController: menu)
@@ -62,8 +62,9 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     }
     
     func didSelectMenuItem(named: String) {
+        if(named != ""){
         sideMenu?.dismiss(animated: true, completion: nil)
-        
+        }
         title = named
         
         if named == "Home"{

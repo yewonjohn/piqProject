@@ -32,8 +32,8 @@ class BusinessCardView : UIView {
     var isOpenView = UILabel()
     var phoneView = UILabel()
     var addressView = UILabel()
-    var label = UILabel()
     var favoriteButton = UIButton()
+    var yelpImgView: UIImageView!
     
     var categoryTitles = ""
     
@@ -45,6 +45,11 @@ class BusinessCardView : UIView {
     
     var dataSource : BusinessModel? {
         didSet {
+            //reformatting phoneNumber
+            var phoneNumber = dataSource?.phone
+            phoneNumber = phoneNumber?.applyPatternOnNumbers(pattern: "+# (###) ###-####", replacmentCharacter: "#")
+                        
+            //setting UIViews text with data
             swipeView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
             guard let image = dataSource?.img_url else { return }
             imageView.image = UIImage(named: image)
@@ -54,7 +59,7 @@ class BusinessCardView : UIView {
             if dataSource?.price == ""{
                 dollarSignsView.text = "? •"
             }
-            phoneView.text = dataSource?.phone
+            phoneView.text = phoneNumber
             let url = URL(string: dataSource?.img_url ?? "")
             imageView.kf.setImage(with: url)
             
@@ -107,6 +112,12 @@ class BusinessCardView : UIView {
         }
     }
 
+    //Action
+    @objc func tapDetected() {
+        guard let url = URL(string: (dataSource?.url)!) else { return }
+        UIApplication.shared.open(url)
+    }
+
     @objc func addToFavorites(){
         if let data = dataSource, let user = Auth.auth().currentUser?.email{
             favoritesManager.addToFavorites(user: user, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoryTitles)
@@ -125,7 +136,6 @@ class BusinessCardView : UIView {
                 },
                                        completion: { _ in }
             )
-            
         }
     }
     
@@ -144,6 +154,7 @@ class BusinessCardView : UIView {
         configureCategoriesView()
         configureisOpenView()
         configurePhoneView()
+        configureYelpView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -280,6 +291,21 @@ class BusinessCardView : UIView {
         phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         phoneView.leftAnchor.constraint(equalTo: isOpenView.rightAnchor, constant: 4).isActive = true
     }
+    func configureYelpView(){
+        yelpImgView = UIImageView()
+        yelpImgView.image = UIImage(named: "yelp_logo_1")
+        swipeView.addSubview(yelpImgView)
+        yelpImgView.contentMode = .scaleAspectFit
+        yelpImgView.translatesAutoresizingMaskIntoConstraints = false
+        yelpImgView.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -20).isActive = true
+        yelpImgView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 15).isActive = true
+        yelpImgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        yelpImgView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
+        yelpImgView.isUserInteractionEnabled = true
+        yelpImgView.addGestureRecognizer(singleTap)
+    }
 
     func configureButton() {
         swipeView.addSubview(favoriteButton)
@@ -319,7 +345,7 @@ class BusinessCardView : UIView {
         
         switch sender.state {
         case .ended:
-            if (card.center.x) > 200 {
+            if (card.center.x) > 350 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 10.0) {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
@@ -354,4 +380,18 @@ class BusinessCardView : UIView {
     }
     
     
+}
+
+extension String {
+    func applyPatternOnNumbers(pattern: String, replacmentCharacter: Character) -> String {
+        var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
+        for index in 0 ..< pattern.count {
+            guard index < pureNumber.count else { return pureNumber }
+            let stringIndex = String.Index(encodedOffset: index)
+            let patternCharacter = pattern[stringIndex]
+            guard patternCharacter != replacmentCharacter else { continue }
+            pureNumber.insert(patternCharacter, at: stringIndex)
+        }
+        return pureNumber
+    }
 }
