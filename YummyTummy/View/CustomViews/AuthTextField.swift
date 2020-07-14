@@ -28,7 +28,7 @@ class AuthTextField: UITextField {
         font                  = UIFont(name: Fonts.avenirNextCondensedDemiBold, size: 18)
         backgroundColor       = UIColor(white: 1.0, alpha: 0.5)
         autocorrectionType    = .no
-        layer.cornerRadius    = 25.0
+        layer.cornerRadius    = frame.size.height/2
         clipsToBounds         = true
         
         let placeholder       = self.placeholder != nil ? self.placeholder! : ""
