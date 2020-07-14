@@ -19,11 +19,11 @@ class FavoritesViewController: UITableViewController{
     override func viewDidLoad() {
         
         //making navigation bar transparent
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = UIColor.clear
-                
+        //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        //        self.navigationController?.navigationBar.shadowImage = UIImage()
+        //        self.navigationController?.navigationBar.isTranslucent = true
+        //        self.navigationController?.view.backgroundColor = UIColor.clear
+        
         tableView.register(UINib(nibName: "FavoritesCell", bundle: nil), forCellReuseIdentifier: "FavoritesCell")
         
         favoritesManager.delegate = self
@@ -35,8 +35,8 @@ class FavoritesViewController: UITableViewController{
     override func viewWillAppear(_ animated: Bool) {
         favoritesManager.loadFavorites()
     }
-
-
+    
+    
     
     //MARK - Tableview DataSource Methods
     //DEFINES HOW MANY CELLS TO CREATE
@@ -51,7 +51,7 @@ class FavoritesViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //set current cell with "Coming Cell" at the current index
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
-
+        
         
         //setting fetched cell text
         if(favoritesArray[indexPath.row].userEmail == Auth.auth().currentUser?.email){
@@ -99,12 +99,36 @@ class FavoritesViewController: UITableViewController{
         //deselects after selecting
         tableView.deselectRow(at: indexPath, animated: true)
         
-        //SEGUE - sets current video to local var, and triggers segue
-//        let vid = videoArray[indexPath.row]
-//        vidToPass = vid
-//        performSegue(withIdentifier: "ComingSegue", sender: self)
+        guard let url = URL(string: (favoritesArray[indexPath.row].url!)) else { return }
+        UIApplication.shared.open(url)
+        
     }
-
+    //defines
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+    {
+        // 1
+        let deleteAction = UITableViewRowAction(style: .default, title: "Toss" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+            // 2
+            let deleteMenu = UIAlertController(title: nil, message: "Toss?", preferredStyle: .actionSheet)
+            
+            let deleteAction = UIAlertAction(title: "Yes, toss it", style: .default, handler: {
+                (alert: UIAlertAction!) in self.favoritesManager.deleteFavorite(itemToDelete: self.favoritesArray[indexPath.row])
+                DispatchQueue.main.async {
+                    self.favoritesManager.loadFavorites()
+                    print("reloaded data here")
+                }
+                
+            })
+            let cancelAction = UIAlertAction(title: "Nevermind I like", style: .cancel, handler: nil)
+            
+            deleteMenu.addAction(deleteAction)
+            deleteMenu.addAction(cancelAction)
+            
+            self.present(deleteMenu, animated: true, completion: nil)
+        })
+        return [deleteAction]
+    }
+    
 }
 extension FavoritesViewController: FavoritesManagerDelegate{
     

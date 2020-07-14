@@ -32,8 +32,9 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         sideMenu?.leftSide = true
         sideMenu?.setNavigationBarHidden(true, animated: false)
         
-        SideMenuManager.default.leftMenuNavigationController = sideMenu
-        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
+        //makes menuList swipable
+//        SideMenuManager.default.leftMenuNavigationController = sideMenu
+//        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

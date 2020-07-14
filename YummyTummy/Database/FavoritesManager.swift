@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 //DEFINE PROTOCOL FOR DELEGATE FRAMEWORK
 protocol FavoritesManagerDelegate {
@@ -17,9 +18,11 @@ protocol FavoritesManagerDelegate {
 }
 
 class FavoritesManager{
-    
+
     let db = Firestore.firestore()
     var delegate: FavoritesManagerDelegate?
+    
+    var timeStamp = NSDate().timeIntervalSince1970
     
     func addToFavorites(user:String?, id: String?, name: String?, ratings: Float?, reviewCount: Int?, price: String?, distance: Double?, phone: String?, isClosed: Bool?, url: String?, img_url: String?, categories: String?){
         
@@ -48,7 +51,8 @@ class FavoritesManager{
                     "isClosed":isClosed,
                     "url":url,
                     "img_url":img_url,
-                    "categories":categories
+                    "categories":categories,
+                    "date_added":self.timeStamp
                     ]){ (error) in
                         if let e = error{
                             self.delegate?.didFailAddingFavorites(error: e)
@@ -56,26 +60,6 @@ class FavoritesManager{
                             print("succesfully saved favorites")
                         }
                     }
-                    
-//                    addDocument(data: ["user":user,
-//                                                                  "business_id":id,
-//                                                                  "name":name,
-//                                                                  "ratings":ratings,
-//                                                                  "reviewCount":reviewCount,
-//                                                                  "price":price,
-//                                                                  "distance":distance,
-//                                                                  "phone":phone,
-//                                                                  "isClosed":isClosed,
-//                                                                  "url":url,
-//                                                                  "img_url":img_url,
-//                                                                  "categories":categories
-//                    ]) { (error) in
-//                        if let e = error{
-//                            self.delegate?.didFailAddingFavorites(error: e)
-//                        } else{
-//                            print("succesfully saved favorites")
-//                        }
-//                    }
                 }
             }else {
                 print("nothing saved in favorites at all\(error)")
@@ -92,6 +76,7 @@ class FavoritesManager{
         
         db.collection("favorites")
             .whereField("user", isEqualTo: currentUser)
+            .order(by: "date_added")
             .getDocuments{ (QuerySnapshot, Error) in
                 if let e = Error{
                     self.delegate?.didFailWithError(error: e)
@@ -122,6 +107,17 @@ class FavoritesManager{
                     self.delegate?.didFetchFavorites(favorites: favoritesArr)
                 }
                 
+        }
+    }
+    
+    func deleteFavorite(itemToDelete: FavoritesModel) {
+        
+        db.collection("favorites").document(itemToDelete.id!).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
         }
     }
     
