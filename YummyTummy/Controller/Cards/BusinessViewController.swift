@@ -52,10 +52,10 @@ class BusinessViewController: UIViewController {
             currentLoc = locationManager.location
             
             //calling API for all the Cards Data using location
+            print(currentLoc.coordinate.latitude)
             RestaurantManager().getLocalRestaurants(latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude) { (businessModelArray) in
                 self.viewModelData = businessModelArray
                 self.stackContainer.dataSource = self
-                
             }
         }
     }
