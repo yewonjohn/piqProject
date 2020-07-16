@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import RealmSwift
 
 //DEFINE PROTOCOL FOR DELEGATE FRAMEWORK
 protocol FavoritesManagerDelegate {
@@ -19,8 +20,13 @@ protocol FavoritesManagerDelegate {
 
 class FavoritesManager{
 
+    //Firestore init
     let db = Firestore.firestore()
     var delegate: FavoritesManagerDelegate?
+    
+    //Realm init
+    let realm = try! Realm()
+    var favorites: Results<FavoritesModel>!
     
     var timeStamp = NSDate().timeIntervalSince1970
     
@@ -60,6 +66,30 @@ class FavoritesManager{
                             print("succesfully saved favorites")
                         }
                     }
+                    //SAVE LOCALLY HERE TOO
+                    var favorite = FavoritesModel()
+                    favorite.userEmail = user
+                    favorite.name = name
+                    favorite.id = id
+                    favorite.rating.value = ratings
+                    favorite.reviewCount.value = reviewCount
+                    favorite.price = price
+                    favorite.distance.value = distance
+                    favorite.phone = phone
+                    favorite.isClosed.value = isClosed
+                    favorite.url = url
+                    favorite.img_url = img_url
+                    favorite.categories = categories
+                    favorite.date_added = Date(timeIntervalSince1970: self.timeStamp)
+                    
+                    do{
+                        try self.realm.write{
+                            self.realm.add((favorite))
+                        }
+                    }catch {
+                        print("Error saving favorite \(error)")
+                    }
+                    
                 }
             }else {
                 print("nothing saved in favorites at all\(error)")
@@ -74,40 +104,57 @@ class FavoritesManager{
         var favoritesArr = [FavoritesModel]()
         let currentUser = Auth.auth().currentUser?.email
         
-        db.collection("favorites")
-            .whereField("user", isEqualTo: currentUser)
-            .order(by: "date_added")
-            .getDocuments{ (QuerySnapshot, Error) in
-                if let e = Error{
-                    self.delegate?.didFailWithError(error: e)
-                }
-                else {
-                    if let snapshotDocuments = QuerySnapshot?.documents{
-                        for doc in snapshotDocuments{
-                            let data = doc.data()
-                            
-                            let businessName = data["name"] as? String
-                            let businessId = data["business_id"] as? String
-                            let businessRatings = data["ratings"] as? Float
-                            let businessReviewCount = data["reviewCount"] as? Int
-                            let businessCategories = data["categories"] as? String
-                            let businessDistance = data["distance"] as? Double
-                            let businessPrice = data["price"] as? String
-                            let businessUrl = data["url"] as? String
-                            let businessImg_url = data["img_url"] as? String
-                            let businessPhone = data["phone"] as? String
-                            let businessIsClosed = data["isClosed"] as? Bool
-                            let businessUserEmail = data["user"] as? String
-                            
-                            let newFavorite = FavoritesModel(userEmail: businessUserEmail, name: businessName, id: businessId, rating: businessRatings, reviewCount: businessReviewCount, price: businessPrice, distance: businessDistance, isClosed: businessIsClosed, phone: businessPhone, categories: businessCategories, url: businessUrl, img_url: businessImg_url)
-                            
-                            favoritesArr.append(newFavorite)
-                        }
-                    }
-                    self.delegate?.didFetchFavorites(favorites: favoritesArr)
-                }
-                
-        }
+        //loading from local database
+        favorites = realm.objects(FavoritesModel.self)
+        self.delegate?.didFetchFavorites(favorites: favoritesArr)
+
+        
+//        db.collection("favorites")
+//            .whereField("user", isEqualTo: currentUser)
+//            .order(by: "date_added")
+//            .getDocuments{ (QuerySnapshot, Error) in
+//                if let e = Error{
+//                    self.delegate?.didFailWithError(error: e)
+//                }
+//                else {
+//                    if let snapshotDocuments = QuerySnapshot?.documents{
+//                        for doc in snapshotDocuments{
+//                            let data = doc.data()
+//
+//                            let businessName = data["name"] as? String
+//                            let businessId = data["business_id"] as? String
+//                            let businessRatings = data["ratings"] as? Float
+//                            let businessReviewCount = data["reviewCount"] as? Int
+//                            let businessCategories = data["categories"] as? String
+//                            let businessDistance = data["distance"] as? Double
+//                            let businessPrice = data["price"] as? String
+//                            let businessUrl = data["url"] as? String
+//                            let businessImg_url = data["img_url"] as? String
+//                            let businessPhone = data["phone"] as? String
+//                            let businessIsClosed = data["isClosed"] as? Bool
+//                            let businessUserEmail = data["user"] as? String
+//
+//                            let newFavorite = FavoritesModel()
+//                            newFavorite.userEmail = businessUserEmail
+//                            newFavorite.name = businessName
+//                            newFavorite.id = businessId
+//                            newFavorite.rating.value = businessRatings
+//                            newFavorite.reviewCount.value = businessReviewCount
+//                            newFavorite.price = businessPrice
+//                            newFavorite.distance.value = businessDistance
+//                            newFavorite.isClosed.value = businessIsClosed
+//                            newFavorite.phone = businessPhone
+//                            newFavorite.categories = businessCategories
+//                            newFavorite.url = businessUrl
+//                            newFavorite.img_url = businessImg_url
+//
+//                            favoritesArr.append(newFavorite)
+//                        }
+//                    }
+//                    self.delegate?.didFetchFavorites(favorites: favoritesArr)
+//                }
+//
+//        }
     }
     
     func deleteFavorite(itemToDelete: FavoritesModel) {

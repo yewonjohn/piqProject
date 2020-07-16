@@ -7,19 +7,23 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct FavoritesModel{
+class FavoritesModel: Object {
     
-    var userEmail: String?
-    var name : String?
-    var id: String?
-    var rating: Float?
-    var reviewCount: Int?
-    var price: String?
-    var distance: Double?
-    var isClosed: Bool?
-    var phone: String?
-    var categories: String?
-    var url: String?
-    var img_url: String?
-}
+
+    
+    
+    @objc dynamic var userEmail: String?
+    @objc dynamic var name : String?
+    @objc dynamic var id: String?
+    let rating = RealmOptional<Float>()
+    let reviewCount = RealmOptional<Int>()
+    @objc dynamic var price: String?
+    let distance = RealmOptional<Double>()
+    let isClosed = RealmOptional<Bool>()
+    @objc dynamic var phone: String?
+    @objc dynamic var categories: String?
+    @objc dynamic var url: String?
+    @objc dynamic var img_url: String?
+    @objc dynamic var date_added: Date? = nil}

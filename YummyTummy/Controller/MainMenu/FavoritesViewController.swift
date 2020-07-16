@@ -57,10 +57,10 @@ class FavoritesViewController: UITableViewController{
         if(favoritesArray[indexPath.row].userEmail == Auth.auth().currentUser?.email){
             cell.favoritesTitle.text = favoritesArray[indexPath.row].name
             cell.favoritesPrice.text = favoritesArray[indexPath.row].price
-            cell.favoritesRatingCount.text = String(favoritesArray[indexPath.row].reviewCount!)
+            cell.favoritesRatingCount.text = String(favoritesArray[indexPath.row].reviewCount.value!)
             cell.favoritesCategories.text = favoritesArray[indexPath.row].categories
             
-            switch favoritesArray[indexPath.row].rating {
+            switch favoritesArray[indexPath.row].rating.value {
             case 0.0:
                 cell.favoritesRatings.image = UIImage(named: "regular_0")
             case 0.5:

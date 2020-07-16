@@ -343,6 +343,7 @@
 				44D201CA249D76F90074F315 /* Sources */,
 				44D201CB249D76F90074F315 /* Frameworks */,
 				44D201CC249D76F90074F315 /* Resources */,
+				D67E1F4BD840FC994A01EA4B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -545,6 +546,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YummyTummy-YummyTummyUITests/Pods-YummyTummy-YummyTummyUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D67E1F4BD840FC994A01EA4B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YummyTummyTests/Pods-YummyTummyTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YummyTummyTests/Pods-YummyTummyTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YummyTummyTests/Pods-YummyTummyTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
