@@ -4,10 +4,37 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>YummyTummy 1.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>29</integer>
+		</dict>
 		<key>YummyTummy.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>28</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>44D201B7249D76F70074F315</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>44D201CD249D76F90074F315</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>44D201D8249D76F90074F315</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

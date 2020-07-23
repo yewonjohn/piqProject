@@ -11,9 +11,6 @@ import RealmSwift
 
 class FavoritesModel: Object {
     
-
-    
-    
     @objc dynamic var userEmail: String?
     @objc dynamic var name : String?
     @objc dynamic var id: String?
@@ -26,4 +23,6 @@ class FavoritesModel: Object {
     @objc dynamic var categories: String?
     @objc dynamic var url: String?
     @objc dynamic var img_url: String?
-    @objc dynamic var date_added: Date? = nil}
+    @objc dynamic var date_added: Date? = nil
+    
+}

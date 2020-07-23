@@ -19,14 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         let db = Firestore.firestore()
-        
-        do{
-            let realm = try Realm()
-        } catch {
-            print("Error initializing new realm,\(error)")
-        }
-        print(Realm.Configuration.defaultConfiguration.fileURL)
-        
+
         return true
     }
 

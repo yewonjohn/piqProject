@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 class FavoritesViewController: UITableViewController{
     
@@ -17,12 +18,6 @@ class FavoritesViewController: UITableViewController{
     let backgroundImageView = UIImageView()
     
     override func viewDidLoad() {
-        
-        //making navigation bar transparent
-        //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        //        self.navigationController?.navigationBar.shadowImage = UIImage()
-        //        self.navigationController?.navigationBar.isTranslucent = true
-        //        self.navigationController?.view.backgroundColor = UIColor.clear
         
         tableView.register(UINib(nibName: "FavoritesCell", bundle: nil), forCellReuseIdentifier: "FavoritesCell")
         
@@ -35,7 +30,6 @@ class FavoritesViewController: UITableViewController{
     override func viewWillAppear(_ animated: Bool) {
         favoritesManager.loadFavorites()
     }
-    
     
     
     //MARK - Tableview DataSource Methods

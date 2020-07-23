@@ -16,6 +16,10 @@ class BusinessViewController: UIViewController {
     var viewModelData = [BusinessModel]()
     var stackContainer : StackContainerView!
     
+    var categoriesArr = [CategoryModel]()
+    var categoriesTitle = String()
+    var dollarSign = String()
+    
     //MARK: - Init
     
     override func loadView() {
@@ -41,8 +45,17 @@ class BusinessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //set background
         Background().setAuthBackground(view,backgroundImageView)
+        //get category title alias
+        var categoryAlias: String?
+        for category in categoriesArr{
+            if(category.title == categoriesTitle){
+                categoryAlias = category.alias
+            }
+        }
+        print(dollarSign)
+        
         //asking for location
         locationManager.requestWhenInUseAuthorization()
         var currentLoc: CLLocation!
@@ -53,7 +66,7 @@ class BusinessViewController: UIViewController {
             
             //calling API for all the Cards Data using location
             print(currentLoc.coordinate.latitude)
-            RestaurantManager().getLocalRestaurants(latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude) { (businessModelArray) in
+            RestaurantManager().getLocalRestaurants(latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
                 self.viewModelData = businessModelArray
                 self.stackContainer.dataSource = self
             }

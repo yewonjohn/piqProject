@@ -10,20 +10,67 @@ import UIKit
 import IQKeyboardManager
 import FirebaseAuth
 import SideMenu
+import SwiftyJSON
+import SearchTextField
 
 class HomePageViewController: UIViewController, MenuControllerDelegate{
     
     let backgroundImageView = UIImageView()
     var sideMenu: SideMenuNavigationController?
     
+    var categoriesArr = [CategoryModel]()
+    var categoriesTitles = [String]()
+    var dollarSignsParam = String()
     let favoritesVC = FavoritesViewController()
+    
+    
+    
+    @IBOutlet weak var searchCategory: SearchTextField!
+    @IBOutlet weak var dollarSign: UILabel!
+    
+    @IBAction func sliderChanged(_ sender: UISlider) {
+        var currentValue = Int(sender.value)
+            switch currentValue {
+            case 1:
+                    self.dollarSign.text = "$"
+                    dollarSignsParam = "1"
+            case 2:
+                    self.dollarSign.text = "$$"
+                    dollarSignsParam = "2"
+            case 3:
+                    self.dollarSign.text = "$$$"
+                    dollarSignsParam = "3"
 
+            case 4:
+                    self.dollarSign.text = "$$$$"
+                    dollarSignsParam = "4"
+
+            default:
+                    self.dollarSign.text = ""
+                    dollarSignsParam = "1"
+
+            }
+    }
     @IBAction func goToCards(_ sender: UIButton) {
         self.performSegue(withIdentifier: "HomeToCards", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "HomeToCards" {
+            let controller = segue.destination as! BusinessViewController
+            controller.categoriesArr = categoriesArr
+            controller.categoriesTitle = searchCategory.text ?? ""
+            controller.dollarSign = dollarSignsParam
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //json for categories
+        guard let jsonCategories = readLocalFile(forName: "categories") else { return }
+        parse(jsonData: jsonCategories)
+        configureCategories(categories: categoriesArr)
         
         let menu = MenuListController(with: ["","Home","Favorites","Logout"])
         menu.delegate = self
@@ -33,8 +80,8 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         sideMenu?.setNavigationBarHidden(true, animated: false)
         
         //makes menuList swipable
-//        SideMenuManager.default.leftMenuNavigationController = sideMenu
-//        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
+        //        SideMenuManager.default.leftMenuNavigationController = sideMenu
+        //        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -44,7 +91,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         
         //hides back button from this view
         self.navigationItem.setHidesBackButton(true, animated: false)
-
+        
         
         Background().setAuthBackground(view,backgroundImageView)
         addChildVCs()
@@ -64,43 +111,94 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     
     func didSelectMenuItem(named: String) {
         if(named != ""){
-        sideMenu?.dismiss(animated: true, completion: nil)
+            sideMenu?.dismiss(animated: true, completion: nil)
         }
         title = named
         
         if named == "Home"{
             favoritesVC.view.isHidden = true
+            searchCategory.isHidden = false
             
         }
         else if named == "Favorites"{
             favoritesVC.view.isHidden = false
+            searchCategory.isHidden = true
+            searchCategory.endEditing(true)
         }
         else if named == "Logout"{
             
             let firebaseAuth = Auth.auth()
             do {
-              try firebaseAuth.signOut()
+                try firebaseAuth.signOut()
                 _ = navigationController?.popViewController(animated: true)
-
+                
             } catch let signOutError as NSError {
-              print ("Error signing out: %@", signOutError)
+                print ("Error signing out: %@", signOutError)
             }
-              
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.window! = UIWindow(frame: UIScreen.main.bounds)
-//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//
-//            let view = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//            appDelegate.window!.rootViewController = view
+            
+            //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            //            appDelegate.window! = UIWindow(frame: UIScreen.main.bounds)
+            //            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            //
+            //            let view = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            //            appDelegate.window!.rootViewController = view
         }
     }
     
 }
 
+//MARK -- 	Search options
+extension HomePageViewController{
     
+    private func readLocalFile(forName name: String) -> Data? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: name, ofType: "json"),
+                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return jsonData
+            }
+        } catch {
+            print(error)
+        }
+        
+        return nil
+    }
     
+    private func parse(jsonData: Data) {
+        do {
+            let decodedData = try JSONDecoder().decode([CategoryModel].self, from: jsonData)
+            
+            categoriesArr = decodedData
+            
+        } catch {
+            print("decode error \(error)")
+        }
+    }
     
+    private func configureCategories(categories: [CategoryModel]){
+        for category in categories{
+            if let parent = category.parents{
+                if (parent.contains("food") || parent.contains("bars") || parent.contains("restaurants")){
+                    if let title = category.title{
+                        if let blacklist = category.countryBlacklist{
+                            if !(blacklist.contains("US")){
+                                categoriesTitles.append(title)
+                            }
+                        } else{
+                            categoriesTitles.append(title)
+                        }
+                    }
+                }else{continue}
+            }
+        }
+        
+        searchCategory.filterStrings(categoriesTitles)
+        searchCategory.startVisible = true
+        
+    }
     
+}
+
+
 
 
 
