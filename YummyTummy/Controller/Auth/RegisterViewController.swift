@@ -22,8 +22,12 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         //dynamic keyboard
         IQKeyboardManager.shared().isEnabled = true
+        self.hideKeyboardWhenTappedAround()
+
         //set background
         Background().setAuthBackground(view,backgroundImageView)
+        
+        
         
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -53,5 +57,17 @@ class RegisterViewController: UIViewController {
                 
             }
         }
+    }
+}
+
+extension RegisterViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

@@ -23,6 +23,8 @@ class LoginViewController: UIViewController {
         //setting background
         Background().setAuthBackground(view,backgroundImageView)
 //        RestaurantManager().getLocalRestaurants()
+        self.hideKeyboardWhenTappedAround()
+
     }
     //navigation bar management
     override func viewWillAppear(_ animated: Bool) {
@@ -53,5 +55,17 @@ class LoginViewController: UIViewController {
     }
     
     
+}
+
+extension LoginViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 

@@ -67,6 +67,9 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+
+        
         //json for categories
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
         parse(jsonData: jsonCategories)
@@ -202,3 +205,14 @@ extension HomePageViewController{
 
 
 
+extension HomePageViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomePageViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
