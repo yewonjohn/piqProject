@@ -29,8 +29,11 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     @IBOutlet weak var dollarSign: UILabel!
     
     @IBAction func sliderChanged(_ sender: UISlider) {
-        var currentValue = Int(sender.value)
+        let currentValue = Int(sender.value)
             switch currentValue {
+            case 0:
+                    self.dollarSign.text = "no preference"
+                    dollarSignsParam = "0"
             case 1:
                     self.dollarSign.text = "$"
                     dollarSignsParam = "1"
@@ -40,15 +43,12 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
             case 3:
                     self.dollarSign.text = "$$$"
                     dollarSignsParam = "3"
-
             case 4:
                     self.dollarSign.text = "$$$$"
                     dollarSignsParam = "4"
-
             default:
-                    self.dollarSign.text = ""
-                    dollarSignsParam = "1"
-
+                    self.dollarSign.text = "no preference"
+                    dollarSignsParam = "0"
             }
     }
     @IBAction func goToCards(_ sender: UIButton) {

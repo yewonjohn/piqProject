@@ -14,6 +14,8 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
+    @IBOutlet weak var passwordValidateTextField: AuthTextField!
+    
     let backgroundImageView = UIImageView()
     
     override func viewDidLoad() {
@@ -31,16 +33,24 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func register(_ sender: UIButton) {
-        if let email = emailTextField.text, let password = passwordTextField.text{
-            
-            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                if let e = error{
-                    let alert = UIAlertController(title: "uh oh", message: e.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in }))
-                    self.present(alert, animated: true, completion: nil)
-                } else {
-                    self.performSegue(withIdentifier: "RegisterToMain", sender: self)
+        if let email = emailTextField.text, let password = passwordTextField.text, let passwordValidate = passwordValidateTextField.text{
+            if(password == passwordValidate){
+                
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let e = error{
+                        let alert = UIAlertController(title: "uh oh", message: e.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in }))
+                        self.present(alert, animated: true, completion: nil)
+                    } else {
+                        self.performSegue(withIdentifier: "RegisterToMain", sender: self)
+                    }
                 }
+            }else {
+                print("someghing")
+                let alert = UIAlertController(title: "uh oh", message: "password doesn't match!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in}))
+                self.present(alert, animated: true, completion: nil)
+                
             }
         }
     }

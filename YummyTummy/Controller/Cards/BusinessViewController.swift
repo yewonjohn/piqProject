@@ -18,7 +18,7 @@ class BusinessViewController: UIViewController {
     
     var categoriesArr = [CategoryModel]()
     var categoriesTitle = String()
-    var dollarSign = String()
+    var dollarSign : String?
     
     //MARK: - Init
     
@@ -54,7 +54,9 @@ class BusinessViewController: UIViewController {
                 categoryAlias = category.alias
             }
         }
-        print(dollarSign)
+        if(dollarSign == "0"){
+            dollarSign = nil
+        }
         
         //asking for location
         locationManager.requestWhenInUseAuthorization()

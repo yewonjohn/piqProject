@@ -13,26 +13,30 @@ import CoreLocation
 
 
 class RestaurantManager{
-    
-    var categoryParam: String?
-    var dollarSignParam: String?
 
     func getLocalRestaurants(latitude: Double, longitude: Double, category: String?, dollarSigns: String?, completion: @escaping ((_ businesses:[BusinessModel])->Void)){
         var businesses: [BusinessModel]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
-        categoryParam = category
-        dollarSignParam = dollarSigns
         
-        if(category == ""){
-            categoryParam = nil
+        var requestParams : [String: Any] = [:]
+
+        if let cat = category{
+            if(dollarSigns == nil){
+                requestParams = ["latitude": latitude, "longitude": longitude, "categories": cat]
+            }
         }
-        if(dollarSigns == ""){
-            dollarSignParam = nil
+        if let price = dollarSigns{
+            if(category == nil){
+                requestParams = ["latitude": latitude, "longitude": longitude, "price": price]
+            }
         }
-        print(categoryParam)
-        print(dollarSignParam)
-        var requestParams = ["latitude": latitude, "longitude": longitude, "categories": categoryParam, "price": dollarSignParam] as [String : Any]
-        
+        if let price = dollarSigns, let cat = category {
+                requestParams = ["latitude": latitude, "longitude": longitude, "categories": cat,"price": price]
+        }
+        if (category == nil && dollarSigns == nil){
+            requestParams = ["latitude": latitude, "longitude": longitude]
+        }
+                
 
         let apiKey = "XoLZTUzyXFYVkxV7QjDpxU0gkHSdGbUNmGPtMtIQcOdPzpQDF5iGA5kCBGkX7QFYrd8He5_OSg_mrLFeKfvOyd3_bZ8A7gHsyiwu0DUvDTAlpag_ctqd7j9B7DDtXnYx"
         let headers: HTTPHeaders = ["Authorization" : "Bearer \(apiKey)"]
