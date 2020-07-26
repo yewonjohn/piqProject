@@ -20,14 +20,12 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //dynamic keyboard
+        
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
 
         //set background
         Background().setAuthBackground(view,backgroundImageView)
-        
-        
         
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -50,7 +48,6 @@ class RegisterViewController: UIViewController {
                     }
                 }
             }else {
-                print("someghing")
                 let alert = UIAlertController(title: "uh oh", message: "password doesn't match!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in}))
                 self.present(alert, animated: true, completion: nil)
@@ -60,6 +57,7 @@ class RegisterViewController: UIViewController {
     }
 }
 
+//MARK -- Keyboard Management
 extension RegisterViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))

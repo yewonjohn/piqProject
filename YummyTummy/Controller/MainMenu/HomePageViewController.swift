@@ -47,7 +47,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
                     self.dollarSign.text = "$$$$"
                     dollarSignsParam = "4"
             default:
-                    self.dollarSign.text = "no preference"
+                    self.dollarSign.text = "No Preference"
                     dollarSignsParam = "0"
             }
     }
@@ -67,8 +67,8 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
-
         
         //json for categories
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
@@ -81,10 +81,6 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         sideMenu = SideMenuNavigationController(rootViewController: menu)
         sideMenu?.leftSide = true
         sideMenu?.setNavigationBarHidden(true, animated: false)
-        
-        //makes menuList swipable
-        //        SideMenuManager.default.leftMenuNavigationController = sideMenu
-        //        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

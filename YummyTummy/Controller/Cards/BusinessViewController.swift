@@ -85,7 +85,7 @@ class BusinessViewController: UIViewController {
     }
     //SETS RESET NAVIGATIONAL BUTTON
     func configureResetNavigationBarButtonItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset Cards", style: .plain, target: self, action: #selector(resetTapped))
     }
     
     //MARK: - Handlers

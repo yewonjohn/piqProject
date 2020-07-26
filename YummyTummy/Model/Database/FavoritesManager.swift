@@ -154,12 +154,11 @@ class FavoritesManager{
                     }
                     self.delegate?.didFetchFavorites(favorites: favoritesArr)
                 }
-
         }
     }
     
     func deleteFavorite(itemToDelete: FavoritesModel) {
-        
+        //deleting from cloud
         db.collection("favorites").document(itemToDelete.id!).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
@@ -168,10 +167,14 @@ class FavoritesManager{
             }
         }
         
-        //deleting locally
+        //deleting locally & automatically from instance
         do{
-            try realm.write{
-                realm.delete(itemToDelete)
+            let object = realm.objects(FavoritesModel.self).filter("id = %@", itemToDelete.id).first
+
+            try! realm.write{
+                if let obj = object {
+                    realm.delete(obj)
+                }
             }
         }catch {
             print("error deleting local data \(error)")

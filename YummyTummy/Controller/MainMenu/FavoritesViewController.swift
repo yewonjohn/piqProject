@@ -101,14 +101,18 @@ class FavoritesViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         // 1
-        let deleteAction = UITableViewRowAction(style: .default, title: "Toss" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
             // 2
-            let deleteMenu = UIAlertController(title: nil, message: "Toss?", preferredStyle: .actionSheet)
+            let deleteMenu = UIAlertController(title: nil, message: "Delete?", preferredStyle: .actionSheet)
             
-            let deleteAction = UIAlertAction(title: "Yes, toss it", style: .default, handler: {
+            let deleteAction = UIAlertAction(title: "Yes delete", style: .default, handler: {
+                // deleting from realm and cloud
                 (alert: UIAlertAction!) in self.favoritesManager.deleteFavorite(itemToDelete: self.favoritesArray[indexPath.row])
+                // deleting from instance variable - already taken care of by realm i think..
+//                self.favoritesArray.remove(at: indexPath.row)
                 DispatchQueue.main.async {
-                    self.favoritesManager.loadFavorites()
+//                    self.favoritesManager.loadFavorites()
+                    tableView.reloadData()
                     print("reloaded data here")
                 }
                 

@@ -19,21 +19,30 @@ class RestaurantManager{
         let url = "https://api.yelp.com/v3/businesses/search"
         
         var requestParams : [String: Any] = [:]
+        
+//        print(latitude)
+//        print(longitude)
+//        print(category)
+//        print(dollarSigns)
 
         if let cat = category{
-            if(dollarSigns == nil){
+            if(dollarSigns == nil && cat != ""){
+                print("1")
                 requestParams = ["latitude": latitude, "longitude": longitude, "categories": cat]
             }
         }
         if let price = dollarSigns{
-            if(category == nil){
+            if(category == nil && price != ""){
+                print("2")
                 requestParams = ["latitude": latitude, "longitude": longitude, "price": price]
             }
         }
         if let price = dollarSigns, let cat = category {
+            print("3")
                 requestParams = ["latitude": latitude, "longitude": longitude, "categories": cat,"price": price]
         }
-        if (category == nil && dollarSigns == nil){
+        if ((category == nil || category! == "") && (dollarSigns == nil || dollarSigns! == "")){
+            print("4")
             requestParams = ["latitude": latitude, "longitude": longitude]
         }
                 

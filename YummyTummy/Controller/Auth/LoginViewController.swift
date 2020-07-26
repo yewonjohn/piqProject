@@ -19,11 +19,11 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         IQKeyboardManager.shared().isEnabled = true
-        //setting background
-        Background().setAuthBackground(view,backgroundImageView)
-//        RestaurantManager().getLocalRestaurants()
         self.hideKeyboardWhenTappedAround()
+
+        Background().setAuthBackground(view,backgroundImageView)
 
     }
     //navigation bar management
@@ -54,9 +54,8 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
 }
-
+//MARK -- Keyboard Management
 extension LoginViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
