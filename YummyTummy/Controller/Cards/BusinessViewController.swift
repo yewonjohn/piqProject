@@ -13,6 +13,8 @@ class BusinessViewController: UIViewController {
     
     //MARK: - Properties
     
+    let emptyLabel = UILabel()
+    
     var viewModelData = [BusinessModel]()
     var stackContainer : StackContainerView!
     
@@ -45,6 +47,7 @@ class BusinessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //set background
         Background().setAuthBackground(view,backgroundImageView)
         //get category title alias
@@ -92,6 +95,7 @@ class BusinessViewController: UIViewController {
     @objc func resetTapped() {
         stackContainer.reloadData()
     }
+    
 }
 //MARK: - DataSource for StackContainerView
 
@@ -107,8 +111,17 @@ extension BusinessViewController : BusinessCardsDataSource {
         return card
     }
     
-    func emptyView() -> UIView? {
-        return nil
+    func emptyView() -> Void {
+        
+        self.view?.addSubview(emptyLabel)
+        emptyLabel.textColor = .black
+        emptyLabel.textAlignment = .center
+        emptyLabel.font = UIFont.systemFont(ofSize: 18)
+        emptyLabel.text = "No more cards!"
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
+        emptyLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
+
     }
     
 }

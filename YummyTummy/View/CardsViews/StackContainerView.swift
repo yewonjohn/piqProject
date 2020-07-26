@@ -11,7 +11,7 @@ import UIKit
 protocol BusinessCardsDataSource {
     func numberOfCardsToShow() -> Int
     func card(at index: Int) -> BusinessCardView
-    func emptyView() -> UIView?
+    func emptyView() -> Void
     
 }
 
@@ -19,6 +19,7 @@ class StackContainerView: UIView, BusinessCardsDelegate {
 
     //MARK: - Properties
     var numberOfCardsToShow: Int = 0
+    var lastCardCounter = 0
     var cardsToBeVisible: Int = 3
     var cardViews : [BusinessCardView] = []
     var remainingcards: Int = 0
@@ -52,6 +53,7 @@ class StackContainerView: UIView, BusinessCardsDelegate {
         layoutIfNeeded()
         numberOfCardsToShow = datasource.numberOfCardsToShow()
         remainingcards = numberOfCardsToShow
+        lastCardCounter = numberOfCardsToShow
         
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: datasource.card(at: i), atIndex: i )
@@ -87,11 +89,11 @@ class StackContainerView: UIView, BusinessCardsDelegate {
         }
         cardViews = []
     }
-    
+        
     func swipeDidEnd(on view: BusinessCardView) {
         guard let datasource = dataSource else { return }
         view.removeFromSuperview()
-
+//        print(remainingcards)
         if remainingcards > 0 {
             let newIndex = datasource.numberOfCardsToShow() - remainingcards
             addCardView(cardView: datasource.card(at: newIndex), atIndex: 2)
@@ -111,6 +113,11 @@ class StackContainerView: UIView, BusinessCardsDelegate {
                     self.layoutIfNeeded()
                 })
             }
+        }
+        //keeping track of last card
+        lastCardCounter -= 1
+        if(lastCardCounter == 0){
+            dataSource?.emptyView()
         }
     }
     
