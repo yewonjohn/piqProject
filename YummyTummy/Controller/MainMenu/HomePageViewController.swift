@@ -32,7 +32,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         let currentValue = Int(sender.value)
             switch currentValue {
             case 0:
-                    self.dollarSign.text = "no preference"
+                    self.dollarSign.text = "No Preference"
                     dollarSignsParam = "0"
             case 1:
                     self.dollarSign.text = "$"

@@ -108,6 +108,7 @@ class BusinessCardView : UIView {
                 counter+=1
             }
             categoriesView.text = categoryTitles
+            
             favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         }
     }
@@ -268,7 +269,7 @@ class BusinessCardView : UIView {
         categoriesView.translatesAutoresizingMaskIntoConstraints = false
         categoriesView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
         categoriesView.leftAnchor.constraint(equalTo: dollarSignsView.rightAnchor, constant: 4).isActive = true
-        categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 10).isActive = true
+        categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 2).isActive = true
     }
     
     func configureisOpenView() {
