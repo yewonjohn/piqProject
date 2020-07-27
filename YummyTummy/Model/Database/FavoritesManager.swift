@@ -13,7 +13,7 @@ import RealmSwift
 
 //DEFINE PROTOCOL FOR DELEGATE FRAMEWORK
 protocol FavoritesManagerDelegate {
-    func didFetchFavorites(favorites: [FavoritesModel])
+    func didFetchFavorites(favorites: Results<FavoritesModel>?)
 //    func didFetchFavoritesLocally(favorites: Results<FavoritesModel>)
     func didFailWithError(error: Error)
     func didFailAddingFavorites(error: Error)
@@ -27,10 +27,11 @@ class FavoritesManager{
     
     //Realm init
     let realm = try! Realm()
-    var favorites: Results<FavoritesModel>!
+    var favorites: Results<FavoritesModel>?
     
     var timeStamp = NSDate().timeIntervalSince1970
     
+    //Adds Favorite item to cloud + Realm
     func addToFavorites(user:String?, id: String?, name: String?, ratings: Float?, reviewCount: Int?, price: String?, distance: Double?, phone: String?, isClosed: Bool?, url: String?, img_url: String?, categories: String?){
         
         // CHECK IF CURRENT USER HAS THIS BUSINESS FAVORITED ALREADY
@@ -46,6 +47,7 @@ class FavoritesManager{
                     }
                 }
                 if(exists == false){
+                    //saving to cloud
                     self.db.collection("favorites").document(id!).setData([
                     "user":user,
                     "business_id":id,
@@ -67,7 +69,7 @@ class FavoritesManager{
                             print("succesfully saved favorites")
                         }
                     }
-                    //SAVE LOCALLY HERE
+                    //saving to realm
                     var favorite = FavoritesModel()
                     favorite.userEmail = user
                     favorite.name = name
@@ -100,65 +102,66 @@ class FavoritesManager{
         
 
     }
-    func loadFavorites(){
-        
-        var favoritesArr = [FavoritesModel]()
-        let currentUser = Auth.auth().currentUser?.email
-        
-        //loading from local database
-//        favorites = realm.objects(FavoritesModel.self)
-//        self.delegate?.didFetchFavorites(favorites: favoritesArr)
-
-        
-        db.collection("favorites")
-            .whereField("user", isEqualTo: currentUser)
-            .order(by: "date_added")
-            .getDocuments{ (QuerySnapshot, Error) in
-                if let e = Error{
-                    self.delegate?.didFailWithError(error: e)
-                }
-                else {
-                    if let snapshotDocuments = QuerySnapshot?.documents{
-                        for doc in snapshotDocuments{
-                            let data = doc.data()
-
-                            let businessName = data["name"] as? String
-                            let businessId = data["business_id"] as? String
-                            let businessRatings = data["ratings"] as? Float
-                            let businessReviewCount = data["reviewCount"] as? Int
-                            let businessCategories = data["categories"] as? String
-                            let businessDistance = data["distance"] as? Double
-                            let businessPrice = data["price"] as? String
-                            let businessUrl = data["url"] as? String
-                            let businessImg_url = data["img_url"] as? String
-                            let businessPhone = data["phone"] as? String
-                            let businessIsClosed = data["isClosed"] as? Bool
-                            let businessUserEmail = data["user"] as? String
-
-                            let newFavorite = FavoritesModel()
-                            newFavorite.userEmail = businessUserEmail
-                            newFavorite.name = businessName
-                            newFavorite.id = businessId
-                            newFavorite.rating.value = businessRatings
-                            newFavorite.reviewCount.value = businessReviewCount
-                            newFavorite.price = businessPrice
-                            newFavorite.distance.value = businessDistance
-                            newFavorite.isClosed.value = businessIsClosed
-                            newFavorite.phone = businessPhone
-                            newFavorite.categories = businessCategories
-                            newFavorite.url = businessUrl
-                            newFavorite.img_url = businessImg_url
-
-                            favoritesArr.append(newFavorite)
-                        }
-                    }
-                    self.delegate?.didFetchFavorites(favorites: favoritesArr)
-                }
-        }
-    }
+//    func loadFavorites(){
+//
+//        var favoritesArr = [FavoritesModel]()
+//        let currentUser = Auth.auth().currentUser?.email
+//
+//        //loading from local database
+////        favorites = realm.objects(FavoritesModel.self)
+////        self.delegate?.didFetchFavorites(favorites: favoritesArr)
+//
+//
+//        db.collection("favorites")
+//            .whereField("user", isEqualTo: currentUser)
+//            .order(by: "date_added")
+//            .getDocuments{ (QuerySnapshot, Error) in
+//                if let e = Error{
+//                    self.delegate?.didFailWithError(error: e)
+//                }
+//                else {
+//                    if let snapshotDocuments = QuerySnapshot?.documents{
+//                        for doc in snapshotDocuments{
+//                            let data = doc.data()
+//
+//                            let businessName = data["name"] as? String
+//                            let businessId = data["business_id"] as? String
+//                            let businessRatings = data["ratings"] as? Float
+//                            let businessReviewCount = data["reviewCount"] as? Int
+//                            let businessCategories = data["categories"] as? String
+//                            let businessDistance = data["distance"] as? Double
+//                            let businessPrice = data["price"] as? String
+//                            let businessUrl = data["url"] as? String
+//                            let businessImg_url = data["img_url"] as? String
+//                            let businessPhone = data["phone"] as? String
+//                            let businessIsClosed = data["isClosed"] as? Bool
+//                            let businessUserEmail = data["user"] as? String
+//
+//                            let newFavorite = FavoritesModel()
+//                            newFavorite.userEmail = businessUserEmail
+//                            newFavorite.name = businessName
+//                            newFavorite.id = businessId
+//                            newFavorite.rating.value = businessRatings
+//                            newFavorite.reviewCount.value = businessReviewCount
+//                            newFavorite.price = businessPrice
+//                            newFavorite.distance.value = businessDistance
+//                            newFavorite.isClosed.value = businessIsClosed
+//                            newFavorite.phone = businessPhone
+//                            newFavorite.categories = businessCategories
+//                            newFavorite.url = businessUrl
+//                            newFavorite.img_url = businessImg_url
+//
+//                            favoritesArr.append(newFavorite)
+//                        }
+//                    }
+//                    self.delegate?.didFetchFavorites(favorites: favoritesArr)
+//                }
+//        }
+//    }
     
     func loadFavoritesLocally(){
-        
+        favorites = realm.objects(FavoritesModel.self)
+        self.delegate?.didFetchFavorites(favorites: favorites)
     }
     
     func deleteFavorite(itemToDelete: FavoritesModel) {
