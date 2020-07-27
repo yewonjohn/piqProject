@@ -17,8 +17,14 @@ class LoginViewController: UIViewController {
     
     let backgroundImageView = UIImageView()
     
+    let userDefault = UserDefaults.standard
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if userDefault.bool(forKey: "usersignedin") {
+            self.performSegue(withIdentifier: "LoginToMain", sender: self)
+        }
         
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
@@ -47,6 +53,9 @@ class LoginViewController: UIViewController {
                     alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in}))
                     self.present(alert, animated: true, completion: nil)
                 } else {
+                    self.userDefault.set(true, forKey: "usersignedin")
+                    self.userDefault.synchronize()
+
                     self.performSegue(withIdentifier: "LoginToMain", sender: self)
                 }
                 // ...

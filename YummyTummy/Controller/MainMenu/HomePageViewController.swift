@@ -23,6 +23,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     var dollarSignsParam = String()
     let favoritesVC = FavoritesViewController()
     
+    let userDefault = UserDefaults.standard
     
     
     @IBOutlet weak var searchCategory: SearchTextField!
@@ -130,6 +131,8 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
             do {
                 try firebaseAuth.signOut()
                 _ = navigationController?.popViewController(animated: true)
+                self.userDefault.set(false, forKey: "usersignedin")
+                self.userDefault.synchronize()
                 
             } catch let signOutError as NSError {
                 print ("Error signing out: %@", signOutError)

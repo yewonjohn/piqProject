@@ -9,8 +9,27 @@
 import UIKit
 import Firebase
 import RealmSwift
+import SwipeCellKit
 
-class FavoritesViewController: UITableViewController{
+class FavoritesViewController: UITableViewController, SwipeTableViewCellDelegate{
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.favoritesManager.deleteFavorite(itemToDelete: self.favoritesArray[indexPath.row])
+            DispatchQueue.main.async {
+//                tableView.reloadData()
+                print(self.favoritesArray)
+            }
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+        
+        return [deleteAction]
+    }
+    
     
     let favoritesManager = FavoritesManager()
     var favoritesArray = [FavoritesModel]()
@@ -45,6 +64,7 @@ class FavoritesViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //set current cell with "Coming Cell" at the current index
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
+        cell.delegate = self
         
         
         //setting fetched cell text
@@ -97,35 +117,36 @@ class FavoritesViewController: UITableViewController{
         UIApplication.shared.open(url)
         
     }
-    //defines
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
-    {
-        // 1
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
-            // 2
-            let deleteMenu = UIAlertController(title: nil, message: "Delete?", preferredStyle: .actionSheet)
-            
-            let deleteAction = UIAlertAction(title: "Yes delete", style: .default, handler: {
-                // deleting from realm and cloud
-                (alert: UIAlertAction!) in self.favoritesManager.deleteFavorite(itemToDelete: self.favoritesArray[indexPath.row])
-                // deleting from instance variable - already taken care of by realm i think..
-//                self.favoritesArray.remove(at: indexPath.row)
-                DispatchQueue.main.async {
-//                    self.favoritesManager.loadFavorites()
-                    tableView.reloadData()
-                    print("reloaded data here")
-                }
-                
-            })
-            let cancelAction = UIAlertAction(title: "Nevermind I like", style: .cancel, handler: nil)
-            
-            deleteMenu.addAction(deleteAction)
-            deleteMenu.addAction(cancelAction)
-            
-            self.present(deleteMenu, animated: true, completion: nil)
-        })
-        return [deleteAction]
-    }
+    //defines swipe
+    
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+//    {
+//        // 1
+//        let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+//            // 2
+//            let deleteMenu = UIAlertController(title: nil, message: "Delete?", preferredStyle: .actionSheet)
+//
+//            let deleteAction = UIAlertAction(title: "Yes delete", style: .default, handler: {
+//                // deleting from realm and cloud
+//                (alert: UIAlertAction!) in self.favoritesManager.deleteFavorite(itemToDelete: self.favoritesArray[indexPath.row])
+//                // deleting from instance variable - already taken care of by realm i think..
+//                //                self.favoritesArray.remove(at: indexPath.row)
+//                DispatchQueue.main.async {
+//                    //                    self.favoritesManager.loadFavorites()
+//                    tableView.reloadData()
+//                    print("reloaded data here")
+//                }
+//
+//            })
+//            let cancelAction = UIAlertAction(title: "Nevermind I like", style: .cancel, handler: nil)
+//
+//            deleteMenu.addAction(deleteAction)
+//            deleteMenu.addAction(cancelAction)
+//
+//            self.present(deleteMenu, animated: true, completion: nil)
+//        })
+//        return [deleteAction]
+//    }
     
 }
 extension FavoritesViewController: FavoritesManagerDelegate{
@@ -147,4 +168,13 @@ extension FavoritesViewController: FavoritesManagerDelegate{
     }
     
     
+}
+
+extension FavoritesViewController{
+    
+//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+//        var options = SwipeOptions()
+//        options.expansionStyle = .destructive
+//        return options
+//    }
 }

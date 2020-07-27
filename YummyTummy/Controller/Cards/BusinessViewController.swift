@@ -48,6 +48,10 @@ class BusinessViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //sets label for no more cards
+        setLastLabel()
+        emptyLabel.isHidden = true
+        
         //set background
         Background().setAuthBackground(view,backgroundImageView)
         //get category title alias
@@ -90,10 +94,23 @@ class BusinessViewController: UIViewController {
     func configureResetNavigationBarButtonItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset Cards", style: .plain, target: self, action: #selector(resetTapped))
     }
+    //SETS CARDS ARE EMPTY LABEL
+    func setLastLabel(){
+        self.view?.addSubview(emptyLabel)
+        emptyLabel.textColor = .black
+        emptyLabel.textAlignment = .center
+        emptyLabel.font = UIFont.systemFont(ofSize: 18)
+        emptyLabel.text = "No more cards!"
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
+        emptyLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
+    }
     
     //MARK: - Handlers
     @objc func resetTapped() {
         stackContainer.reloadData()
+        emptyLabel.isHidden = true
+
     }
     
 }
@@ -112,16 +129,7 @@ extension BusinessViewController : BusinessCardsDataSource {
     }
     
     func emptyView() -> Void {
-        
-        self.view?.addSubview(emptyLabel)
-        emptyLabel.textColor = .black
-        emptyLabel.textAlignment = .center
-        emptyLabel.font = UIFont.systemFont(ofSize: 18)
-        emptyLabel.text = "No more cards!"
-        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
-        emptyLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
-        emptyLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
-
+        emptyLabel.isHidden = false
     }
     
 }

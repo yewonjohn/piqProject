@@ -157,6 +157,10 @@ class FavoritesManager{
         }
     }
     
+    func loadFavoritesLocally(){
+        
+    }
+    
     func deleteFavorite(itemToDelete: FavoritesModel) {
         //deleting from cloud
         db.collection("favorites").document(itemToDelete.id!).delete() { err in

@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let db = Firestore.firestore()
         
+        let userDefault = UserDefaults.standard
+        let launchedBefore = UserDefaults.standard.bool(forKey: "usersignedin")
+        
 //        print(Realm.Configuration.defaultConfiguration.fileURL)
 
         return true
