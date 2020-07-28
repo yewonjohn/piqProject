@@ -16,3 +16,20 @@ struct Colors {
 struct Fonts {
     static let avenirNextCondensedDemiBold = "AvenirNextCondensed-DemiBold"
 }
+
+struct MenuList {
+    static let home = "Home"
+    static let favorites = "Favorites"
+    static let logout = "Logout"
+    static let empty = ""
+}
+
+struct MenuItems {
+    static let reset = "Reset Cards"
+}
+
+struct LabelText {
+    static let emptyCardsText = "No more cards!"
+}
+
+

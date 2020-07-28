@@ -15,6 +15,11 @@ import SearchTextField
 
 class HomePageViewController: UIViewController, MenuControllerDelegate{
     
+    // MARK: - Outlets
+    @IBOutlet weak var searchCategory: SearchTextField!
+    @IBOutlet weak var dollarSign: UILabel!
+    
+    // MARK: - Properties
     let backgroundImageView = UIImageView()
     var sideMenu: SideMenuNavigationController?
     
@@ -24,38 +29,44 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     let favoritesVC = FavoritesViewController()
     
     let userDefault = UserDefaults.standard
+    let menu = MenuListController(with: [MenuList.empty,MenuList.home,MenuList.favorites,MenuList.logout])
     
-    
-    @IBOutlet weak var searchCategory: SearchTextField!
-    @IBOutlet weak var dollarSign: UILabel!
-    
-    @IBAction func sliderChanged(_ sender: UISlider) {
-        let currentValue = Int(sender.value)
-            switch currentValue {
-            case 0:
-                    self.dollarSign.text = "No Preference"
-                    dollarSignsParam = "0"
-            case 1:
-                    self.dollarSign.text = "$"
-                    dollarSignsParam = "1"
-            case 2:
-                    self.dollarSign.text = "$$"
-                    dollarSignsParam = "2"
-            case 3:
-                    self.dollarSign.text = "$$$"
-                    dollarSignsParam = "3"
-            case 4:
-                    self.dollarSign.text = "$$$$"
-                    dollarSignsParam = "4"
-            default:
-                    self.dollarSign.text = "No Preference"
-                    dollarSignsParam = "0"
-            }
+    // MARK: - View Controller Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        IQKeyboardManager.shared().isEnabled = true
+        self.hideKeyboardWhenTappedAround()
+        
+        //Fetching categories data from json file
+        guard let jsonCategories = readLocalFile(forName: "categories") else { return }
+        parse(jsonData: jsonCategories)
+        configureCategories(categories: categoriesArr)
+        
+        //Side Menu management
+        menu.delegate = self
+        sideMenu = SideMenuNavigationController(rootViewController: menu)
+        sideMenu?.leftSide = true
+        sideMenu?.setNavigationBarHidden(true, animated: false)
+        
+        //Making navigation bar transparent
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        //Hides back button from this view
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        //Sets background
+        Background().setAuthBackground(view,backgroundImageView)
+        addFavoriteVC()
     }
+
+    //MARK: - Segue
     @IBAction func goToCards(_ sender: UIButton) {
         self.performSegue(withIdentifier: "HomeToCards", sender: self)
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToCards" {
             let controller = segue.destination as! BusinessViewController
@@ -64,43 +75,9 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
             controller.dollarSign = dollarSignsParam
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        IQKeyboardManager.shared().isEnabled = true
-        self.hideKeyboardWhenTappedAround()
-        
-        //json for categories
-        guard let jsonCategories = readLocalFile(forName: "categories") else { return }
-        parse(jsonData: jsonCategories)
-        configureCategories(categories: categoriesArr)
-        
-        let menu = MenuListController(with: ["","Home","Favorites","Logout"])
-        menu.delegate = self
-        
-        sideMenu = SideMenuNavigationController(rootViewController: menu)
-        sideMenu?.leftSide = true
-        sideMenu?.setNavigationBarHidden(true, animated: false)
-        
-        //making navigation bar transparent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-        
-        //hides back button from this view
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        
-        
-        Background().setAuthBackground(view,backgroundImageView)
-        addChildVCs()
-    }
-    @IBAction func didTapMenu(){
-        present(sideMenu!,animated: true)
-    }
-    
-    func addChildVCs(){
+
+    //MARK: - Layout Config
+    func addFavoriteVC(){
         addChild(favoritesVC)
         view.addSubview(favoritesVC.view)
         favoritesVC.view.frame = view.bounds
@@ -109,23 +86,26 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         favoritesVC.view.isHidden = true
     }
     
+    //MARK: - Side Menu Config
+    @IBAction func didTapMenu(){
+        present(sideMenu!,animated: true)
+    }
     func didSelectMenuItem(named: String) {
         if(named != ""){
             sideMenu?.dismiss(animated: true, completion: nil)
         }
         title = named
         
-        if named == "Home"{
+        if named == MenuList.home{
             favoritesVC.view.isHidden = true
             searchCategory.isHidden = false
-            
         }
-        else if named == "Favorites"{
+        else if named == MenuList.favorites{
             favoritesVC.view.isHidden = false
             searchCategory.isHidden = true
             searchCategory.endEditing(true)
         }
-        else if named == "Logout"{
+        else if named == MenuList.logout{
             
             let firebaseAuth = Auth.auth()
             do {
@@ -137,20 +117,36 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
             } catch let signOutError as NSError {
                 print ("Error signing out: %@", signOutError)
             }
-            
-            //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            //            appDelegate.window! = UIWindow(frame: UIScreen.main.bounds)
-            //            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            //
-            //            let view = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            //            appDelegate.window!.rootViewController = view
         }
     }
-    
 }
 
-//MARK -- 	Search options
+//MARK: -- 	Category Search Configuration
 extension HomePageViewController{
+    
+    @IBAction func sliderChanged(_ sender: UISlider) {
+        let currentValue = Int(sender.value)
+        switch currentValue {
+        case 0:
+            self.dollarSign.text = "No Preference"
+            dollarSignsParam = "0"
+        case 1:
+            self.dollarSign.text = "$"
+            dollarSignsParam = "1"
+        case 2:
+            self.dollarSign.text = "$$"
+            dollarSignsParam = "2"
+        case 3:
+            self.dollarSign.text = "$$$"
+            dollarSignsParam = "3"
+        case 4:
+            self.dollarSign.text = "$$$$"
+            dollarSignsParam = "4"
+        default:
+            self.dollarSign.text = "No Preference"
+            dollarSignsParam = "0"
+        }
+    }
     
     private func readLocalFile(forName name: String) -> Data? {
         do {
@@ -161,10 +157,8 @@ extension HomePageViewController{
         } catch {
             print(error)
         }
-        
         return nil
     }
-    
     private func parse(jsonData: Data) {
         do {
             let decodedData = try JSONDecoder().decode([CategoryModel].self, from: jsonData)
@@ -175,7 +169,6 @@ extension HomePageViewController{
             print("decode error \(error)")
         }
     }
-    
     private func configureCategories(categories: [CategoryModel]){
         for category in categories{
             if let parent = category.parents{
@@ -192,25 +185,17 @@ extension HomePageViewController{
                 }else{continue}
             }
         }
-        
         searchCategory.filterStrings(categoriesTitles)
         searchCategory.startVisible = true
-        
     }
-    
 }
-
-
-
-
-
+//MARK: - Keyboard Management
 extension HomePageViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomePageViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

@@ -8,15 +8,19 @@
 
 import UIKit
 
+// MARK: - Protocol
+
 protocol MenuControllerDelegate{
     func didSelectMenuItem(named: String)
 }
 
 class MenuListController: UITableViewController{
     
+    // MARK: - Properties
     public var delegate: MenuControllerDelegate?
     var menuItems: [String]
     
+    // MARK: - View Controller Life Cycle
     init(with menuItems: [String]) {
         self.menuItems = menuItems
         super.init(nibName: nil, bundle: nil)
@@ -29,12 +33,12 @@ class MenuListController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         tableView.separatorStyle = .none
         tableView.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
-
     }
-    
+    // MARK: - Menu List Configuration
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
     }
@@ -45,13 +49,13 @@ class MenuListController: UITableViewController{
         cell.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
         cell.imageView?.tintColor = #colorLiteral(red: 0.9098039216, green: 0.2901960784, blue: 0.3725490196, alpha: 1)
 
-        if(menuItems[indexPath.row] == "Favorites"){
+        if(menuItems[indexPath.row] == MenuList.home){
             cell.imageView?.image = UIImage(systemName: "star")
         }
-        if(menuItems[indexPath.row] == "Home"){
+        if(menuItems[indexPath.row] == MenuList.favorites){
             cell.imageView?.image = UIImage(systemName: "house")
         }
-        if(menuItems[indexPath.row] == "Logout"){
+        if(menuItems[indexPath.row] == MenuList.logout){
             cell.imageView?.image = UIImage(systemName: "arrowshape.turn.up.left")
         }
         return cell
@@ -62,5 +66,4 @@ class MenuListController: UITableViewController{
     
         delegate?.didSelectMenuItem(named: menuItems[indexPath.row])
     }
-    
 }

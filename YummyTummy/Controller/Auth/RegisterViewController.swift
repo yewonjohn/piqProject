@@ -12,12 +12,15 @@ import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var passwordValidateTextField: AuthTextField!
     
+    // MARK: - Properties
     let backgroundImageView = UIImageView()
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +36,7 @@ class RegisterViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
     }
-    
+    // MARK: - IBActions & Objc Functions
     @IBAction func register(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text, let passwordValidate = passwordValidateTextField.text{
             if(password == passwordValidate){
@@ -57,14 +60,13 @@ class RegisterViewController: UIViewController {
     }
 }
 
-//MARK -- Keyboard Management
+    //MARK: -- Keyboard Management
 extension RegisterViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

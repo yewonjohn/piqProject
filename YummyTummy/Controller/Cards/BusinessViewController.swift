@@ -11,9 +11,9 @@ import CoreLocation
 
 class BusinessViewController: UIViewController {
     
-    //MARK: - Properties
+    // MARK: - Properties
     
-    let emptyLabel = UILabel()
+    let emptyCardsLabel = UILabel()
     
     var viewModelData = [BusinessModel]()
     var stackContainer : StackContainerView!
@@ -22,10 +22,12 @@ class BusinessViewController: UIViewController {
     var categoriesTitle = String()
     var dollarSign : String?
     
-    //MARK: - Init
+    var locationManager = CLLocationManager()
+    let backgroundImageView = UIImageView()
     
+    // MARK: - View Controller Life Cycle
+
     override func loadView() {
-        
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -39,21 +41,18 @@ class BusinessViewController: UIViewController {
         configureStackContainer()
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
         configureResetNavigationBarButtonItem()
-        
     }
-    
-    var locationManager = CLLocationManager()
-    let backgroundImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //sets label for no more cards
         setLastLabel()
-        emptyLabel.isHidden = true
+        emptyCardsLabel.isHidden = true
         
         //set background
         Background().setAuthBackground(view,backgroundImageView)
+        
         //get category title alias
         var categoryAlias: String?
         for category in categoriesArr{
@@ -65,15 +64,15 @@ class BusinessViewController: UIViewController {
             dollarSign = nil
         }
         
-        //asking for location
+        //Asking for location permission
         locationManager.requestWhenInUseAuthorization()
         var currentLoc: CLLocation!
-        //if location is granted..
+
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == .authorizedAlways) {
             currentLoc = locationManager.location
             
-            //calling API for all the Cards Data using location
+            //Calling API for all the Cards Data using current location
             print(currentLoc.coordinate.latitude)
             RestaurantManager().getLocalRestaurants(latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
                 self.viewModelData = businessModelArray
@@ -92,29 +91,28 @@ class BusinessViewController: UIViewController {
     }
     //SETS RESET NAVIGATIONAL BUTTON
     func configureResetNavigationBarButtonItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset Cards", style: .plain, target: self, action: #selector(resetTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: MenuItems.reset, style: .plain, target: self, action: #selector(resetTapped))
     }
     //SETS CARDS ARE EMPTY LABEL
     func setLastLabel(){
-        self.view?.addSubview(emptyLabel)
-        emptyLabel.textColor = .black
-        emptyLabel.textAlignment = .center
-        emptyLabel.font = UIFont.systemFont(ofSize: 18)
-        emptyLabel.text = "No more cards!"
-        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
-        emptyLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
-        emptyLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
+        self.view?.addSubview(emptyCardsLabel)
+        emptyCardsLabel.textColor = .black
+        emptyCardsLabel.textAlignment = .center
+        emptyCardsLabel.font = UIFont.systemFont(ofSize: 18)
+        emptyCardsLabel.text = LabelText.emptyCardsText
+        emptyCardsLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyCardsLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
+        emptyCardsLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
     }
     
-    //MARK: - Handlers
+    // MARK: - IBActions & Objc Functions
+    
     @objc func resetTapped() {
         stackContainer.reloadData()
-        emptyLabel.isHidden = true
-
+        emptyCardsLabel.isHidden = true
     }
-    
 }
-//MARK: - DataSource for StackContainerView
+//MARK: - DataSource for StackContainerView (Delegate)
 
 extension BusinessViewController : BusinessCardsDataSource {
     
@@ -129,7 +127,6 @@ extension BusinessViewController : BusinessCardsDataSource {
     }
     
     func emptyView() -> Void {
-        emptyLabel.isHidden = false
+        emptyCardsLabel.isHidden = false
     }
-    
 }

@@ -12,12 +12,16 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
+    //MARK: - Outlets
+    
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     
+    // MARK: - Properties
     let backgroundImageView = UIImageView()
-    
     let userDefault = UserDefaults.standard
+    
+    // MARK: - View Controller Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +34,8 @@ class LoginViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
 
         Background().setAuthBackground(view,backgroundImageView)
-
     }
-    //navigation bar management
+    // Navigation Bar Management
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -42,6 +45,7 @@ class LoginViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    // MARK: - IBActions & Objc Functions
     @IBAction func goSignUp(_ sender: Any) {
         self.performSegue(withIdentifier: "LoginToRegister", sender: self)
     }
@@ -64,14 +68,13 @@ class LoginViewController: UIViewController {
     }
     
 }
-//MARK -- Keyboard Management
+    //MARK: -- Keyboard Management
 extension LoginViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

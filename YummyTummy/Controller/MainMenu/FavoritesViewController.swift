@@ -13,43 +13,40 @@ import SwipeCellKit
 
 class FavoritesViewController: UITableViewController{
     
+    //MARK: - Properties
     
-    let favoritesManager = FavoritesManager()
+    let favoriteManager = FavoritesManager()
     var favoritesArray : Results<FavoritesModel>?
     
     let backgroundImageView = UIImageView()
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
-        
         tableView.register(UINib(nibName: "FavoritesCell", bundle: nil), forCellReuseIdentifier: "FavoritesCell")
         
-        favoritesManager.delegate = self
-        favoritesManager.loadFavoritesLocally()
+        favoriteManager.delegate = self
+        favoriteManager.loadFavoritesLocally()
         
         view.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        favoritesManager.loadFavoritesLocally()
-    
+        favoriteManager.loadFavoritesLocally()
     }
     
-    //MARK - Tableview DataSource Methods
+    //MARK: - Tableview Methods
     
-    //DEFINES HOW MANY CELLS TO CREATE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favoritesArray?.count ?? 1
     }
-    //
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120    }
     
-    //Runs every time a cell is loaded
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //set current cell with "Coming Cell" at the current index
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
         cell.delegate = self
-        
         
         //setting fetched cell text
         if(favoritesArray?[indexPath.row].userEmail == Auth.auth().currentUser?.email){
@@ -88,10 +85,8 @@ class FavoritesViewController: UITableViewController{
             //setting image using kingfisher
             let url = URL(string: favoritesArray?[indexPath.row].img_url ?? "")
             cell.favoritesImage.kf.setImage(with: url)
-            //returning updated cell
         }
         return cell
-        
     }
     //Takes user to yelp page of selected favorite item
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -103,18 +98,17 @@ class FavoritesViewController: UITableViewController{
         UIApplication.shared.open(url)
         
     }
-}//MARK -- DATASOURCE DELEGATE
+}
 
+//MARK: -- Favorites Manager Delegate
 extension FavoritesViewController: FavoritesManagerDelegate{
     
     func didFetchFavorites(favorites: Results<FavoritesModel>?) {
         favoritesArray = favorites
-         DispatchQueue.main.async {
-             self.tableView.reloadData()
-             print("reloaded data here")
-         }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
-    
     func didFailWithError(error: Error) {
         print("something went wrong fetching favorites :(, \(error)")
     }
@@ -125,27 +119,20 @@ extension FavoritesViewController: FavoritesManagerDelegate{
     
 }
 
-//MARK -- SWIPE DELEGATES
-
+//MARK: -- Cell Swipe Delegates
 extension FavoritesViewController: SwipeTableViewCellDelegate{
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            if let favArr = self.favoritesArray {self.favoritesManager.deleteFavorite(itemToDelete: favArr[indexPath.row])
-            DispatchQueue.main.async {
-//                tableView.reloadData()
-            }
+            if let favArr = self.favoritesArray {self.favoriteManager.deleteFavorite(itemToDelete: favArr[indexPath.row])
             }
         }
-        
         // customize the action appearance
-        deleteAction.image = UIImage(named: "delete")
-        
+        deleteAction.image = UIImage(named: "trash_icon")
         return [deleteAction]
     }
-    
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
         options.expansionStyle = .destructive
