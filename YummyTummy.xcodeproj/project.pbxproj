@@ -156,19 +156,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		446E8DBA24C0ED9700D8CCEF /* Api */ = {
-			isa = PBXGroup;
-			children = (
-				442297FD24A394FD000F846A /* RestaurantManager.swift */,
-			);
-			path = Api;
-			sourceTree = "<group>";
-		};
 		44712D7524A267D80083B1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				44DA294024B8E78D003974AE /* Database */,
-				446E8DBA24C0ED9700D8CCEF /* Api */,
+				44DA294124B8E7AB003974AE /* FavoritesManager.swift */,
+				442297FD24A394FD000F846A /* RestaurantManager.swift */,
 				4476A20C24A416600009719D /* BusinessModel.swift */,
 				44DA293924B7E137003974AE /* FavoritesModel.swift */,
 				44E09CC724C8CF13009C3370 /* CategoryModel.swift */,
@@ -307,14 +299,6 @@
 				44E79B5A24A2E5C000DDC48E /* BusinessViewController.swift */,
 			);
 			path = Cards;
-			sourceTree = "<group>";
-		};
-		44DA294024B8E78D003974AE /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				44DA294124B8E7AB003974AE /* FavoritesManager.swift */,
-			);
-			path = Database;
 			sourceTree = "<group>";
 		};
 		44E79B5E24A2FDAA00DDC48E /* Util */ = {
