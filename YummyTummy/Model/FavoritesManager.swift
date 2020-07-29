@@ -20,21 +20,20 @@ protocol FavoritesManagerDelegate {
 }
 
 class FavoritesManager{
+    //MARK: - Properties
 
-    //Firestore init
     let db = Firestore.firestore()
     var delegate: FavoritesManagerDelegate?
-    
-    //Realm init
+
     let realm = try! Realm()
     var favorites: Results<FavoritesModel>?
     
     var timeStamp = NSDate().timeIntervalSince1970
     
-    //Adds Favorite item to cloud + Realm
+    //MARK: - Functions (ADD)
     func addToFavorites(user:String?, id: String?, name: String?, ratings: Float?, reviewCount: Int?, price: String?, distance: Double?, phone: String?, isClosed: Bool?, url: String?, img_url: String?, categories: String?){
         
-        // CHECK IF CURRENT USER HAS THIS BUSINESS FAVORITED ALREADY
+        // CHECK IF CURRENT USER HAS THIS FAVORITED ALREADY
         let docRef = db.collection("favorites")
         var exists = false
         
@@ -158,12 +157,12 @@ class FavoritesManager{
 //                }
 //        }
 //    }
-    
+    //MARK: - Functions (GET)
     func loadFavoritesLocally(){
         favorites = realm.objects(FavoritesModel.self)
         self.delegate?.didFetchFavorites(favorites: favorites)
     }
-    
+    //MARK: - Functions (DELETE)
     func deleteFavorite(itemToDelete: FavoritesModel) {
         //deleting from cloud
         db.collection("favorites").document(itemToDelete.id!).delete() { err in
@@ -177,8 +176,7 @@ class FavoritesManager{
         //deleting locally & automatically from instance
         do{
             let object = realm.objects(FavoritesModel.self).filter("id = %@", itemToDelete.id).first
-
-            try! realm.write{
+            try realm.write{
                 if let obj = object {
                     realm.delete(obj)
                 }
