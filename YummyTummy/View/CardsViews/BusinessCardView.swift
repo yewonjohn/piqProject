@@ -11,6 +11,7 @@ import Kingfisher
 import FirebaseFirestore
 import Firebase
 
+
 protocol BusinessCardsDelegate {
     func swipeDidEnd(on view: BusinessCardView)
 }
@@ -208,7 +209,6 @@ class BusinessCardView : UIView {
         imageView = UIImageView()
         imageContainView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFill
-        //        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.centerXAnchor.constraint(equalTo: imageContainView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: imageContainView.centerYAnchor).isActive = true

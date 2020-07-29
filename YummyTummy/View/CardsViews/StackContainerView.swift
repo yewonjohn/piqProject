@@ -93,7 +93,6 @@ class StackContainerView: UIView, BusinessCardsDelegate {
     func swipeDidEnd(on view: BusinessCardView) {
         guard let datasource = dataSource else { return }
         view.removeFromSuperview()
-//        print(remainingcards)
         if remainingcards > 0 {
             let newIndex = datasource.numberOfCardsToShow() - remainingcards
             addCardView(cardView: datasource.card(at: newIndex), atIndex: 2)
@@ -120,7 +119,5 @@ class StackContainerView: UIView, BusinessCardsDelegate {
             dataSource?.emptyView()
         }
     }
-    
-
 }
 
