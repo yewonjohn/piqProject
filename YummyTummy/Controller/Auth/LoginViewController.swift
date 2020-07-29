@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
 
-        Background().setAuthBackground(view,backgroundImageView)
+        ServiceUtil().setAuthBackground(view,backgroundImageView)
     }
     // Navigation Bar Management
     override func viewWillAppear(_ animated: Bool) {

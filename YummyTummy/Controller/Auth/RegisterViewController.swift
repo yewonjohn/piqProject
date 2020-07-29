@@ -28,7 +28,7 @@ class RegisterViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
 
         //set background
-        Background().setAuthBackground(view,backgroundImageView)
+        ServiceUtil().setAuthBackground(view,backgroundImageView)
         
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

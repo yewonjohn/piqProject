@@ -59,7 +59,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         //Sets background
-        Background().setAuthBackground(view,backgroundImageView)
+        ServiceUtil().setAuthBackground(view,backgroundImageView)
         addFavoriteVC()
     }
 
@@ -69,7 +69,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToCards" {
-            let controller = segue.destination as! BusinessViewController
+            let controller = segue.destination as! RestaurantViewController
             controller.categoriesArr = categoriesArr
             controller.categoriesTitle = searchCategory.text ?? ""
             controller.dollarSign = dollarSignsParam

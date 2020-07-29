@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class BusinessViewController: UIViewController {
+class RestaurantViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -51,7 +51,7 @@ class BusinessViewController: UIViewController {
         emptyCardsLabel.isHidden = true
         
         //set background
-        Background().setAuthBackground(view,backgroundImageView)
+        ServiceUtil().setAuthBackground(view,backgroundImageView)
         
         //get category title alias
         var categoryAlias: String?
@@ -99,7 +99,7 @@ class BusinessViewController: UIViewController {
         emptyCardsLabel.textColor = .black
         emptyCardsLabel.textAlignment = .center
         emptyCardsLabel.font = UIFont.systemFont(ofSize: 18)
-        emptyCardsLabel.text = LabelText.emptyCardsText
+        emptyCardsLabel.text = RestaurantVC.emptyCardsText
         emptyCardsLabel.translatesAutoresizingMaskIntoConstraints = false
         emptyCardsLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
         emptyCardsLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
@@ -114,14 +114,14 @@ class BusinessViewController: UIViewController {
 }
 //MARK: - DataSource for StackContainerView (Delegate)
 
-extension BusinessViewController : BusinessCardsDataSource {
+extension RestaurantViewController : BusinessCardsDataSource {
     
     func numberOfCardsToShow() -> Int {
         return viewModelData.count
     }
     
-    func card(at index: Int) -> BusinessCardView {
-        let card = BusinessCardView()
+    func card(at index: Int) -> RestaurantCardView {
+        let card = RestaurantCardView()
         card.dataSource = viewModelData[index]
         return card
     }

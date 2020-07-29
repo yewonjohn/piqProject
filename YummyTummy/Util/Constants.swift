@@ -28,7 +28,7 @@ struct MenuItems {
     static let reset = "Reset Cards"
 }
 
-struct LabelText {
+struct RestaurantVC {
     static let emptyCardsText = "No more cards!"
 }
 

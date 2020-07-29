@@ -8,8 +8,6 @@
 
 import UIKit
 
-// MARK: - Protocol
-
 protocol MenuControllerDelegate{
     func didSelectMenuItem(named: String)
 }
