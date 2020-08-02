@@ -17,7 +17,8 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     
     // MARK: - Outlets
     @IBOutlet weak var searchCategory: SearchTextField!
-    @IBOutlet weak var dollarSign: UILabel!
+    @IBOutlet weak var dollarLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
 
     // MARK: - Properties
@@ -134,22 +135,22 @@ extension HomePageViewController{
         let currentValue = Int(sender.value)
         switch currentValue {
         case 0:
-            self.dollarSign.text = "No preference"
+            self.dollarLabel.text = "No preference"
             dollarSignsParam = "0"
         case 1:
-            self.dollarSign.text = "$"
+            self.dollarLabel.text = "$"
             dollarSignsParam = "1"
         case 2:
-            self.dollarSign.text = "$$"
+            self.dollarLabel.text = "$$"
             dollarSignsParam = "2"
         case 3:
-            self.dollarSign.text = "$$$"
+            self.dollarLabel.text = "$$$"
             dollarSignsParam = "3"
         case 4:
-            self.dollarSign.text = "$$$$"
+            self.dollarLabel.text = "$$$$"
             dollarSignsParam = "4"
         default:
-            self.dollarSign.text = "No preference"
+            self.dollarLabel.text = "No preference"
             dollarSignsParam = "0"
         }
     }
@@ -158,40 +159,40 @@ extension HomePageViewController{
         let currentValue = Int(sender.value)
         switch currentValue {
         case 0:
-            self.dollarSign.text = "0 mi"
+            self.distanceLabel.text = "0 mi"
             distanceParam = 0
         case 1:
-            self.dollarSign.text = "1 mi"
+            self.distanceLabel.text = "1 mi"
             distanceParam = 1
         case 2:
-            self.dollarSign.text = "2 mi"
+            self.distanceLabel.text = "2 mi"
             distanceParam = 2
         case 3:
-            self.dollarSign.text = "3 mi"
+            self.distanceLabel.text = "3 mi"
             distanceParam = 3
         case 4:
-            self.dollarSign.text = "4 mi"
+            self.distanceLabel.text = "4 mi"
             distanceParam = 4
         case 5:
-            self.dollarSign.text = "5 mi"
+            self.distanceLabel.text = "5 mi"
             distanceParam = 5
         case 6:
-            self.dollarSign.text = "6 mi"
+            self.distanceLabel.text = "6 mi"
             distanceParam = 6
         case 7:
-            self.dollarSign.text = "7 mi"
+            self.distanceLabel.text = "7 mi"
             distanceParam = 7
         case 8:
-            self.dollarSign.text = "8 mi"
+            self.distanceLabel.text = "8 mi"
             distanceParam = 8
         case 9:
-            self.dollarSign.text = "9 mi"
+            self.distanceLabel.text = "9 mi"
             distanceParam = 9
         case 10:
-            self.dollarSign.text = "10 mi"
+            self.distanceLabel.text = "10 mi"
             distanceParam = 10
         default:
-            self.dollarSign.text = "0 mi"
+            self.distanceLabel.text = "0 mi"
             distanceParam = 0
         }
     }

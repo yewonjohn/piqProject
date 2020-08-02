@@ -274,7 +274,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="WIK-Vb-plO" userLabel="DistanceSlider">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="WIK-Vb-plO" userLabel="DistanceSlider">
                                 <rect key="frame" x="48" y="557" width="318" height="31"/>
                                 <color key="thumbTintColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -318,7 +318,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="dollarSign" destination="H3y-Zb-q01" id="kh8-lI-pQj"/>
+                        <outlet property="distanceLabel" destination="ofd-vY-dAZ" id="ri6-SQ-4hE"/>
+                        <outlet property="dollarLabel" destination="H3y-Zb-q01" id="kh8-lI-pQj"/>
                         <outlet property="searchCategory" destination="vhW-zJ-c0Z" id="kyz-5l-dtO"/>
                         <segue destination="N3k-EI-wXm" kind="show" identifier="HomeToCards" id="t5M-kX-SwH"/>
                     </connections>

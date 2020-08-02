@@ -61,7 +61,10 @@ class RestaurantViewController: UIViewController {
                 categoryAlias = category.alias
             }
         }
-        if(dollarSign == "0"){
+        if(categoryAlias == ""){
+            categoryAlias = nil
+        }
+        if(dollarSign == "0" || dollarSign == ""){
             dollarSign = nil
         }
         if(distance == 0){
