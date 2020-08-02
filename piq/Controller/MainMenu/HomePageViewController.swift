@@ -19,6 +19,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     @IBOutlet weak var searchCategory: SearchTextField!
     @IBOutlet weak var dollarSign: UILabel!
     
+
     // MARK: - Properties
     let backgroundImageView = UIImageView()
     var sideMenu: SideMenuNavigationController?
@@ -26,6 +27,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = [String]()
     var dollarSignsParam = String()
+    var distanceParam = Int()
     let favoritesVC = FavoritesViewController()
     
     let userDefault = UserDefaults.standard
@@ -77,6 +79,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
             controller.categoriesArr = categoriesArr
             controller.categoriesTitle = searchCategory.text ?? ""
             controller.dollarSign = dollarSignsParam
+            controller.distance = distanceParam
         }
     }
 
@@ -124,14 +127,14 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     }
 }
 
-//MARK: -- 	Category Search Configuration
+//MARK: -- 	Search Configuration
 extension HomePageViewController{
     
-    @IBAction func sliderChanged(_ sender: UISlider) {
+    @IBAction func costSliderChanged(_ sender: UISlider) {
         let currentValue = Int(sender.value)
         switch currentValue {
         case 0:
-            self.dollarSign.text = "No Preference"
+            self.dollarSign.text = "No preference"
             dollarSignsParam = "0"
         case 1:
             self.dollarSign.text = "$"
@@ -146,11 +149,52 @@ extension HomePageViewController{
             self.dollarSign.text = "$$$$"
             dollarSignsParam = "4"
         default:
-            self.dollarSign.text = "No Preference"
+            self.dollarSign.text = "No preference"
             dollarSignsParam = "0"
         }
     }
     
+    @IBAction func distanceSliderMoved(_ sender: UISlider) {
+        let currentValue = Int(sender.value)
+        switch currentValue {
+        case 0:
+            self.dollarSign.text = "0 mi"
+            distanceParam = 0
+        case 1:
+            self.dollarSign.text = "1 mi"
+            distanceParam = 1
+        case 2:
+            self.dollarSign.text = "2 mi"
+            distanceParam = 2
+        case 3:
+            self.dollarSign.text = "3 mi"
+            distanceParam = 3
+        case 4:
+            self.dollarSign.text = "4 mi"
+            distanceParam = 4
+        case 5:
+            self.dollarSign.text = "5 mi"
+            distanceParam = 5
+        case 6:
+            self.dollarSign.text = "6 mi"
+            distanceParam = 6
+        case 7:
+            self.dollarSign.text = "7 mi"
+            distanceParam = 7
+        case 8:
+            self.dollarSign.text = "8 mi"
+            distanceParam = 8
+        case 9:
+            self.dollarSign.text = "9 mi"
+            distanceParam = 9
+        case 10:
+            self.dollarSign.text = "10 mi"
+            distanceParam = 10
+        default:
+            self.dollarSign.text = "0 mi"
+            distanceParam = 0
+        }
+    }
     private func readLocalFile(forName name: String) -> Data? {
         do {
             if let bundlePath = Bundle.main.path(forResource: name, ofType: "json"),

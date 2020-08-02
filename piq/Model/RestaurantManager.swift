@@ -15,27 +15,28 @@ import CoreLocation
 class RestaurantManager{
 
     //MARK: - Functions (GET)
-    func getLocalRestaurants(latitude: Double, longitude: Double, category: String?, dollarSigns: String?, completion: @escaping ((_ businesses:[BusinessModel])->Void)){
+    func getLocalRestaurants(distance: Int?, latitude: Double, longitude: Double, category: String?, dollarSigns: String?, completion: @escaping ((_ businesses:[BusinessModel])->Void)){
         var businesses: [BusinessModel]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
         
+        let distanceWR = distance!
         var requestParams : [String: Any] = [:]
         //Calling API depending on headers
         if let cat = category{
             if(dollarSigns == nil && cat != ""){
-                requestParams = ["latitude": latitude, "longitude": longitude, "categories": cat]
+                requestParams = ["limit": 40,"latitude": latitude, "longitude": longitude, "categories": cat]
             }
         }
         if let price = dollarSigns{
             if(category == nil && price != ""){
-                requestParams = ["latitude": latitude, "longitude": longitude, "price": price]
+                requestParams = ["limit": 40, "latitude": latitude, "longitude": longitude, "price": price]
             }
         }
         if let price = dollarSigns, let cat = category {
-            requestParams = ["latitude": latitude, "longitude": longitude, "categories": cat,"price": price]
+            requestParams = ["limit": 40, "latitude": latitude, "longitude": longitude, "categories": cat,"price": price]
         }
         if ((category == nil || category! == "") && (dollarSigns == nil || dollarSigns! == "")){
-            requestParams = ["latitude": latitude, "longitude": longitude]
+            requestParams = ["limit": 40, "radius":distanceWR, "latitude": latitude, "longitude": longitude]
         }
                 
 
@@ -51,6 +52,7 @@ class RestaurantManager{
                 let businessArray = json["businesses"].arrayValue
 
                 for business in businessArray {
+                    print(business)
                     var categoryArr = [Categories]()
                     
                     let categories = business["categories"].arrayValue

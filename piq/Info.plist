@@ -64,5 +64,10 @@
 	<string>Application wants to use your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Application wants to use your location</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+	</array>
 </dict>
 </plist>

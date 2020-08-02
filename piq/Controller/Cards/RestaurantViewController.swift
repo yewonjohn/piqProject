@@ -21,6 +21,7 @@ class RestaurantViewController: UIViewController {
     var categoriesArr = [CategoryModel]()
     var categoriesTitle = String()
     var dollarSign : String?
+    var distance : Int?
     
     var locationManager = CLLocationManager()
     let backgroundImageView = UIImageView()
@@ -63,6 +64,13 @@ class RestaurantViewController: UIViewController {
         if(dollarSign == "0"){
             dollarSign = nil
         }
+        if(distance == 0){
+            distance = nil
+        } else{
+            if let dist = distance{
+                distance = dist * 1609
+            }
+        }
         
         //Asking for location permission
         locationManager.requestWhenInUseAuthorization()
@@ -74,7 +82,7 @@ class RestaurantViewController: UIViewController {
             
             //Calling API for all the Cards Data using current location
             print(currentLoc.coordinate.latitude)
-            RestaurantManager().getLocalRestaurants(latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
+            RestaurantManager().getLocalRestaurants(distance: distance, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
                 self.viewModelData = businessModelArray
                 self.stackContainer.dataSource = self
             }
