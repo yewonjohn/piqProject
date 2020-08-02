@@ -76,33 +76,11 @@ class RestaurantManager{
             }
         }
         //none
-        else if(distance == nil && category != nil && dollarSigns != nil){
+        else {
             requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude]
             print("8")
         }
 
-
-
-        
-        //        if let cat = category{
-        //            if(dollarSigns == nil && cat != ""){
-        //                requestParams = ["limit": 40,"latitude": latitude, "longitude": longitude, "categories": cat]
-        //            }
-        //        }
-        //        if let price = dollarSigns{
-        //            if(category == nil && price != ""){
-        //                requestParams = ["limit": 40, "latitude": latitude, "longitude": longitude, "price": price]
-        //            }
-        //        }
-        //        if let price = dollarSigns, let cat = category {
-        //            requestParams = ["limit": 40, "latitude": latitude, "longitude": longitude, "categories": cat,"price": price]
-        //        }
-        //        if ((category == nil || category! == "") && (dollarSigns == nil || dollarSigns! == "")){
-        //            if let distanceWR = distance{
-        //            requestParams = ["limit": 40, "radius":distanceWR, "latitude": latitude, "longitude": longitude]
-        //            }
-        //        }
-        //
         
         let apiKey = "XoLZTUzyXFYVkxV7QjDpxU0gkHSdGbUNmGPtMtIQcOdPzpQDF5iGA5kCBGkX7QFYrd8He5_OSg_mrLFeKfvOyd3_bZ8A7gHsyiwu0DUvDTAlpag_ctqd7j9B7DDtXnYx"
         let headers: HTTPHeaders = ["Authorization" : "Bearer \(apiKey)"]
@@ -116,7 +94,7 @@ class RestaurantManager{
                 let businessArray = json["businesses"].arrayValue
                 
                 for business in businessArray {
-                    print(business)
+//                    print(business)
                     var categoryArr = [Categories]()
                     
                     let categories = business["categories"].arrayValue
