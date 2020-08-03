@@ -12,7 +12,8 @@ import FirebaseAuth
 import SideMenu
 import SwiftyJSON
 
-class HomePageViewController: UIViewController, MenuControllerDelegate{
+class HomePageViewController: UIViewController{
+    
     
     // MARK: - Outlets
     @IBOutlet weak var dollarLabel: UILabel!
@@ -22,7 +23,6 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     
     // MARK: - Properties
     let backgroundImageView = UIImageView()
-    var sideMenu: SideMenuNavigationController?
     
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = HomePage.categoriesLabels
@@ -33,9 +33,14 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
     let favoritesVC = FavoritesViewController()
     
     let userDefault = UserDefaults.standard
-    let menu = MenuListController(with: [MenuList.empty,MenuList.home,MenuList.favorites,MenuList.logout])
     
     // MARK: - View Controller Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,25 +50,6 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
         parse(jsonData: jsonCategories)
-        
-        //Side Menu management
-        menu.delegate = self
-        sideMenu = SideMenuNavigationController(rootViewController: menu)
-        sideMenu?.leftSide = true
-        sideMenu?.setNavigationBarHidden(true, animated: false)
-        sideMenu?.presentationStyle = .menuSlideIn
-        
-        SideMenuManager.default.leftMenuNavigationController = sideMenu
-        SideMenuManager.default.addPanGestureToPresent(toView: view)
-        
-        //Making navigation bar transparent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-        
-        //Hides back button from this view
-        self.navigationItem.setHidesBackButton(true, animated: false)
         
         //Sets background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
@@ -100,36 +86,6 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         favoritesVC.view.isHidden = true
     }
     
-    //MARK: - Side Menu Config
-    @IBAction func didTapMenu(){
-        present(sideMenu!,animated: true)
-    }
-    func didSelectMenuItem(named: String) {
-        if(named != ""){
-            sideMenu?.dismiss(animated: true, completion: nil)
-        }
-        title = named
-        
-        if named == MenuList.home{
-            favoritesVC.view.isHidden = true
-        }
-        else if named == MenuList.favorites{
-            favoritesVC.view.isHidden = false
-
-        }
-        else if named == MenuList.logout{
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-                _ = navigationController?.popViewController(animated: true)
-                self.userDefault.set(false, forKey: "usersignedin")
-                self.userDefault.synchronize()
-                
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
-            }
-        }
-    }
 }
 
 //MARK: -- 	Search Configuration
@@ -221,11 +177,6 @@ extension HomePageViewController{
             print("decode error \(error)")
         }
     }
-//    private func configureCategories(){
-//        categoriesTitles = ["Any","Breakfast & Brunch","Burgers","Pizza","Mexican","Chinese","Seafood","Thai", "Sandwiches","Italian","Steakhouses","Korean","Japanese","Vietnamese","Vegetarian","Sushi Bars","American (New)"]
-//        categoriesImages = [UIImage(named: "food"), UIImage(named: "breakfast"), UIImage(named: "breakfast"), UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast")]
-//
-//    }
 }
 //MARK: - Keyboard Management
 extension HomePageViewController {

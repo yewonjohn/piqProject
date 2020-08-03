@@ -36,6 +36,7 @@
 		44DA294224B8E7AB003974AE /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA294124B8E7AB003974AE /* FavoritesManager.swift */; };
 		44E09CC624C8CDA7009C3370 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 44E09CC524C8CDA7009C3370 /* categories.json */; };
 		44E09CC824C8CF13009C3370 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E09CC724C8CF13009C3370 /* CategoryModel.swift */; };
+		44E5451424D87AEA00237C34 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5451324D87AEA00237C34 /* FilterView.swift */; };
 		44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5624A2E0F900DDC48E /* SignUpButton.swift */; };
 		44E79B5924A2E54200DDC48E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5824A2E54200DDC48E /* RegisterViewController.swift */; };
 		44E79B5B24A2E5C000DDC48E /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5A24A2E5C000DDC48E /* RestaurantViewController.swift */; };
@@ -108,6 +109,7 @@
 		44DA294124B8E7AB003974AE /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		44E09CC524C8CDA7009C3370 /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		44E09CC724C8CF13009C3370 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		44E5451324D87AEA00237C34 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		44E79B5624A2E0F900DDC48E /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		44E79B5824A2E54200DDC48E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		44E79B5A24A2E5C000DDC48E /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				44D201C1249D76F70074F315 /* Main.storyboard */,
 				44712D7824A2682D0083B1AB /* CustomViews */,
 				44DA293E24B7E403003974AE /* CardsViews */,
+				44E5451324D87AEA00237C34 /* FilterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,7 +214,7 @@
 			children = (
 				44DA293C24B7E1EC003974AE /* Auth */,
 				44DA293D24B7E1F6003974AE /* MainMenu */,
-				44DA293F24B7E7A3003974AE /* Cards */,
+				44DA293F24B7E7A3003974AE /* Tab Bar Pages */,
 				44DA293B24B7E1BE003974AE /* Sidebar */,
 				4496385C24D75701007576E1 /* TabBarViewController.swift */,
 			);
@@ -324,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				44A6E33824B5194B008E4D19 /* HomePageViewController.swift */,
-				44DA293324B7B527003974AE /* FavoritesViewController.swift */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -338,12 +340,13 @@
 			path = CardsViews;
 			sourceTree = "<group>";
 		};
-		44DA293F24B7E7A3003974AE /* Cards */ = {
+		44DA293F24B7E7A3003974AE /* Tab Bar Pages */ = {
 			isa = PBXGroup;
 			children = (
 				44E79B5A24A2E5C000DDC48E /* RestaurantViewController.swift */,
+				44DA293324B7B527003974AE /* FavoritesViewController.swift */,
 			);
-			path = Cards;
+			path = "Tab Bar Pages";
 			sourceTree = "<group>";
 		};
 		44E79B5E24A2FDAA00DDC48E /* Util */ = {
@@ -628,6 +631,7 @@
 				44F9509624A56D480088748F /* StackContainerView.swift in Sources */,
 				44D201BE249D76F70074F315 /* SceneDelegate.swift in Sources */,
 				44E09CC824C8CF13009C3370 /* CategoryModel.swift in Sources */,
+				44E5451424D87AEA00237C34 /* FilterView.swift in Sources */,
 				44712D7C24A268650083B1AB /* LoginButton.swift in Sources */,
 				44DA293424B7B527003974AE /* FavoritesViewController.swift in Sources */,
 				44712D7E24A26CF40083B1AB /* Constants.swift in Sources */,

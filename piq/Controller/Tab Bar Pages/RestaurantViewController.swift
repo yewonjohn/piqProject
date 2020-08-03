@@ -13,7 +13,10 @@ class RestaurantViewController: UIViewController {
     
     // MARK: - Properties
     let piqTitle = UILabel()
+    let filterButton = UIButton()
     let emptyCardsLabel = UILabel()
+    let filterView = UIView()
+    
     
     var viewModelData = [BusinessModel]()
     var stackContainer : StackContainerView!
@@ -29,12 +32,7 @@ class RestaurantViewController: UIViewController {
     // MARK: - View Controller Life Cycle
 
     override func loadView() {
-        //making navigation bar transparent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-        
+
         view = UIView()
         view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         stackContainer = StackContainerView()
@@ -42,17 +40,20 @@ class RestaurantViewController: UIViewController {
         configureStackContainer()
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
         configureResetNavigationBarButtonItem()
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //sets label for no more cards
+        //creates views for this page
         setLastLabel()
-        //sets title
-        setPiqTitle()
         emptyCardsLabel.isHidden = true
-        
+        setPiqTitle()
+        setButton()
+        setFilterView()
+
+
         //set background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
         
@@ -129,8 +130,36 @@ class RestaurantViewController: UIViewController {
         piqTitle.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
 //        piqTitle.leftAnchor.constraint(equalTo: self.view!.leftAnchor, constant: 100).isActive = true
     }
+    func setButton(){
+        self.view?.addSubview(filterButton)
+        filterButton.setTitle("Filter", for: .normal)
+        filterButton.translatesAutoresizingMaskIntoConstraints = false
+        filterButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 55).isActive = true
+        filterButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
+        filterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        filterButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        filterButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        filterButton.isUserInteractionEnabled = true
+
+    }
+    func setFilterView(){
+        self.view?.addSubview(filterView)
+        filterView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        filterView.translatesAutoresizingMaskIntoConstraints = false
+        filterView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        filterView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        filterView.leftAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
+        filterView.widthAnchor.constraint(equalToConstant: 360).isActive = true
+    }
     
     // MARK: - IBActions & Objc Functions
+    
+    @objc func buttonAction(){
+        print("Button tapped")
+        UIView.animate(withDuration: 0.5, animations: {
+            self.filterView.frame.origin.x -= self.filterView.frame.width
+        })
+    }
     
     @objc func resetTapped() {
         stackContainer.reloadData()

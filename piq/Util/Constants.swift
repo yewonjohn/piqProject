@@ -35,7 +35,7 @@ struct RestaurantVC {
 struct HomePage {
     static let categoriesLabels = ["Any","Breakfast & Brunch","Burgers","Pizza","Mexican","Chinese","Seafood","Thai", "Sandwiches","Italian","Steakhouses","Korean","Japanese","Vietnamese","Vegetarian","Sushi Bars","American (New)"]
     
-    static let categoriesUIImages = [UIImage(named: "food"), UIImage(named: "breakfast"), UIImage(named: "breakfast"), UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast")]
+    static let categoriesUIImages = [UIImage(named: "breakfast"), UIImage(named: "breakfast"), UIImage(named: "breakfast"), UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast")]
 }
 
 

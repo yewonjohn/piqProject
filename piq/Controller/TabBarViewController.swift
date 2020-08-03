@@ -20,14 +20,14 @@ class TabBarViewController: UITabBarController{
         super.viewDidLoad()
         
         //passing info
-//        print(self.tabBarController)
-//        print(self.tabBarController?.viewControllers?[0])
-        let vc = self.tabBarController!.viewControllers![0] as! RestaurantViewController
+        let viewControllers = self.viewControllers
+        let vc = viewControllers![0] as! RestaurantViewController
+
         vc.categoriesArr = categoriesArr
         vc.categoriesTitle = categoriesTitle
         vc.dollarSign = dollarSign
         vc.distance = distance
-        
+
         
         //Making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
