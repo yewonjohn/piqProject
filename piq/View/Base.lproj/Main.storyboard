@@ -189,7 +189,7 @@
         <!--Home Page View Controller-->
         <scene sceneID="ocr-oe-QDD">
             <objects>
-                <viewController id="fvK-Bj-i0g" customClass="HomePageViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePageViewController" id="fvK-Bj-i0g" customClass="HomePageViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9C7-J7-xR6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,6 +309,7 @@
                         <outlet property="categoryCollectionView" destination="bhj-yb-r4p" id="7cg-V5-tbo"/>
                         <outlet property="distanceLabel" destination="ofd-vY-dAZ" id="ri6-SQ-4hE"/>
                         <outlet property="dollarLabel" destination="H3y-Zb-q01" id="kh8-lI-pQj"/>
+                        <outlet property="findFoodButton" destination="0bG-8x-ObV" id="cv5-ym-hOa"/>
                         <segue destination="Hty-i1-pwL" kind="show" identifier="HomeToCards" id="Pvo-Ik-9cv"/>
                     </connections>
                 </viewController>

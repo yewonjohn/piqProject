@@ -19,6 +19,7 @@ class HomePageViewController: UIViewController{
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var findFoodButton: FoodButton!
     
     
     // MARK: - Properties
@@ -31,6 +32,7 @@ class HomePageViewController: UIViewController{
     var dollarSignsParam = String()
     var distanceParam = Int()
     let favoritesVC = FavoritesViewController()
+    var sidePresented = false
     
     let userDefault = UserDefaults.standard
     
@@ -53,14 +55,24 @@ class HomePageViewController: UIViewController{
         
         //Sets background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
-        addFavoriteVC()
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 1)
         categoryCollectionView.allowsSelection = true
         categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
+
+        
     }
+    override func viewWillLayoutSubviews() {
+        switch sidePresented {
+        case true:
+            findFoodButton.setTitle("Apply", for: .normal)
+        default:
+            findFoodButton.setTitle("Find my meal!", for: .normal)
+        }
+    }
+    
     
     //MARK: - Segue
     @IBAction func goToCards(_ sender: UIButton) {
@@ -77,14 +89,6 @@ class HomePageViewController: UIViewController{
     }
     
     //MARK: - Layout Config
-    func addFavoriteVC(){
-        addChild(favoritesVC)
-        view.addSubview(favoritesVC.view)
-        favoritesVC.view.frame = view.bounds
-        
-        favoritesVC.didMove(toParent: self)
-        favoritesVC.view.isHidden = true
-    }
     
 }
 

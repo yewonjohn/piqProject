@@ -15,7 +15,7 @@ class RestaurantViewController: UIViewController {
     let piqTitle = UILabel()
     let filterButton = UIButton()
     let emptyCardsLabel = UILabel()
-    let filterView = UIView()
+//    let filterView = FilterView()
     
     
     var viewModelData = [BusinessModel]()
@@ -51,7 +51,8 @@ class RestaurantViewController: UIViewController {
         emptyCardsLabel.isHidden = true
         setPiqTitle()
         setButton()
-        setFilterView()
+//        setFilterView()
+//        filterView.setCategoryTitle()
 
 
         //set background
@@ -142,24 +143,18 @@ class RestaurantViewController: UIViewController {
         filterButton.isUserInteractionEnabled = true
 
     }
-    func setFilterView(){
-        self.view?.addSubview(filterView)
-        filterView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        filterView.translatesAutoresizingMaskIntoConstraints = false
-        filterView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        filterView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        filterView.leftAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
-        filterView.widthAnchor.constraint(equalToConstant: 360).isActive = true
-    }
+//    func setFilterView(){
+//        self.view?.addSubview(filterView)
+//        filterView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        filterView.translatesAutoresizingMaskIntoConstraints = false
+//        filterView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+//        filterView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+//        filterView.leftAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
+//        filterView.widthAnchor.constraint(equalToConstant: 360).isActive = true
+//    }
     
     // MARK: - IBActions & Objc Functions
     
-    @objc func buttonAction(){
-        print("Button tapped")
-        UIView.animate(withDuration: 0.5, animations: {
-            self.filterView.frame.origin.x -= self.filterView.frame.width
-        })
-    }
     
     @objc func resetTapped() {
         stackContainer.reloadData()
@@ -184,3 +179,35 @@ extension RestaurantViewController : BusinessCardsDataSource {
         emptyCardsLabel.isHidden = false
     }
 }
+
+extension RestaurantViewController: UIViewControllerTransitioningDelegate{
+    
+    @objc public func buttonAction(){
+            print("Button tapped")
+        
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
+        
+        pvc.modalPresentationStyle = UIModalPresentationStyle.custom
+        pvc.transitioningDelegate = self
+        pvc.view.layer.cornerRadius = 30
+        pvc.view.clipsToBounds = true
+        pvc.sidePresented = true
+
+        self.present(pvc, animated: true, completion: nil)
+        
+        }
+
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+             return SetSizePresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+class SetSizePresentationController : UIPresentationController {
+    override var frameOfPresentedViewInContainerView: CGRect {
+        get {
+             return CGRect(x: (containerView?.bounds.width)! - 350, y: 0, width: (containerView?.bounds.width)! - 65, height: (containerView?.bounds.height)!)
+        }
+    }
+
+}
+
