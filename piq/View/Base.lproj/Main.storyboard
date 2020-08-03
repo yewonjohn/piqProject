@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -206,76 +205,63 @@
                                     <action selector="goToCards:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="TS3-LZ-DbJ"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vhW-zJ-c0Z" customClass="SearchTextField" customModule="SearchTextField">
-                                <rect key="frame" x="40" y="734" width="334" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No preference" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3y-Zb-q01">
-                                <rect key="frame" x="185" y="394" width="184" height="30.5"/>
+                                <rect key="frame" x="185" y="393.5" width="184" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="xYV-RB-TAO" userLabel="CostSlider">
-                                <rect key="frame" x="48" y="433" width="318" height="31"/>
+                                <rect key="frame" x="48" y="432" width="318" height="31"/>
                                 <color key="thumbTintColor" red="0.90980392156862744" green="0.37647058823529411" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="costSliderChanged:" destination="fvK-Bj-i0g" eventType="valueChanged" id="MWU-5M-v8x"/>
                                 </connections>
                             </slider>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bhj-yb-r4p">
-                                <rect key="frame" x="0.0" y="154" width="414" height="200"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bhj-yb-r4p" userLabel="CategoriesCollection">
+                                <rect key="frame" x="0.0" y="153.5" width="414" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="tQ2-u3-LC6"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sjf-Gj-1Hg">
-                                    <size key="itemSize" width="128" height="128"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sjf-Gj-1Hg">
+                                    <size key="itemSize" width="122" height="188"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UIE-uG-Lg2">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KoV-og-j5I">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="fvK-Bj-i0g" id="8ue-e6-Zcd"/>
+                                    <outlet property="delegate" destination="fvK-Bj-i0g" id="27z-is-M77"/>
+                                </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDL-3y-N5w">
-                                <rect key="frame" x="45" y="118" width="118" height="31"/>
+                                <rect key="frame" x="45" y="118" width="118" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fH2-HZ-Co3">
-                                <rect key="frame" x="45" y="394" width="58" height="31"/>
+                                <rect key="frame" x="45" y="393.5" width="57.5" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAS-l1-uYF">
-                                <rect key="frame" x="45" y="518" width="114" height="31"/>
+                                <rect key="frame" x="45" y="517" width="114" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 mi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofd-vY-dAZ" userLabel="Distance mi">
-                                <rect key="frame" x="306" y="518" width="58" height="31"/>
+                                <rect key="frame" x="306.5" y="517" width="57.5" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="WIK-Vb-plO" userLabel="DistanceSlider">
-                                <rect key="frame" x="48" y="557" width="318" height="31"/>
+                                <rect key="frame" x="48" y="555.5" width="318" height="31"/>
                                 <color key="thumbTintColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="distanceSliderMoved:" destination="fvK-Bj-i0g" eventType="valueChanged" id="tKb-xc-kNI"/>
@@ -318,15 +304,63 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoryCollectionView" destination="bhj-yb-r4p" id="7cg-V5-tbo"/>
                         <outlet property="distanceLabel" destination="ofd-vY-dAZ" id="ri6-SQ-4hE"/>
                         <outlet property="dollarLabel" destination="H3y-Zb-q01" id="kh8-lI-pQj"/>
-                        <outlet property="searchCategory" destination="vhW-zJ-c0Z" id="kyz-5l-dtO"/>
-                        <segue destination="N3k-EI-wXm" kind="show" identifier="HomeToCards" id="t5M-kX-SwH"/>
+                        <segue destination="Hty-i1-pwL" kind="show" identifier="HomeToCards" id="Pvo-Ik-9cv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vHn-6e-UTN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682.608695652174" y="-476.11607142857139"/>
+            <point key="canvasLocation" x="1650.7246376811595" y="-418.52678571428572"/>
+        </scene>
+        <!--Tab Bar View Controller-->
+        <scene sceneID="rEg-ag-QhS">
+            <objects>
+                <tabBarController id="Hty-i1-pwL" customClass="TabBarViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="w2M-Q2-tDw"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="evj-K7-XEf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="N3k-EI-wXm" kind="relationship" relationship="viewControllers" id="WZG-aa-FG0"/>
+                        <segue destination="ewY-jh-Vgq" kind="relationship" relationship="viewControllers" id="z8L-rF-yr2"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lOh-Xy-DK6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1903" y="-1199"/>
+        </scene>
+        <!--Favorites View Controller-->
+        <scene sceneID="JuA-c6-tqm">
+            <objects>
+                <tableViewController id="ewY-jh-Vgq" customClass="FavoritesViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DuH-ug-ChZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="dr4-u5-zlm">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dr4-u5-zlm" id="im6-Wn-qVN">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ewY-jh-Vgq" id="oeC-Vc-BMm"/>
+                            <outlet property="delegate" destination="ewY-jh-Vgq" id="zLm-K0-iFq"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="bcM-wj-aiO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0IU-vN-4Pv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2841" y="-823"/>
         </scene>
         <!--Restaurant View Controller-->
         <scene sceneID="g5E-eN-GpB">
@@ -338,15 +372,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="lU9-57-CqB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="b7M-Of-3I6"/>
                     <navigationItem key="navigationItem" id="d5I-fS-cYi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j6t-kk-XGv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2801" y="-476"/>
+            <point key="canvasLocation" x="2822" y="-1503"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XKc-xF-yZK"/>
+        <segue reference="YzQ-Mu-wf5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>

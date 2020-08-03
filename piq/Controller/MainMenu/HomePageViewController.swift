@@ -11,22 +11,23 @@ import IQKeyboardManager
 import FirebaseAuth
 import SideMenu
 import SwiftyJSON
-import SearchTextField
 
 class HomePageViewController: UIViewController, MenuControllerDelegate{
     
     // MARK: - Outlets
-    @IBOutlet weak var searchCategory: SearchTextField!
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
     
-
+    
     // MARK: - Properties
     let backgroundImageView = UIImageView()
     var sideMenu: SideMenuNavigationController?
     
     var categoriesArr = [CategoryModel]()
-    var categoriesTitles = [String]()
+    var categoriesTitles = HomePage.categoriesLabels
+    var categoriesImages = HomePage.categoriesUIImages
+    var titleParam = String()
     var dollarSignsParam = String()
     var distanceParam = Int()
     let favoritesVC = FavoritesViewController()
@@ -44,7 +45,6 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
         parse(jsonData: jsonCategories)
-        configureCategories(categories: categoriesArr)
         
         //Side Menu management
         menu.delegate = self
@@ -52,7 +52,7 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         sideMenu?.leftSide = true
         sideMenu?.setNavigationBarHidden(true, animated: false)
         sideMenu?.presentationStyle = .menuSlideIn
-    
+        
         SideMenuManager.default.leftMenuNavigationController = sideMenu
         SideMenuManager.default.addPanGestureToPresent(toView: view)
         
@@ -68,22 +68,28 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         //Sets background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
         addFavoriteVC()
+        
+        categoryCollectionView.delegate = self
+        categoryCollectionView.dataSource = self
+        categoryCollectionView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 1)
+        categoryCollectionView.allowsSelection = true
+        categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
     }
-
+    
     //MARK: - Segue
     @IBAction func goToCards(_ sender: UIButton) {
         self.performSegue(withIdentifier: "HomeToCards", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToCards" {
-            let controller = segue.destination as! RestaurantViewController
+            let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
-            controller.categoriesTitle = searchCategory.text ?? ""
+            controller.categoriesTitle = titleParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
         }
     }
-
+    
     //MARK: - Layout Config
     func addFavoriteVC(){
         addChild(favoritesVC)
@@ -106,12 +112,10 @@ class HomePageViewController: UIViewController, MenuControllerDelegate{
         
         if named == MenuList.home{
             favoritesVC.view.isHidden = true
-            searchCategory.isHidden = false
         }
         else if named == MenuList.favorites{
             favoritesVC.view.isHidden = false
-            searchCategory.isHidden = true
-            searchCategory.endEditing(true)
+
         }
         else if named == MenuList.logout{
             let firebaseAuth = Auth.auth()
@@ -217,25 +221,11 @@ extension HomePageViewController{
             print("decode error \(error)")
         }
     }
-    private func configureCategories(categories: [CategoryModel]){
-        for category in categories{
-            if let parent = category.parents{
-                if (parent.contains("food") || parent.contains("bars") || parent.contains("restaurants")){
-                    if let title = category.title{
-                        if let blacklist = category.countryBlacklist{
-                            if !(blacklist.contains("US")){
-                                categoriesTitles.append(title)
-                            }
-                        } else{
-                            categoriesTitles.append(title)
-                        }
-                    }
-                }else{continue}
-            }
-        }
-        searchCategory.filterStrings(categoriesTitles)
-        searchCategory.startVisible = true
-    }
+//    private func configureCategories(){
+//        categoriesTitles = ["Any","Breakfast & Brunch","Burgers","Pizza","Mexican","Chinese","Seafood","Thai", "Sandwiches","Italian","Steakhouses","Korean","Japanese","Vietnamese","Vegetarian","Sushi Bars","American (New)"]
+//        categoriesImages = [UIImage(named: "food"), UIImage(named: "breakfast"), UIImage(named: "breakfast"), UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast"),UIImage(named: "breakfast")]
+//
+//    }
 }
 //MARK: - Keyboard Management
 extension HomePageViewController {
@@ -246,5 +236,42 @@ extension HomePageViewController {
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+//MARK: - Categories Collection Delegates
+extension HomePageViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        titleParam = categoriesTitles[indexPath.row]
+    }
+
+}
+
+//MARK: - Categories Collection Data Source
+extension HomePageViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return categoriesTitles.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+        cell.layer.cornerRadius = 15
+        cell.layer.masksToBounds = true
+        cell.dataImage = categoriesImages[indexPath.row]
+        cell.dataTitle = categoriesTitles[indexPath.row]
+        return cell
+    }
+}
+
+//MARK: - Categories Collection Delegate Flow Layout
+extension HomePageViewController: UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 123, height: 180)
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+       return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
     }
 }

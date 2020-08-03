@@ -12,7 +12,7 @@ import CoreLocation
 class RestaurantViewController: UIViewController {
     
     // MARK: - Properties
-    
+    let piqTitle = UILabel()
     let emptyCardsLabel = UILabel()
     
     var viewModelData = [BusinessModel]()
@@ -49,6 +49,8 @@ class RestaurantViewController: UIViewController {
         
         //sets label for no more cards
         setLastLabel()
+        //sets title
+        setPiqTitle()
         emptyCardsLabel.isHidden = true
         
         //set background
@@ -114,6 +116,18 @@ class RestaurantViewController: UIViewController {
         emptyCardsLabel.translatesAutoresizingMaskIntoConstraints = false
         emptyCardsLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
         emptyCardsLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
+    }
+    //Sets title
+    func setPiqTitle(){
+        self.view?.addSubview(piqTitle)
+        piqTitle.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
+        piqTitle.textAlignment = .center
+        piqTitle.font = UIFont(name: "Montserrat-SemiBold", size: 36)
+        piqTitle.text = "piq"
+        piqTitle.translatesAutoresizingMaskIntoConstraints = false
+        piqTitle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 44).isActive = true
+        piqTitle.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
+//        piqTitle.leftAnchor.constraint(equalTo: self.view!.leftAnchor, constant: 100).isActive = true
     }
     
     // MARK: - IBActions & Objc Functions

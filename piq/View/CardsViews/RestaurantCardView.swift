@@ -52,7 +52,7 @@ class RestaurantCardView : UIView {
             phoneNumber = phoneNumber?.applyPatternOnNumbers(pattern: "+# (###) ###-####", replacmentCharacter: "#")
                         
             //setting UIViews text with data
-            swipeView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+            swipeView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             guard let image = dataSource?.img_url else { return }
             imageView.image = UIImage(named: image)
             titleLabel.text = dataSource?.name
@@ -72,7 +72,7 @@ class RestaurantCardView : UIView {
                 
             } else {
                 isOpenView.text = "Open now •"
-            isOpenView.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            isOpenView.textColor = #colorLiteral(red: 0.1529411765, green: 0.6823529412, blue: 0.3764705882, alpha: 1)
             }
             //SETTING RATINGS BAR
             switch dataSource?.rating {
@@ -144,7 +144,7 @@ class RestaurantCardView : UIView {
         configureCategoriesView()
         configureisOpenView()
         configurePhoneView()
-        configureYelpView()
+//        configureYelpView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -190,7 +190,7 @@ class RestaurantCardView : UIView {
         imageContainView.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
         imageContainView.topAnchor.constraint(equalTo: swipeView.topAnchor).isActive = true
         imageContainView.widthAnchor.constraint(equalTo: self.swipeView.widthAnchor, multiplier: 1.0).isActive = true
-        imageContainView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        imageContainView.heightAnchor.constraint(equalToConstant: 350).isActive = true
     }
     
     func configureImageView() {
@@ -208,7 +208,12 @@ class RestaurantCardView : UIView {
         imageContainView.addSubview(titleLabel)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .left
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        titleLabel.font = UIFont(name: "Montserrat-SemiBold", size: 25)
+        titleLabel.numberOfLines = 0
+        titleLabel.layer.shadowColor = UIColor.black.cgColor
+        titleLabel.layer.shadowOpacity = 1
+        titleLabel.layer.shadowOffset = .zero
+        titleLabel.layer.shadowRadius = 10
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leftAnchor.constraint(equalTo: imageContainView.leftAnchor, constant: 10).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: imageContainView.rightAnchor).isActive = true
@@ -229,9 +234,9 @@ class RestaurantCardView : UIView {
     
     func configureRatingsCountView() {
         swipeView.addSubview(ratingsCountView)
-        ratingsCountView.textColor = .black
+        ratingsCountView.textColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
         ratingsCountView.textAlignment = .left
-        ratingsCountView.font = UIFont.systemFont(ofSize: 16)
+        ratingsCountView.font = UIFont(name: "Montserrat-Medium", size: 12)
         ratingsCountView.translatesAutoresizingMaskIntoConstraints = false
         ratingsCountView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: 16).isActive = true
         ratingsCountView.leftAnchor.constraint(equalTo: ratingsView.rightAnchor, constant: 8).isActive = true
@@ -239,9 +244,9 @@ class RestaurantCardView : UIView {
     
     func configureDollarSignsView() {
         swipeView.addSubview(dollarSignsView)
-        dollarSignsView.textColor = .black
+        dollarSignsView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
         dollarSignsView.textAlignment = .left
-        dollarSignsView.font = UIFont.systemFont(ofSize: 18)
+        dollarSignsView.font = UIFont(name: "Montserrat-Medium", size: 15)
         dollarSignsView.translatesAutoresizingMaskIntoConstraints = false
         dollarSignsView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
         dollarSignsView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
@@ -249,9 +254,9 @@ class RestaurantCardView : UIView {
     
     func configureCategoriesView() {
         swipeView.addSubview(categoriesView)
-        categoriesView.textColor = .black
+        categoriesView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
         categoriesView.textAlignment = .left
-        categoriesView.font = UIFont.systemFont(ofSize: 18)
+        categoriesView.font = UIFont(name: "Montserrat-Medium", size: 15)
         categoriesView.text = "Korean, American"
         categoriesView.numberOfLines = 0
         categoriesView.translatesAutoresizingMaskIntoConstraints = false
@@ -264,7 +269,7 @@ class RestaurantCardView : UIView {
         swipeView.addSubview(isOpenView)
         isOpenView.textColor = .red
         isOpenView.textAlignment = .left
-        isOpenView.font = UIFont.boldSystemFont(ofSize: 18)
+        isOpenView.font = UIFont(name: "Montserrat-Medium", size: 15)
         isOpenView.text = "Closed now •"
         isOpenView.translatesAutoresizingMaskIntoConstraints = false
         isOpenView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
@@ -273,9 +278,9 @@ class RestaurantCardView : UIView {
     
     func configurePhoneView() {
         swipeView.addSubview(phoneView)
-        phoneView.textColor = .black
+        phoneView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
         phoneView.textAlignment = .left
-        phoneView.font = UIFont.systemFont(ofSize: 18)
+        phoneView.font = UIFont(name: "Montserrat-Medium", size: 15)
         phoneView.translatesAutoresizingMaskIntoConstraints = false
         phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         phoneView.leftAnchor.constraint(equalTo: isOpenView.rightAnchor, constant: 4).isActive = true
