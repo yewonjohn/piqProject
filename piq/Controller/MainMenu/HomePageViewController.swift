@@ -9,7 +9,6 @@
 import UIKit
 import IQKeyboardManager
 import FirebaseAuth
-import SideMenu
 import SwiftyJSON
 
 class HomePageViewController: UIViewController{

@@ -1,6 +1,6 @@
 //
 //  FavoritesViewController.swift
-//  YummyTummy
+//  piq
 //
 //  Created by John Kim on 7/9/20.
 //  Copyright © 2020 John Yewon Kim. All rights reserved.
@@ -16,7 +16,7 @@ class FavoritesViewController: UITableViewController{
     //MARK: - Properties
     
     let favoriteManager = FavoritesManager()
-    var favoritesArray : Results<FavoritesModel>?
+    var favoritesArray : [FavoritesModel]?
     
     let backgroundImageView = UIImageView()
     
@@ -25,13 +25,12 @@ class FavoritesViewController: UITableViewController{
         tableView.register(UINib(nibName: "FavoritesCell", bundle: nil), forCellReuseIdentifier: "FavoritesCell")
         
         favoriteManager.delegate = self
-        favoriteManager.loadFavoritesLocally()
-        
+        favoriteManager.loadFavorites()
         view.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.8901960784, blue: 0.8901960784, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        favoriteManager.loadFavoritesLocally()
+        favoriteManager.loadFavorites()
     }
     
     //MARK: - Tableview Methods
@@ -103,7 +102,7 @@ class FavoritesViewController: UITableViewController{
 //MARK: -- Favorites Manager Delegate
 extension FavoritesViewController: FavoritesManagerDelegate{
     
-    func didFetchFavorites(favorites: Results<FavoritesModel>?) {
+    func didFetchFavorites(favorites: [FavoritesModel]?) {
         favoritesArray = favorites
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -126,7 +125,9 @@ extension FavoritesViewController: SwipeTableViewCellDelegate{
         guard orientation == .right else { return nil }
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            if let favArr = self.favoritesArray {self.favoriteManager.deleteFavorite(itemToDelete: favArr[indexPath.row])
+            if let favArr = self.favoritesArray {
+                self.favoritesArray?.remove(at: indexPath.row)
+                self.favoriteManager.deleteFavorite(itemToDelete: favArr[indexPath.row])
             }
         }
         // customize the action appearance
