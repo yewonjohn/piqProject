@@ -27,7 +27,6 @@ class TabBarViewController: UITabBarController{
         vc.categoriesTitle = categoriesTitle
         vc.dollarSign = dollarSign
         vc.distance = distance
-
     }
     
     //MARK: - Segues

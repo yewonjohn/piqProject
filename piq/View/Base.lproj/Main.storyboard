@@ -272,7 +272,7 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="xYV-RB-TAO" userLabel="CostSlider">
-                                <rect key="frame" x="48" y="452" width="318" height="31"/>
+                                <rect key="frame" x="48" y="552" width="318" height="31"/>
                                 <color key="minimumTrackTintColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="thumbTintColor" red="0.90980392156862744" green="0.37647058823529411" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -280,7 +280,7 @@
                                 </connections>
                             </slider>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bhj-yb-r4p" userLabel="CategoriesCollection">
-                                <rect key="frame" x="0.0" y="173.5" width="414" height="200"/>
+                                <rect key="frame" x="0.0" y="273.5" width="414" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="tQ2-u3-LC6"/>
@@ -298,37 +298,37 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDL-3y-N5w">
-                                <rect key="frame" x="45" y="138" width="118" height="30.5"/>
+                                <rect key="frame" x="45" y="238" width="118" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fH2-HZ-Co3">
-                                <rect key="frame" x="45" y="413.5" width="57.5" height="30.5"/>
+                                <rect key="frame" x="45" y="513.5" width="57.5" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3y-Zb-q01">
-                                <rect key="frame" x="369" y="413.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="369" y="513.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAS-l1-uYF">
-                                <rect key="frame" x="45" y="537" width="114" height="30.5"/>
+                                <rect key="frame" x="45" y="637" width="114" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofd-vY-dAZ" userLabel="Distance mi">
-                                <rect key="frame" x="364" y="537" width="0.0" height="0.0"/>
+                                <rect key="frame" x="364" y="637" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="WIK-Vb-plO" userLabel="DistanceSlider">
-                                <rect key="frame" x="48" y="575.5" width="318" height="31"/>
+                                <rect key="frame" x="48" y="675.5" width="318" height="31"/>
                                 <color key="minimumTrackTintColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="thumbTintColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -347,6 +347,12 @@
                                     <action selector="dismissView:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="9mf-w6-GgA"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="piq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TX3-aZ-aQM">
+                                <rect key="frame" x="177" y="98" width="60" height="44"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="36"/>
+                                <color key="textColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -357,8 +363,8 @@
                             <constraint firstItem="xYV-RB-TAO" firstAttribute="leading" secondItem="ilZ-Qz-HQ0" secondAttribute="leading" constant="50" id="DWU-ce-C4l"/>
                             <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="trailing" secondItem="bhj-yb-r4p" secondAttribute="trailing" id="FYo-df-4BR"/>
                             <constraint firstItem="WIK-Vb-plO" firstAttribute="leading" secondItem="ilZ-Qz-HQ0" secondAttribute="leading" constant="50" id="Foq-HN-4fo"/>
-                            <constraint firstItem="pDL-3y-N5w" firstAttribute="top" secondItem="ilZ-Qz-HQ0" secondAttribute="top" constant="50" id="IYX-cr-j1s"/>
                             <constraint firstItem="bhj-yb-r4p" firstAttribute="leading" secondItem="ilZ-Qz-HQ0" secondAttribute="leading" id="Lws-e5-knI"/>
+                            <constraint firstItem="pDL-3y-N5w" firstAttribute="top" secondItem="ilZ-Qz-HQ0" secondAttribute="top" constant="150" id="NXQ-1d-ovo"/>
                             <constraint firstItem="fH2-HZ-Co3" firstAttribute="top" secondItem="bhj-yb-r4p" secondAttribute="bottom" constant="40" id="OUw-gj-zBr"/>
                             <constraint firstItem="vQk-rq-2So" firstAttribute="top" secondItem="ilZ-Qz-HQ0" secondAttribute="top" constant="35" id="PDO-36-N03"/>
                             <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="trailing" secondItem="WIK-Vb-plO" secondAttribute="trailing" constant="50" id="SxA-Oa-SM9"/>
@@ -366,7 +372,9 @@
                             <constraint firstItem="WIK-Vb-plO" firstAttribute="top" secondItem="eAS-l1-uYF" secondAttribute="bottom" constant="8" id="ZeR-QT-7Xq"/>
                             <constraint firstItem="xYV-RB-TAO" firstAttribute="top" secondItem="fH2-HZ-Co3" secondAttribute="bottom" constant="8" id="bmP-VO-dTD"/>
                             <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="trailing" secondItem="H3y-Zb-q01" secondAttribute="trailing" constant="45" id="deH-jF-vcv"/>
+                            <constraint firstItem="TX3-aZ-aQM" firstAttribute="top" secondItem="9C7-J7-xR6" secondAttribute="topMargin" constant="10" id="gBT-XH-fHb"/>
                             <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="trailing" secondItem="xYV-RB-TAO" secondAttribute="trailing" constant="50" id="gei-wp-OFD"/>
+                            <constraint firstItem="TX3-aZ-aQM" firstAttribute="centerX" secondItem="9C7-J7-xR6" secondAttribute="centerX" id="icP-kF-rbj"/>
                             <constraint firstItem="H3y-Zb-q01" firstAttribute="top" secondItem="bhj-yb-r4p" secondAttribute="bottom" constant="40" id="j53-Ey-Vhb"/>
                             <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="bottom" secondItem="0bG-8x-ObV" secondAttribute="bottom" constant="20" id="l62-Lp-6aN"/>
                             <constraint firstItem="ilZ-Qz-HQ0" firstAttribute="trailing" secondItem="ofd-vY-dAZ" secondAttribute="trailing" constant="50" id="lTh-S1-O5T"/>
@@ -385,6 +393,7 @@
                         <outlet property="distanceLabel" destination="ofd-vY-dAZ" id="ri6-SQ-4hE"/>
                         <outlet property="dollarLabel" destination="H3y-Zb-q01" id="nxY-Kc-8Ld"/>
                         <outlet property="findFoodButton" destination="0bG-8x-ObV" id="cv5-ym-hOa"/>
+                        <outlet property="piqLabel" destination="TX3-aZ-aQM" id="wBd-oB-xcv"/>
                         <segue destination="Hty-i1-pwL" kind="show" identifier="HomeToCards" id="Pvo-Ik-9cv"/>
                         <segue destination="q2O-rh-d4A" kind="unwind" identifier="unwindToCards" unwindAction="unwindToCards:" id="t2y-bc-J4k"/>
                         <segue destination="q2O-rh-d4A" kind="unwind" identifier="unwindWithInfo" unwindAction="unwindWithInfo:" id="El6-qA-LK3"/>

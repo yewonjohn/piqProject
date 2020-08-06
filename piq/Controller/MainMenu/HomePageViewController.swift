@@ -11,6 +11,11 @@ import IQKeyboardManager
 import FirebaseAuth
 import SwiftyJSON
 
+//exists to get rid of shadowView onClick of dismissal
+protocol HomePageShadowViewDelegate {
+    func homePageDismissed()
+}
+
 class HomePageViewController: UIViewController{
     
     
@@ -21,6 +26,7 @@ class HomePageViewController: UIViewController{
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var findFoodButton: FoodButton!
+    @IBOutlet weak var piqLabel: UILabel!
     
     
     // MARK: - Properties
@@ -47,8 +53,10 @@ class HomePageViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        IQKeyboardManager.shared().isEnabled = true
-        self.hideKeyboardWhenTappedAround()
+        let delegate : HomePageShadowViewDelegate?
+        
+//        IQKeyboardManager.shared().isEnabled = true
+//        self.hideKeyboardWhenTappedAround()
         
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
@@ -70,7 +78,9 @@ class HomePageViewController: UIViewController{
         case true:
             findFoodButton.setTitle("Apply", for: .normal)
             cancelButton.isHidden = false
-            categoryLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+            piqLabel.isHidden = true
+            
+            
         default:
             findFoodButton.setTitle("Find my meal!", for: .normal)
             cancelButton.isHidden = true
@@ -106,11 +116,13 @@ class HomePageViewController: UIViewController{
     }
     @IBAction func dismissView(_ sender: UIButton) {
         performSegue(withIdentifier: "unwindToCards", sender: self)
+        //setting shadowView in RestaurantVC to hidden
+        
         print("triggered")
     }
     
     //MARK: - Layout Config
-    
+
 }
 
 //MARK: -- 	Search Configuration
@@ -203,17 +215,17 @@ extension HomePageViewController{
         }
     }
 }
-//MARK: - Keyboard Management
-extension HomePageViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomePageViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
+////MARK: - Keyboard Management
+//extension HomePageViewController {
+//    func hideKeyboardWhenTappedAround() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomePageViewController.dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tap)
+//    }
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
+//}
 
 //MARK: - Categories Collection Delegates
 extension HomePageViewController: UICollectionViewDelegate{

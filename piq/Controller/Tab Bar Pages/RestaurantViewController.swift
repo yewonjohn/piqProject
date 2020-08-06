@@ -18,6 +18,8 @@ class RestaurantViewController: UIViewController {
     let emptyCardsLabel = UILabel()
     let signOutButton = UIButton()
     let resetButton = UIButton()
+    //needs to be accessible from HomePageView
+    let shadowView = UIView()
     
     let userDefault = UserDefaults.standard
 
@@ -57,9 +59,11 @@ class RestaurantViewController: UIViewController {
         setFilterButton()
         setSignOut()
         setResetButton()
+        setShadowView()
 
         //set background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
+        
         getCards()
     }
     
@@ -101,8 +105,6 @@ class RestaurantViewController: UIViewController {
             }
         }
     }
- 
-
     
     
     //MARK: - Configurations
@@ -186,6 +188,17 @@ class RestaurantViewController: UIViewController {
         resetButton.addTarget(self, action: #selector(resetTapped), for: .touchUpInside)
         resetButton.isUserInteractionEnabled = true
     }
+      func setShadowView(){
+        self.view.addSubview(shadowView)
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.backgroundColor = .black
+        shadowView.alpha = 0.5
+        shadowView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        shadowView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        shadowView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        shadowView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        shadowView.isHidden = true
+    }
     
 
     
@@ -245,7 +258,8 @@ extension RestaurantViewController : RestaurantCardsDataSource {
 
 extension RestaurantViewController: UIViewControllerTransitioningDelegate{
     
-    @objc public func buttonAction(){        
+    @objc public func buttonAction(){
+        shadowView.isHidden = false
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
         
@@ -255,8 +269,8 @@ extension RestaurantViewController: UIViewControllerTransitioningDelegate{
         pvc.view.clipsToBounds = true
         pvc.sidePresented = true
 
-        self.present(pvc, animated: true, completion: nil)
         
+        self.present(pvc, animated: true, completion: nil)
         }
 
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
