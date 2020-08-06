@@ -199,21 +199,20 @@ class RestaurantViewController: UIViewController {
     @objc func logoutUser() {
         
         let alert = UIAlertController(title: "Logout?", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))
-        alert.addAction(UIAlertAction(title: "Yes, logout", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Yes, logout", style: .destructive, handler: { action in
               switch action.style{
               case .default:
-                    do { try Auth.auth().signOut() }
-                    catch { print("already logged out") }
-                    self.userDefault.set(false, forKey: "usersignedin")
-                    self.userDefault.synchronize()
-                    self.navigationController?.popToRootViewController(animated: true)
-
+                print("cancel")
               case .cancel:
                 print("cancel")
               case .destructive:
-                print("destruct")
+                do { try Auth.auth().signOut() }
+                catch { print("already logged out") }
+                self.userDefault.set(false, forKey: "usersignedin")
+                self.userDefault.synchronize()
+                self.navigationController?.popToRootViewController(animated: true)
             }}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
         self.present(alert, animated: true, completion: nil)
         
         
@@ -247,8 +246,8 @@ extension RestaurantViewController : RestaurantCardsDataSource {
 extension RestaurantViewController: UIViewControllerTransitioningDelegate{
     
     @objc public func buttonAction(){        
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
         
         pvc.modalPresentationStyle = UIModalPresentationStyle.custom
         pvc.transitioningDelegate = self

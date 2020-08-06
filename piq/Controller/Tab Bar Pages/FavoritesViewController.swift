@@ -36,7 +36,7 @@ class FavoritesViewController: UITableViewController{
     //MARK: - Tableview Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoritesArray?.count ?? 1
+        return favoritesArray?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
