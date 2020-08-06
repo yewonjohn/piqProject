@@ -46,9 +46,6 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - IBActions & Objc Functions
-    @IBAction func goSignUp(_ sender: Any) {
-        self.performSegue(withIdentifier: "LoginToRegister", sender: self)
-    }
     @IBAction func loginUser(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text{
             Auth.auth().signIn(withEmail: email, password: password) {authResult, error in

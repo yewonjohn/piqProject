@@ -50,7 +50,8 @@ class RestaurantManager{
         //category
         else if(distance == nil && category != nil && dollarSigns == nil){
             if let cat = category{
-                requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude,"category":cat]
+                requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude,"categories": cat]
+                print(cat)
                 print("4")
             }
         }

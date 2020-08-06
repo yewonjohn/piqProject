@@ -24,9 +24,11 @@ class SignUpButton: UIButton {
     
     private func setupButton() {
         backgroundColor = .clear
-        titleLabel?.font    = UIFont(name: Fonts.avenirNextCondensedDemiBold, size: 18)
+        titleLabel?.font    = UIFont(name: "Montserrat-SemiBold", size: 18)
         layer.cornerRadius  = frame.size.height/2
-        tintColor = #colorLiteral(red: 0.9098039216, green: 0.2901960784, blue: 0.3725490196, alpha: 1)
+        backgroundColor     = #colorLiteral(red: 0.8972918391, green: 0.8919581175, blue: 0.9013919234, alpha: 1)
+        layer.borderWidth = 2
+        layer.borderColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
 
     }
 }

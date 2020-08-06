@@ -36,13 +36,12 @@
 		44DA294224B8E7AB003974AE /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA294124B8E7AB003974AE /* FavoritesManager.swift */; };
 		44E09CC624C8CDA7009C3370 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 44E09CC524C8CDA7009C3370 /* categories.json */; };
 		44E09CC824C8CF13009C3370 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E09CC724C8CF13009C3370 /* CategoryModel.swift */; };
-		44E5451624D87CAB00237C34 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5451524D87CAB00237C34 /* FilterView.swift */; };
+		44E5451824D8B3A300237C34 /* IntialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5451724D8B3A300237C34 /* IntialPageViewController.swift */; };
 		44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5624A2E0F900DDC48E /* SignUpButton.swift */; };
 		44E79B5924A2E54200DDC48E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5824A2E54200DDC48E /* RegisterViewController.swift */; };
 		44E79B5B24A2E5C000DDC48E /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B5A24A2E5C000DDC48E /* RestaurantViewController.swift */; };
 		44E79B5D24A2FC0F00DDC48E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44E79B5C24A2FC0F00DDC48E /* Assets.xcassets */; };
 		44E79B6224A2FEAB00DDC48E /* ServiceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E79B6124A2FEAB00DDC48E /* ServiceUtil.swift */; };
-		44F05A1C24B641440083F56C /* MenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F05A1B24B641440083F56C /* MenuListController.swift */; };
 		44F9509424A56D0E0088748F /* RestaurantCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F9509324A56D0E0088748F /* RestaurantCardView.swift */; };
 		44F9509624A56D480088748F /* StackContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F9509524A56D480088748F /* StackContainerView.swift */; };
 		8B1E9CC6BDEF7FE37BC4517C /* Pods_piq_piqUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A574ACA535EEBFEA4C77CF /* Pods_piq_piqUITests.framework */; };
@@ -109,13 +108,12 @@
 		44DA294124B8E7AB003974AE /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		44E09CC524C8CDA7009C3370 /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		44E09CC724C8CF13009C3370 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
-		44E5451524D87CAB00237C34 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		44E5451724D8B3A300237C34 /* IntialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntialPageViewController.swift; sourceTree = "<group>"; };
 		44E79B5624A2E0F900DDC48E /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		44E79B5824A2E54200DDC48E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		44E79B5A24A2E5C000DDC48E /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		44E79B5C24A2FC0F00DDC48E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44E79B6124A2FEAB00DDC48E /* ServiceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUtil.swift; sourceTree = "<group>"; };
-		44F05A1B24B641440083F56C /* MenuListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListController.swift; sourceTree = "<group>"; };
 		44F9509324A56D0E0088748F /* RestaurantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCardView.swift; sourceTree = "<group>"; };
 		44F9509524A56D480088748F /* StackContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackContainerView.swift; sourceTree = "<group>"; };
 		6B0BB38AD5F26C3AB05323B1 /* Pods-YummyTummyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YummyTummyTests.debug.xcconfig"; path = "Target Support Files/Pods-YummyTummyTests/Pods-YummyTummyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -211,10 +209,10 @@
 		44712D7724A267EA0083B1AB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				44E5451724D8B3A300237C34 /* IntialPageViewController.swift */,
 				44DA293C24B7E1EC003974AE /* Auth */,
 				44DA293D24B7E1F6003974AE /* MainMenu */,
 				44DA293F24B7E7A3003974AE /* Tab Bar Pages */,
-				44DA293B24B7E1BE003974AE /* Sidebar */,
 				4496385C24D75701007576E1 /* TabBarViewController.swift */,
 			);
 			path = Controller;
@@ -230,7 +228,6 @@
 				44712D7A24A268650083B1AB /* LoginButton.swift */,
 				4496385A24D68DCE007576E1 /* FoodButton.swift */,
 				4496386C24D7AE95007576E1 /* CategoryCell.swift */,
-				44E5451524D87CAB00237C34 /* FilterView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -304,14 +301,6 @@
 				44D201DF249D76F90074F315 /* Info.plist */,
 			);
 			path = piqUITests;
-			sourceTree = "<group>";
-		};
-		44DA293B24B7E1BE003974AE /* Sidebar */ = {
-			isa = PBXGroup;
-			children = (
-				44F05A1B24B641440083F56C /* MenuListController.swift */,
-			);
-			path = Sidebar;
 			sourceTree = "<group>";
 		};
 		44DA293C24B7E1EC003974AE /* Auth */ = {
@@ -631,7 +620,6 @@
 				44F9509624A56D480088748F /* StackContainerView.swift in Sources */,
 				44D201BE249D76F70074F315 /* SceneDelegate.swift in Sources */,
 				44E09CC824C8CF13009C3370 /* CategoryModel.swift in Sources */,
-				44E5451624D87CAB00237C34 /* FilterView.swift in Sources */,
 				44712D7C24A268650083B1AB /* LoginButton.swift in Sources */,
 				44DA293424B7B527003974AE /* FavoritesViewController.swift in Sources */,
 				44712D7E24A26CF40083B1AB /* Constants.swift in Sources */,
@@ -642,11 +630,11 @@
 				44DA293824B7D359003974AE /* FavoritesCell.swift in Sources */,
 				4496385D24D75701007576E1 /* TabBarViewController.swift in Sources */,
 				44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */,
-				44F05A1C24B641440083F56C /* MenuListController.swift in Sources */,
 				44A6E33924B5194B008E4D19 /* HomePageViewController.swift in Sources */,
 				44E79B6224A2FEAB00DDC48E /* ServiceUtil.swift in Sources */,
 				442297FE24A394FD000F846A /* RestaurantManager.swift in Sources */,
 				44DA293A24B7E137003974AE /* FavoritesModel.swift in Sources */,
+				44E5451824D8B3A300237C34 /* IntialPageViewController.swift in Sources */,
 				4476A20D24A416600009719D /* BusinessModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

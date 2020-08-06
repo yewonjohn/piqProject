@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol BusinessCardsDataSource {
+protocol RestaurantCardsDataSource {
     func numberOfCardsToShow() -> Int
     func card(at index: Int) -> RestaurantCardView
     func emptyView() -> Void
-    
+    func swipeStarted() -> Bool
 }
 
 class StackContainerView: UIView, RestaurantCardsDelegate {
@@ -23,6 +23,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     var cardsToBeVisible: Int = 3
     var cardViews : [RestaurantCardView] = []
     var remainingcards: Int = 0
+    var swipeStarted = true
     
     let horizontalInset: CGFloat = 10.0
     let verticalInset: CGFloat = 10.0
@@ -30,7 +31,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     var visibleCards: [RestaurantCardView] {
         return subviews as? [RestaurantCardView] ?? []
     }
-    var dataSource: BusinessCardsDataSource? {
+    var dataSource: RestaurantCardsDataSource? {
         didSet {
             reloadData()
         }
@@ -47,6 +48,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     }
 
     func reloadData() {
+        swipeStarted = true
         removeAllCardViews()
         guard let datasource = dataSource else { return }
         setNeedsLayout()
@@ -103,7 +105,6 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
                     self.layoutIfNeeded()
                 })
             }
-
         }else {
             for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
                 UIView.animate(withDuration: 0.2, animations: {
@@ -117,6 +118,11 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         lastCardCounter -= 1
         if(lastCardCounter == 0){
             dataSource?.emptyView()
+        }
+        
+        //triggering reset button to show here
+        if(swipeStarted){
+            swipeStarted = datasource.swipeStarted()
         }
     }
 }

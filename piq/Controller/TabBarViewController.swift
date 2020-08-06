@@ -28,14 +28,27 @@ class TabBarViewController: UITabBarController{
         vc.dollarSign = dollarSign
         vc.distance = distance
 
-        
-        //Making navigation bar transparent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-        
-        //Hides back button from this view
-        self.navigationItem.setHidesBackButton(true, animated: false)
     }
+    
+    //MARK: - Segues
+    @IBAction func unwindToCards(_ unwindSegue: UIStoryboardSegue) {
+           // Use data from the view controller which initiated the unwind segue
+       }
+    
+    @IBAction func unwindWithInfo(_ unwindSegue: UIStoryboardSegue) {
+         //let sourceViewController = unwindSegue.source
+         // Use data from the view controller which initiated the unwind segue
+        print("unwindWIthInfo triggerd")
+        
+        let viewControllers = self.viewControllers
+        let vc = viewControllers![0] as! RestaurantViewController
+
+        vc.categoriesArr = categoriesArr
+        vc.categoriesTitle = categoriesTitle
+        vc.dollarSign = dollarSign
+        vc.distance = distance
+        vc.getCards()
+        
+        
+     }
 }

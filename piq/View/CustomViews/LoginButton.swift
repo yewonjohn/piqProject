@@ -23,8 +23,8 @@ class LoginButton: UIButton {
     
     
     private func setupButton() {
-        backgroundColor     = #colorLiteral(red: 0.9098039216, green: 0.2901960784, blue: 0.3725490196, alpha: 1)
-        titleLabel?.font    = UIFont(name: Fonts.avenirNextCondensedDemiBold, size: 22)
+        backgroundColor     = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
+        titleLabel?.font    = UIFont(name: "Montserrat-SemiBold", size: 18)
         layer.cornerRadius  = frame.size.height/2
         setTitleColor(.white, for: .normal)
 //        tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)

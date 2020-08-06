@@ -16,6 +16,8 @@ class HomePageViewController: UIViewController{
     
     
     // MARK: - Outlets
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
@@ -68,15 +70,24 @@ class HomePageViewController: UIViewController{
         switch sidePresented {
         case true:
             findFoodButton.setTitle("Apply", for: .normal)
+            cancelButton.isHidden = false
+            categoryLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         default:
             findFoodButton.setTitle("Find my meal!", for: .normal)
+            cancelButton.isHidden = true
+
         }
     }
     
     
     //MARK: - Segue
     @IBAction func goToCards(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "HomeToCards", sender: self)
+        switch sidePresented {
+        case true:
+            self.performSegue(withIdentifier: "unwindWithInfo", sender: self)
+        default:
+            self.performSegue(withIdentifier: "HomeToCards", sender: self)
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToCards" {
@@ -86,6 +97,17 @@ class HomePageViewController: UIViewController{
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
         }
+        if segue.identifier == "unwindWithInfo" {
+            let controller = segue.destination as! TabBarViewController
+            controller.categoriesArr = categoriesArr
+            controller.categoriesTitle = titleParam
+            controller.dollarSign = dollarSignsParam
+            controller.distance = distanceParam
+        }
+    }
+    @IBAction func dismissView(_ sender: UIButton) {
+        performSegue(withIdentifier: "unwindToCards", sender: self)
+        print("triggered")
     }
     
     //MARK: - Layout Config
@@ -99,7 +121,7 @@ extension HomePageViewController{
         let currentValue = Int(sender.value)
         switch currentValue {
         case 0:
-            self.dollarLabel.text = "No preference"
+            self.dollarLabel.text = ""
             dollarSignsParam = "0"
         case 1:
             self.dollarLabel.text = "$"
@@ -114,7 +136,7 @@ extension HomePageViewController{
             self.dollarLabel.text = "$$$$"
             dollarSignsParam = "4"
         default:
-            self.dollarLabel.text = "No preference"
+            self.dollarLabel.text = ""
             dollarSignsParam = "0"
         }
     }
@@ -123,7 +145,7 @@ extension HomePageViewController{
         let currentValue = Int(sender.value)
         switch currentValue {
         case 0:
-            self.distanceLabel.text = "0 mi"
+            self.distanceLabel.text = ""
             distanceParam = 0
         case 1:
             self.distanceLabel.text = "1 mi"
@@ -156,7 +178,7 @@ extension HomePageViewController{
             self.distanceLabel.text = "10 mi"
             distanceParam = 10
         default:
-            self.distanceLabel.text = "0 mi"
+            self.distanceLabel.text = ""
             distanceParam = 0
         }
     }

@@ -36,7 +36,8 @@ class RestaurantCardView : UIView {
     var addressView = UILabel()
     var favoriteButton = UIButton()
     var yelpImgView: UIImageView!
-    
+    var arrowButton = UIButton()
+
     var categoryTitles = ""
     
     var delegate : RestaurantCardsDelegate?
@@ -116,7 +117,7 @@ class RestaurantCardView : UIView {
     }
 
     //Action
-    @objc func tapDetected() {
+    @objc func goToURL() {
         guard let url = URL(string: (dataSource?.url)!) else { return }
         UIApplication.shared.open(url)
     }
@@ -144,6 +145,7 @@ class RestaurantCardView : UIView {
         configureCategoriesView()
         configureisOpenView()
         configurePhoneView()
+        configureArrow()
 //        configureYelpView()
         configureButton()
         addPanGestureOnCards()
@@ -173,7 +175,7 @@ class RestaurantCardView : UIView {
     
     func configureSwipeView() {
         swipeView = UIView()
-        swipeView.layer.cornerRadius = 15
+        swipeView.layer.cornerRadius = 25
         swipeView.clipsToBounds = true
         shadowView.addSubview(swipeView)
         swipeView.translatesAutoresizingMaskIntoConstraints = false
@@ -285,22 +287,6 @@ class RestaurantCardView : UIView {
         phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         phoneView.leftAnchor.constraint(equalTo: isOpenView.rightAnchor, constant: 4).isActive = true
     }
-    func configureYelpView(){
-        yelpImgView = UIImageView()
-        yelpImgView.image = UIImage(named: "yelp_logo_1")
-        swipeView.addSubview(yelpImgView)
-        yelpImgView.contentMode = .scaleAspectFit
-        yelpImgView.translatesAutoresizingMaskIntoConstraints = false
-        yelpImgView.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -20).isActive = true
-        yelpImgView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 15).isActive = true
-        yelpImgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        yelpImgView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
-        yelpImgView.isUserInteractionEnabled = true
-        yelpImgView.addGestureRecognizer(singleTap)
-    }
-
     func configureButton() {
         swipeView.addSubview(favoriteButton)
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
@@ -312,6 +298,24 @@ class RestaurantCardView : UIView {
         favoriteButton.layer.cornerRadius  = 7
         favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -30).isActive = true
         favoriteButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -30).isActive = true
+    }
+    func configureArrow(){
+        swipeView.addSubview(arrowButton)
+        let symbol = UIImage(systemName: "chevron.compact.down")
+        arrowButton.setImage(symbol, for: .normal)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .regular, scale: .large)
+        arrowButton.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
+        arrowButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        arrowButton.translatesAutoresizingMaskIntoConstraints = false
+        arrowButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        arrowButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        arrowButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: 5).isActive = true
+        arrowButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(goToURL))
+        arrowButton.isUserInteractionEnabled = true
+        arrowButton.addGestureRecognizer(singleTap)
+
     }
     
     func configureTapGesture() {

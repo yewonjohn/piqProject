@@ -33,7 +33,7 @@ class CategoryCell: UICollectionViewCell{
     
     fileprivate let categoryImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "breakfast")
+        imageView.image = #imageLiteral(resourceName: "salad")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
