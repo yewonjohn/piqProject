@@ -50,6 +50,9 @@ class LoginViewController: UIViewController {
 //        setAnimationImage()
         service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
     }
+    @IBAction func goToRegister(_ sender: Any) {
+        self.performSegue(withIdentifier: "loginToRegister", sender: self)
+    }
     // Navigation Bar Management
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
