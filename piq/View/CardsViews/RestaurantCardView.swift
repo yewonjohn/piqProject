@@ -46,7 +46,7 @@ class RestaurantCardView : UIView {
     let baseView = UIView()
     
     
-    var dataSource : BusinessModel? {
+    var dataSource : RestaurantModel? {
         didSet {
             //reformatting phoneNumber
             var phoneNumber = dataSource?.phone

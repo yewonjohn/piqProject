@@ -73,7 +73,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.89411764705882346" green="0.8901960784313725" blue="0.8901960784313725" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.96470588235294119" blue="0.95294117647058818" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="e73-JF-vht" firstAttribute="top" secondItem="kfW-Gd-g5J" secondAttribute="bottom" constant="5" id="3On-Ma-sAo"/>
                             <constraint firstItem="e73-JF-vht" firstAttribute="leading" secondItem="3HA-MA-dFt" secondAttribute="leading" constant="5" id="BEZ-FZ-fpp"/>
@@ -90,7 +90,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.83137254900000002" green="0.83137254900000002" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                <color key="backgroundColor" red="0.97254901960784312" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="NO2-sY-9Rj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KmW-r9-0SG"/>
                     <constraint firstItem="NO2-sY-9Rj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Mey-xC-I64"/>
@@ -101,8 +101,11 @@
                     <constraint firstItem="3HA-MA-dFt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ufF-qe-mef"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.89640919750000003" green="0.89207871829999996" blue="0.9007396768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="containerView" destination="3HA-MA-dFt" id="bEx-hd-pn6"/>
+                <outlet property="contentVIew" destination="H2p-sc-9uM" id="qhN-sr-h5g"/>
                 <outlet property="favoritesCategories" destination="VnL-oE-Ueo" id="WDj-ED-oa6"/>
                 <outlet property="favoritesImage" destination="NO2-sY-9Rj" id="CWd-VX-QPu"/>
                 <outlet property="favoritesPrice" destination="sIb-bt-MKF" id="QgD-bg-4Do"/>

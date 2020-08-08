@@ -11,15 +11,11 @@ import IQKeyboardManager
 import FirebaseAuth
 import SwiftyJSON
 
-//exists to get rid of shadowView onClick of dismissal
-protocol HomePageShadowViewDelegate {
-    func homePageDismissed()
-}
-
 class HomePageViewController: UIViewController{
     
     
     // MARK: - Outlets
+    @IBOutlet weak var gestureBounds: UIView!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
@@ -52,9 +48,7 @@ class HomePageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let delegate : HomePageShadowViewDelegate?
-        
+                
 //        IQKeyboardManager.shared().isEnabled = true
 //        self.hideKeyboardWhenTappedAround()
         
@@ -67,11 +61,10 @@ class HomePageViewController: UIViewController{
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
-        categoryCollectionView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 1)
+        categoryCollectionView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
         categoryCollectionView.allowsSelection = true
         categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
 
-        
     }
     override func viewWillLayoutSubviews() {
         switch sidePresented {
@@ -79,12 +72,52 @@ class HomePageViewController: UIViewController{
             findFoodButton.setTitle("Apply", for: .normal)
             cancelButton.isHidden = false
             piqLabel.isHidden = true
+            view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            
+            print(gestureBounds.isUserInteractionEnabled)
+            
+//            let myScreenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action:#selector(handleDismiss))
+//            myScreenEdgePanGestureRecognizer.delegate = self
             
             
         default:
             findFoodButton.setTitle("Find my meal!", for: .normal)
             cancelButton.isHidden = true
 
+        }
+    }
+    //configurting gesture dismiss
+    var viewTranslation = CGPoint(x: 0, y: 0)
+    @objc func handleDismiss(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .changed:
+            if(viewTranslation.x < 0){
+//                self.view.transform = .identity
+                UIView.animate(withDuration: 0.10, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.view.transform = .identity
+                })
+            }
+            print("changed")
+            print("changed:\(viewTranslation.x)")
+            viewTranslation = sender.translation(in: view)
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.view.transform = CGAffineTransform(translationX: self.viewTranslation.x, y: 0)
+            })
+        case .ended:
+            if viewTranslation.x < 75 {
+                print("ended")
+                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.view.transform = .identity
+                })
+            } else {
+                print("else")
+//                dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "unwindToCards", sender: self)
+
+            }
+        default:
+            print("default")
+            break
         }
     }
     
@@ -117,8 +150,6 @@ class HomePageViewController: UIViewController{
     @IBAction func dismissView(_ sender: UIButton) {
         performSegue(withIdentifier: "unwindToCards", sender: self)
         //setting shadowView in RestaurantVC to hidden
-        
-        print("triggered")
     }
     
     //MARK: - Layout Config
@@ -263,3 +294,15 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout{
        return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
     }
 }
+
+//extension HomePageViewController: UIGestureRecognizerDelegate {
+//
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        print("gesturebounds:\(gestureBounds.bounds)")
+//        print(touch.location(in: gestureBounds))
+//        if gestureBounds.bounds.contains(touch.location(in: gestureBounds)){
+//            return true
+//        }
+//        return false
+//    }
+//}

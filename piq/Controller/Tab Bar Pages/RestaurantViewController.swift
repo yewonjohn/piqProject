@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import FirebaseAuth
+import NVActivityIndicatorView
 
 class RestaurantViewController: UIViewController {
     
@@ -18,12 +19,17 @@ class RestaurantViewController: UIViewController {
     let emptyCardsLabel = UILabel()
     let signOutButton = UIButton()
     let resetButton = UIButton()
-    //needs to be accessible from HomePageView
+
     let shadowView = UIView()
+    let loadingView = NVActivityIndicatorView(frame: .zero)
+    
+    var presentTransition: UIViewControllerAnimatedTransitioning?
+    var dismissTransition: UIViewControllerAnimatedTransitioning?
+
     
     let userDefault = UserDefaults.standard
 
-    var viewModelData = [BusinessModel]()
+    var viewModelData = [RestaurantModel]()
     var stackContainer : StackContainerView!
     
     var categoriesArr = [CategoryModel]()
@@ -34,7 +40,9 @@ class RestaurantViewController: UIViewController {
     var locationManager = CLLocationManager()
     let backgroundImageView = UIImageView()
     let service = ServiceUtil()
-    
+    let homePage = HomePageViewController()
+    let restaurantAPI = RestaurantManager()
+
     // MARK: - View Controller Life Cycle
 
     override func loadView() {
@@ -46,6 +54,7 @@ class RestaurantViewController: UIViewController {
         configureStackContainer()
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
         configureResetNavigationBarButtonItem()
+        restaurantAPI.delegate = self
 
     }
     
@@ -60,6 +69,7 @@ class RestaurantViewController: UIViewController {
         setSignOut()
         setResetButton()
         setShadowView()
+        setLoadingView()
 
         //set background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
@@ -98,14 +108,14 @@ class RestaurantViewController: UIViewController {
             currentLoc = locationManager.location
             
             //Calling API for all the Cards Data using current location
-            print(currentLoc.coordinate.latitude)
-            RestaurantManager().getLocalRestaurants(distance: distance, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
+            restaurantAPI.getLocalRestaurants(distance: distance, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
                 self.viewModelData = businessModelArray
                 self.stackContainer.dataSource = self
+                //stop loading animation
+                self.loadingView.stopAnimating()
             }
         }
     }
-    
     
     //MARK: - Configurations
     //SETS CONTAINER CONSTRAINTS
@@ -189,17 +199,31 @@ class RestaurantViewController: UIViewController {
         resetButton.isUserInteractionEnabled = true
     }
       func setShadowView(){
+
         self.view.addSubview(shadowView)
         shadowView.translatesAutoresizingMaskIntoConstraints = false
         shadowView.backgroundColor = .black
-        shadowView.alpha = 0.5
+        shadowView.alpha = 0.7
         shadowView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         shadowView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         shadowView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         shadowView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         shadowView.isHidden = true
     }
-    
+    func triggerShadowView(){
+        service.animateShadowView(view: shadowView)
+    }
+
+    func setLoadingView(){
+        self.view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        loadingView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        loadingView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        loadingView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        loadingView.type = .pacman
+        loadingView.color = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
+    }
 
     
     // MARK: - IBActions & Objc Functions
@@ -227,8 +251,6 @@ class RestaurantViewController: UIViewController {
             }}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default))
         self.present(alert, animated: true, completion: nil)
-        
-        
 
     }
 }
@@ -255,34 +277,87 @@ extension RestaurantViewController : RestaurantCardsDataSource {
         return false
     }
 }
-
+//MARK:-- Custom Transition (Delegate)
 extension RestaurantViewController: UIViewControllerTransitioningDelegate{
     
     @objc public func buttonAction(){
-        shadowView.isHidden = false
+        
+        triggerShadowView()
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
         
-        pvc.modalPresentationStyle = UIModalPresentationStyle.custom
+        presentTransition = RightToLeftTransition()
+        dismissTransition = LeftToRightTransition()
+        
+        pvc.modalPresentationStyle = .custom
         pvc.transitioningDelegate = self
         pvc.view.layer.cornerRadius = 30
         pvc.view.clipsToBounds = true
+        //boolean value to let HomePageVC know where it's being presented from
         pvc.sidePresented = true
-
         
         self.present(pvc, animated: true, completion: nil)
         }
-
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-             return SetSizePresentationController(presentedViewController: presented, presenting: presenting)
-    }
-}
-class SetSizePresentationController : UIPresentationController {
-    override var frameOfPresentedViewInContainerView: CGRect {
-        get {
-             return CGRect(x: (containerView?.bounds.width)! - 350, y: 0, width: (containerView?.bounds.width)! - 65, height: (containerView?.bounds.height)!)
-        }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return presentTransition
     }
 
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return dismissTransition
+    }
+}
+//MARK:-- Custom Transition (Right to Left Transition)
+class RightToLeftTransition: NSObject, UIViewControllerAnimatedTransitioning {
+    let duration: TimeInterval = 0.25
+
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return duration
+    }
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let container = transitionContext.containerView
+        let toView = transitionContext.view(forKey: .to)!
+
+        container.addSubview(toView)
+
+        toView.frame = CGRect(x: toView.bounds.width, y: 0, width: (toView.bounds.width) - 65, height: (toView.bounds.height) as! CGFloat)
+        toView.layoutIfNeeded()
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
+            toView.frame.origin = CGPoint(x: 65, y: 0)
+        }, completion: { _ in
+            transitionContext.completeTransition(true)
+        })
+    }
+}
+//MARK:-- Custom Transition (Left to Right Transition)
+class LeftToRightTransition: NSObject, UIViewControllerAnimatedTransitioning {
+    let duration: TimeInterval = 0.25
+
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return duration
+    }
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let container = transitionContext.containerView
+        let fromView = transitionContext.view(forKey: .from)!
+
+        container.addSubview(fromView)
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
+            fromView.frame.origin = CGPoint(x: fromView.frame.width, y: 0)
+        }, completion: { _ in
+            fromView.removeFromSuperview()
+            transitionContext.completeTransition(true)
+        })
+    }
 }
 
+//MARK:- Restaurant Manager Delegate (IS LOADING)
+extension RestaurantViewController: RestaurantManagerDelegate{
+    func isLoading() {
+        loadingView.startAnimating()
+    }
+}

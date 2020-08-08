@@ -17,6 +17,7 @@ protocol FavoritesManagerDelegate {
     //    func didFetchFavoritesLocally(favorites: Results<FavoritesModel>)
     func didFailWithError(error: Error)
     func didFailAddingFavorites(error: Error)
+    func isLoading()
 }
 
 class FavoritesManager{
@@ -104,6 +105,8 @@ class FavoritesManager{
         
     }
         func loadFavorites(){
+            
+            delegate?.isLoading()
     
             var favoritesArr = [FavoritesModel]()
             let currentUser = Auth.auth().currentUser?.email

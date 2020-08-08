@@ -11,20 +11,28 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 
+protocol RestaurantManagerDelegate {
+    func isLoading()
+}
 
 class RestaurantManager{
     
+    var delegate: RestaurantManagerDelegate?
+    
     //MARK: - Functions (GET)
-    func getLocalRestaurants(distance: Int?, latitude: Double, longitude: Double, category: String?, dollarSigns: String?, completion: @escaping ((_ businesses:[BusinessModel])->Void)){
-        var businesses: [BusinessModel]? = []
+    func getLocalRestaurants(distance: Int?, latitude: Double, longitude: Double, category: String?, dollarSigns: String?, completion: @escaping ((_ businesses:[RestaurantModel])->Void)){
+        print("get func called")
+        delegate?.isLoading()
+        
+        var businesses: [RestaurantModel]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
         
         //        let distanceWR = distance!
         var requestParams : [String: Any] = [:]
         //Calling API depending on headers
-        print(distance)
-        print(category)
-        print(dollarSigns)
+//        print(distance)
+//        print(category)
+//        print(dollarSigns)
         
         //everything included
         if(distance != nil && category != nil && dollarSigns != nil){
@@ -105,7 +113,7 @@ class RestaurantManager{
                         cat.title = category["title"].stringValue
                         categoryArr.append(cat)
                     }
-                    let businessUnit = BusinessModel(name: business["name"].stringValue,
+                    let businessUnit = RestaurantModel(name: business["name"].stringValue,
                                                      id: business["id"].stringValue,
                                                      rating: business["rating"].floatValue,
                                                      reviewCount: business["review_count"].intValue,

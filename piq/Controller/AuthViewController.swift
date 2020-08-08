@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-class InitialPageViewController: UIViewController{
+class AuthViewController: UIViewController{
     @IBOutlet weak var containerView: UIView!
+    
+    let userDefault = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,5 +24,10 @@ class InitialPageViewController: UIViewController{
         
         containerView.layer.cornerRadius = 15
         containerView.layer.masksToBounds = true
+        
+        if userDefault.bool(forKey: "usersignedin") {
+            self.performSegue(withIdentifier: "AuthToHome", sender: self)
+        }
+        
     }
 }

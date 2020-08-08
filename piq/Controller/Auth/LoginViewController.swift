@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
+    @IBOutlet weak var containerView: UIView!
     
     // MARK: - Properties
     let backgroundImageView = UIImageView()
@@ -34,6 +35,8 @@ class LoginViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
 
         ServiceUtil().setAuthBackground(view,backgroundImageView)
+        containerView.layer.cornerRadius = 20
+        containerView.clipsToBounds = true
     }
     // Navigation Bar Management
     override func viewWillAppear(_ animated: Bool) {
@@ -59,11 +62,9 @@ class LoginViewController: UIViewController {
 
                     self.performSegue(withIdentifier: "LoginToMain", sender: self)
                 }
-                // ...
             }
         }
     }
-    
 }
     //MARK: -- Keyboard Management
 extension LoginViewController {

@@ -19,7 +19,7 @@ class ServiceUtil{
         backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         //        backgroundImageView.image = UIImage(named: "tacosImg")
-        backgroundImageView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 1)
+        backgroundImageView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
         //        backgroundImageView.alpha = 0.5
         view.sendSubviewToBack(backgroundImageView)
     }
@@ -49,23 +49,47 @@ class ServiceUtil{
                            animations: {
                             button.transform = button.transform.rotated(by: 360)
                             button.alpha = 0
-
+                            
             },
                            completion: { _ in
                             button.isHidden = true
             }
             )
         }else{
-        UIView.animate(withDuration: 1.0,
-                       delay: 0,
-                       options: UIView.AnimationOptions.allowUserInteraction,
-                       animations: {
-                        button.transform = button.transform.rotated(by: 360)
-                        button.isHidden = false
-                        button.alpha = 1
-        },
-                       completion: { _ in }
-        )
+            UIView.animate(withDuration: 1.0,
+                           delay: 0,
+                           options: UIView.AnimationOptions.allowUserInteraction,
+                           animations: {
+                            button.transform = button.transform.rotated(by: 360)
+                            button.isHidden = false
+                            button.alpha = 1
+            },
+                           completion: { _ in }
+            )
+        }
+    }
+    
+    func animateShadowView(view: UIView){
+        if(view.isHidden == false){
+            UIView.animate(withDuration: 0.35,
+                           delay: 0,
+                           animations: {
+                            view.alpha = 0
+                            
+            },
+                           completion: { _ in
+                            view.isHidden = true
+            }
+            )
+        }else{
+            UIView.animate(withDuration: 0.35,
+                           delay: 0,
+                           animations: {
+                            view.isHidden = false
+                            view.alpha = 0.7
+            },
+                           completion: { _ in }
+            )
         }
     }
     

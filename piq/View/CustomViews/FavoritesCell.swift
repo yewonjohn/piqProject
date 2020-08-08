@@ -11,6 +11,8 @@ import SwipeCellKit
 
 class FavoritesCell: SwipeTableViewCell {
 
+    @IBOutlet weak var contentVIew: UIView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var favoritesImage: UIImageView!
     @IBOutlet weak var favoritesTitle: UILabel!
     @IBOutlet weak var favoritesRatings: UIImageView!
@@ -23,6 +25,8 @@ class FavoritesCell: SwipeTableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        favoritesImage.layer.cornerRadius = 15
+        favoritesImage.clipsToBounds = true
     }
     
 }
