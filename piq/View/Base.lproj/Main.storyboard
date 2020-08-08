@@ -131,6 +131,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hu3-ld-xm6">
+                                <rect key="frame" x="0.0" y="88" width="414" height="230"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_splash" translatesAutoresizingMaskIntoConstraints="NO" id="Xc0-43-yQI">
+                                        <rect key="frame" x="-45" y="-57" width="229" height="202"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="229" id="jb7-wM-jkx"/>
+                                            <constraint firstAttribute="height" constant="202" id="y9o-Hh-hIN"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_splash2" translatesAutoresizingMaskIntoConstraints="NO" id="ZDK-1m-ikO">
+                                        <rect key="frame" x="159" y="91" width="310" height="229"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="310" id="V05-6J-jIc"/>
+                                            <constraint firstAttribute="height" constant="229" id="wCS-YP-Uwy"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spaghetti" translatesAutoresizingMaskIntoConstraints="NO" id="dRW-JT-fid" userLabel="animatingIcon">
+                                        <rect key="frame" x="-40" y="-230" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="BoI-uB-U7E"/>
+                                            <constraint firstAttribute="width" constant="120" id="bIx-6o-s3u"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ZDK-1m-ikO" secondAttribute="bottom" constant="-90" id="2PK-Q8-ZLv"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZDK-1m-ikO" secondAttribute="trailing" constant="-55" id="2ie-Qh-WTb"/>
+                                    <constraint firstItem="dRW-JT-fid" firstAttribute="leading" secondItem="hu3-ld-xm6" secondAttribute="leading" constant="-40" id="7b4-PC-JtY"/>
+                                    <constraint firstItem="Xc0-43-yQI" firstAttribute="leading" secondItem="hu3-ld-xm6" secondAttribute="leading" constant="-45" id="jdz-ul-vSL"/>
+                                    <constraint firstItem="dRW-JT-fid" firstAttribute="top" secondItem="hu3-ld-xm6" secondAttribute="top" constant="-230" id="sBp-3X-r6q"/>
+                                    <constraint firstItem="Xc0-43-yQI" firstAttribute="top" secondItem="hu3-ld-xm6" secondAttribute="top" constant="-57" id="wEx-VK-F1O"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsr-FN-efO">
                                 <rect key="frame" x="0.0" y="308" width="414" height="588"/>
                                 <subviews>
@@ -189,7 +224,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hu3-ld-xm6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0YA-rj-y8F"/>
                             <constraint firstAttribute="bottom" secondItem="wsr-FN-efO" secondAttribute="bottom" id="5hE-uX-XzJ"/>
+                            <constraint firstItem="wsr-FN-efO" firstAttribute="top" secondItem="hu3-ld-xm6" secondAttribute="bottom" constant="-10" id="FkX-Xq-wKp"/>
+                            <constraint firstItem="hu3-ld-xm6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="cL9-lK-Zr7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hu3-ld-xm6" secondAttribute="trailing" id="eX9-Xz-TD6"/>
                             <constraint firstItem="wsr-FN-efO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="308" id="jWR-t2-tnI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wsr-FN-efO" secondAttribute="trailing" id="p9u-rz-HJR"/>
                             <constraint firstItem="wsr-FN-efO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qH6-6g-PKv"/>
@@ -198,6 +237,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="9AF-xK-d8s"/>
                     <connections>
+                        <outlet property="animatingIcon" destination="dRW-JT-fid" id="lLE-fs-DE4"/>
+                        <outlet property="animationContainerView" destination="hu3-ld-xm6" id="46f-KN-Ucg"/>
                         <outlet property="containerView" destination="wsr-FN-efO" id="dbV-1e-7jy"/>
                         <outlet property="emailTextField" destination="aVj-xe-OE4" id="DgM-F2-BD7"/>
                         <outlet property="passwordTextField" destination="lyw-Wc-gTJ" id="RBl-2q-pAt"/>
@@ -544,7 +585,10 @@
         <segue reference="XKc-xF-yZK"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="background_splash" width="368" height="290"/>
+        <image name="background_splash2" width="526" height="598"/>
         <image name="loading_background" width="414" height="896"/>
+        <image name="spaghetti" width="166.5" height="166.5"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

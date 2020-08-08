@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var animatingIcon: UIImageView!
+    @IBOutlet weak var animationContainerView: UIView!
     
     // MARK: - Properties
     let backgroundImageView = UIImageView()
@@ -34,19 +36,38 @@ class LoginViewController: UIViewController {
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
 
-        ServiceUtil().setAuthBackground(view,backgroundImageView)
+//        ServiceUtil().setAuthBackground(view,backgroundImageView)
         containerView.layer.cornerRadius = 20
         containerView.clipsToBounds = true
+        
+        //making navigation bar transparent
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+//        setAnimationImage()
+        ServiceUtil().animateIcon(icon: animatingIcon, parentView: animationContainerView)
     }
     // Navigation Bar Management
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        navigationController?.setNavigationBarHidden(true, animated: animated)
+//    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        navigationController?.setNavigationBarHidden(false, animated: animated)
+//    }
+    
+//    func setAnimationImage(){
+//        animationContainerView.addSubview(imageIcon)
+//        imageIcon.translatesAutoresizingMaskIntoConstraints = false
+//        imageIcon.image = #imageLiteral(resourceName: "spaghetti")
+//        imageIcon.rightAnchor.constraint(equalTo: animationContainerView.leftAnchor, constant: 0).isActive = true
+//        imageIcon.bottomAnchor.constraint(equalTo: animationContainerView.topAnchor, constant: 0).isActive = true
+//        imageIcon.heightAnchor.constraint(equalToConstant: 80)
+//        imageIcon.widthAnchor.constraint(equalToConstant: 80)
+//    }
     
     // MARK: - IBActions & Objc Functions
     @IBAction func loginUser(_ sender: UIButton) {

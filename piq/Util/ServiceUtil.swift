@@ -93,4 +93,46 @@ class ServiceUtil{
         }
     }
     
+    func animateIcon(icon: UIImageView, parentView: UIView){
+        
+        var customTransform = icon.transform
+        customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
+        customTransform = customTransform.translatedBy(x: 100, y: 275)
+        customTransform = customTransform.rotated(by: .pi/8)
+        
+        UIView.animate(withDuration: 0.5, delay: 1, animations: {
+
+            icon.transform = customTransform
+
+        }, completion: { _ in
+            
+            customTransform = customTransform.translatedBy(x: 340, y: 90)
+            customTransform = customTransform.scaledBy(x: 1.8, y: 1.8)
+            customTransform = customTransform.rotated(by: -.pi/10)
+
+            UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                icon.transform = customTransform
+                
+            }, completion: { _ in
+                
+                UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                    icon.transform = customTransform.translatedBy(x: 100, y: -50)
+                    
+                }, completion: { _ in
+                    icon.transform = .identity
+                })
+                
+            })
+        })
+    }
+    
+//    func animateIconSecond(icon:UIImageView){
+//        UIView.animate(withDuration: 1, delay: 3, animations: {
+//
+//            icon.transform = CGAffineTransform(scaleX: 2, y: 2)
+//            icon.transform = CGAffineTransform(translationX: 150, y: 80)
+//
+//        }, completion: { _ in }
+//        )
+//    }
 }
