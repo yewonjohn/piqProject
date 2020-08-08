@@ -92,34 +92,43 @@ class ServiceUtil{
             )
         }
     }
-    
-    func animateIcon(icon: UIImageView, parentView: UIView){
+        var counter = 0
+    func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
+        
+        if(counter == imageArray.count){
+            counter = 0
+        }
+        icon.image = imageArray[counter]
+        counter = counter + 1
         
         var customTransform = icon.transform
         customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-        customTransform = customTransform.translatedBy(x: 100, y: 275)
+        customTransform = customTransform.translatedBy(x: 75, y: 245)
         customTransform = customTransform.rotated(by: .pi/8)
         
-        UIView.animate(withDuration: 0.5, delay: 1, animations: {
+        UIView.animate(withDuration: 0.6, delay: 1, animations: {
 
             icon.transform = customTransform
 
         }, completion: { _ in
             
-            customTransform = customTransform.translatedBy(x: 340, y: 90)
-            customTransform = customTransform.scaledBy(x: 1.8, y: 1.8)
+            customTransform = customTransform.translatedBy(x: 375, y: 30)
+            customTransform = customTransform.scaledBy(x: 2, y: 2)
             customTransform = customTransform.rotated(by: -.pi/10)
 
-            UIView.animate(withDuration: 1, delay: 0.5, animations: {
+            UIView.animate(withDuration: 0.6, delay: 1, animations: {
                 icon.transform = customTransform
                 
             }, completion: { _ in
                 
-                UIView.animate(withDuration: 1, delay: 0.5, animations: {
-                    icon.transform = customTransform.translatedBy(x: 100, y: -50)
+                customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
+                customTransform = customTransform.rotated(by: -.pi/3)
+                UIView.animate(withDuration: 0.6, delay: 1, animations: {
+                    icon.transform = customTransform.translatedBy(x: 300, y: 0)
                     
                 }, completion: { _ in
                     icon.transform = .identity
+                    self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
                 })
                 
             })

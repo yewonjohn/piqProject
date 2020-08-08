@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     let backgroundImageView = UIImageView()
     let userDefault = UserDefaults.standard
+    let service = ServiceUtil()
     
     // MARK: - View Controller Life Cycle
 
@@ -47,7 +48,7 @@ class LoginViewController: UIViewController {
         self.navigationController?.view.backgroundColor = UIColor.clear
         
 //        setAnimationImage()
-        ServiceUtil().animateIcon(icon: animatingIcon, parentView: animationContainerView)
+        service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
     }
     // Navigation Bar Management
 //    override func viewWillAppear(_ animated: Bool) {
