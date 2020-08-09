@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+//Model for Realm
 class FavoritesModel: Object {
     
     @objc dynamic var userEmail: String?

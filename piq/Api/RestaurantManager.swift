@@ -14,7 +14,7 @@ import CoreLocation
 protocol RestaurantManagerDelegate {
     func isLoading()
 }
-
+//Network calls to fetching yelp restaurant info
 class RestaurantManager{
     
     var delegate: RestaurantManagerDelegate?
@@ -136,7 +136,6 @@ class RestaurantManager{
             completion(businesses!)
         }
     }
-    
     
     
 }

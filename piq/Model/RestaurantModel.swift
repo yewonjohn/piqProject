@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Model to fetch from API
 struct RestaurantModel{
     
     var name : String?

@@ -5,6 +5,7 @@
 
 import Foundation
 
+//Model to get categories from json file
 struct CategoryModel: Codable{
     
     let alias : String?

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		441B917F24DC6981004B27D9 /* loadingIcon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 441B917E24DC6981004B27D9 /* loadingIcon.gif */; };
 		441B918124DC6F69004B27D9 /* loading_orange.gif in Resources */ = {isa = PBXBuildFile; fileRef = 441B918024DC6F69004B27D9 /* loading_orange.gif */; };
+		441B918524DF7637004B27D9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B918424DF7637004B27D9 /* ProfileViewController.swift */; };
+		441B918824DF7F92004B27D9 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B918724DF7F92004B27D9 /* AuthManager.swift */; };
 		442297FE24A394FD000F846A /* RestaurantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442297FD24A394FD000F846A /* RestaurantManager.swift */; };
 		442A123E24D1EFA8004E5D7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 442A123D24D1EFA8004E5D7A /* GoogleService-Info.plist */; };
 		44712D7B24A268650083B1AB /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44712D7924A268650083B1AB /* AuthTextField.swift */; };
@@ -77,6 +79,8 @@
 		3930B77CF6BE9323D001AF96 /* Pods_piq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_piq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		441B917E24DC6981004B27D9 /* loadingIcon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingIcon.gif; sourceTree = "<group>"; };
 		441B918024DC6F69004B27D9 /* loading_orange.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_orange.gif; sourceTree = "<group>"; };
+		441B918424DF7637004B27D9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		441B918724DF7F92004B27D9 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		442297FD24A394FD000F846A /* RestaurantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantManager.swift; sourceTree = "<group>"; };
 		442A123D24D1EFA8004E5D7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44712D7924A268650083B1AB /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
@@ -188,11 +192,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		44712D7524A267D80083B1AB /* Model */ = {
+		441B918624DF7F29004B27D9 /* Api */ = {
 			isa = PBXGroup;
 			children = (
 				44DA294124B8E7AB003974AE /* FavoritesManager.swift */,
 				442297FD24A394FD000F846A /* RestaurantManager.swift */,
+				441B918724DF7F92004B27D9 /* AuthManager.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		44712D7524A267D80083B1AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				4476A20C24A416600009719D /* RestaurantModel.swift */,
 				44DA293924B7E137003974AE /* FavoritesModel.swift */,
 				44E09CC724C8CF13009C3370 /* CategoryModel.swift */,
@@ -216,8 +228,7 @@
 				44E5451724D8B3A300237C34 /* AuthViewController.swift */,
 				44DA293C24B7E1EC003974AE /* Auth */,
 				44DA293D24B7E1F6003974AE /* MainMenu */,
-				44DA293F24B7E7A3003974AE /* Tab Bar Pages */,
-				4496385C24D75701007576E1 /* TabBarViewController.swift */,
+				44DA293F24B7E7A3003974AE /* Tab Bar */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -276,6 +287,7 @@
 				44D201BB249D76F70074F315 /* AppDelegate.swift */,
 				44D201BD249D76F70074F315 /* SceneDelegate.swift */,
 				44E79B5E24A2FDAA00DDC48E /* Util */,
+				441B918624DF7F29004B27D9 /* Api */,
 				44712D7524A267D80083B1AB /* Model */,
 				44712D7624A267E30083B1AB /* View */,
 				44712D7724A267EA0083B1AB /* Controller */,
@@ -335,13 +347,15 @@
 			path = CardsViews;
 			sourceTree = "<group>";
 		};
-		44DA293F24B7E7A3003974AE /* Tab Bar Pages */ = {
+		44DA293F24B7E7A3003974AE /* Tab Bar */ = {
 			isa = PBXGroup;
 			children = (
+				4496385C24D75701007576E1 /* TabBarViewController.swift */,
 				44E79B5A24A2E5C000DDC48E /* RestaurantViewController.swift */,
 				44DA293324B7B527003974AE /* FavoritesViewController.swift */,
+				441B918424DF7637004B27D9 /* ProfileViewController.swift */,
 			);
-			path = "Tab Bar Pages";
+			path = "Tab Bar";
 			sourceTree = "<group>";
 		};
 		44E79B5E24A2FDAA00DDC48E /* Util */ = {
@@ -623,6 +637,7 @@
 				44D201C0249D76F70074F315 /* LoginViewController.swift in Sources */,
 				44712D7B24A268650083B1AB /* AuthTextField.swift in Sources */,
 				44D201BC249D76F70074F315 /* AppDelegate.swift in Sources */,
+				441B918824DF7F92004B27D9 /* AuthManager.swift in Sources */,
 				44F9509424A56D0E0088748F /* RestaurantCardView.swift in Sources */,
 				44E79B5924A2E54200DDC48E /* RegisterViewController.swift in Sources */,
 				44F9509624A56D480088748F /* StackContainerView.swift in Sources */,
@@ -642,6 +657,7 @@
 				44E79B6224A2FEAB00DDC48E /* ServiceUtil.swift in Sources */,
 				442297FE24A394FD000F846A /* RestaurantManager.swift in Sources */,
 				44DA293A24B7E137003974AE /* FavoritesModel.swift in Sources */,
+				441B918524DF7637004B27D9 /* ProfileViewController.swift in Sources */,
 				44E5451824D8B3A300237C34 /* AuthViewController.swift in Sources */,
 				4476A20D24A416600009719D /* RestaurantModel.swift in Sources */,
 			);

@@ -23,7 +23,8 @@ class ServiceUtil{
         //        backgroundImageView.alpha = 0.5
         view.sendSubviewToBack(backgroundImageView)
     }
-    
+
+
     
     func animateButton(button: UIButton){
         button.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
@@ -92,14 +93,16 @@ class ServiceUtil{
             )
         }
     }
+    
         var counter = 0
+    
     func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
         
         if(counter == imageArray.count){
             counter = 0
         }
         icon.image = imageArray[counter]
-        counter = counter + 1
+        counter = counter + 2
         
         var customTransform = icon.transform
         customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
@@ -112,7 +115,7 @@ class ServiceUtil{
 
         }, completion: { _ in
             
-            customTransform = customTransform.translatedBy(x: 375, y: 30)
+            customTransform = customTransform.translatedBy(x: 375, y: 50)
             customTransform = customTransform.scaledBy(x: 2, y: 2)
             customTransform = customTransform.rotated(by: -.pi/10)
 
@@ -135,13 +138,176 @@ class ServiceUtil{
         })
     }
     
-//    func animateIconSecond(icon:UIImageView){
-//        UIView.animate(withDuration: 1, delay: 3, animations: {
+    var counter2 = 1
+//    var firstRun = true
+    func animateSecondIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
+        
+//        var delayNum : Double
 //
-//            icon.transform = CGAffineTransform(scaleX: 2, y: 2)
-//            icon.transform = CGAffineTransform(translationX: 150, y: 80)
+//        if(firstRun){
+//            delayNum = 2.0
+//            firstRun = false
+//        }else{
+//            delayNum = 1.0
+//        }
 //
-//        }, completion: { _ in }
-//        )
-//    }
+        if(counter == imageArray.count){
+            counter2 = 1
+        }
+        icon.image = imageArray[counter]
+        counter2 = counter2 + 2
+        
+        var customTransform = icon.transform
+        customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
+        customTransform = customTransform.translatedBy(x: 75, y: 245)
+        customTransform = customTransform.rotated(by: .pi/8)
+        
+        UIView.animate(withDuration: 0.6, delay: 2.5, animations: {
+
+            icon.transform = customTransform
+
+        }, completion: { _ in
+            
+            customTransform = customTransform.translatedBy(x: 375, y: 50)
+            customTransform = customTransform.scaledBy(x: 2, y: 2)
+            customTransform = customTransform.rotated(by: -.pi/10)
+
+            UIView.animate(withDuration: 0.6, delay: 1, animations: {
+                icon.transform = customTransform
+                
+            }, completion: { _ in
+                
+                customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
+                customTransform = customTransform.rotated(by: -.pi/3)
+                UIView.animate(withDuration: 0.6, delay: 1, animations: {
+                    icon.transform = customTransform.translatedBy(x: 300, y: 0)
+                    
+                }, completion: { _ in
+                    icon.transform = .identity
+                    self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+                })
+                
+            })
+        })
+    }
+    
+        func animateThirdIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
+            
+    //        var delayNum : Double
+    //
+    //        if(firstRun){
+    //            delayNum = 2.0
+    //            firstRun = false
+    //        }else{
+    //            delayNum = 1.0
+    //        }
+    //
+            if(counter == imageArray.count){
+                counter2 = 1
+            }
+            icon.image = imageArray[counter]
+            counter2 = counter2 + 2
+            
+            var customTransform = icon.transform
+            customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
+            customTransform = customTransform.translatedBy(x: 75, y: 245)
+            customTransform = customTransform.rotated(by: .pi/8)
+            
+            UIView.animate(withDuration: 0.6, delay: 4.15, animations: {
+
+                icon.transform = customTransform
+
+            }, completion: { _ in
+                
+                customTransform = customTransform.translatedBy(x: 375, y: 50)
+                customTransform = customTransform.scaledBy(x: 2, y: 2)
+                customTransform = customTransform.rotated(by: -.pi/10)
+
+                UIView.animate(withDuration: 0.6, delay: 1, animations: {
+                    icon.transform = customTransform
+                    
+                }, completion: { _ in
+                    
+                    customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
+                    customTransform = customTransform.rotated(by: -.pi/3)
+                    UIView.animate(withDuration: 0.6, delay: 1, animations: {
+                        icon.transform = customTransform.translatedBy(x: 300, y: 0)
+                        
+                    }, completion: { _ in
+                        icon.transform = .identity
+                        self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+                    })
+                    
+                })
+            })
+        }
+    
+    
+    func deselectButtons(button1: UIButton, button2:UIButton, button3:UIButton, button4:UIButton, buttonAll: UIButton, index: Int){
+        if(index == 1){
+            button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+        }
+        else if(index == 2){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+        }
+        else if(index == 3){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
+            button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+        }
+        else if(index == 4){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
+            button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+        }
+        else if(index == 5){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
+            button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+        }
+    }
+    
+    func deselectDistButtons(button1: UIButton, button2:UIButton, button3:UIButton, button4:UIButton, buttonAll: UIButton, index: Int){
+        if(index == 1){
+            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+            print("1")
+        }
+        else if(index == 2){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
+            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+        }
+        else if(index == 3){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
+            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+        }
+        else if(index == 4){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
+            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
+            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+        }
+        else if(index == 5){
+            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
+            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
+            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
+            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
+        }
+    }
 }

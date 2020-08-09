@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController{
     var categoriesArr = [CategoryModel]()
     var categoriesTitle = String()
     var dollarSign : String?
-    var distance : Int?
+    var distance : Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,13 +66,19 @@ extension TabBarViewController: UITabBarControllerDelegate{
         }
         
         if fromView != toView {
-            if(viewController == self.viewControllers?[1]){
-                UIView.transition(from: fromView, to: toView, duration: 0.5, options: [.transitionCurlUp], completion: nil)
+            
+            UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
 
-            }
-            else{
-                UIView.transition(from: fromView, to: toView, duration: 0.5, options: [.transitionCurlDown], completion: nil)
-            }
+//            if(viewController == self.viewControllers?[1]){
+//                UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
+//
+//            }
+//            if(viewController == self.viewControllers?[2]){
+//                UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
+//            }
+//            else{
+//                UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
+//            }
         }
         
         return true

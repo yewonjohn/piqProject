@@ -8,7 +8,6 @@
 
 import UIKit
 import IQKeyboardManager
-import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -17,16 +16,23 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var animatingIcon: UIImageView!
     @IBOutlet weak var animationContainerView: UIView!
-    
+    @IBOutlet weak var animatingIcon: UIImageView!
+    @IBOutlet weak var animatingIcon2: UIImageView!
+    @IBOutlet weak var animatingIcon3: UIImageView!
+
     // MARK: - Properties
-    let backgroundImageView = UIImageView()
     let userDefault = UserDefaults.standard
     let service = ServiceUtil()
+    let auth = AuthManager()
     
     // MARK: - View Controller Life Cycle
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +43,7 @@ class LoginViewController: UIViewController {
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
 
-//        ServiceUtil().setAuthBackground(view,backgroundImageView)
+        //
         containerView.layer.cornerRadius = 20
         containerView.clipsToBounds = true
         
@@ -47,47 +53,26 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
         
-//        setAnimationImage()
         service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
+        service.animateSecondIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
+        service.animateThirdIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("ViewWillDisappear")
+        animatingIcon.layer.removeAllAnimations()
+        animatingIcon2.layer.removeAllAnimations()
+        animatingIcon3.layer.removeAllAnimations()
+    }
+    
     @IBAction func goToRegister(_ sender: Any) {
         self.performSegue(withIdentifier: "loginToRegister", sender: self)
     }
-    // Navigation Bar Management
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
-//    }
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
-    
-//    func setAnimationImage(){
-//        animationContainerView.addSubview(imageIcon)
-//        imageIcon.translatesAutoresizingMaskIntoConstraints = false
-//        imageIcon.image = #imageLiteral(resourceName: "spaghetti")
-//        imageIcon.rightAnchor.constraint(equalTo: animationContainerView.leftAnchor, constant: 0).isActive = true
-//        imageIcon.bottomAnchor.constraint(equalTo: animationContainerView.topAnchor, constant: 0).isActive = true
-//        imageIcon.heightAnchor.constraint(equalToConstant: 80)
-//        imageIcon.widthAnchor.constraint(equalToConstant: 80)
-//    }
     
     // MARK: - IBActions & Objc Functions
     @IBAction func loginUser(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text{
-            Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
-                if let e = error{
-                    let alert = UIAlertController(title: "uh oh", message: e.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in}))
-                    self.present(alert, animated: true, completion: nil)
-                } else {
-                    self.userDefault.set(true, forKey: "usersignedin")
-                    self.userDefault.synchronize()
-
-                    self.performSegue(withIdentifier: "LoginToMain", sender: self)
-                }
-            }
+            auth.login(viewController: self, email: email, password: password)
         }
     }
 }

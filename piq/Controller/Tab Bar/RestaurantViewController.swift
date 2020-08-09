@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import FirebaseAuth
 import NVActivityIndicatorView
 
 class RestaurantViewController: UIViewController {
@@ -26,7 +25,6 @@ class RestaurantViewController: UIViewController {
     var presentTransition: UIViewControllerAnimatedTransitioning?
     var dismissTransition: UIViewControllerAnimatedTransitioning?
 
-    
     let userDefault = UserDefaults.standard
 
     var viewModelData = [RestaurantModel]()
@@ -35,7 +33,8 @@ class RestaurantViewController: UIViewController {
     var categoriesArr = [CategoryModel]()
     var categoriesTitle = String()
     var dollarSign : String?
-    var distance : Int?
+    var distance : Double?
+    var finalDist : Int?
     
     var locationManager = CLLocationManager()
     let backgroundImageView = UIImageView()
@@ -66,7 +65,6 @@ class RestaurantViewController: UIViewController {
         emptyCardsLabel.isHidden = true
         setPiqTitle()
         setFilterButton()
-        setSignOut()
         setResetButton()
         setShadowView()
         setLoadingView()
@@ -91,11 +89,11 @@ class RestaurantViewController: UIViewController {
         if(dollarSign == "0" || dollarSign == ""){
             dollarSign = nil
         }
-        if(distance == 0){
-            distance = nil
+        if(distance == 0.0){
+            finalDist = nil
         } else{
             if let dist = distance{
-                distance = dist * 1609
+                finalDist = Int(dist * 1609)
             }
         }
         
@@ -108,7 +106,7 @@ class RestaurantViewController: UIViewController {
             currentLoc = locationManager.location
             
             //Calling API for all the Cards Data using current location
-            restaurantAPI.getLocalRestaurants(distance: distance, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
+            restaurantAPI.getLocalRestaurants(distance: finalDist, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
                 self.viewModelData = businessModelArray
                 self.stackContainer.dataSource = self
                 //stop loading animation
@@ -164,22 +162,6 @@ class RestaurantViewController: UIViewController {
         filterButton.isUserInteractionEnabled = true
 
     }
-    func setSignOut(){
-        self.view.addSubview(signOutButton)
-        let symbol = UIImage(systemName: "escape")
-        signOutButton.setImage(symbol, for: .normal)
-        let configuration = UIImage.SymbolConfiguration(pointSize: 30.0, weight: .regular, scale: .default)
-        signOutButton.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
-        
-        signOutButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        signOutButton.translatesAutoresizingMaskIntoConstraints = false
-        signOutButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        signOutButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        signOutButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 71).isActive = true
-        signOutButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 25).isActive = true
-        signOutButton.addTarget(self, action: #selector(logoutUser), for: .touchUpInside)
-        signOutButton.isUserInteractionEnabled = true
-    }
     func setResetButton(){
         self.view.addSubview(resetButton)
         let symbol = UIImage(systemName: "arrow.2.circlepath")
@@ -233,26 +215,7 @@ class RestaurantViewController: UIViewController {
         emptyCardsLabel.isHidden = true
         service.animateResetButton(button: resetButton)
     }
-    @objc func logoutUser() {
-        
-        let alert = UIAlertController(title: "Logout?", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes, logout", style: .destructive, handler: { action in
-              switch action.style{
-              case .default:
-                print("cancel")
-              case .cancel:
-                print("cancel")
-              case .destructive:
-                do { try Auth.auth().signOut() }
-                catch { print("already logged out") }
-                self.userDefault.set(false, forKey: "usersignedin")
-                self.userDefault.synchronize()
-                self.navigationController?.popToRootViewController(animated: true)
-            }}))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
-        self.present(alert, animated: true, completion: nil)
 
-    }
 }
 //MARK: - DataSource for StackContainerView (Delegate)
 

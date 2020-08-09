@@ -15,7 +15,6 @@ class HomePageViewController: UIViewController{
     
     
     // MARK: - Outlets
-    @IBOutlet weak var gestureBounds: UIView!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
@@ -23,6 +22,21 @@ class HomePageViewController: UIViewController{
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var findFoodButton: FoodButton!
     @IBOutlet weak var piqLabel: UILabel!
+    
+    @IBOutlet weak var costStackView: UIStackView!
+    @IBOutlet weak var costButton1: UIButton!
+    @IBOutlet weak var costButton2: UIButton!
+    @IBOutlet weak var costButton3: UIButton!
+    @IBOutlet weak var costButton4: UIButton!
+    @IBOutlet weak var costButtonAll: UIButton!
+    
+    @IBOutlet weak var distanceStackView: UIStackView!
+    @IBOutlet weak var walkButton: UIButton!
+    @IBOutlet weak var bikeButton: UIButton!
+    @IBOutlet weak var carButton: UIButton!
+    @IBOutlet weak var farButton: UIButton!
+    @IBOutlet weak var anyButton: UIButton!
+    
     
     
     // MARK: - Properties
@@ -33,11 +47,12 @@ class HomePageViewController: UIViewController{
     var categoriesImages = HomePage.categoriesUIImages
     var titleParam = String()
     var dollarSignsParam = String()
-    var distanceParam = Int()
+    var distanceParam = Double()
     let favoritesVC = FavoritesViewController()
     var sidePresented = false
     
     let userDefault = UserDefaults.standard
+    let service = ServiceUtil()
     
     // MARK: - View Controller Life Cycle
     
@@ -73,9 +88,7 @@ class HomePageViewController: UIViewController{
             cancelButton.isHidden = false
             piqLabel.isHidden = true
             view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismiss)))
-            
-            print(gestureBounds.isUserInteractionEnabled)
-            
+                        
 //            let myScreenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action:#selector(handleDismiss))
 //            myScreenEdgePanGestureRecognizer.delegate = self
             
@@ -121,6 +134,71 @@ class HomePageViewController: UIViewController{
         }
     }
     
+    // MARK: - button onclicks
+    @IBAction func costButtonClicked(_ sender: UIButton) {
+        switch sender {
+        case costButton1:
+            costButton1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeft"), for: .normal)
+            costButton1.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            dollarSignsParam = "1"
+            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 1)
+        case costButton2:
+            costButton2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddle"), for: .normal)
+            costButton2.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            dollarSignsParam = "2"
+            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 2)
+        case costButton3:
+            costButton3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddle"), for: .normal)
+            costButton3.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            dollarSignsParam = "3"
+            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 3)
+        case costButton4:
+            costButton4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddle"), for: .normal)
+            costButton4.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            dollarSignsParam = "4"
+            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 4)
+        case costButtonAll:
+            costButtonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRight"), for: .normal)
+            costButtonAll.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            dollarSignsParam = "0"
+            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 5)
+        default:
+            dollarSignsParam = "0"
+            print("defualt")
+        }
+    }
+    
+    @IBAction func distanceButtonSelected(_ sender: UIButton) {
+        switch sender {
+        case walkButton:
+            walkButton.setBackgroundImage(#imageLiteral(resourceName: "walk_selected"), for: .normal)
+            distanceParam = 0.5
+            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 1)
+        case bikeButton:
+            bikeButton.setBackgroundImage(#imageLiteral(resourceName: "bike_selected"), for: .normal)
+            distanceParam = 1.0
+            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 2)
+        case carButton:
+            carButton.setBackgroundImage(#imageLiteral(resourceName: "drive_selected"), for: .normal)
+            distanceParam = 1.5
+            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 3)
+        case farButton:
+            farButton.setBackgroundImage(#imageLiteral(resourceName: "far_selected"), for: .normal)
+            distanceParam = 2.0
+            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 4)
+        case anyButton:
+            anyButton.setBackgroundImage(#imageLiteral(resourceName: "any_selected"), for: .normal)
+            distanceParam = 2.5
+            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 5)
+        default:
+            distanceParam = 0.0
+            print("defualt")
+        }
+        
+    }
+    
+    
+    
     
     //MARK: - Segue
     @IBAction func goToCards(_ sender: UIButton) {
@@ -158,72 +236,7 @@ class HomePageViewController: UIViewController{
 
 //MARK: -- 	Search Configuration
 extension HomePageViewController{
-    
-    @IBAction func costSliderChanged(_ sender: UISlider) {
-        let currentValue = Int(sender.value)
-        switch currentValue {
-        case 0:
-            self.dollarLabel.text = ""
-            dollarSignsParam = "0"
-        case 1:
-            self.dollarLabel.text = "$"
-            dollarSignsParam = "1"
-        case 2:
-            self.dollarLabel.text = "$$"
-            dollarSignsParam = "2"
-        case 3:
-            self.dollarLabel.text = "$$$"
-            dollarSignsParam = "3"
-        case 4:
-            self.dollarLabel.text = "$$$$"
-            dollarSignsParam = "4"
-        default:
-            self.dollarLabel.text = ""
-            dollarSignsParam = "0"
-        }
-    }
-    
-    @IBAction func distanceSliderMoved(_ sender: UISlider) {
-        let currentValue = Int(sender.value)
-        switch currentValue {
-        case 0:
-            self.distanceLabel.text = ""
-            distanceParam = 0
-        case 1:
-            self.distanceLabel.text = "1 mi"
-            distanceParam = 1
-        case 2:
-            self.distanceLabel.text = "2 mi"
-            distanceParam = 2
-        case 3:
-            self.distanceLabel.text = "3 mi"
-            distanceParam = 3
-        case 4:
-            self.distanceLabel.text = "4 mi"
-            distanceParam = 4
-        case 5:
-            self.distanceLabel.text = "5 mi"
-            distanceParam = 5
-        case 6:
-            self.distanceLabel.text = "6 mi"
-            distanceParam = 6
-        case 7:
-            self.distanceLabel.text = "7 mi"
-            distanceParam = 7
-        case 8:
-            self.distanceLabel.text = "8 mi"
-            distanceParam = 8
-        case 9:
-            self.distanceLabel.text = "9 mi"
-            distanceParam = 9
-        case 10:
-            self.distanceLabel.text = "10 mi"
-            distanceParam = 10
-        default:
-            self.distanceLabel.text = ""
-            distanceParam = 0
-        }
-    }
+
     private func readLocalFile(forName name: String) -> Data? {
         do {
             if let bundlePath = Bundle.main.path(forResource: name, ofType: "json"),

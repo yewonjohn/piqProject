@@ -11,7 +11,6 @@ import Firebase
 import FirebaseFirestore
 import RealmSwift
 
-//DEFINE PROTOCOL FOR DELEGATE FRAMEWORK
 protocol FavoritesManagerDelegate {
     func didFetchFavorites(favorites: [FavoritesModel]?)
     //    func didFetchFavoritesLocally(favorites: Results<FavoritesModel>)
@@ -20,6 +19,7 @@ protocol FavoritesManagerDelegate {
     func isLoading()
 }
 
+//network calls to firebase (database) for favorites objects
 class FavoritesManager{
     //MARK: - Properties
     

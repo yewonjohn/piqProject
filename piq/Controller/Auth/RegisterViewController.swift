@@ -8,17 +8,25 @@
 
 import UIKit
 import IQKeyboardManager
-import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var animationContainer: UIView!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var nameTextField: AuthTextField!
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var passwordValidateTextField: AuthTextField!
     
+    @IBOutlet weak var animationIcon: UIImageView!
+    @IBOutlet weak var animationIcon2: UIImageView!
+    @IBOutlet weak var animationIcon3: UIImageView!
+    
+    
     // MARK: - Properties
-    let backgroundImageView = UIImageView()
+    let auth = AuthManager()
+    let service = ServiceUtil()
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
@@ -26,35 +34,40 @@ class RegisterViewController: UIViewController {
         
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
-
-        //set background
-        ServiceUtil().setAuthBackground(view,backgroundImageView)
+        
+        containerView.layer.cornerRadius = 20
+        containerView.clipsToBounds = true
         
         //making navigation bar transparent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: LoginPage.animationIcons)
+        service.animateSecondIcon(icon: animationIcon2, parentView: animationContainer, imageArray: LoginPage.animationIcons)
+        service.animateThirdIcon(icon: animationIcon3, parentView: animationContainer, imageArray: LoginPage.animationIcons)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("ViewWillDisappear")
+        animationIcon.layer.removeAllAnimations()
+        animationIcon2.layer.removeAllAnimations()
+        animationIcon3.layer.removeAllAnimations()
     }
     // MARK: - IBActions & Objc Functions
+    
+    @IBAction func goToLogin(_ sender: Any) {
+    }
+    
     @IBAction func register(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text, let passwordValidate = passwordValidateTextField.text{
             if(password == passwordValidate){
-                
-                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                    if let e = error{
-                        let alert = UIAlertController(title: "uh oh", message: e.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in }))
-                        self.present(alert, animated: true, completion: nil)
-                    } else {
-                        self.performSegue(withIdentifier: "RegisterToMain", sender: self)
-                    }
-                }
+                auth.register(viewController: self, email: email, password: password, name: nameTextField.text ?? "")
             }else {
                 let alert = UIAlertController(title: "uh oh", message: "password doesn't match!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in}))
                 self.present(alert, animated: true, completion: nil)
-                
             }
         }
     }
