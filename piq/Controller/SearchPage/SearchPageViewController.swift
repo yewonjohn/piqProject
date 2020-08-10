@@ -260,14 +260,12 @@ extension SearchPageViewController{
 //MARK: - Categories Collection Delegates
 extension SearchPageViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            print("add")
             categoriesIndexArr.append(indexPath.row)
         
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if(categoriesIndexArr.contains(indexPath.row)){
-            print("remove")
             if let index = categoriesIndexArr.firstIndex(of: indexPath.row) {
                 categoriesIndexArr.remove(at: index)
             }
@@ -275,15 +273,18 @@ extension SearchPageViewController: UICollectionViewDelegate{
     }
     //not a delegate function
     func setCategoriesTitles(){
-        if(categoriesIndexArr.contains(0)){
+        print(categoriesIndexArr)
+        if(categoriesIndexArr.contains(0) || categoriesIndexArr.isEmpty){
             categoriesTitlesParam = ""
         } else{
-            for index in 1...categoriesIndexArr.count {
+            for index in 0...categoriesIndexArr.count-1 {
                 print(index)
-                if(index == 1){
-                    categoriesTitlesParam += categoriesTitles[index]
+                if(index == 0){
+                    let tempIndex = categoriesIndexArr[index]
+                    categoriesTitlesParam += categoriesTitles[tempIndex]
                 } else{
-                    categoriesTitlesParam += ","+categoriesTitles[index]
+                    let tempIndex = categoriesIndexArr[index]
+                    categoriesTitlesParam += ","+categoriesTitles[tempIndex]
                 }
             }
         }

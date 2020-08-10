@@ -139,19 +139,9 @@ class ServiceUtil{
     }
     
     var counter2 = 1
-//    var firstRun = true
     func animateSecondIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
         
-//        var delayNum : Double
-//
-//        if(firstRun){
-//            delayNum = 2.0
-//            firstRun = false
-//        }else{
-//            delayNum = 1.0
-//        }
-//
-        if(counter == imageArray.count){
+        if(counter2 == imageArray.count){
             counter2 = 1
         }
         icon.image = imageArray[counter]
@@ -190,20 +180,11 @@ class ServiceUtil{
             })
         })
     }
-    
+        var counter3 = 2
         func animateThirdIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
             
-    //        var delayNum : Double
-    //
-    //        if(firstRun){
-    //            delayNum = 2.0
-    //            firstRun = false
-    //        }else{
-    //            delayNum = 1.0
-    //        }
-    //
-            if(counter == imageArray.count){
-                counter2 = 1
+            if(counter3 == imageArray.count){
+                counter3 = 2
             }
             icon.image = imageArray[counter]
             counter2 = counter2 + 2

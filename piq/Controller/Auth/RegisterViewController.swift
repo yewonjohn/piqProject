@@ -44,9 +44,9 @@ class RegisterViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
         
-        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: LoginPage.animationIcons)
-        service.animateSecondIcon(icon: animationIcon2, parentView: animationContainer, imageArray: LoginPage.animationIcons)
-        service.animateThirdIcon(icon: animationIcon3, parentView: animationContainer, imageArray: LoginPage.animationIcons)
+        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons)
+        service.animateSecondIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons)
+        service.animateThirdIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

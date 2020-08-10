@@ -53,9 +53,9 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
         
-        service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
-        service.animateSecondIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
-        service.animateThirdIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: LoginPage.animationIcons)
+        service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: AuthPage.animationIcons)
+        service.animateSecondIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: AuthPage.animationIcons)
+        service.animateThirdIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: AuthPage.animationIcons)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
