@@ -11,7 +11,7 @@ import IQKeyboardManager
 import FirebaseAuth
 import SwiftyJSON
 
-class HomePageViewController: UIViewController{
+class FilterPageViewController: UIViewController{
     
     
     // MARK: - Outlets
@@ -63,9 +63,6 @@ class HomePageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-//        IQKeyboardManager.shared().isEnabled = true
-//        self.hideKeyboardWhenTappedAround()
         
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
@@ -79,7 +76,8 @@ class HomePageViewController: UIViewController{
         categoryCollectionView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
         categoryCollectionView.allowsSelection = true
         categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
-
+        
+        dollarSignsParam = "0"
     }
     override func viewWillLayoutSubviews() {
         switch sidePresented {
@@ -87,11 +85,9 @@ class HomePageViewController: UIViewController{
             findFoodButton.setTitle("Apply", for: .normal)
             cancelButton.isHidden = false
             piqLabel.isHidden = true
-            view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismiss)))
-                        
-//            let myScreenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action:#selector(handleDismiss))
-//            myScreenEdgePanGestureRecognizer.delegate = self
-            
+            let edgePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
+//            edgePan.edges = .left
+            view.addGestureRecognizer(edgePan)
             
         default:
             findFoodButton.setTitle("Find my meal!", for: .normal)
@@ -104,18 +100,19 @@ class HomePageViewController: UIViewController{
     @objc func handleDismiss(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .changed:
-            if(viewTranslation.x < 0){
-//                self.view.transform = .identity
-                UIView.animate(withDuration: 0.10, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    self.view.transform = .identity
-                })
-            }
-            print("changed")
-            print("changed:\(viewTranslation.x)")
+//            if(viewTranslation.x < 0){
+//                UIView.animate(withDuration: 0.01, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, animations: {
+//                    self.view.transform = .identity
+//                })
+//            }
+
             viewTranslation = sender.translation(in: view)
+            
+            if(viewTranslation.x > 0){
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.view.transform = CGAffineTransform(translationX: self.viewTranslation.x, y: 0)
             })
+            }
         case .ended:
             if viewTranslation.x < 75 {
                 print("ended")
@@ -141,27 +138,27 @@ class HomePageViewController: UIViewController{
             costButton1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeft"), for: .normal)
             costButton1.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             dollarSignsParam = "1"
-            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 1)
+            service.deselectButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 1)
         case costButton2:
             costButton2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddle"), for: .normal)
             costButton2.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             dollarSignsParam = "2"
-            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 2)
+            service.deselectButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 2)
         case costButton3:
             costButton3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddle"), for: .normal)
             costButton3.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             dollarSignsParam = "3"
-            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 3)
+            service.deselectButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 3)
         case costButton4:
             costButton4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddle"), for: .normal)
             costButton4.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             dollarSignsParam = "4"
-            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 4)
+            service.deselectButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 4)
         case costButtonAll:
             costButtonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRight"), for: .normal)
             costButtonAll.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             dollarSignsParam = "0"
-            service.deselectDistButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 5)
+            service.deselectButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 5)
         default:
             dollarSignsParam = "0"
             print("defualt")
@@ -173,23 +170,24 @@ class HomePageViewController: UIViewController{
         case walkButton:
             walkButton.setBackgroundImage(#imageLiteral(resourceName: "walk_selected"), for: .normal)
             distanceParam = 0.5
-            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 1)
+            service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 1)
         case bikeButton:
             bikeButton.setBackgroundImage(#imageLiteral(resourceName: "bike_selected"), for: .normal)
             distanceParam = 1.0
-            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 2)
+            service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 2)
         case carButton:
-            carButton.setBackgroundImage(#imageLiteral(resourceName: "drive_selected"), for: .normal)
+            carButton.setBackgroundImage(#imageLiteral(resourceName: "car_selected"), for: .normal)
             distanceParam = 1.5
-            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 3)
+            service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 3)
         case farButton:
             farButton.setBackgroundImage(#imageLiteral(resourceName: "far_selected"), for: .normal)
             distanceParam = 2.0
-            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 4)
+            service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 4)
         case anyButton:
-            anyButton.setBackgroundImage(#imageLiteral(resourceName: "any_selected"), for: .normal)
-            distanceParam = 2.5
-            service.deselectButtons(button1: walkButton, button2: bikeButton, button3: carButton, button4: farButton, buttonAll: anyButton, index: 5)
+            anyButton.setBackgroundImage(#imageLiteral(resourceName: "buttonRight"), for: .normal)
+            anyButton.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            distanceParam = 0.0
+            service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 5)
         default:
             distanceParam = 0.0
             print("defualt")
@@ -229,13 +227,10 @@ class HomePageViewController: UIViewController{
         performSegue(withIdentifier: "unwindToCards", sender: self)
         //setting shadowView in RestaurantVC to hidden
     }
-    
-    //MARK: - Layout Config
-
 }
 
 //MARK: -- 	Search Configuration
-extension HomePageViewController{
+extension FilterPageViewController{
 
     private func readLocalFile(forName name: String) -> Data? {
         do {
@@ -259,20 +254,9 @@ extension HomePageViewController{
         }
     }
 }
-////MARK: - Keyboard Management
-//extension HomePageViewController {
-//    func hideKeyboardWhenTappedAround() {
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomePageViewController.dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tap)
-//    }
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-//}
 
 //MARK: - Categories Collection Delegates
-extension HomePageViewController: UICollectionViewDelegate{
+extension FilterPageViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         titleParam = categoriesTitles[indexPath.row]
     }
@@ -280,7 +264,7 @@ extension HomePageViewController: UICollectionViewDelegate{
 }
 
 //MARK: - Categories Collection Data Source
-extension HomePageViewController: UICollectionViewDataSource{
+extension FilterPageViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoriesTitles.count
     }
@@ -296,7 +280,7 @@ extension HomePageViewController: UICollectionViewDataSource{
 }
 
 //MARK: - Categories Collection Delegate Flow Layout
-extension HomePageViewController: UICollectionViewDelegateFlowLayout{
+extension FilterPageViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 123, height: 180)

@@ -249,65 +249,94 @@ class ServiceUtil{
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            
+            button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            buttonAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+
         }
         else if(index == 2){
             button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            
+            button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            buttonAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
         else if(index == 3){
             button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            
+            button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            buttonAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
         else if(index == 4){
             button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            
+            button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            buttonAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
         else if(index == 5){
             button1.setBackgroundImage(#imageLiteral(resourceName: "buttonLeftWhite"), for: .normal)
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
+            
+            button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+            button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
     }
     
-    func deselectDistButtons(button1: UIButton, button2:UIButton, button3:UIButton, button4:UIButton, buttonAll: UIButton, index: Int){
+    func deselectDistButtons(buttonDist1: UIButton, buttonDist2:UIButton, buttonDist3:UIButton, buttonDist4:UIButton, buttonDistAll: UIButton, index: Int){
         if(index == 1){
-            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
-            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
-            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
-            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+            buttonDist2.setBackgroundImage(#imageLiteral(resourceName: "bike_unselected"), for: .normal)
+            buttonDist3.setBackgroundImage(#imageLiteral(resourceName: "car_unselected"), for: .normal)
+            buttonDist4.setBackgroundImage(#imageLiteral(resourceName: "far_unselected"), for: .normal)
+            buttonDistAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            buttonDistAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             print("1")
         }
         else if(index == 2){
-            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
-            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
-            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
-            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
-            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+            buttonDist1.setBackgroundImage(#imageLiteral(resourceName: "walk_unselected"), for: .normal)
+            buttonDist3.setBackgroundImage(#imageLiteral(resourceName: "car_unselected"), for: .normal)
+            buttonDist4.setBackgroundImage(#imageLiteral(resourceName: "far_unselected"), for: .normal)
+            buttonDistAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            buttonDistAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
         else if(index == 3){
-            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
-            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
-            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
-            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+            buttonDist1.setBackgroundImage(#imageLiteral(resourceName: "walk_unselected"), for: .normal)
+            buttonDist2.setBackgroundImage(#imageLiteral(resourceName: "bike_unselected"), for: .normal)
+            buttonDist4.setBackgroundImage(#imageLiteral(resourceName: "far_unselected"), for: .normal)
+            buttonDistAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            buttonDistAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
         else if(index == 4){
-            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
-            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
-            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
-            buttonAll.setBackgroundImage(#imageLiteral(resourceName: "any_un"), for: .normal)
+            buttonDist1.setBackgroundImage(#imageLiteral(resourceName: "walk_unselected"), for: .normal)
+            buttonDist2.setBackgroundImage(#imageLiteral(resourceName: "bike_unselected"), for: .normal)
+            buttonDist3.setBackgroundImage(#imageLiteral(resourceName: "car_unselected"), for: .normal)
+            buttonDistAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
+            buttonDistAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
         else if(index == 5){
-            button1.setBackgroundImage(#imageLiteral(resourceName: "walk_un"), for: .normal)
-            button2.setBackgroundImage(#imageLiteral(resourceName: "bike_un"), for: .normal)
-            button3.setBackgroundImage(#imageLiteral(resourceName: "drive_un"), for: .normal)
-            button4.setBackgroundImage(#imageLiteral(resourceName: "far_un"), for: .normal)
+            buttonDist1.setBackgroundImage(#imageLiteral(resourceName: "walk_unselected"), for: .normal)
+            buttonDist2.setBackgroundImage(#imageLiteral(resourceName: "bike_unselected"), for: .normal)
+            buttonDist3.setBackgroundImage(#imageLiteral(resourceName: "car_unselected"), for: .normal)
+            buttonDist4.setBackgroundImage(#imageLiteral(resourceName: "far_unselected"), for: .normal)
         }
     }
 }

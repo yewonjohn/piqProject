@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		441B917F24DC6981004B27D9 /* loadingIcon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 441B917E24DC6981004B27D9 /* loadingIcon.gif */; };
-		441B918124DC6F69004B27D9 /* loading_orange.gif in Resources */ = {isa = PBXBuildFile; fileRef = 441B918024DC6F69004B27D9 /* loading_orange.gif */; };
 		441B918524DF7637004B27D9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B918424DF7637004B27D9 /* ProfileViewController.swift */; };
 		441B918824DF7F92004B27D9 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B918724DF7F92004B27D9 /* AuthManager.swift */; };
 		442297FE24A394FD000F846A /* RestaurantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442297FD24A394FD000F846A /* RestaurantManager.swift */; };
@@ -17,6 +15,8 @@
 		44712D7C24A268650083B1AB /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44712D7A24A268650083B1AB /* LoginButton.swift */; };
 		44712D7E24A26CF40083B1AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44712D7D24A26CF40083B1AB /* Constants.swift */; };
 		4476A20D24A416600009719D /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4476A20C24A416600009719D /* RestaurantModel.swift */; };
+		448D78EA24E0D052006D55C3 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D78E824E0D052006D55C3 /* SettingsCell.swift */; };
+		448D78EB24E0D052006D55C3 /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448D78E924E0D052006D55C3 /* SettingsCell.xib */; };
 		4496385B24D68DCE007576E1 /* FoodButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496385A24D68DCE007576E1 /* FoodButton.swift */; };
 		4496385D24D75701007576E1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496385C24D75701007576E1 /* TabBarViewController.swift */; };
 		4496385E24D76516007576E1 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496385524D6896D007576E1 /* Montserrat-Regular.ttf */; };
@@ -25,7 +25,7 @@
 		4496386124D76516007576E1 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496385924D68A3C007576E1 /* Montserrat-Light.ttf */; };
 		4496386324D76582007576E1 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496386224D76563007576E1 /* Montserrat-Medium.ttf */; };
 		4496386D24D7AE95007576E1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496386C24D7AE95007576E1 /* CategoryCell.swift */; };
-		44A6E33924B5194B008E4D19 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6E33824B5194B008E4D19 /* HomePageViewController.swift */; };
+		44A6E33924B5194B008E4D19 /* FilterPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6E33824B5194B008E4D19 /* FilterPageViewController.swift */; };
 		44D201BC249D76F70074F315 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BB249D76F70074F315 /* AppDelegate.swift */; };
 		44D201BE249D76F70074F315 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BD249D76F70074F315 /* SceneDelegate.swift */; };
 		44D201C0249D76F70074F315 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BF249D76F70074F315 /* LoginViewController.swift */; };
@@ -77,8 +77,6 @@
 		30A574ACA535EEBFEA4C77CF /* Pods_piq_piqUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_piq_piqUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32267B3926139A8DE4558F04 /* Pods-piq-piqUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-piq-piqUITests.release.xcconfig"; path = "Target Support Files/Pods-piq-piqUITests/Pods-piq-piqUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3930B77CF6BE9323D001AF96 /* Pods_piq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_piq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		441B917E24DC6981004B27D9 /* loadingIcon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingIcon.gif; sourceTree = "<group>"; };
-		441B918024DC6F69004B27D9 /* loading_orange.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_orange.gif; sourceTree = "<group>"; };
 		441B918424DF7637004B27D9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		441B918724DF7F92004B27D9 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		442297FD24A394FD000F846A /* RestaurantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantManager.swift; sourceTree = "<group>"; };
@@ -87,6 +85,8 @@
 		44712D7A24A268650083B1AB /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		44712D7D24A26CF40083B1AB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4476A20C24A416600009719D /* RestaurantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
+		448D78E824E0D052006D55C3 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		448D78E924E0D052006D55C3 /* SettingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCell.xib; sourceTree = "<group>"; };
 		4496385524D6896D007576E1 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		4496385724D68A1C007576E1 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		4496385824D68A2C007576E1 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		4496385C24D75701007576E1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4496386224D76563007576E1 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		4496386C24D7AE95007576E1 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		44A6E33824B5194B008E4D19 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		44A6E33824B5194B008E4D19 /* FilterPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPageViewController.swift; sourceTree = "<group>"; };
 		44D201B8249D76F70074F315 /* piq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = piq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D201BB249D76F70074F315 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44D201BD249D76F70074F315 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -225,7 +225,6 @@
 		44712D7724A267EA0083B1AB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				44E5451724D8B3A300237C34 /* AuthViewController.swift */,
 				44DA293C24B7E1EC003974AE /* Auth */,
 				44DA293D24B7E1F6003974AE /* MainMenu */,
 				44DA293F24B7E7A3003974AE /* Tab Bar */,
@@ -243,6 +242,8 @@
 				44712D7A24A268650083B1AB /* LoginButton.swift */,
 				4496385A24D68DCE007576E1 /* FoodButton.swift */,
 				4496386C24D7AE95007576E1 /* CategoryCell.swift */,
+				448D78E824E0D052006D55C3 /* SettingsCell.swift */,
+				448D78E924E0D052006D55C3 /* SettingsCell.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -292,8 +293,6 @@
 				44712D7624A267E30083B1AB /* View */,
 				44712D7724A267EA0083B1AB /* Controller */,
 				44E79B5C24A2FC0F00DDC48E /* Assets.xcassets */,
-				441B917E24DC6981004B27D9 /* loadingIcon.gif */,
-				441B918024DC6F69004B27D9 /* loading_orange.gif */,
 				44D201C6249D76F90074F315 /* LaunchScreen.storyboard */,
 				4496385624D68978007576E1 /* Fonts */,
 				44E09CC524C8CDA7009C3370 /* categories.json */,
@@ -324,6 +323,7 @@
 		44DA293C24B7E1EC003974AE /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				44E5451724D8B3A300237C34 /* AuthViewController.swift */,
 				44D201BF249D76F70074F315 /* LoginViewController.swift */,
 				44E79B5824A2E54200DDC48E /* RegisterViewController.swift */,
 			);
@@ -333,7 +333,7 @@
 		44DA293D24B7E1F6003974AE /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
-				44A6E33824B5194B008E4D19 /* HomePageViewController.swift */,
+				44A6E33824B5194B008E4D19 /* FilterPageViewController.swift */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -479,12 +479,11 @@
 			files = (
 				4496386324D76582007576E1 /* Montserrat-Medium.ttf in Resources */,
 				4496385E24D76516007576E1 /* Montserrat-Regular.ttf in Resources */,
-				441B918124DC6F69004B27D9 /* loading_orange.gif in Resources */,
 				4496385F24D76516007576E1 /* Montserrat-Bold.ttf in Resources */,
 				4496386024D76516007576E1 /* Montserrat-SemiBold.ttf in Resources */,
 				4496386124D76516007576E1 /* Montserrat-Light.ttf in Resources */,
 				44DA293724B7D359003974AE /* FavoritesCell.xib in Resources */,
-				441B917F24DC6981004B27D9 /* loadingIcon.gif in Resources */,
+				448D78EB24E0D052006D55C3 /* SettingsCell.xib in Resources */,
 				44E09CC624C8CDA7009C3370 /* categories.json in Resources */,
 				44D201C8249D76F90074F315 /* LaunchScreen.storyboard in Resources */,
 				44D201C3249D76F70074F315 /* Main.storyboard in Resources */,
@@ -653,7 +652,8 @@
 				44DA293824B7D359003974AE /* FavoritesCell.swift in Sources */,
 				4496385D24D75701007576E1 /* TabBarViewController.swift in Sources */,
 				44E79B5724A2E0F900DDC48E /* SignUpButton.swift in Sources */,
-				44A6E33924B5194B008E4D19 /* HomePageViewController.swift in Sources */,
+				44A6E33924B5194B008E4D19 /* FilterPageViewController.swift in Sources */,
+				448D78EA24E0D052006D55C3 /* SettingsCell.swift in Sources */,
 				44E79B6224A2FEAB00DDC48E /* ServiceUtil.swift in Sources */,
 				442297FE24A394FD000F846A /* RestaurantManager.swift in Sources */,
 				44DA293A24B7E137003974AE /* FavoritesModel.swift in Sources */,

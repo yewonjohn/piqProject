@@ -39,7 +39,7 @@ class RestaurantViewController: UIViewController {
     var locationManager = CLLocationManager()
     let backgroundImageView = UIImageView()
     let service = ServiceUtil()
-    let homePage = HomePageViewController()
+    let homePage = FilterPageViewController()
     let restaurantAPI = RestaurantManager()
 
     // MARK: - View Controller Life Cycle
@@ -89,7 +89,7 @@ class RestaurantViewController: UIViewController {
         if(dollarSign == "0" || dollarSign == ""){
             dollarSign = nil
         }
-        if(distance == 0.0){
+        if(distance == 0.0 || distance == nil){
             finalDist = nil
         } else{
             if let dist = distance{
@@ -248,7 +248,7 @@ extension RestaurantViewController: UIViewControllerTransitioningDelegate{
         triggerShadowView()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
+        let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! FilterPageViewController
         
         presentTransition = RightToLeftTransition()
         dismissTransition = LeftToRightTransition()

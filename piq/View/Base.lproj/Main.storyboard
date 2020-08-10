@@ -7,6 +7,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Medium.ttf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
         <array key="Montserrat-SemiBold.ttf">
             <string>Montserrat-SemiBold</string>
         </array>
@@ -471,10 +477,10 @@
             </objects>
             <point key="canvasLocation" x="747.82608695652175" y="-578.57142857142856"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--Filter Page View Controller-->
         <scene sceneID="ocr-oe-QDD">
             <objects>
-                <viewController storyboardIdentifier="HomePageViewController" id="fvK-Bj-i0g" customClass="HomePageViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePageViewController" id="fvK-Bj-i0g" customClass="FilterPageViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9C7-J7-xR6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -597,8 +603,9 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikw-xs-gKA">
                                         <rect key="frame" x="259" y="0.0" width="65" height="40"/>
-                                        <state key="normal" title="All" backgroundImage="buttonRightWhite">
-                                            <color key="titleColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                        <state key="normal" title="All" backgroundImage="buttonRight">
+                                            <color key="titleColor" red="0.97254901959999995" green="0.96470588239999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="costButtonClicked:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="PL0-V6-qOR"/>
@@ -614,7 +621,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8d-Lr-jW0" userLabel="walkButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="40"/>
-                                        <state key="normal" backgroundImage="walk_un">
+                                        <state key="normal" backgroundImage="walk_unselected">
                                             <color key="titleColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -623,28 +630,31 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMR-pZ-4Fo" userLabel="bike">
                                         <rect key="frame" x="65" y="0.0" width="64.5" height="40"/>
-                                        <state key="normal" backgroundImage="bike_un"/>
+                                        <state key="normal" backgroundImage="bike_unselected"/>
                                         <connections>
                                             <action selector="distanceButtonSelected:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="C9q-wo-oWd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjl-fS-3rp" userLabel="car">
                                         <rect key="frame" x="129.5" y="0.0" width="65" height="40"/>
-                                        <state key="normal" backgroundImage="drive_un"/>
+                                        <state key="normal" backgroundImage="car_unselected"/>
                                         <connections>
                                             <action selector="distanceButtonSelected:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="BCJ-VE-9LB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoZ-Xe-r3Q" userLabel="far">
                                         <rect key="frame" x="194.5" y="0.0" width="64.5" height="40"/>
-                                        <state key="normal" backgroundImage="far_un"/>
+                                        <state key="normal" backgroundImage="far_unselected"/>
                                         <connections>
                                             <action selector="distanceButtonSelected:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="ERX-7C-kLO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0MM-lB-FO0" userLabel="any">
                                         <rect key="frame" x="259" y="0.0" width="65" height="40"/>
-                                        <state key="normal" backgroundImage="any_un"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                        <state key="normal" title="Any" backgroundImage="buttonRight">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="distanceButtonSelected:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="QAj-q3-UmO"/>
                                         </connections>
@@ -827,19 +837,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-gG-5b2">
-                                <rect key="frame" x="0.0" y="168" width="414" height="645"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-gG-5b2">
+                                <rect key="frame" x="40" y="337.5" width="334" height="340"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.96470588239999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="340" id="O7b-tk-6TT"/>
+                                </constraints>
+                                <color key="separatorColor" red="0.97254901960784312" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="separatorInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuCell" textLabel="S6y-Eh-Zsy" style="IBUITableViewCellStyleDefault" id="a36-Cf-r1s">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="334" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a36-Cf-r1s" id="zW5-Tq-kre">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S6y-Eh-Zsy">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="30" y="0.0" width="284" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -851,27 +866,36 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="piq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcT-8D-2gu">
-                                <rect key="frame" x="177" y="98" width="60" height="44"/>
-                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="36"/>
-                                <color key="textColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcT-8D-2gu">
+                                <rect key="frame" x="106" y="188" width="202.5" height="29.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="24"/>
+                                <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maz-XI-fSk">
+                                <rect key="frame" x="31" y="293.5" width="148.5" height="21"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901959999995" green="0.96470588239999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="OCb-3r-DNi" firstAttribute="trailing" secondItem="bh4-gG-5b2" secondAttribute="trailing" id="0CZ-UE-tvS"/>
-                            <constraint firstItem="bh4-gG-5b2" firstAttribute="top" secondItem="OCb-3r-DNi" secondAttribute="top" constant="80" id="DdJ-NZ-PeO"/>
-                            <constraint firstItem="bh4-gG-5b2" firstAttribute="leading" secondItem="OCb-3r-DNi" secondAttribute="leading" id="Efk-bI-UL5"/>
-                            <constraint firstItem="OCb-3r-DNi" firstAttribute="bottom" secondItem="bh4-gG-5b2" secondAttribute="bottom" id="JZt-cR-BHA"/>
-                            <constraint firstItem="NcT-8D-2gu" firstAttribute="centerX" secondItem="5PN-nS-FbP" secondAttribute="centerX" id="dRa-gU-Woo"/>
-                            <constraint firstItem="NcT-8D-2gu" firstAttribute="top" secondItem="OCb-3r-DNi" secondAttribute="top" constant="10" id="i2M-yf-kTN"/>
+                            <constraint firstItem="OCb-3r-DNi" firstAttribute="trailing" secondItem="bh4-gG-5b2" secondAttribute="trailing" constant="40" id="0CZ-UE-tvS"/>
+                            <constraint firstItem="bh4-gG-5b2" firstAttribute="top" secondItem="maz-XI-fSk" secondAttribute="bottom" constant="23" id="9g8-dA-Dqq"/>
+                            <constraint firstItem="NcT-8D-2gu" firstAttribute="centerX" secondItem="5PN-nS-FbP" secondAttribute="centerX" id="9wA-FL-69U"/>
+                            <constraint firstItem="bh4-gG-5b2" firstAttribute="leading" secondItem="OCb-3r-DNi" secondAttribute="leading" constant="40" id="Efk-bI-UL5"/>
+                            <constraint firstItem="maz-XI-fSk" firstAttribute="top" secondItem="NcT-8D-2gu" secondAttribute="bottom" constant="76" id="aTa-Bt-ssH"/>
+                            <constraint firstItem="NcT-8D-2gu" firstAttribute="top" secondItem="OCb-3r-DNi" secondAttribute="top" constant="100" id="i2M-yf-kTN"/>
+                            <constraint firstItem="maz-XI-fSk" firstAttribute="leading" secondItem="OCb-3r-DNi" secondAttribute="leading" constant="31" id="iN2-PY-gsS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OCb-3r-DNi"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="person" catalog="system" id="t17-q1-ey0"/>
                     <connections>
+                        <outlet property="fullNameLabel" destination="NcT-8D-2gu" id="lLq-cr-Up3"/>
                         <outlet property="tableView" destination="bh4-gG-5b2" id="hGK-Tq-aWc"/>
+                        <outlet property="tableViewHeight" destination="O7b-tk-6TT" id="51A-tT-fAq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60i-Gc-13a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -884,19 +908,18 @@
         <segue reference="Wa3-QC-iue"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="any_un" width="66" height="40"/>
         <image name="background_splash" width="458" height="404"/>
         <image name="background_splash2" width="526" height="598"/>
-        <image name="bike_un" width="65" height="40"/>
+        <image name="bike_unselected" width="130" height="80"/>
         <image name="buttonLeftWhite" width="130" height="80"/>
         <image name="buttonMiddleWhite" width="130" height="80"/>
-        <image name="buttonRightWhite" width="132" height="80"/>
+        <image name="buttonRight" width="132" height="80"/>
+        <image name="car_unselected" width="130" height="80"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="drive_un" width="65" height="40"/>
-        <image name="far_un" width="65" height="40"/>
+        <image name="far_unselected" width="130" height="80"/>
         <image name="loading_background" width="414" height="896"/>
         <image name="person" catalog="system" width="128" height="117"/>
-        <image name="walk_un" width="65" height="40"/>
+        <image name="walk_unselected" width="130" height="80"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

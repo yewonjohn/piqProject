@@ -53,5 +53,11 @@ class AuthManager{
         }
     }
     
+    func getDisplayName() -> String?{
+        let displayName = Auth.auth().currentUser?.displayName
+        
+        return displayName
+    }
+    
     
 }
