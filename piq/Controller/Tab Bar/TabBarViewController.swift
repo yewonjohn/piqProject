@@ -11,13 +11,16 @@ import UIKit
 
 class TabBarViewController: UITabBarController{
     
+    
+    //MARK:- Properties
+    
     //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
     var categoriesTitle = String()
     var dollarSign : String?
     var distance : Double?
 
-    
+    //MARK:- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,20 +34,18 @@ class TabBarViewController: UITabBarController{
         vc.categoriesTitle = categoriesTitle
         vc.dollarSign = dollarSign
         vc.distance = distance
-
     }
     
     //MARK: - Segues
-    //cancel button segue
+    
+    //'Cancel' button segue
     @IBAction func unwindToCards(_ unwindSegue: UIStoryboardSegue) {
         
         let viewControllers = self.viewControllers
         let vc = viewControllers![0] as! RestaurantViewController
-        
         vc.triggerShadowView()
-        
     }
-    //apply button segue
+    //'Apply' button segue
     @IBAction func unwindWithInfo(_ unwindSegue: UIStoryboardSegue) {
         
         let viewControllers = self.viewControllers
@@ -60,7 +61,7 @@ class TabBarViewController: UITabBarController{
         
     }
 }
-
+//MARK:- Tab Bar Delegate
 extension TabBarViewController: UITabBarControllerDelegate{
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
@@ -69,11 +70,8 @@ extension TabBarViewController: UITabBarControllerDelegate{
         }
         
         if fromView != toView {
-            
             UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
-
         }
-        
         return true
     }
 }

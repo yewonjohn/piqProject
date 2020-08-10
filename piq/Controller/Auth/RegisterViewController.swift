@@ -45,16 +45,13 @@ class RegisterViewController: UIViewController {
         self.navigationController?.view.backgroundColor = UIColor.clear
         
         service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons)
-        service.animateSecondIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons)
-        service.animateThirdIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons)
+        service.animateSecondIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2)
+        service.animateThirdIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("ViewWillDisappear")
-        animationIcon.layer.removeAllAnimations()
-        animationIcon2.layer.removeAllAnimations()
-        animationIcon3.layer.removeAllAnimations()
-    }
+         service.backgroundTrigger()
+     }
     // MARK: - IBActions & Objc Functions
     
     @IBAction func goToLogin(_ sender: Any) {

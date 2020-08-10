@@ -216,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				44D201C1249D76F70074F315 /* Main.storyboard */,
+				448D78EC24E1EDEB006D55C3 /* Custom Cells */,
 				44712D7824A2682D0083B1AB /* CustomViews */,
 				44DA293E24B7E403003974AE /* CardsViews */,
 			);
@@ -235,17 +236,24 @@
 		44712D7824A2682D0083B1AB /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				44DA293624B7D359003974AE /* FavoritesCell.swift */,
-				44DA293524B7D359003974AE /* FavoritesCell.xib */,
 				44712D7924A268650083B1AB /* AuthTextField.swift */,
 				44E79B5624A2E0F900DDC48E /* SignUpButton.swift */,
 				44712D7A24A268650083B1AB /* LoginButton.swift */,
 				4496385A24D68DCE007576E1 /* FoodButton.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		448D78EC24E1EDEB006D55C3 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				44DA293624B7D359003974AE /* FavoritesCell.swift */,
+				44DA293524B7D359003974AE /* FavoritesCell.xib */,
 				4496386C24D7AE95007576E1 /* CategoryCell.swift */,
 				448D78E824E0D052006D55C3 /* SettingsCell.swift */,
 				448D78E924E0D052006D55C3 /* SettingsCell.xib */,
 			);
-			path = CustomViews;
+			path = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		4496385624D68978007576E1 /* Fonts */ = {

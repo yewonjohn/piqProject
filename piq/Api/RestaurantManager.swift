@@ -27,13 +27,9 @@ class RestaurantManager{
         var businesses: [RestaurantModel]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
         
-        //        let distanceWR = distance!
         var requestParams : [String: Any] = [:]
         //Calling API depending on headers
-//        print(distance)
-//        print(category)
-//        print(dollarSigns)
-        
+
         //everything included
         if(distance != nil && category != nil && dollarSigns != nil){
             if let dist = distance, let price = dollarSigns, let cat = category{

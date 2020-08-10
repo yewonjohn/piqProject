@@ -94,15 +94,23 @@ class ServiceUtil{
         }
     }
     
-        var counter = 0
+    var inBackground = false
+    
+    func backgroundTrigger(){
+        inBackground = true
+    }
+    
+    var counter = 0
     
     func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
         
-        if(counter == imageArray.count){
+        print(imageArray.count-1)
+        print(counter)
+        if(counter == imageArray.count-1){
             counter = 0
         }
         icon.image = imageArray[counter]
-        counter = counter + 2
+        counter = counter + 1
         
         var customTransform = icon.transform
         customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
@@ -131,21 +139,23 @@ class ServiceUtil{
                     
                 }, completion: { _ in
                     icon.transform = .identity
+                    if(!self.inBackground){
                     self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+                    }
                 })
                 
             })
         })
     }
     
-    var counter2 = 1
+    var counter2 = 0
     func animateSecondIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
         
-        if(counter2 == imageArray.count){
-            counter2 = 1
+        if(counter2 == imageArray.count-1){
+            counter2 = 0
         }
-        icon.image = imageArray[counter]
-        counter2 = counter2 + 2
+        icon.image = imageArray[counter2]
+        counter2 = counter2 + 1
         
         var customTransform = icon.transform
         customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
@@ -174,20 +184,22 @@ class ServiceUtil{
                     
                 }, completion: { _ in
                     icon.transform = .identity
+                    if(!self.inBackground){
                     self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+                    }
                 })
                 
             })
         })
     }
-        var counter3 = 2
+        var counter3 = 0
         func animateThirdIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
             
-            if(counter3 == imageArray.count){
-                counter3 = 2
+            if(counter3 == imageArray.count-1){
+                counter3 = 0
             }
-            icon.image = imageArray[counter]
-            counter2 = counter2 + 2
+            icon.image = imageArray[counter3]
+            counter3 = counter3 + 1
             
             var customTransform = icon.transform
             customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
@@ -216,9 +228,10 @@ class ServiceUtil{
                         
                     }, completion: { _ in
                         icon.transform = .identity
+                        if(!self.inBackground){
                         self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+                        }
                     })
-                    
                 })
             })
         }

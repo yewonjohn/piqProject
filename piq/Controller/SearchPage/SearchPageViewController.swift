@@ -69,6 +69,8 @@ class SearchPageViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        walkButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
+
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
         parse(jsonData: jsonCategories)
