@@ -39,7 +39,7 @@ class RestaurantViewController: UIViewController {
     var locationManager = CLLocationManager()
     let backgroundImageView = UIImageView()
     let service = ServiceUtil()
-    let homePage = FilterPageViewController()
+    let homePage = SearchPageViewController()
     let restaurantAPI = RestaurantManager()
 
     // MARK: - View Controller Life Cycle
@@ -255,7 +255,7 @@ extension RestaurantViewController: UIViewControllerTransitioningDelegate{
         triggerShadowView()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! FilterPageViewController
+        let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! SearchPageViewController
         
         presentTransition = RightToLeftTransition()
         dismissTransition = LeftToRightTransition()

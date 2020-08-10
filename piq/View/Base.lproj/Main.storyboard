@@ -477,10 +477,10 @@
             </objects>
             <point key="canvasLocation" x="747.82608695652175" y="-578.57142857142856"/>
         </scene>
-        <!--Filter Page View Controller-->
+        <!--Search Page View Controller-->
         <scene sceneID="ocr-oe-QDD">
             <objects>
-                <viewController storyboardIdentifier="HomePageViewController" id="fvK-Bj-i0g" customClass="FilterPageViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePageViewController" id="fvK-Bj-i0g" customClass="SearchPageViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9C7-J7-xR6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

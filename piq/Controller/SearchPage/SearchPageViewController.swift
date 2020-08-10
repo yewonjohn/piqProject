@@ -13,7 +13,7 @@ import SwiftyJSON
 import CoreLocation
 
 
-class FilterPageViewController: UIViewController{
+class SearchPageViewController: UIViewController{
     
     
     // MARK: - Outlets
@@ -48,7 +48,8 @@ class FilterPageViewController: UIViewController{
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = HomePage.categoriesLabels
     var categoriesImages = HomePage.categoriesUIImages
-    var categoriesTitleIndexParam = String()
+    var categoriesIndexArr = [Int]()
+    var categoriesTitlesParam = String()
     var dollarSignsParam = String()
     var distanceParam = Double()
     let favoritesVC = FavoritesViewController()
@@ -79,6 +80,7 @@ class FilterPageViewController: UIViewController{
         categoryCollectionView.dataSource = self
         categoryCollectionView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
         categoryCollectionView.allowsSelection = true
+        categoryCollectionView.allowsMultipleSelection = true
         categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
         
         dollarSignsParam = "0"
@@ -207,19 +209,20 @@ class FilterPageViewController: UIViewController{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToCards" {
+            setCategoriesTitles()
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
-            controller.categoriesTitle = categoriesTitleIndexParam
+            controller.categoriesTitle = categoriesTitlesParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
         }
         if segue.identifier == "unwindWithInfo" {
+            setCategoriesTitles()
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
-            controller.categoriesTitle = categoriesTitleIndexParam
+            controller.categoriesTitle = categoriesTitlesParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
-                        
         }
     }
     @IBAction func dismissView(_ sender: UIButton) {
@@ -229,7 +232,7 @@ class FilterPageViewController: UIViewController{
 }
 
 //MARK: -- 	Search Configuration
-extension FilterPageViewController{
+extension SearchPageViewController{
 
     private func readLocalFile(forName name: String) -> Data? {
         do {
@@ -255,15 +258,42 @@ extension FilterPageViewController{
 }
 
 //MARK: - Categories Collection Delegates
-extension FilterPageViewController: UICollectionViewDelegate{
+extension SearchPageViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        categoriesTitleIndexParam = categoriesTitles[indexPath.row]
+            print("add")
+            categoriesIndexArr.append(indexPath.row)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if(categoriesIndexArr.contains(indexPath.row)){
+            print("remove")
+            if let index = categoriesIndexArr.firstIndex(of: indexPath.row) {
+                categoriesIndexArr.remove(at: index)
+            }
+        }
+    }
+    //not a delegate function
+    func setCategoriesTitles(){
+        if(categoriesIndexArr.contains(0)){
+            categoriesTitlesParam = ""
+        } else{
+            for index in 1...categoriesIndexArr.count {
+                print(index)
+                if(index == 1){
+                    categoriesTitlesParam += categoriesTitles[index]
+                } else{
+                    categoriesTitlesParam += ","+categoriesTitles[index]
+                }
+            }
+        }
+        print(categoriesTitlesParam)
     }
 
 }
 
 //MARK: - Categories Collection Data Source
-extension FilterPageViewController: UICollectionViewDataSource{
+extension SearchPageViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoriesTitles.count
     }
@@ -279,7 +309,7 @@ extension FilterPageViewController: UICollectionViewDataSource{
 }
 
 //MARK: - Categories Collection Delegate Flow Layout
-extension FilterPageViewController: UICollectionViewDelegateFlowLayout{
+extension SearchPageViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 123, height: 180)
