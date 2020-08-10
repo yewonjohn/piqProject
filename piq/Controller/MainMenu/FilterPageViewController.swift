@@ -10,6 +10,8 @@ import UIKit
 import IQKeyboardManager
 import FirebaseAuth
 import SwiftyJSON
+import CoreLocation
+
 
 class FilterPageViewController: UIViewController{
     
@@ -41,11 +43,12 @@ class FilterPageViewController: UIViewController{
     
     // MARK: - Properties
     let backgroundImageView = UIImageView()
-    
+    var locationManager = CLLocationManager()
+
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = HomePage.categoriesLabels
     var categoriesImages = HomePage.categoriesUIImages
-    var titleParam = String()
+    var categoriesTitleIndexParam = String()
     var dollarSignsParam = String()
     var distanceParam = Double()
     let favoritesVC = FavoritesViewController()
@@ -59,6 +62,7 @@ class FilterPageViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
     }
     
     override func viewDidLoad() {
@@ -79,7 +83,11 @@ class FilterPageViewController: UIViewController{
         
         dollarSignsParam = "0"
     }
+    
     override func viewWillLayoutSubviews() {
+        //Asking for location permission if not already
+        locationManager.requestWhenInUseAuthorization()
+        
         switch sidePresented {
         case true:
             findFoodButton.setTitle("Apply", for: .normal)
@@ -100,12 +108,7 @@ class FilterPageViewController: UIViewController{
     @objc func handleDismiss(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .changed:
-//            if(viewTranslation.x < 0){
-//                UIView.animate(withDuration: 0.01, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, animations: {
-//                    self.view.transform = .identity
-//                })
-//            }
-
+            
             viewTranslation = sender.translation(in: view)
             
             if(viewTranslation.x > 0){
@@ -121,9 +124,7 @@ class FilterPageViewController: UIViewController{
                 })
             } else {
                 print("else")
-//                dismiss(animated: true, completion: nil)
                 self.performSegue(withIdentifier: "unwindToCards", sender: self)
-
             }
         default:
             print("default")
@@ -192,10 +193,7 @@ class FilterPageViewController: UIViewController{
             distanceParam = 0.0
             print("defualt")
         }
-        
     }
-    
-    
     
     
     //MARK: - Segue
@@ -211,16 +209,17 @@ class FilterPageViewController: UIViewController{
         if segue.identifier == "HomeToCards" {
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
-            controller.categoriesTitle = titleParam
+            controller.categoriesTitle = categoriesTitleIndexParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
         }
         if segue.identifier == "unwindWithInfo" {
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
-            controller.categoriesTitle = titleParam
+            controller.categoriesTitle = categoriesTitleIndexParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
+                        
         }
     }
     @IBAction func dismissView(_ sender: UIButton) {
@@ -258,7 +257,7 @@ extension FilterPageViewController{
 //MARK: - Categories Collection Delegates
 extension FilterPageViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        titleParam = categoriesTitles[indexPath.row]
+        categoriesTitleIndexParam = categoriesTitles[indexPath.row]
     }
 
 }

@@ -71,11 +71,16 @@ class RestaurantViewController: UIViewController {
 
         //set background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
-        
+
         getCards()
     }
     
     func getCards(){
+        
+        //make sure empty label and reset button is hidden when new search
+        resetButton.isHidden = true
+        emptyCardsLabel.isHidden = true
+        
         //get category title alias
         var categoryAlias: String?
         for category in categoriesArr{
@@ -97,8 +102,6 @@ class RestaurantViewController: UIViewController {
             }
         }
         
-        //Asking for location permission
-        locationManager.requestWhenInUseAuthorization()
         var currentLoc: CLLocation!
 
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
@@ -113,6 +116,10 @@ class RestaurantViewController: UIViewController {
                 self.loadingView.stopAnimating()
             }
         }
+    }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("triggered")
+        getCards()
     }
     
     //MARK: - Configurations

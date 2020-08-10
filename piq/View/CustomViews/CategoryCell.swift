@@ -67,21 +67,6 @@ class CategoryCell: UICollectionViewCell{
         selectedView.layer.cornerRadius = 15
         self.selectedBackgroundView = selectedView
         
-//        let topView = UIView()
-//        contentView.addSubview(topView)
-//        topView.translatesAutoresizingMaskIntoConstraints = false
-//        topView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-//        topView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-//        topView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-//        topView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-//        topView.layer.cornerRadius = 15
-//        topView.clipsToBounds = true
-
-//        self.contentView.layer.cornerRadius = 12.0
-//        self.contentView.layer.borderWidth = 1.0
-//        self.contentView.layer.borderColor = UIColor.clear.cgColor
-//        self.contentView.layer.masksToBounds = true
-        
         contentView.addSubview(categoryImage)
 
         categoryImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30).isActive = true

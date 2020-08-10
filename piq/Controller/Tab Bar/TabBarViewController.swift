@@ -11,10 +11,12 @@ import UIKit
 
 class TabBarViewController: UITabBarController{
     
+    //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
     var categoriesTitle = String()
     var dollarSign : String?
     var distance : Double?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +26,12 @@ class TabBarViewController: UITabBarController{
         //passing info
         let viewControllers = self.viewControllers
         let vc = viewControllers![0] as! RestaurantViewController
-        
+    
         vc.categoriesArr = categoriesArr
         vc.categoriesTitle = categoriesTitle
         vc.dollarSign = dollarSign
         vc.distance = distance
-        
+
     }
     
     //MARK: - Segues
@@ -55,6 +57,7 @@ class TabBarViewController: UITabBarController{
         vc.dollarSign = dollarSign
         vc.distance = distance
         vc.getCards()
+        
     }
 }
 
@@ -69,16 +72,6 @@ extension TabBarViewController: UITabBarControllerDelegate{
             
             UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
 
-//            if(viewController == self.viewControllers?[1]){
-//                UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
-//
-//            }
-//            if(viewController == self.viewControllers?[2]){
-//                UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
-//            }
-//            else{
-//                UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
-//            }
         }
         
         return true
