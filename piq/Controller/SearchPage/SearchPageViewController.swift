@@ -77,6 +77,9 @@ class SearchPageViewController: UIViewController{
         super.viewDidLoad()
         
 //        walkButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
+        costStackView.heightAnchor.constraint(equalTo: costStackView.widthAnchor, multiplier: 0.13).isActive = true
+        distanceStackView.heightAnchor.constraint(equalTo: distanceStackView.widthAnchor, multiplier: 0.13).isActive = true
+
 
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
@@ -105,15 +108,10 @@ class SearchPageViewController: UIViewController{
             cancelButton.isHidden = false
             piqLabel.isHidden = true
             
-            
-            
-            costStackView.heightAnchor.constraint(equalTo: costStackView.widthAnchor, multiplier: 0.13).isActive = true
-//            costStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
-//            costStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
-//
-            distanceStackView.heightAnchor.constraint(equalTo: distanceStackView.widthAnchor, multiplier: 0.13).isActive = true
-//            distanceStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
-//            distanceStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+            costLeftConstraint.constant = 25
+            costRightConstraint.constant = 25
+            distanceLeftConstraint.constant = 25
+            distanceRightConstraint.constant = 25
             
             let edgePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
 //            edgePan.edges = .left

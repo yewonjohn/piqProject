@@ -521,7 +521,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fH2-HZ-Co3">
-                                <rect key="frame" x="45" y="521" width="57.5" height="30.5"/>
+                                <rect key="frame" x="45" y="441" width="57.5" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -533,7 +533,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAS-l1-uYF">
-                                <rect key="frame" x="45" y="631.5" width="114" height="30.5"/>
+                                <rect key="frame" x="45" y="591.5" width="114" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -557,10 +557,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v0e-Lu-UmK">
-                                <rect key="frame" x="45" y="561.5" width="324" height="40"/>
+                                <rect key="frame" x="45" y="481.5" width="324" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWX-5q-LNQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="80"/>
                                         <state key="normal" title="$" backgroundImage="buttonLeftWhite">
                                             <color key="titleColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -569,7 +569,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fR8-Qc-2CZ">
-                                        <rect key="frame" x="65" y="0.0" width="64.5" height="40"/>
+                                        <rect key="frame" x="65" y="0.0" width="64.5" height="80"/>
                                         <state key="normal" title="$$" backgroundImage="buttonMiddleWhite">
                                             <color key="titleColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -578,7 +578,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28e-b8-HZh">
-                                        <rect key="frame" x="129.5" y="0.0" width="65" height="40"/>
+                                        <rect key="frame" x="129.5" y="0.0" width="65" height="80"/>
                                         <state key="normal" title="$$$" backgroundImage="buttonMiddleWhite">
                                             <color key="titleColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -587,7 +587,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JkA-rh-QkE">
-                                        <rect key="frame" x="194.5" y="0.0" width="64.5" height="40"/>
+                                        <rect key="frame" x="194.5" y="0.0" width="64.5" height="80"/>
                                         <state key="normal" title="$$$$" backgroundImage="buttonMiddleWhite">
                                             <color key="titleColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -596,7 +596,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikw-xs-gKA">
-                                        <rect key="frame" x="259" y="0.0" width="65" height="40"/>
+                                        <rect key="frame" x="259" y="0.0" width="65" height="80"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <state key="normal" title="All" backgroundImage="buttonRight">
                                             <color key="titleColor" red="0.97254901959999995" green="0.96470588239999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -606,15 +606,12 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="W81-OV-fP1"/>
-                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="44O-OY-tRr" userLabel="Distance Stack View">
-                                <rect key="frame" x="45" y="672" width="324" height="40"/>
+                                <rect key="frame" x="45" y="632" width="324" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8d-Lr-jW0" userLabel="walkButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="80"/>
                                         <state key="normal" backgroundImage="walk_unselected">
                                             <color key="titleColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -623,28 +620,28 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMR-pZ-4Fo" userLabel="bike">
-                                        <rect key="frame" x="65" y="0.0" width="64.5" height="40"/>
+                                        <rect key="frame" x="65" y="0.0" width="64.5" height="80"/>
                                         <state key="normal" backgroundImage="bike_unselected"/>
                                         <connections>
                                             <action selector="distanceButtonSelected:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="C9q-wo-oWd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjl-fS-3rp" userLabel="car">
-                                        <rect key="frame" x="129.5" y="0.0" width="65" height="40"/>
+                                        <rect key="frame" x="129.5" y="0.0" width="65" height="80"/>
                                         <state key="normal" backgroundImage="car_unselected"/>
                                         <connections>
                                             <action selector="distanceButtonSelected:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="BCJ-VE-9LB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoZ-Xe-r3Q" userLabel="far">
-                                        <rect key="frame" x="194.5" y="0.0" width="64.5" height="40"/>
+                                        <rect key="frame" x="194.5" y="0.0" width="64.5" height="80"/>
                                         <state key="normal" backgroundImage="far_unselected"/>
                                         <connections>
                                             <action selector="distanceButtonSelected:" destination="fvK-Bj-i0g" eventType="touchUpInside" id="ERX-7C-kLO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0MM-lB-FO0" userLabel="any">
-                                        <rect key="frame" x="259" y="0.0" width="65" height="40"/>
+                                        <rect key="frame" x="259" y="0.0" width="65" height="80"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <state key="normal" title="Any" backgroundImage="buttonRight">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -654,12 +651,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="x9j-7Y-bYj"/>
-                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∞" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8c8-uN-yLL">
-                                <rect key="frame" x="340.5" y="631.5" width="23.5" height="30.5"/>
+                                <rect key="frame" x="340.5" y="591.5" width="23.5" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="25"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -713,12 +707,10 @@
                         <outlet property="costButtonAll" destination="ikw-xs-gKA" id="MYK-6u-hB8"/>
                         <outlet property="costLeftConstraint" destination="dlK-v0-MFa" id="fwV-L4-h98"/>
                         <outlet property="costRightConstraint" destination="ZBm-RG-XMr" id="4Vh-IC-3Qh"/>
-                        <outlet property="costStackHeight" destination="W81-OV-fP1" id="Pq7-eU-nSw"/>
                         <outlet property="costStackView" destination="v0e-Lu-UmK" id="znZ-Qd-jOF"/>
                         <outlet property="distanceLabel" destination="8c8-uN-yLL" id="VrL-Bb-fV0"/>
                         <outlet property="distanceLeftConstraint" destination="aYi-vh-gP1" id="hjP-3F-Log"/>
                         <outlet property="distanceRightConstraint" destination="ynF-Jv-6mq" id="N6Z-B9-ipz"/>
-                        <outlet property="distanceStackHeight" destination="x9j-7Y-bYj" id="JGz-YN-w8v"/>
                         <outlet property="distanceStackView" destination="44O-OY-tRr" id="rUp-yG-n6t"/>
                         <outlet property="dollarLabel" destination="H3y-Zb-q01" id="nxY-Kc-8Ld"/>
                         <outlet property="farButton" destination="HoZ-Xe-r3Q" id="Nhp-QO-rfI"/>

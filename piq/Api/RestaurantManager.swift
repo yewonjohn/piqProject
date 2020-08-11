@@ -81,7 +81,7 @@ class RestaurantManager{
         }
         //none
         else {
-            requestParams = ["sort_by": "distance","limit": 50,"latitude": latitude,"longitude": longitude]
+            requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude]
             print("8")
         }
 
