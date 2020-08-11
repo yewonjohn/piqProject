@@ -212,7 +212,7 @@ class SearchPageViewController: UIViewController{
             distanceParam = 2.0
             service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 4)
         case anyButton:
-            distanceLabel.text = "∞ mi"
+            distanceLabel.text = "∞"
             anyButton.setBackgroundImage(#imageLiteral(resourceName: "buttonRight"), for: .normal)
             anyButton.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             distanceParam = 0.0

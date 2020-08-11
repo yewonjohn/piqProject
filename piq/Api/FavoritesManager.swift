@@ -26,7 +26,7 @@ class FavoritesManager{
     let db = Firestore.firestore()
     var delegate: FavoritesManagerDelegate?
     
-    let realm = try! Realm()    
+    let realm = try! Realm()
     var timeStamp = NSDate().timeIntervalSince1970
     let currentUser = Auth.auth().currentUser?.email
     

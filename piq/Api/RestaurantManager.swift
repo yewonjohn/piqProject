@@ -81,7 +81,7 @@ class RestaurantManager{
         }
         //none
         else {
-            requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude]
+            requestParams = ["sort_by": "distance","limit": 50,"latitude": latitude,"longitude": longitude]
             print("8")
         }
 
@@ -120,7 +120,6 @@ class RestaurantManager{
                                                      url: business["url"].stringValue,
                                                      img_url: business["image_url"].stringValue
                     )
-                    
                     businesses?.append(businessUnit)
                 }
                 

@@ -31,7 +31,7 @@ class RestaurantCardView : UIView {
     var ratingsCountView = UILabel()
     var dollarSignsView = UILabel()
     var categoriesView = UILabel()
-    var isOpenView = UILabel()
+    var distanceView = UILabel()
     var phoneView = UILabel()
     var addressView = UILabel()
     var favoriteButton = UIButton()
@@ -67,14 +67,15 @@ class RestaurantCardView : UIView {
             imageView.kf.setImage(with: url)
             
             //SETTING STORE OPEN/CLOSED
-            if dataSource?.isClosed == true{
-                isOpenView.text = "Closed now •"
-                isOpenView.textColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
-                
-            } else {
-                isOpenView.text = "Open now •"
-            isOpenView.textColor = #colorLiteral(red: 0.1529411765, green: 0.6823529412, blue: 0.3764705882, alpha: 1)
+            if let dist = dataSource?.distance{
+                var distInMiles = dist/1609
+                distInMiles = Double(round(10*distInMiles)/10)
+                distanceView.text = String(distInMiles)+" •"
+            } else{
+                distanceView.text = "? •"
             }
+            
+            
             //SETTING RATINGS BAR
             switch dataSource?.rating {
             case 0.0:
@@ -143,7 +144,7 @@ class RestaurantCardView : UIView {
         configureRatingsCountView()
         configureDollarSignsView()
         configureCategoriesView()
-        configureisOpenView()
+        configureDistanceView()
         configurePhoneView()
         configureArrow()
 //        configureYelpView()
@@ -267,15 +268,15 @@ class RestaurantCardView : UIView {
         categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 2).isActive = true
     }
     
-    func configureisOpenView() {
-        swipeView.addSubview(isOpenView)
-        isOpenView.textColor = .red
-        isOpenView.textAlignment = .left
-        isOpenView.font = UIFont(name: "Montserrat-Medium", size: 15)
-        isOpenView.text = "Closed now •"
-        isOpenView.translatesAutoresizingMaskIntoConstraints = false
-        isOpenView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
-        isOpenView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
+    func configureDistanceView() {
+        swipeView.addSubview(distanceView)
+        distanceView.textColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
+        distanceView.textAlignment = .left
+        distanceView.font = UIFont(name: "Montserrat-Medium", size: 15)
+        distanceView.text = "distance •"
+        distanceView.translatesAutoresizingMaskIntoConstraints = false
+        distanceView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
+        distanceView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
     }
     
     func configurePhoneView() {
@@ -285,7 +286,7 @@ class RestaurantCardView : UIView {
         phoneView.font = UIFont(name: "Montserrat-Medium", size: 15)
         phoneView.translatesAutoresizingMaskIntoConstraints = false
         phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
-        phoneView.leftAnchor.constraint(equalTo: isOpenView.rightAnchor, constant: 4).isActive = true
+        phoneView.leftAnchor.constraint(equalTo: distanceView.rightAnchor, constant: 4).isActive = true
     }
     func configureButton() {
         swipeView.addSubview(favoriteButton)
