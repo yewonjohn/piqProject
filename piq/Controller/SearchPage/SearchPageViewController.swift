@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  YummyTummy
+//  piq
 //
 //  Created by John Kim on 6/19/20.
 //  Copyright © 2020 John Yewon Kim. All rights reserved.
@@ -31,6 +31,10 @@ class SearchPageViewController: UIViewController{
     @IBOutlet weak var costButton3: UIButton!
     @IBOutlet weak var costButton4: UIButton!
     @IBOutlet weak var costButtonAll: UIButton!
+    @IBOutlet weak var costStackHeight: NSLayoutConstraint!
+    @IBOutlet weak var costRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var costLeftConstraint: NSLayoutConstraint!
+    
     
     @IBOutlet weak var distanceStackView: UIStackView!
     @IBOutlet weak var walkButton: UIButton!
@@ -38,6 +42,9 @@ class SearchPageViewController: UIViewController{
     @IBOutlet weak var carButton: UIButton!
     @IBOutlet weak var farButton: UIButton!
     @IBOutlet weak var anyButton: UIButton!
+    @IBOutlet weak var distanceStackHeight: NSLayoutConstraint!
+    @IBOutlet weak var distanceRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var distanceLeftConstraint: NSLayoutConstraint!
     
     
     
@@ -49,7 +56,7 @@ class SearchPageViewController: UIViewController{
     var categoriesTitles = HomePage.categoriesLabels
     var categoriesImages = HomePage.categoriesUIImages
     var categoriesIndexArr = [Int]()
-    var categoriesTitlesParam = String()
+    var categoriesTitlesParam = [String]()
     var dollarSignsParam = String()
     var distanceParam = Double()
     let favoritesVC = FavoritesViewController()
@@ -97,9 +104,21 @@ class SearchPageViewController: UIViewController{
             findFoodButton.setTitle("Apply", for: .normal)
             cancelButton.isHidden = false
             piqLabel.isHidden = true
+            
+            
+            
+            costStackView.heightAnchor.constraint(equalTo: costStackView.widthAnchor, multiplier: 0.13).isActive = true
+//            costStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+//            costStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+//
+            distanceStackView.heightAnchor.constraint(equalTo: distanceStackView.widthAnchor, multiplier: 0.13).isActive = true
+//            distanceStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+//            distanceStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+            
             let edgePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
 //            edgePan.edges = .left
             view.addGestureRecognizer(edgePan)
+            
             
         default:
             findFoodButton.setTitle("Find my meal!", for: .normal)
@@ -174,21 +193,26 @@ class SearchPageViewController: UIViewController{
         switch sender {
         case walkButton:
             walkButton.setBackgroundImage(#imageLiteral(resourceName: "walk_selected"), for: .normal)
+            distanceLabel.text = "0.5 mi"
             distanceParam = 0.5
             service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 1)
         case bikeButton:
             bikeButton.setBackgroundImage(#imageLiteral(resourceName: "bike_selected"), for: .normal)
+            distanceLabel.text = "1.0 mi"
             distanceParam = 1.0
             service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 2)
         case carButton:
             carButton.setBackgroundImage(#imageLiteral(resourceName: "car_selected"), for: .normal)
+            distanceLabel.text = "1.5 mi"
             distanceParam = 1.5
             service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 3)
         case farButton:
             farButton.setBackgroundImage(#imageLiteral(resourceName: "far_selected"), for: .normal)
+            distanceLabel.text = "2.0 mi"
             distanceParam = 2.0
             service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 4)
         case anyButton:
+            distanceLabel.text = "∞ mi"
             anyButton.setBackgroundImage(#imageLiteral(resourceName: "buttonRight"), for: .normal)
             anyButton.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             distanceParam = 0.0
@@ -214,7 +238,7 @@ class SearchPageViewController: UIViewController{
             setCategoriesTitles()
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
-            controller.categoriesTitle = categoriesTitlesParam
+            controller.categoriesTitles = categoriesTitlesParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
         }
@@ -222,7 +246,7 @@ class SearchPageViewController: UIViewController{
             setCategoriesTitles()
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
-            controller.categoriesTitle = categoriesTitlesParam
+            controller.categoriesTitles = categoriesTitlesParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
         }
@@ -259,7 +283,7 @@ extension SearchPageViewController{
     }
 }
 
-//MARK: - Categories Collection Delegates
+//MARK: - Categories Collection Delegates (config)
 extension SearchPageViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             categoriesIndexArr.append(indexPath.row)
@@ -277,17 +301,11 @@ extension SearchPageViewController: UICollectionViewDelegate{
     func setCategoriesTitles(){
         print(categoriesIndexArr)
         if(categoriesIndexArr.contains(0) || categoriesIndexArr.isEmpty){
-            categoriesTitlesParam = ""
+            categoriesTitlesParam = [""]
         } else{
             for index in 0...categoriesIndexArr.count-1 {
-                print(index)
-                if(index == 0){
-                    let tempIndex = categoriesIndexArr[index]
-                    categoriesTitlesParam += categoriesTitles[tempIndex]
-                } else{
-                    let tempIndex = categoriesIndexArr[index]
-                    categoriesTitlesParam += ","+categoriesTitles[tempIndex]
-                }
+                let tempIndex = categoriesIndexArr[index]
+                categoriesTitlesParam.append(categoriesTitles[tempIndex])
             }
         }
         print(categoriesTitlesParam)
@@ -295,7 +313,7 @@ extension SearchPageViewController: UICollectionViewDelegate{
 
 }
 
-//MARK: - Categories Collection Data Source
+//MARK: - Categories Collection Delegate (Data Source)
 extension SearchPageViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoriesTitles.count
@@ -311,7 +329,7 @@ extension SearchPageViewController: UICollectionViewDataSource{
     }
 }
 
-//MARK: - Categories Collection Delegate Flow Layout
+//MARK: - Categories Collection Delegate (Framing)
 extension SearchPageViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -323,15 +341,3 @@ extension SearchPageViewController: UICollectionViewDelegateFlowLayout{
        return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
     }
 }
-
-//extension HomePageViewController: UIGestureRecognizerDelegate {
-//
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        print("gesturebounds:\(gestureBounds.bounds)")
-//        print(touch.location(in: gestureBounds))
-//        if gestureBounds.bounds.contains(touch.location(in: gestureBounds)){
-//            return true
-//        }
-//        return false
-//    }
-//}

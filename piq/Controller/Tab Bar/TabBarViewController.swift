@@ -16,7 +16,7 @@ class TabBarViewController: UITabBarController{
     
     //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
-    var categoriesTitle = String()
+    var categoriesTitles = [String]()
     var dollarSign : String?
     var distance : Double?
 
@@ -31,7 +31,7 @@ class TabBarViewController: UITabBarController{
         let vc = viewControllers![0] as! RestaurantViewController
     
         vc.categoriesArr = categoriesArr
-        vc.categoriesTitle = categoriesTitle
+        vc.categoriesTitles = categoriesTitles
         vc.dollarSign = dollarSign
         vc.distance = distance
     }
@@ -54,7 +54,7 @@ class TabBarViewController: UITabBarController{
         vc.triggerShadowView()
         
         vc.categoriesArr = categoriesArr
-        vc.categoriesTitle = categoriesTitle
+        vc.categoriesTitles = categoriesTitles
         vc.dollarSign = dollarSign
         vc.distance = distance
         vc.getCards()

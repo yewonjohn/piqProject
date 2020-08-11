@@ -1,6 +1,6 @@
 //
 //  FavoritesCell.swift
-//  Next-flix
+//  piq
 //
 //  Created by John Kim on 6/15/20.
 //  Copyright © 2020 John Yewon Kim. All rights reserved.

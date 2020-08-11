@@ -1,9 +1,9 @@
 //
 //  Constants.swift
-//  Beginner-Constraints
+//  piq
 //
-//  Created by Sean Allen on 11/29/18.
-//  Copyright © 2018 Sean Allen. All rights reserved.
+//  Created by John Kim on 6/23/20.
+//  Copyright © 2020 John Yewon Kim. All rights reserved.
 //
 
 import UIKit

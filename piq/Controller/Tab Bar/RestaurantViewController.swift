@@ -1,6 +1,6 @@
 //
 //  RegisterViewController.swift
-//  YummyTummy
+//  piq
 //
 //  Created by John Kim on 6/23/20.
 //  Copyright © 2020 John Yewon Kim. All rights reserved.
@@ -31,7 +31,7 @@ class RestaurantViewController: UIViewController {
     var stackContainer : StackContainerView!
     
     var categoriesArr = [CategoryModel]()
-    var categoriesTitle = String()
+    var categoriesTitles = [String]()
     var dollarSign : String?
     var distance : Double?
     var finalDist : Int?
@@ -82,14 +82,17 @@ class RestaurantViewController: UIViewController {
         emptyCardsLabel.isHidden = true
         
         //get category title alias
-        var categoryAlias: String?
+        var categoryAlias: String? = nil
         for category in categoriesArr{
-            if(category.title == categoriesTitle){
-                categoryAlias = category.alias
+            if let catTitle = category.title, let catAlias = category.alias{
+                if (categoriesTitles.contains(catTitle)){
+                    if(categoryAlias == nil){
+                        categoryAlias = catAlias
+                    }else {
+                        categoryAlias! += ","+catAlias
+                    }
+                }
             }
-        }
-        if(categoryAlias == ""){
-            categoryAlias = nil
         }
         if(dollarSign == "0" || dollarSign == ""){
             dollarSign = nil

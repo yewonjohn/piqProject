@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  YummyTummy
+//  piq
 //
 //  Created by John Kim on 6/19/20.
 //  Copyright © 2020 John Yewon Kim. All rights reserved.

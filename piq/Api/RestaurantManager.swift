@@ -1,6 +1,6 @@
 //
 //  RestaurantManager.swift
-//  YummyTummy
+//  piq
 //
 //  Created by John Kim on 6/24/20.
 //  Copyright © 2020 John Yewon Kim. All rights reserved.
@@ -21,9 +21,8 @@ class RestaurantManager{
     
     //MARK: - Functions (GET)
     func getLocalRestaurants(distance: Int?, latitude: Double, longitude: Double, category: String?, dollarSigns: String?, completion: @escaping ((_ businesses:[RestaurantModel])->Void)){
-        print("get func called")
         delegate?.isLoading()
-        
+                
         var businesses: [RestaurantModel]? = []
         let url = "https://api.yelp.com/v3/businesses/search"
         

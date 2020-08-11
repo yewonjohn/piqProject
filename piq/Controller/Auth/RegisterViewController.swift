@@ -1,6 +1,6 @@
 //
 //  RegisterViewController.swift
-//  YummyTummy
+//  piq
 //
 //  Created by John Kim on 6/23/20.
 //  Copyright © 2020 John Yewon Kim. All rights reserved.
@@ -29,6 +29,10 @@ class RegisterViewController: UIViewController {
     let service = ServiceUtil()
     
     // MARK: - View Controller Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,6 +59,7 @@ class RegisterViewController: UIViewController {
     // MARK: - IBActions & Objc Functions
     
     @IBAction func goToLogin(_ sender: Any) {
+        self.performSegue(withIdentifier: "RegisterToMain", sender: self)
     }
     
     @IBAction func register(_ sender: UIButton) {
