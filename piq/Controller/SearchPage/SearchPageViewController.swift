@@ -31,7 +31,6 @@ class SearchPageViewController: UIViewController{
     @IBOutlet weak var costButton3: UIButton!
     @IBOutlet weak var costButton4: UIButton!
     @IBOutlet weak var costButtonAll: UIButton!
-    @IBOutlet weak var costStackHeight: NSLayoutConstraint!
     @IBOutlet weak var costRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var costLeftConstraint: NSLayoutConstraint!
     
@@ -42,7 +41,6 @@ class SearchPageViewController: UIViewController{
     @IBOutlet weak var carButton: UIButton!
     @IBOutlet weak var farButton: UIButton!
     @IBOutlet weak var anyButton: UIButton!
-    @IBOutlet weak var distanceStackHeight: NSLayoutConstraint!
     @IBOutlet weak var distanceRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var distanceLeftConstraint: NSLayoutConstraint!
     
@@ -61,6 +59,9 @@ class SearchPageViewController: UIViewController{
     var distanceParam = Double()
     let favoritesVC = FavoritesViewController()
     var sidePresented = false
+    
+    //translation var for dismiss gesture
+    var viewTranslation = CGPoint(x: 0, y: 0)
     
     let userDefault = UserDefaults.standard
     let service = ServiceUtil()
@@ -108,14 +109,14 @@ class SearchPageViewController: UIViewController{
             cancelButton.isHidden = false
             piqLabel.isHidden = true
             
+            //set constraints
             costLeftConstraint.constant = 25
             costRightConstraint.constant = 25
             distanceLeftConstraint.constant = 25
             distanceRightConstraint.constant = 25
             
-            let edgePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
-//            edgePan.edges = .left
-            view.addGestureRecognizer(edgePan)
+            let gesturePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
+            view.addGestureRecognizer(gesturePan)
             
             
         default:
@@ -124,36 +125,8 @@ class SearchPageViewController: UIViewController{
 
         }
     }
-    //configurting gesture dismiss
-    var viewTranslation = CGPoint(x: 0, y: 0)
-    @objc func handleDismiss(sender: UIPanGestureRecognizer) {
-        switch sender.state {
-        case .changed:
-            
-            viewTranslation = sender.translation(in: view)
-            
-            if(viewTranslation.x > 0){
-            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.view.transform = CGAffineTransform(translationX: self.viewTranslation.x, y: 0)
-            })
-            }
-        case .ended:
-            if viewTranslation.x < 75 {
-                print("ended")
-                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    self.view.transform = .identity
-                })
-            } else {
-                print("else")
-                self.performSegue(withIdentifier: "unwindToCards", sender: self)
-            }
-        default:
-            print("default")
-            break
-        }
-    }
     
-    // MARK: - button onclicks
+    // MARK: - IBActions & Objc Functions
     @IBAction func costButtonClicked(_ sender: UIButton) {
         switch sender {
         case costButton1:
@@ -222,7 +195,7 @@ class SearchPageViewController: UIViewController{
     }
     
     
-    //MARK: - Segue
+    //Segues
     @IBAction func goToCards(_ sender: UIButton) {
         switch sidePresented {
         case true:
@@ -281,13 +254,12 @@ extension SearchPageViewController{
     }
 }
 
-//MARK: - Categories Collection Delegates (config)
+//MARK: - Categories Collection Delegates (Config)
 extension SearchPageViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             categoriesIndexArr.append(indexPath.row)
         
     }
-    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if(categoriesIndexArr.contains(indexPath.row)){
             if let index = categoriesIndexArr.firstIndex(of: indexPath.row) {
@@ -297,7 +269,6 @@ extension SearchPageViewController: UICollectionViewDelegate{
     }
     //not a delegate function
     func setCategoriesTitles(){
-        print(categoriesIndexArr)
         if(categoriesIndexArr.contains(0) || categoriesIndexArr.isEmpty){
             categoriesTitlesParam = [""]
         } else{
@@ -308,7 +279,6 @@ extension SearchPageViewController: UICollectionViewDelegate{
         }
         print(categoriesTitlesParam)
     }
-
 }
 
 //MARK: - Categories Collection Delegate (Data Source)
@@ -337,5 +307,36 @@ extension SearchPageViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
        return UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
+    }
+}
+
+//MARK: - Handlers
+extension SearchPageViewController{
+    
+    @objc func handleDismiss(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .changed:
+            
+            viewTranslation = sender.translation(in: view)
+            
+            if(viewTranslation.x > 0){
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.view.transform = CGAffineTransform(translationX: self.viewTranslation.x, y: 0)
+            })
+            }
+        case .ended:
+            if viewTranslation.x < 75 {
+                print("ended")
+                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.view.transform = .identity
+                })
+            } else {
+                print("else")
+                self.performSegue(withIdentifier: "unwindToCards", sender: self)
+            }
+        default:
+            print("default")
+            break
+        }
     }
 }

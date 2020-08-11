@@ -62,17 +62,18 @@ class LoginViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         service.backgroundTrigger()
     }
-    
-    @IBAction func goToRegister(_ sender: Any) {
-        self.performSegue(withIdentifier: "loginToRegister", sender: self)
-    }
-    
+
     // MARK: - IBActions & Objc Functions
     @IBAction func loginUser(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text{
             auth.login(viewController: self, email: email, password: password)
         }
     }
+    
+    @IBAction func goToRegister(_ sender: Any) {
+        self.performSegue(withIdentifier: "loginToRegister", sender: self)
+    }
+
 }
     //MARK: -- Keyboard Management
 extension LoginViewController {

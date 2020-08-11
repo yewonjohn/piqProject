@@ -12,15 +12,20 @@ import FirebaseAuth
 
 class ProfileViewController: UIViewController{
     
+    
+    //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fullNameLabel: UILabel!
     
+    
+    //MARK: - Properties
     var accountSettingsLabel = [String]()
     var accountSettingsImages = [UIImage]()
     let userDefault = UserDefaults.standard
     let auth = AuthManager()
 
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         
         accountSettingsLabel = ["Search History", "Password", "Rate Us", "App Feedback", "Logout"]
@@ -40,23 +45,8 @@ class ProfileViewController: UIViewController{
         attributedString1.append(attributedString2)
         self.fullNameLabel.attributedText = attributedString1
     }
-
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        tableView.reloadData()
-//        self.tableViewHeight.constant = self.tableView.contentSize.height
-//    }
-    
-//    override func viewDidLayoutSubviews() {
-//        tableView.frame.size = tableView.contentSize
-//    }
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
 }
-
+//MARK: -- TableView DataSource and Delegate
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +93,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-//MARK:- hexColor Function
+//MARK:- hexColor Method
 extension ProfileViewController{
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

@@ -36,8 +36,8 @@ class TabBarViewController: UITabBarController{
         vc.distance = distance
     }
     
-    //MARK: - Segues
-    
+    // MARK: - IBActions & Objc Functions (Segues)
+
     //'Cancel' button segue
     @IBAction func unwindToCards(_ unwindSegue: UIStoryboardSegue) {
         
@@ -58,7 +58,6 @@ class TabBarViewController: UITabBarController{
         vc.dollarSign = dollarSign
         vc.distance = distance
         vc.getCards()
-        
     }
 }
 //MARK:- Tab Bar Delegate

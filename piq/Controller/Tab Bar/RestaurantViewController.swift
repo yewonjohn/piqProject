@@ -75,57 +75,7 @@ class RestaurantViewController: UIViewController {
         getCards()
     }
     
-    func getCards(){
-        
-        //make sure empty label and reset button is hidden when new search
-        resetButton.isHidden = true
-        emptyCardsLabel.isHidden = true
-        
-        //get category title alias
-        var categoryAlias: String? = nil
-        for category in categoriesArr{
-            if let catTitle = category.title, let catAlias = category.alias{
-                if (categoriesTitles.contains(catTitle)){
-                    if(categoryAlias == nil){
-                        categoryAlias = catAlias
-                    }else {
-                        categoryAlias! += ","+catAlias
-                    }
-                }
-            }
-        }
-        if(dollarSign == "0" || dollarSign == ""){
-            dollarSign = nil
-        }
-        if(distance == 0.0 || distance == nil){
-            finalDist = nil
-        } else{
-            if let dist = distance{
-                finalDist = Int(dist * 1609)
-            }
-        }
-        
-        var currentLoc: CLLocation!
-
-        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-            CLLocationManager.authorizationStatus() == .authorizedAlways) {
-            currentLoc = locationManager.location
-            
-            //Calling API for all the Cards Data using current location
-            restaurantAPI.getLocalRestaurants(distance: finalDist, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
-                self.viewModelData = businessModelArray
-                self.stackContainer.dataSource = self
-                //stop loading animation
-                self.loadingView.stopAnimating()
-            }
-        }
-    }
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("triggered")
-        getCards()
-    }
-    
-    //MARK: - Configurations
+    //MARK: - Layout Configurations
     //SETS CONTAINER CONSTRAINTS
     func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -328,9 +278,64 @@ class LeftToRightTransition: NSObject, UIViewControllerAnimatedTransitioning {
     }
 }
 
-//MARK:- Restaurant Manager Delegate (IS LOADING)
+//MARK:- Restaurant Manager Delegate (LOADING ICON)
 extension RestaurantViewController: RestaurantManagerDelegate{
     func isLoading() {
         loadingView.startAnimating()
+    }
+}
+
+//MARK:- Restaurant API Call
+extension RestaurantViewController{
+    
+    func getCards(){
+        
+        //make sure empty label and reset button is hidden when new search
+        resetButton.isHidden = true
+        emptyCardsLabel.isHidden = true
+        
+        //get category title alias
+        var categoryAlias: String? = nil
+        for category in categoriesArr{
+            if let catTitle = category.title, let catAlias = category.alias{
+                if (categoriesTitles.contains(catTitle)){
+                    if(categoryAlias == nil){
+                        categoryAlias = catAlias
+                    }else {
+                        categoryAlias! += ","+catAlias
+                    }
+                }
+            }
+        }
+        if(dollarSign == "0" || dollarSign == ""){
+            dollarSign = nil
+        }
+        if(distance == 0.0 || distance == nil){
+            finalDist = nil
+        } else{
+            if let dist = distance{
+                finalDist = Int(dist * 1609)
+            }
+        }
+        
+        var currentLoc: CLLocation!
+
+        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+            currentLoc = locationManager.location
+            
+            //Calling API for all the Cards Data using current location
+            restaurantAPI.getLocalRestaurants(distance: finalDist, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
+                self.viewModelData = businessModelArray
+                self.stackContainer.dataSource = self
+                //stop loading animation here
+                self.loadingView.stopAnimating()
+            }
+        }
+    }
+    //making sure data refreshes once user clicks 'allow' to location
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("triggered")
+        getCards()
     }
 }
