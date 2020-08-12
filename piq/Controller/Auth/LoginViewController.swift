@@ -12,7 +12,6 @@ import IQKeyboardManager
 class LoginViewController: UIViewController {
     
     //MARK: - Outlets
-    
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var containerView: UIView!

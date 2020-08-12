@@ -18,9 +18,7 @@ class ServiceUtil{
         backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        //        backgroundImageView.image = UIImage(named: "tacosImg")
         backgroundImageView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
-        //        backgroundImageView.alpha = 0.5
         view.sendSubviewToBack(backgroundImageView)
     }
 
@@ -36,8 +34,7 @@ class ServiceUtil{
                        animations: {
                         button.transform = CGAffineTransform.identity
                         button.tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
-                        //                                    button.layer.borderWidth = 1
-                        //                                    button.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+
         },
                        completion: { _ in }
         )
@@ -104,8 +101,6 @@ class ServiceUtil{
     
     func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
         
-        print(imageArray.count-1)
-        print(counter)
         if(counter == imageArray.count-1){
             counter = 0
         }

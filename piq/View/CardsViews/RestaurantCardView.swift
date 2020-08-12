@@ -17,10 +17,7 @@ protocol RestaurantCardsDelegate {
 }
 
 class RestaurantCardView : UIView {
-    
-    let favoritesManager = FavoritesManager()
-    let service = ServiceUtil()
-    
+
     //MARK: - UI Properties
     var shadowView : UIView!
     var swipeView : UIView!
@@ -38,10 +35,12 @@ class RestaurantCardView : UIView {
     var yelpImgView: UIImageView!
     var arrowButton = UIButton()
 
-    var categoryTitles = ""
-    
+    //MARK: - Other Properties
+    let favoritesManager = FavoritesManager()
+    let service = ServiceUtil()
     var delegate : RestaurantCardsDelegate?
     
+    var categoryTitles = ""
     var divisor : CGFloat = 0
     let baseView = UIView()
     
@@ -147,7 +146,6 @@ class RestaurantCardView : UIView {
         configureDistanceView()
         configurePhoneView()
         configureArrow()
-//        configureYelpView()
         configureButton()
         addPanGestureOnCards()
         configureTapGesture()
@@ -304,8 +302,6 @@ class RestaurantCardView : UIView {
         let image = UIImage(named: "plus-tab")?.withRenderingMode(.alwaysTemplate)
         favoriteButton.setImage(image, for: .normal)
         favoriteButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//        favoriteButton.layer.borderWidth = 1
-//        favoriteButton.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         favoriteButton.layer.cornerRadius  = 7
         favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -30).isActive = true
         favoriteButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -30).isActive = true

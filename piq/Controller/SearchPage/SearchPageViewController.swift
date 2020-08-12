@@ -77,7 +77,6 @@ class SearchPageViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        walkButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 18, bottom: 8, right: 18)
         costStackView.heightAnchor.constraint(equalTo: costStackView.widthAnchor, multiplier: 0.13).isActive = true
         distanceStackView.heightAnchor.constraint(equalTo: distanceStackView.widthAnchor, multiplier: 0.13).isActive = true
 
@@ -326,16 +325,13 @@ extension SearchPageViewController{
             }
         case .ended:
             if viewTranslation.x < 75 {
-                print("ended")
                 UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     self.view.transform = .identity
                 })
             } else {
-                print("else")
                 self.performSegue(withIdentifier: "unwindToCards", sender: self)
             }
         default:
-            print("default")
             break
         }
     }

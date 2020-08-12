@@ -59,7 +59,7 @@ class RegisterViewController: UIViewController {
     // MARK: - IBActions & Objc Functions
     
     @IBAction func goToLogin(_ sender: Any) {
-        self.performSegue(withIdentifier: "RegisterToMain", sender: self)
+        	navigationController?.popViewController(animated: true)
     }
     
     @IBAction func register(_ sender: UIButton) {

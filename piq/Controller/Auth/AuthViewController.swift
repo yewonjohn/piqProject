@@ -10,10 +10,13 @@ import Foundation
 import UIKit
 
 class AuthViewController: UIViewController{
+    //MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     
+    //MARK: - Properties
     let userDefault = UserDefaults.standard
     
+    //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         

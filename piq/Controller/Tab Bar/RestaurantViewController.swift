@@ -233,7 +233,7 @@ extension RestaurantViewController: UIViewControllerTransitioningDelegate{
 }
 //MARK:-- Custom Transition (Right to Left Transition)
 class RightToLeftTransition: NSObject, UIViewControllerAnimatedTransitioning {
-    let duration: TimeInterval = 0.25
+    let duration: TimeInterval = 0.15
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
@@ -257,7 +257,7 @@ class RightToLeftTransition: NSObject, UIViewControllerAnimatedTransitioning {
 }
 //MARK:-- Custom Transition (Left to Right Transition)
 class LeftToRightTransition: NSObject, UIViewControllerAnimatedTransitioning {
-    let duration: TimeInterval = 0.25
+    let duration: TimeInterval = 0.15
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
