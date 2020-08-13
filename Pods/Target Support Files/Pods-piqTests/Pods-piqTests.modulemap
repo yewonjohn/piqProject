@@ -1,0 +1,6 @@
+framework module Pods_piqTests {
+  umbrella header "Pods-piqTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
