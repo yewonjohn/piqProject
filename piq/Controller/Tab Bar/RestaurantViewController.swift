@@ -18,6 +18,7 @@ class RestaurantViewController: UIViewController {
     let emptyCardsLabel = UILabel()
     let signOutButton = UIButton()
     let resetButton = UIButton()
+    let resetLabel = UILabel()
 
     let shadowView = UIView()
     let loadingView = NVActivityIndicatorView(frame: .zero)
@@ -50,7 +51,7 @@ class RestaurantViewController: UIViewController {
         view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         stackContainer = StackContainerView()
         view.addSubview(stackContainer)
-        configureStackContainer()
+//        configureStackContainer()
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
         configureResetNavigationBarButtonItem()
         restaurantAPI.delegate = self
@@ -66,13 +67,20 @@ class RestaurantViewController: UIViewController {
         setPiqTitle()
         setFilterButton()
         setResetButton()
+        setResetLabel()
         setShadowView()
         setLoadingView()
+//        configureStackContainer()
 
         //set background
         ServiceUtil().setAuthBackground(view,backgroundImageView)
 
         getCards()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configureStackContainer()
     }
     
     //MARK: - Layout Configurations
@@ -82,11 +90,8 @@ class RestaurantViewController: UIViewController {
         stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
 //        stackContainer.widthAnchor.constraint(equalToConstant: 350).isActive = true
 //        stackContainer.heightAnchor.constraint(equalToConstant: 500).isActive = true
-        print(view.frame.width)
-        print(view.frame.width * 0.60)
-        print(self.view.frame.height * 0.75)
-        stackContainer.widthAnchor.constraint(equalToConstant: view.frame.width * 0.60).isActive = true
-        stackContainer.heightAnchor.constraint(equalToConstant: view.frame.height * 0.75).isActive = true
+        stackContainer.widthAnchor.constraint(equalToConstant: view.frame.width * 0.83).isActive = true
+        stackContainer.heightAnchor.constraint(equalToConstant: view.frame.height * 0.58).isActive = true
     }
     //SETS RESET NAVIGATIONAL BUTTON
     func configureResetNavigationBarButtonItem() {
@@ -111,7 +116,7 @@ class RestaurantViewController: UIViewController {
         piqTitle.font = UIFont(name: "Montserrat-SemiBold", size: 36)
         piqTitle.text = "piq"
         piqTitle.translatesAutoresizingMaskIntoConstraints = false
-        piqTitle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 55).isActive = true
+        piqTitle.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         piqTitle.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
 //        piqTitle.leftAnchor.constraint(equalTo: self.view!.leftAnchor, constant: 100).isActive = true
     }
@@ -119,7 +124,7 @@ class RestaurantViewController: UIViewController {
         self.view?.addSubview(filterButton)
         filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: .normal)
         filterButton.translatesAutoresizingMaskIntoConstraints = false
-        filterButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 55).isActive = true
+        filterButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         filterButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
         filterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
@@ -144,6 +149,18 @@ class RestaurantViewController: UIViewController {
         resetButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         resetButton.addTarget(self, action: #selector(resetTapped), for: .touchUpInside)
         resetButton.isUserInteractionEnabled = true
+    }
+    
+    func setResetLabel(){
+        self.view.addSubview(resetLabel)
+        resetLabel.text = "reset"
+        resetLabel.font = UIFont(name: "Montserrat-Medium", size: 8)
+        resetLabel.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        resetLabel.textAlignment = .center
+        resetLabel.translatesAutoresizingMaskIntoConstraints = false
+        resetLabel.centerXAnchor.constraint(equalTo: resetButton.centerXAnchor, constant: 0).isActive = true
+        resetLabel.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 0).isActive = true
+        resetLabel.isHidden = true
     }
       func setShadowView(){
 
@@ -179,8 +196,8 @@ class RestaurantViewController: UIViewController {
         stackContainer.reloadData()
         emptyCardsLabel.isHidden = true
         service.animateResetButton(button: resetButton)
+        service.animateResetLabel(label: resetLabel)
     }
-
 }
 //MARK: - DataSource for StackContainerView (Delegate)
 
@@ -202,6 +219,7 @@ extension RestaurantViewController : RestaurantCardsDataSource {
     
     func swipeStarted() -> Bool {
         service.animateResetButton(button: resetButton)
+        service.animateResetLabel(label: resetLabel)
         return false
     }
 }

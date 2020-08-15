@@ -35,13 +35,14 @@ class ProfileViewController: UIViewController{
         tableView.register(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "SettingsCell")
         tableView.layer.cornerRadius = 30
         
+        print(view.frame.height * 0.5)
+        tableViewHeight.constant = view.frame.height * 0.4
         
+        //setting two different colors on one label
         let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 24), NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "#828282")]
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 24), NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "#E86042")]
-
         let attributedString1 = NSMutableAttributedString(string:"Hello, ", attributes:attrs1)
         let attributedString2 = NSMutableAttributedString(string:auth.getDisplayName() ?? "Stranger", attributes:attrs2)
-
         attributedString1.append(attributedString2)
         self.fullNameLabel.attributedText = attributedString1
     }
@@ -63,7 +64,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 69    }
+        return (view.frame.height * 0.4)/5
+    }
     
     //Takes user to yelp page of selected favorite item
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -52,7 +52,6 @@ class RegisterViewController: UIViewController {
         passwordHeight.constant = self.view.frame.height * 0.055
         validateHeight.constant = self.view.frame.height * 0.055
         registerHeight.constant = self.view.frame.height * 0.055
-        print(self.view.frame.height * 0.055)
 
         
         IQKeyboardManager.shared().isEnabled = true

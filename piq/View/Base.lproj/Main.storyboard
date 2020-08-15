@@ -854,7 +854,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="340" id="O7b-tk-6TT"/>
                                 </constraints>
-                                <color key="separatorColor" red="0.97254901960784312" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuCell" textLabel="S6y-Eh-Zsy" style="IBUITableViewCellStyleDefault" id="a36-Cf-r1s">

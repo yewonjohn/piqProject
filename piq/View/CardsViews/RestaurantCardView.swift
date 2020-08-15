@@ -191,7 +191,10 @@ class RestaurantCardView : UIView {
         imageContainView.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
         imageContainView.topAnchor.constraint(equalTo: swipeView.topAnchor).isActive = true
         imageContainView.widthAnchor.constraint(equalTo: self.swipeView.widthAnchor, multiplier: 1.0).isActive = true
-        imageContainView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+//        imageContainView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        print(swipeView.frame.height * 0.60)
+        imageContainView.heightAnchor.constraint(equalTo: self.swipeView.heightAnchor, multiplier: 0.70).isActive = true
+
     }
     
     func configureImageView() {
@@ -229,8 +232,10 @@ class RestaurantCardView : UIView {
         ratingsView.translatesAutoresizingMaskIntoConstraints = false
         ratingsView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor).isActive = true
         ratingsView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
-        ratingsView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        ratingsView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        ratingsView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+//        ratingsView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        ratingsView.widthAnchor.constraint(equalTo: swipeView.widthAnchor, multiplier: 0.45).isActive = true
+        ratingsView.heightAnchor.constraint(equalTo: swipeView.heightAnchor, multiplier: 0.10).isActive = true
     }
     
     func configureRatingsCountView() {
@@ -239,8 +244,11 @@ class RestaurantCardView : UIView {
         ratingsCountView.textAlignment = .left
         ratingsCountView.font = UIFont(name: "Montserrat-Medium", size: 12)
         ratingsCountView.translatesAutoresizingMaskIntoConstraints = false
-        ratingsCountView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: 16).isActive = true
+//        ratingsCountView.centerXAnchor.constraint(equalTo: ratingsView.centerXAnchor).isActive = true
+//        ratingsCountView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: 16).isActive = true
         ratingsCountView.leftAnchor.constraint(equalTo: ratingsView.rightAnchor, constant: 8).isActive = true
+        ratingsCountView.centerYAnchor.constraint(equalTo: ratingsView.centerYAnchor, constant: 0).isActive = true
+
     }
     
     func configureDollarSignsView() {
@@ -251,6 +259,8 @@ class RestaurantCardView : UIView {
         dollarSignsView.translatesAutoresizingMaskIntoConstraints = false
         dollarSignsView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
         dollarSignsView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
+        dollarSignsView.adjustsFontSizeToFitWidth = true
+        dollarSignsView.minimumScaleFactor = 0.2
     }
     
     func configureCategoriesView() {
@@ -263,7 +273,9 @@ class RestaurantCardView : UIView {
         categoriesView.translatesAutoresizingMaskIntoConstraints = false
         categoriesView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
         categoriesView.leftAnchor.constraint(equalTo: dollarSignsView.rightAnchor, constant: 4).isActive = true
-        categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 2).isActive = true
+        categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 4).isActive = true
+        categoriesView.adjustsFontSizeToFitWidth = true
+        categoriesView.minimumScaleFactor = 0.2
     }
     
     func configureDistanceView() {
@@ -285,6 +297,9 @@ class RestaurantCardView : UIView {
         distanceView.translatesAutoresizingMaskIntoConstraints = false
         distanceView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         distanceView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
+        distanceView.adjustsFontSizeToFitWidth = true
+        distanceView.minimumScaleFactor = 0.2
+        
     }
     
     func configurePhoneView() {
@@ -295,6 +310,10 @@ class RestaurantCardView : UIView {
         phoneView.translatesAutoresizingMaskIntoConstraints = false
         phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         phoneView.leftAnchor.constraint(equalTo: distanceView.rightAnchor, constant: 4).isActive = true
+        phoneView.centerYAnchor.constraint(equalTo: distanceView.centerYAnchor, constant: 0).isActive = true
+        phoneView.adjustsFontSizeToFitWidth = true
+        phoneView.minimumScaleFactor = 0.2
+
     }
     func configureButton() {
         swipeView.addSubview(favoriteButton)
@@ -303,8 +322,8 @@ class RestaurantCardView : UIView {
         favoriteButton.setImage(image, for: .normal)
         favoriteButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         favoriteButton.layer.cornerRadius  = 7
-        favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -30).isActive = true
-        favoriteButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -30).isActive = true
+        favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -20).isActive = true
+        favoriteButton.centerYAnchor.constraint(equalTo: phoneView.centerYAnchor, constant: 0).isActive = true
     }
     func configureArrow(){
         swipeView.addSubview(arrowButton)
@@ -318,6 +337,7 @@ class RestaurantCardView : UIView {
         arrowButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
         arrowButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: 5).isActive = true
         arrowButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
+        arrowButton.topAnchor.constraint(greaterThanOrEqualTo: phoneView.bottomAnchor, constant: 5).isActive = true
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(goToURL))
         arrowButton.isUserInteractionEnabled = true

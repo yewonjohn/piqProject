@@ -27,6 +27,9 @@ class FavoritesCell: SwipeTableViewCell {
         
         favoritesImage.layer.cornerRadius = 15
         favoritesImage.clipsToBounds = true
+        
+        favoritesTitle.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: 4).isActive = true
+        favoritesCategories.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: 4).isActive = true
     }
     
 }

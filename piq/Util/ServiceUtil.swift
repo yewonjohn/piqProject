@@ -67,6 +67,32 @@ class ServiceUtil{
         }
     }
     
+    func animateResetLabel(label: UILabel){
+    if(label.isHidden == false){
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                        label.alpha = 0
+                        
+        },
+                       completion: { _ in
+                        label.isHidden = true
+        }
+        )
+    }else{
+        UIView.animate(withDuration: 1.0,
+                       delay: 0,
+                       options: UIView.AnimationOptions.allowUserInteraction,
+                       animations: {
+                        label.isHidden = false
+                        label.alpha = 1
+        },
+                       completion: { _ in }
+        )
+    }
+    }
+    
     func animateShadowView(view: UIView){
         if(view.isHidden == false){
             UIView.animate(withDuration: 0.35,
