@@ -22,6 +22,8 @@ class SearchPageViewController: UIViewController{
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var categoryCell: CategoryCell!
+    
     @IBOutlet weak var findFoodButton: FoodButton!
     @IBOutlet weak var piqLabel: UILabel!
     
@@ -44,6 +46,8 @@ class SearchPageViewController: UIViewController{
     @IBOutlet weak var distanceRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var distanceLeftConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var categoryTitleTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var categoryCollectionHeight: NSLayoutConstraint!
     
     
     // MARK: - Properties
@@ -76,10 +80,12 @@ class SearchPageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         costStackView.heightAnchor.constraint(equalTo: costStackView.widthAnchor, multiplier: 0.13).isActive = true
         distanceStackView.heightAnchor.constraint(equalTo: distanceStackView.widthAnchor, multiplier: 0.13).isActive = true
-
+        
+        categoryTitleTopConstraint.constant = self.view.frame.height * 0.2
+        categoryCollectionHeight.constant = self.view.frame.height * 0.2
+        print(self.view.frame.height * 0.2)
 
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }
@@ -300,7 +306,8 @@ extension SearchPageViewController: UICollectionViewDataSource{
 extension SearchPageViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 123, height: 180)
+
+        return CGSize(width: collectionView.frame.height * 0.6, height: collectionView.frame.height * 0.9)
 
     }
     
@@ -324,7 +331,7 @@ extension SearchPageViewController{
             })
             }
         case .ended:
-            if viewTranslation.x < 75 {
+            if viewTranslation.x < 55 {
                 UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     self.view.transform = .identity
                 })

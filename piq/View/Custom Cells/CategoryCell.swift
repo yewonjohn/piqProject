@@ -68,16 +68,23 @@ class CategoryCell: UICollectionViewCell{
         self.selectedBackgroundView = selectedView
         
         contentView.addSubview(categoryImage)
-
-        categoryImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30).isActive = true
         categoryImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        categoryImage.heightAnchor.constraint(equalToConstant: 90).isActive = true
-        categoryImage.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        categoryImage.heightAnchor.constraint(equalToConstant: contentView.frame.height * 0.4).isActive = true
+        categoryImage.widthAnchor.constraint(equalToConstant: contentView.frame.height * 0.4).isActive = true
+        let imageHeight = NSLayoutConstraint(item: categoryImage, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 0.80, constant: 0)
+        imageHeight.isActive = true
 
+        
+        
         contentView.addSubview(categoryTitle)
         categoryTitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15).isActive = true
         categoryTitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-      
+        categoryTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        categoryTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        
+        categoryTitle.adjustsFontSizeToFitWidth = true
+        categoryTitle.minimumScaleFactor = 0.2
+        
     }
     
     required init?(coder: NSCoder) {

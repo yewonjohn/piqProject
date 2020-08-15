@@ -80,8 +80,13 @@ class RestaurantViewController: UIViewController {
     func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
-        stackContainer.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        stackContainer.heightAnchor.constraint(equalToConstant: 500).isActive = true
+//        stackContainer.widthAnchor.constraint(equalToConstant: 350).isActive = true
+//        stackContainer.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        print(view.frame.width)
+        print(view.frame.width * 0.60)
+        print(self.view.frame.height * 0.75)
+        stackContainer.widthAnchor.constraint(equalToConstant: view.frame.width * 0.60).isActive = true
+        stackContainer.heightAnchor.constraint(equalToConstant: view.frame.height * 0.75).isActive = true
     }
     //SETS RESET NAVIGATIONAL BUTTON
     func configureResetNavigationBarButtonItem() {
