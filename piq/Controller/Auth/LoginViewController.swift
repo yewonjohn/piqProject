@@ -62,14 +62,11 @@ class LoginViewController: UIViewController {
         containerView.clipsToBounds = true
         
         //making navigation bar transparent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
+        self.navigationController?.setup()
         
-        service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: AuthPage.animationIcons)
-        service.animateSecondIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: AuthPage.animationIcons2)
-        service.animateThirdIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: AuthPage.animationIcons3)
+        service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1)
+        service.animateIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2)
+        service.animateIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3)
         
     }
     
@@ -89,15 +86,15 @@ class LoginViewController: UIViewController {
     }
 
 }
-    //MARK: -- Keyboard Management
-extension LoginViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
+//    //MARK: -- Keyboard Management
+//extension LoginViewController {
+//    func hideKeyboardWhenTappedAround() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tap)
+//    }
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
+//}
 

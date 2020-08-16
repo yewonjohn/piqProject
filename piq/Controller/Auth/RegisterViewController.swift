@@ -61,14 +61,12 @@ class RegisterViewController: UIViewController {
         containerView.clipsToBounds = true
         
         //making navigation bar transparent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
+        self.navigationController?.setup()
+
         
-        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons)
-        service.animateSecondIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2)
-        service.animateThirdIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3)
+        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1)
+        service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2)
+        service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,7 +84,7 @@ class RegisterViewController: UIViewController {
                 auth.register(viewController: self, email: email, password: password, name: nameTextField.text ?? "")
             }else {
                 let alert = UIAlertController(title: "uh oh", message: "password doesn't match!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: { action in}))
+                alert.addAction(UIAlertAction(title: "ok sorry", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
         }
@@ -94,13 +92,13 @@ class RegisterViewController: UIViewController {
 }
 
     //MARK: -- Keyboard Management
-extension RegisterViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
+//extension RegisterViewController {
+//    func hideKeyboardWhenTappedAround() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tap)
+//    }
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
+//}

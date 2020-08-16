@@ -26,6 +26,7 @@
 		4496386324D76582007576E1 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4496386224D76563007576E1 /* Montserrat-Medium.ttf */; };
 		4496386D24D7AE95007576E1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496386C24D7AE95007576E1 /* CategoryCell.swift */; };
 		44A6E33924B5194B008E4D19 /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6E33824B5194B008E4D19 /* SearchPageViewController.swift */; };
+		44A7883524E87EDB005789E5 /* UIKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A7883424E87EDB005789E5 /* UIKit+Extensions.swift */; };
 		44D201BC249D76F70074F315 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BB249D76F70074F315 /* AppDelegate.swift */; };
 		44D201BE249D76F70074F315 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BD249D76F70074F315 /* SceneDelegate.swift */; };
 		44D201C0249D76F70074F315 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D201BF249D76F70074F315 /* LoginViewController.swift */; };
@@ -96,6 +97,7 @@
 		4496386224D76563007576E1 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		4496386C24D7AE95007576E1 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		44A6E33824B5194B008E4D19 /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
+		44A7883424E87EDB005789E5 /* UIKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extensions.swift"; sourceTree = "<group>"; };
 		44D201B8249D76F70074F315 /* piq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = piq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D201BB249D76F70074F315 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44D201BD249D76F70074F315 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +207,8 @@
 		44712D7524A267D80083B1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				44712D7D24A26CF40083B1AB /* Constants.swift */,
+				44A7883424E87EDB005789E5 /* UIKit+Extensions.swift */,
 				4476A20C24A416600009719D /* RestaurantModel.swift */,
 				44DA293924B7E137003974AE /* FavoritesModel.swift */,
 				44E09CC724C8CF13009C3370 /* CategoryModel.swift */,
@@ -226,6 +230,7 @@
 		44712D7724A267EA0083B1AB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				44E79B5E24A2FDAA00DDC48E /* Service */,
 				44DA293C24B7E1EC003974AE /* Auth */,
 				44DA293D24B7E1F6003974AE /* SearchPage */,
 				44DA293F24B7E7A3003974AE /* Tab Bar */,
@@ -295,7 +300,6 @@
 			children = (
 				44D201BB249D76F70074F315 /* AppDelegate.swift */,
 				44D201BD249D76F70074F315 /* SceneDelegate.swift */,
-				44E79B5E24A2FDAA00DDC48E /* Util */,
 				441B918624DF7F29004B27D9 /* Api */,
 				44712D7524A267D80083B1AB /* Model */,
 				44712D7624A267E30083B1AB /* View */,
@@ -366,13 +370,12 @@
 			path = "Tab Bar";
 			sourceTree = "<group>";
 		};
-		44E79B5E24A2FDAA00DDC48E /* Util */ = {
+		44E79B5E24A2FDAA00DDC48E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				44712D7D24A26CF40083B1AB /* Constants.swift */,
 				44E79B6124A2FEAB00DDC48E /* ServiceUtil.swift */,
 			);
-			path = Util;
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -655,6 +658,7 @@
 				44712D7E24A26CF40083B1AB /* Constants.swift in Sources */,
 				4496386D24D7AE95007576E1 /* CategoryCell.swift in Sources */,
 				4496385B24D68DCE007576E1 /* FoodButton.swift in Sources */,
+				44A7883524E87EDB005789E5 /* UIKit+Extensions.swift in Sources */,
 				44E79B5B24A2E5C000DDC48E /* RestaurantViewController.swift in Sources */,
 				44DA294224B8E7AB003974AE /* FavoritesManager.swift in Sources */,
 				44DA293824B7D359003974AE /* FavoritesCell.swift in Sources */,

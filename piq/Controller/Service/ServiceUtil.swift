@@ -109,7 +109,7 @@ class ServiceUtil{
             UIView.animate(withDuration: 0.35,
                            delay: 0,
                            animations: {
-                            view.isHidden = false
+                            view.isHidden = false
                             view.alpha = 0.7
             },
                            completion: { _ in }
@@ -123,22 +123,33 @@ class ServiceUtil{
         inBackground = true
     }
     
-    var counter = 0
-    
-    func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
         
-        if(counter == imageArray.count-1){
-            counter = 0
+    func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?], imageIndex: Int, iconId: Int){
+        var delayNumber = 1.0
+        print("something")
+        switch iconId {
+        case 1:
+            delayNumber = 1.0
+        case 2:
+            delayNumber = 2.5
+        case 3:
+            delayNumber = 4.15
+        default:
+            delayNumber = 1.0
         }
-        icon.image = imageArray[counter]
-        counter = counter + 1
         
+        if(imageIndex == imageArray.count){
+              icon.image = imageArray[0]
+        } else {
+              icon.image = imageArray[imageIndex]
+        }
+                
         var customTransform = icon.transform
         customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
         customTransform = customTransform.translatedBy(x: 75, y: 245)
         customTransform = customTransform.rotated(by: .pi/8)
         
-        UIView.animate(withDuration: 0.6, delay: 1, animations: {
+        UIView.animate(withDuration: 0.6, delay: delayNumber, animations: {
 
             icon.transform = customTransform
 
@@ -161,110 +172,114 @@ class ServiceUtil{
                 }, completion: { _ in
                     icon.transform = .identity
                     if(!self.inBackground){
-                    self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
-                    }
-                })
-                
-            })
-        })
-    }
-    
-    var counter2 = 0
-    func animateSecondIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
-        
-        if(counter2 == imageArray.count-1){
-            counter2 = 0
-        }
-        icon.image = imageArray[counter2]
-        counter2 = counter2 + 1
-        
-        var customTransform = icon.transform
-        customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-        customTransform = customTransform.translatedBy(x: 75, y: 245)
-        customTransform = customTransform.rotated(by: .pi/8)
-        
-        UIView.animate(withDuration: 0.6, delay: 2.5, animations: {
-
-            icon.transform = customTransform
-
-        }, completion: { _ in
-            
-            customTransform = customTransform.translatedBy(x: 375, y: 50)
-            customTransform = customTransform.scaledBy(x: 2, y: 2)
-            customTransform = customTransform.rotated(by: -.pi/10)
-
-            UIView.animate(withDuration: 0.6, delay: 1, animations: {
-                icon.transform = customTransform
-                
-            }, completion: { _ in
-                
-                customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
-                customTransform = customTransform.rotated(by: -.pi/3)
-                UIView.animate(withDuration: 0.6, delay: 1, animations: {
-                    icon.transform = customTransform.translatedBy(x: 300, y: 0)
-                    
-                }, completion: { _ in
-                    icon.transform = .identity
-                    if(!self.inBackground){
-                    self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
-                    }
-                })
-                
-            })
-        })
-    }
-        var counter3 = 0
-        func animateThirdIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
-            
-            if(counter3 == imageArray.count-1){
-                counter3 = 0
-            }
-            icon.image = imageArray[counter3]
-            counter3 = counter3 + 1
-            
-            var customTransform = icon.transform
-            customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-            customTransform = customTransform.translatedBy(x: 75, y: 245)
-            customTransform = customTransform.rotated(by: .pi/8)
-            
-            UIView.animate(withDuration: 0.6, delay: 4.15, animations: {
-
-                icon.transform = customTransform
-
-            }, completion: { _ in
-                
-                customTransform = customTransform.translatedBy(x: 375, y: 50)
-                customTransform = customTransform.scaledBy(x: 2, y: 2)
-                customTransform = customTransform.rotated(by: -.pi/10)
-
-                UIView.animate(withDuration: 0.6, delay: 1, animations: {
-                    icon.transform = customTransform
-                    
-                }, completion: { _ in
-                    
-                    customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
-                    customTransform = customTransform.rotated(by: -.pi/3)
-                    UIView.animate(withDuration: 0.6, delay: 1, animations: {
-                        icon.transform = customTransform.translatedBy(x: 300, y: 0)
-                        
-                    }, completion: { _ in
-                        icon.transform = .identity
-                        if(!self.inBackground){
-                        self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+                        if(imageIndex == imageArray.count){
+                             self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: 0, iconId: iconId)
+                        } else {
+                              self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: imageIndex+1, iconId: iconId)
                         }
-                    })
+                    }
                 })
+                
             })
-        }
-    
-    
+        })
+    }
+//
+//    var counter2 = 0
+//    func animateSecondIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
+//
+//        if(counter2 == imageArray.count-1){
+//            counter2 = 0
+//        }
+//        icon.image = imageArray[counter2]
+//        counter2 = counter2 + 1
+//
+//        var customTransform = icon.transform
+//        customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
+//        customTransform = customTransform.translatedBy(x: 75, y: 245)
+//        customTransform = customTransform.rotated(by: .pi/8)
+//
+//        UIView.animate(withDuration: 0.6, delay: 2.5, animations: {
+//
+//            icon.transform = customTransform
+//
+//        }, completion: { _ in
+//
+//            customTransform = customTransform.translatedBy(x: 375, y: 50)
+//            customTransform = customTransform.scaledBy(x: 2, y: 2)
+//            customTransform = customTransform.rotated(by: -.pi/10)
+//
+//            UIView.animate(withDuration: 0.6, delay: 1, animations: {
+//                icon.transform = customTransform
+//
+//            }, completion: { _ in
+//
+//                customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
+//                customTransform = customTransform.rotated(by: -.pi/3)
+//                UIView.animate(withDuration: 0.6, delay: 1, animations: {
+//                    icon.transform = customTransform.translatedBy(x: 300, y: 0)
+//
+//                }, completion: { _ in
+//                    icon.transform = .identity
+//                    if(!self.inBackground){
+//                    self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+//                    }
+//                })
+//
+//            })
+//        })
+//    }
+//        var counter3 = 0
+//        func animateThirdIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
+//
+//            if(counter3 == imageArray.count-1){
+//                counter3 = 0
+//            }
+//            icon.image = imageArray[counter3]
+//            counter3 = counter3 + 1
+//
+//            var customTransform = icon.transform
+//            customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
+//            customTransform = customTransform.translatedBy(x: 75, y: 245)
+//            customTransform = customTransform.rotated(by: .pi/8)
+//
+//            UIView.animate(withDuration: 0.6, delay: 4.15, animations: {
+//
+//                icon.transform = customTransform
+//
+//            }, completion: { _ in
+//
+//                customTransform = customTransform.translatedBy(x: 375, y: 50)
+//                customTransform = customTransform.scaledBy(x: 2, y: 2)
+//                customTransform = customTransform.rotated(by: -.pi/10)
+//
+//                UIView.animate(withDuration: 0.6, delay: 1, animations: {
+//                    icon.transform = customTransform
+//
+//                }, completion: { _ in
+//
+//                    customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
+//                    customTransform = customTransform.rotated(by: -.pi/3)
+//                    UIView.animate(withDuration: 0.6, delay: 1, animations: {
+//                        icon.transform = customTransform.translatedBy(x: 300, y: 0)
+//
+//                    }, completion: { _ in
+//                        icon.transform = .identity
+//                        if(!self.inBackground){
+//                        self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
+//                        }
+//                    })
+//                })
+//            })
+//        }
+//
+//
     func deselectButtons(button1: UIButton, button2:UIButton, button3:UIButton, button4:UIButton, buttonAll: UIButton, index: Int){
         if(index == 1){
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
-            
+
             button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
@@ -276,7 +291,7 @@ class ServiceUtil{
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
-            
+
             button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
@@ -287,7 +302,7 @@ class ServiceUtil{
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
-            
+
             button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
@@ -298,7 +313,7 @@ class ServiceUtil{
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             buttonAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
-            
+
             button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
@@ -309,14 +324,14 @@ class ServiceUtil{
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button3.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
             button4.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)
-            
+
             button1.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button2.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button3.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
             button4.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
         }
     }
-    
+
     func deselectDistButtons(buttonDist1: UIButton, buttonDist2:UIButton, buttonDist3:UIButton, buttonDist4:UIButton, buttonDistAll: UIButton, index: Int){
         if(index == 1){
             buttonDist2.setBackgroundImage(#imageLiteral(resourceName: "bike_unselected"), for: .normal)
