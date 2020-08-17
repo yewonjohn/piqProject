@@ -11,7 +11,7 @@ import UIKit
 
 class ServiceUtil{
     
-    func setAuthBackground(_ view: UIView,_ backgroundImageView: UIImageView){
+    func setBackground(_ view: UIView,_ backgroundImageView: UIImageView){
         view.addSubview(backgroundImageView)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -21,7 +21,7 @@ class ServiceUtil{
         backgroundImageView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
         view.sendSubviewToBack(backgroundImageView)
     }
-    func setAuthBackground2(_ view: UIView,_ backgroundImageView: UIImageView){
+    func setAuthBackground(_ view: UIView,_ backgroundImageView: UIImageView){
         view.addSubview(backgroundImageView)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -137,9 +137,6 @@ class ServiceUtil{
         let animationDuration = 0.6
 
         switch iconId {
-        case 1:
-            delayNumber = animationDuration + delayInBetween
-
         case 2:
             delayNumber = (animationDuration + delayInBetween)
 
@@ -155,8 +152,6 @@ class ServiceUtil{
         } else {
               icon.image = imageArray[imageIndex]
         }
-        print(parentView.frame.height)
-        print(parentView.frame.width)
                 
         var customTransform = icon.transform
         customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)

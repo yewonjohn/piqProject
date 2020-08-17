@@ -57,7 +57,7 @@ class TabBarViewController: UITabBarController{
         vc.categoriesTitles = categoriesTitles
         vc.dollarSign = dollarSign
         vc.distance = distance
-        vc.getCards()
+        vc.getRestaurantCards()
     }
 }
 //MARK:- Tab Bar Delegate

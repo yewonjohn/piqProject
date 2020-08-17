@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController{
     var accountSettingsImages = [UIImage]()
     let userDefault = UserDefaults.standard
     let auth = AuthManager()
-
+    
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         
@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController{
         let attributedString1 = NSMutableAttributedString(string:"Hello, ", attributes:attrs1)
         let attributedString2 = NSMutableAttributedString(string:auth.getDisplayName() ?? "Stranger", attributes:attrs2)
         attributedString1.append(attributedString2)
-        self.fullNameLabel.attributedText = attributedString1
+        fullNameLabel.attributedText = attributedString1
     }
 }
 //MARK: -- TableView DataSource and Delegate
@@ -69,53 +69,30 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     
     //Takes user to yelp page of selected favorite item
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         //deselects after selecting
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         if(indexPath.row == 4){
             let alert = UIAlertController(title: "Logout?", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .default))
             alert.addAction(UIAlertAction(title: "Yes, logout", style: .destructive, handler: { action in
-                  switch action.style{
-                  case .default:
+                switch action.style{
+                case .default:
                     print("cancel")
-                  case .cancel:
+                case .cancel:
                     print("cancel")
-                  case .destructive:
+                case .destructive:
                     do { try Auth.auth().signOut() }
                     catch { print("already logged out") }
                     self.userDefault.set(false, forKey: "usersignedin")
                     self.userDefault.synchronize()
                     self.navigationController?.popToRootViewController(animated: true)
                 }}))
-
+            
             self.present(alert, animated: true, completion: nil)
         }
     }
 }
 
-//MARK:- hexColor Method
-extension ProfileViewController{
-    func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
-
-        if ((cString.count) != 6) {
-            return UIColor.gray
-        }
-
-        var rgbValue:UInt64 = 0
-        Scanner(string: cString).scanHexInt64(&rgbValue)
-
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-}

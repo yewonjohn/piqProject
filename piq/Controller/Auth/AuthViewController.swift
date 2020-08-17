@@ -21,12 +21,8 @@ class AuthViewController: UIViewController{
         super.viewDidLoad()
             
         self.navigationController?.setup()
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = UIColor.clear
         
-        containerView.layer.cornerRadius = 15
+        containerView.layer.cornerRadius = 20
         containerView.layer.masksToBounds = true
         
         if userDefault.bool(forKey: "usersignedin") {

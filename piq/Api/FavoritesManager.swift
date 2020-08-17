@@ -27,7 +27,7 @@ class FavoritesManager{
     var delegate: FavoritesManagerDelegate?
     
     let realm = try! Realm()
-    var timeStamp = NSDate().timeIntervalSince1970
+    let timeStamp = NSDate().timeIntervalSince1970
     let currentUser = Auth.auth().currentUser?.email
     
     

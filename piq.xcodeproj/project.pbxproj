@@ -207,8 +207,8 @@
 		44712D7524A267D80083B1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				44712D7D24A26CF40083B1AB /* Constants.swift */,
 				44A7883424E87EDB005789E5 /* UIKit+Extensions.swift */,
+				44712D7D24A26CF40083B1AB /* Constants.swift */,
 				4476A20C24A416600009719D /* RestaurantModel.swift */,
 				44DA293924B7E137003974AE /* FavoritesModel.swift */,
 				44E09CC724C8CF13009C3370 /* CategoryModel.swift */,

@@ -15,10 +15,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var animationContainerView: UIView!
-    @IBOutlet weak var animatingIcon: UIImageView!
-    @IBOutlet weak var animatingIcon2: UIImageView!
-    @IBOutlet weak var animatingIcon3: UIImageView!
+    @IBOutlet weak var animationContainer: UIView!
+    @IBOutlet weak var animationIcon: UIImageView!
+    @IBOutlet weak var animationIcon2: UIImageView!
+    @IBOutlet weak var animationIcon3: UIImageView!
 
     //constraints
     @IBOutlet weak var containerHeight: NSLayoutConstraint!
@@ -64,7 +64,6 @@ class LoginViewController: UIViewController {
         icon2Height.constant = self.view.frame.height * 0.1339
         icon3Height.constant = self.view.frame.height * 0.1339
         icon3Width.constant = self.view.frame.height * 0.1339
-        print(iconHeight.constant)
 
 
 //        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.70).isActive = true
@@ -83,16 +82,16 @@ class LoginViewController: UIViewController {
         //making navigation bar transparent
         self.navigationController?.setup()
         
-        service.setAuthBackground2(view, backgroundView)
+        service.setAuthBackground(view, backgroundView)
         
     }
     override func viewDidLayoutSubviews() {
         
         if isFirstTimeOpening {
               isFirstTimeOpening = false
-              service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
-              service.animateIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
-              service.animateIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
+              service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
+              service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
+              service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
         }
     }
     

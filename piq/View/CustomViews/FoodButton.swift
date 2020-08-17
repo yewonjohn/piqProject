@@ -25,7 +25,7 @@ class FoodButton: UIButton {
     private func setupButton() {
         backgroundColor     = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
         titleLabel?.font    = UIFont(name: "Monsterrat-SemiBold", size: 25)
-        layer.cornerRadius  = frame.size.height/2
+        layer.cornerRadius  = frame.size.height/3
         setTitleColor(.white, for: .normal)
 //        tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
     }

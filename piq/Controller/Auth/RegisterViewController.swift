@@ -46,6 +46,8 @@ class RegisterViewController: UIViewController {
     let auth = AuthManager()
     let service = ServiceUtil()
     var isFirstTimeOpening = true
+    var backgroundView = UIImageView()
+
 
     // MARK: - View Controller Life Cycle
     
@@ -79,6 +81,8 @@ class RegisterViewController: UIViewController {
         
         //making navigation bar transparent
         self.navigationController?.setup()
+        //sets backgound
+        service.setAuthBackground(view, backgroundView)
 
     }
     
@@ -93,6 +97,7 @@ class RegisterViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        //stops animation recursive func
          service.backgroundTrigger()
      }
     // MARK: - IBActions & Objc Functions

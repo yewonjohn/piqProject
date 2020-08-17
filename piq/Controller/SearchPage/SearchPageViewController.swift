@@ -36,7 +36,6 @@ class SearchPageViewController: UIViewController{
     @IBOutlet weak var costRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var costLeftConstraint: NSLayoutConstraint!
     
-    
     @IBOutlet weak var distanceStackView: UIStackView!
     @IBOutlet weak var walkButton: UIButton!
     @IBOutlet weak var bikeButton: UIButton!
@@ -69,6 +68,8 @@ class SearchPageViewController: UIViewController{
     
     let userDefault = UserDefaults.standard
     let service = ServiceUtil()
+    var isFirstTimeOpening = true
+
     
     // MARK: - View Controller Life Cycle
     
@@ -91,7 +92,7 @@ class SearchPageViewController: UIViewController{
         parse(jsonData: jsonCategories)
         
         //Sets background
-        ServiceUtil().setAuthBackground(view,backgroundImageView)
+        ServiceUtil().setBackground(view,backgroundImageView)
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
@@ -104,29 +105,32 @@ class SearchPageViewController: UIViewController{
     }
     
     override func viewWillLayoutSubviews() {
-        //Asking for location permission if not already
-        locationManager.requestWhenInUseAuthorization()
-        
-        switch sidePresented {
-        case true:
-            findFoodButton.setTitle("Apply", for: .normal)
-            cancelButton.isHidden = false
-            piqLabel.isHidden = true
-            
-            //set constraints
-            costLeftConstraint.constant = 25
-            costRightConstraint.constant = 25
-            distanceLeftConstraint.constant = 25
-            distanceRightConstraint.constant = 25
-            
-            let gesturePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
-            view.addGestureRecognizer(gesturePan)
-            
-            
-        default:
-            findFoodButton.setTitle("Find my meal!", for: .normal)
-            cancelButton.isHidden = true
+        if isFirstTimeOpening {
+              isFirstTimeOpening = false
+              //Asking for location permission if not already
+              locationManager.requestWhenInUseAuthorization()
+              
+            //sets views differently depending where this VC is called
+              switch sidePresented {
+              case true:
+                  findFoodButton.setTitle("Apply", for: .normal)
+                  cancelButton.isHidden = false
+                  piqLabel.isHidden = true
+                  
+                  //set constraints
+                  costLeftConstraint.constant = 25
+                  costRightConstraint.constant = 25
+                  distanceLeftConstraint.constant = 25
+                  distanceRightConstraint.constant = 25
+                  
+                  let gesturePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
+                  view.addGestureRecognizer(gesturePan)
+                  
+              default:
+                  findFoodButton.setTitle("Find my meal!", for: .normal)
+                  cancelButton.isHidden = true
 
+              }
         }
     }
     
@@ -160,7 +164,6 @@ class SearchPageViewController: UIViewController{
             service.deselectButtons(button1: costButton1, button2: costButton2, button3: costButton3, button4: costButton4, buttonAll: costButtonAll, index: 5)
         default:
             dollarSignsParam = "0"
-            print("defualt")
         }
     }
     
@@ -194,10 +197,8 @@ class SearchPageViewController: UIViewController{
             service.deselectDistButtons(buttonDist1: walkButton, buttonDist2: bikeButton, buttonDist3: carButton, buttonDist4: farButton, buttonDistAll: anyButton, index: 5)
         default:
             distanceParam = 0.0
-            print("defualt")
         }
     }
-    
     
     //Segues
     @IBAction func goToCards(_ sender: UIButton) {

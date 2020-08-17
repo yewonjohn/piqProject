@@ -19,18 +19,16 @@ class RestaurantViewController: UIViewController {
     let signOutButton = UIButton()
     let resetButton = UIButton()
     let resetLabel = UILabel()
-
     let shadowView = UIView()
     let loadingView = NVActivityIndicatorView(frame: .zero)
-    
+    let backgroundImageView = UIImageView()
+
     var presentTransition: UIViewControllerAnimatedTransitioning?
     var dismissTransition: UIViewControllerAnimatedTransitioning?
 
-    let userDefault = UserDefaults.standard
-
-    var viewModelData = [RestaurantModel]()
     var stackContainer : StackContainerView!
     
+    var restaurantModelData = [RestaurantModel]()
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = [String]()
     var dollarSign : String?
@@ -38,22 +36,22 @@ class RestaurantViewController: UIViewController {
     var finalDist : Int?
     
     var locationManager = CLLocationManager()
-    let backgroundImageView = UIImageView()
+
     let service = ServiceUtil()
     let homePage = SearchPageViewController()
     let restaurantAPI = RestaurantManager()
+    var isFirstTimeOpening = true
+    let userDefault = UserDefaults.standard
+
 
     // MARK: - View Controller Life Cycle
 
     override func loadView() {
 
         view = UIView()
-        view.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         stackContainer = StackContainerView()
         view.addSubview(stackContainer)
-//        configureStackContainer()
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
-        configureResetNavigationBarButtonItem()
         restaurantAPI.delegate = self
 
     }
@@ -70,17 +68,19 @@ class RestaurantViewController: UIViewController {
         setResetLabel()
         setShadowView()
         setLoadingView()
-//        configureStackContainer()
 
         //set background
-        ServiceUtil().setAuthBackground(view,backgroundImageView)
+        ServiceUtil().setBackground(view,backgroundImageView)
 
-        getCards()
+        getRestaurantCards()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        configureStackContainer()
+        if isFirstTimeOpening{
+            isFirstTimeOpening = false
+            configureStackContainer()
+        }
     }
     
     //MARK: - Layout Configurations
@@ -88,14 +88,8 @@ class RestaurantViewController: UIViewController {
     func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
-//        stackContainer.widthAnchor.constraint(equalToConstant: 350).isActive = true
-//        stackContainer.heightAnchor.constraint(equalToConstant: 500).isActive = true
         stackContainer.widthAnchor.constraint(equalToConstant: view.frame.width * 0.83).isActive = true
         stackContainer.heightAnchor.constraint(equalToConstant: view.frame.height * 0.58).isActive = true
-    }
-    //SETS RESET NAVIGATIONAL BUTTON
-    func configureResetNavigationBarButtonItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: MenuItems.reset, style: .plain, target: self, action: #selector(resetTapped))
     }
     //SETS CARDS ARE EMPTY LABEL
     func setLastLabel(){
@@ -108,7 +102,7 @@ class RestaurantViewController: UIViewController {
         emptyCardsLabel.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
         emptyCardsLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
     }
-    //Sets title
+
     func setPiqTitle(){
         self.view?.addSubview(piqTitle)
         piqTitle.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
@@ -118,8 +112,8 @@ class RestaurantViewController: UIViewController {
         piqTitle.translatesAutoresizingMaskIntoConstraints = false
         piqTitle.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         piqTitle.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
-//        piqTitle.leftAnchor.constraint(equalTo: self.view!.leftAnchor, constant: 100).isActive = true
     }
+    
     func setFilterButton(){
         self.view?.addSubview(filterButton)
         filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: .normal)
@@ -204,12 +198,12 @@ class RestaurantViewController: UIViewController {
 extension RestaurantViewController : RestaurantCardsDataSource {
 
     func numberOfCardsToShow() -> Int {
-        return viewModelData.count
+        return restaurantModelData.count
     }
     
     func card(at index: Int) -> RestaurantCardView {
         let card = RestaurantCardView()
-        card.dataSource = viewModelData[index]
+        card.dataSource = restaurantModelData[index]
         return card
     }
     
@@ -311,11 +305,13 @@ extension RestaurantViewController: RestaurantManagerDelegate{
 //MARK:- Restaurant API Call
 extension RestaurantViewController{
     
-    func getCards(){
+    func getRestaurantCards(){
         
         //make sure empty label and reset button is hidden when new search
         resetButton.isHidden = true
+        resetLabel.isHidden = true
         emptyCardsLabel.isHidden = true
+
         
         //get category title alias
         var categoryAlias: String? = nil
@@ -348,8 +344,8 @@ extension RestaurantViewController{
             currentLoc = locationManager.location
             
             //Calling API for all the Cards Data using current location
-            restaurantAPI.getLocalRestaurants(distance: finalDist, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (businessModelArray) in
-                self.viewModelData = businessModelArray
+            restaurantAPI.getLocalRestaurants(distance: finalDist, latitude: currentLoc.coordinate.latitude, longitude: currentLoc.coordinate.longitude, category: categoryAlias, dollarSigns: dollarSign) { (restaurantModelArray) in
+                self.restaurantModelData = restaurantModelArray
                 self.stackContainer.dataSource = self
                 //stop loading animation here
                 self.loadingView.stopAnimating()
@@ -358,7 +354,6 @@ extension RestaurantViewController{
     }
     //making sure data refreshes once user clicks 'allow' to location
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("triggered")
-        getCards()
+        getRestaurantCards()
     }
 }
