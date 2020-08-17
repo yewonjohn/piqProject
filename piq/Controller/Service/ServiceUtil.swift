@@ -109,16 +109,15 @@ class ServiceUtil{
             UIView.animate(withDuration: 0.35,
                            delay: 0,
                            animations: {
-                            view.isHidden = false
+                            view.isHidden = false
                             view.alpha = 0.7
             },
                            completion: { _ in }
             )
         }
     }
-    
+    //stops animation
     var inBackground = false
-    
     func backgroundTrigger(){
         inBackground = true
     }
@@ -130,10 +129,16 @@ class ServiceUtil{
         switch iconId {
         case 1:
             delayNumber = 1.0
+            print("case1")
+
         case 2:
             delayNumber = 2.5
+            print("case2")
+
         case 3:
             delayNumber = 4.15
+            print("case3")
+
         default:
             delayNumber = 1.0
         }

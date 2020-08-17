@@ -65,13 +65,21 @@ class RestaurantCardView : UIView {
             let url = URL(string: dataSource?.img_url ?? "")
             imageView.kf.setImage(with: url)
             
+            var distInMiles = 0.0
             //SETTING STORE OPEN/CLOSED
             if let dist = dataSource?.distance{
-                var distInMiles = dist/1609
+                distInMiles = dist/1609
                 distInMiles = Double(round(10*distInMiles)/10)
                 distanceView.text = String(distInMiles)+" mi •"
             } else{
                 distanceView.text = "? mi •"
+            }
+            if distInMiles >= 0 && distInMiles <= 1 {
+                distanceView.textColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            } else if distInMiles > 1 && distInMiles <= 2 {
+                distanceView.textColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
+            } else if distInMiles > 2 {
+                distanceView.textColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
             }
             
             
@@ -280,7 +288,6 @@ class RestaurantCardView : UIView {
     
     func configureDistanceView() {
         swipeView.addSubview(distanceView)
-        distanceView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
 //        if let dist = dataSource?.distance{
 //            let distInMiles = dist/1609
 //            if distInMiles <= 1.0{

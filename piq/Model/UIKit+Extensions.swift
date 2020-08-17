@@ -11,7 +11,6 @@ import UIKit
 extension UINavigationController {
     func setup() {
          // makes nav bar transparent
-        print("triggereeed")
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
