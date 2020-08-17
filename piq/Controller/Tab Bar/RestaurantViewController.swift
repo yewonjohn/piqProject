@@ -149,7 +149,7 @@ class RestaurantViewController: UIViewController {
         self.view.addSubview(resetLabel)
         resetLabel.text = "reset"
         resetLabel.font = UIFont(name: "Montserrat-Medium", size: 8)
-        resetLabel.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        resetLabel.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         resetLabel.textAlignment = .center
         resetLabel.translatesAutoresizingMaskIntoConstraints = false
         resetLabel.centerXAnchor.constraint(equalTo: resetButton.centerXAnchor, constant: 0).isActive = true

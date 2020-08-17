@@ -360,27 +360,35 @@ class RestaurantCardView : UIView {
         let point = sender.translation(in: self)
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         card.center = CGPoint(x: centerOfParentContainer.x + point.x, y: centerOfParentContainer.y + point.y)
-        
-        let distanceFromCenter = ((UIScreen.main.bounds.width / 2) - card.center.x)
-        divisor = ((UIScreen.main.bounds.width / 2) / 0.61)
+//        let distanceFromCenter = ((UIScreen.main.bounds.width / 2) - card.center.x)
+//        divisor = ((UIScreen.main.bounds.width / 2) / 0.61)
         
         switch sender.state {
         case .ended:
-            if (card.center.x) > 350 {
-                delegate?.swipeDidEnd(on: card)
-                UIView.animate(withDuration: 10.0) {
+
+            if point.x > 100 {
+                var cardRightTransform = card.transform
+                cardRightTransform = cardRightTransform.translatedBy(x: card.frame.width*2 , y: -20)
+                UIView.animate(withDuration: 0.2, animations: {
+                    card.transform = cardRightTransform
+                }, completion: { _ in
+                    self.delegate?.swipeDidEnd(on: card)
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-                }
+                })
                 return
-            }else if card.center.x < -35 {
-                delegate?.swipeDidEnd(on: card)
-                UIView.animate(withDuration: 10.0) {
+            }else if point.x < -100 {
+                var cardLeftTransform = card.transform
+                cardLeftTransform = cardLeftTransform.translatedBy(x: -card.frame.width*2 , y: -20)
+                UIView.animate(withDuration: 0.2, animations: {
+                    card.transform = cardLeftTransform
+                }, completion: { _ in
+                    self.delegate?.swipeDidEnd(on: card)
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-                }
+                })
                 return
             }
             UIView.animate(withDuration: 0.2) {
