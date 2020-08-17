@@ -23,6 +23,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var animationIcon2: UIImageView!
     @IBOutlet weak var animationIcon3: UIImageView!
     
+    //constraints
     @IBOutlet weak var containerHeight: NSLayoutConstraint!
     @IBOutlet weak var greetingHeight: NSLayoutConstraint!
     @IBOutlet weak var nameHeight: NSLayoutConstraint!
@@ -31,12 +32,21 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var validateHeight: NSLayoutConstraint!
     @IBOutlet weak var registerHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var iconHeight: NSLayoutConstraint!
+    @IBOutlet weak var iconWidth: NSLayoutConstraint!
+    @IBOutlet weak var icon2Height: NSLayoutConstraint!
+    @IBOutlet weak var icon2Width: NSLayoutConstraint!
+    @IBOutlet weak var icon3Width: NSLayoutConstraint!
+    @IBOutlet weak var icon3Height: NSLayoutConstraint!
+    
+    
     
     
     // MARK: - Properties
     let auth = AuthManager()
     let service = ServiceUtil()
-    
+    var isFirstTimeOpening = true
+
     // MARK: - View Controller Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +62,13 @@ class RegisterViewController: UIViewController {
         passwordHeight.constant = self.view.frame.height * 0.055
         validateHeight.constant = self.view.frame.height * 0.055
         registerHeight.constant = self.view.frame.height * 0.055
+        
+        iconHeight.constant = self.view.frame.height * 0.1339
+        iconWidth.constant = self.view.frame.height * 0.1339
+        icon2Width.constant = self.view.frame.height * 0.1339
+        icon2Height.constant = self.view.frame.height * 0.1339
+        icon3Height.constant = self.view.frame.height * 0.1339
+        icon3Width.constant = self.view.frame.height * 0.1339
 
         
         IQKeyboardManager.shared().isEnabled = true
@@ -63,10 +80,16 @@ class RegisterViewController: UIViewController {
         //making navigation bar transparent
         self.navigationController?.setup()
 
+    }
+    
+    override func viewDidLayoutSubviews() {
         
-        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1)
-        service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2)
-        service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3)
+        if isFirstTimeOpening {
+              isFirstTimeOpening = false
+              service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
+              service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
+              service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,14 +114,4 @@ class RegisterViewController: UIViewController {
     }
 }
 
-    //MARK: -- Keyboard Management
-//extension RegisterViewController {
-//    func hideKeyboardWhenTappedAround() {
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tap)
-//    }
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-//}
+

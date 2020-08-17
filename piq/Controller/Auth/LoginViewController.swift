@@ -20,17 +20,28 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var animatingIcon2: UIImageView!
     @IBOutlet weak var animatingIcon3: UIImageView!
 
+    //constraints
     @IBOutlet weak var containerHeight: NSLayoutConstraint!
     @IBOutlet weak var emailHeight: NSLayoutConstraint!
     @IBOutlet weak var passwordHeight: NSLayoutConstraint!
     @IBOutlet weak var signInHeight: NSLayoutConstraint!
     
     
+    @IBOutlet weak var iconHeight: NSLayoutConstraint!
+    @IBOutlet weak var iconWidth: NSLayoutConstraint!
+    @IBOutlet weak var icon2Width: NSLayoutConstraint!
+    @IBOutlet weak var icon2Height: NSLayoutConstraint!
+    @IBOutlet weak var icon3Height: NSLayoutConstraint!
+    @IBOutlet weak var icon3Width: NSLayoutConstraint!
+    
     
     // MARK: - Properties
     let userDefault = UserDefaults.standard
     let service = ServiceUtil()
     let auth = AuthManager()
+    var backgroundView = UIImageView()
+    var isFirstTimeOpening = true
+
     
     // MARK: - View Controller Life Cycle
     
@@ -47,7 +58,15 @@ class LoginViewController: UIViewController {
         passwordHeight.constant = self.view.frame.height * 0.055
         signInHeight.constant = self.view.frame.height * 0.055
 
-        
+        iconHeight.constant = self.view.frame.height * 0.1339
+        iconWidth.constant = self.view.frame.height * 0.1339
+        icon2Width.constant = self.view.frame.height * 0.1339
+        icon2Height.constant = self.view.frame.height * 0.1339
+        icon3Height.constant = self.view.frame.height * 0.1339
+        icon3Width.constant = self.view.frame.height * 0.1339
+        print(iconHeight.constant)
+
+
 //        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.70).isActive = true
 
         if userDefault.bool(forKey: "usersignedin") {
@@ -64,10 +83,17 @@ class LoginViewController: UIViewController {
         //making navigation bar transparent
         self.navigationController?.setup()
         
-        service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1)
-        service.animateIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2)
-        service.animateIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3)
+        service.setAuthBackground2(view, backgroundView)
         
+    }
+    override func viewDidLayoutSubviews() {
+        
+        if isFirstTimeOpening {
+              isFirstTimeOpening = false
+              service.animateIcon(icon: animatingIcon, parentView: animationContainerView, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
+              service.animateIcon(icon: animatingIcon2, parentView: animationContainerView, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
+              service.animateIcon(icon: animatingIcon3, parentView: animationContainerView, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

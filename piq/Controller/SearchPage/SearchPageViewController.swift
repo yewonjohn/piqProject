@@ -85,7 +85,6 @@ class SearchPageViewController: UIViewController{
         
         categoryTitleTopConstraint.constant = self.view.frame.height * 0.2
         categoryCollectionHeight.constant = self.view.frame.height * 0.2
-        print(self.view.frame.height * 0.2)
 
         //Fetching categories data from json file
         guard let jsonCategories = readLocalFile(forName: "categories") else { return }

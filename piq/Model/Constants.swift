@@ -41,7 +41,7 @@ struct HomePage {
 struct AuthPage {
     static let animationIcons = [UIImage(named: "Beer"), UIImage(named: "Cafe"), UIImage(named: "Cinnamon Roll"), UIImage(named: "Cookies"), UIImage(named: "Cotton Candy"), UIImage(named: "Cupcake"),UIImage(named: "Dim Sum"), UIImage(named: "Pizza"), UIImage(named: "Rack of Lamb")]
     
-    static let animationIcons2 = [UIImage(named: "Doughnut"), UIImage(named: "Food And Wine"), UIImage(named: "French Fries"), UIImage(named: "Hamburger"), UIImage(named: "Hot Dog"), UIImage(named: "Kebab"), UIImage(named: "Pancakes"), UIImage(named: "Porridge"), UIImage(named: "Ice Cream Cone")]
+    static let animationIcons2 = [UIImage(named: "Doughnut"), UIImage(named: "Food And Wine"), UIImage(named: "French Fries"), UIImage(named: "Hamburger"), UIImage(named: "Hot Dog"), UIImage(named: "Kebab"), UIImage(named: "Pancake"), UIImage(named: "Porridge"), UIImage(named: "Ice Cream Cone")]
     
     static let animationIcons3 = [UIImage(named: "Pizza"), UIImage(named: "Porridge"), UIImage(named: "Rack of Lamb"), UIImage(named: "Spaghetti"), UIImage(named: "Steak"), UIImage(named: "Sushi"), UIImage(named: "Taco"), UIImage(named: "Wrap"), UIImage(named: "Noodles")]
 }
