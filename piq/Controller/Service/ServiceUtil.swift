@@ -11,6 +11,8 @@ import UIKit
 
 class ServiceUtil{
     
+    //MARK: - Background Config
+    
     func setBackground(_ view: UIView,_ backgroundImageView: UIImageView){
         view.addSubview(backgroundImageView)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,21 +35,23 @@ class ServiceUtil{
         view.sendSubviewToBack(backgroundImageView)
     }
     
-    func animateButton(button: UIButton){
-        button.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        UIView.animate(withDuration: 2.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.20),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIView.AnimationOptions.allowUserInteraction,
-                       animations: {
-                        button.transform = CGAffineTransform.identity
-                        button.tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
+//    func animateButton(button: UIButton){
+//        button.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+//        UIView.animate(withDuration: 2.0,
+//                       delay: 0,
+//                       usingSpringWithDamping: CGFloat(0.20),
+//                       initialSpringVelocity: CGFloat(6.0),
+//                       options: UIView.AnimationOptions.allowUserInteraction,
+//                       animations: {
+//                        button.transform = CGAffineTransform.identity
+//                        button.tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
+//
+//        },
+//                       completion: { _ in }
+//        )
+//    }
+    //MARK: - Animations
 
-        },
-                       completion: { _ in }
-        )
-    }
     func animateResetButton(button: UIButton){
         if(button.isHidden == false){
             UIView.animate(withDuration: 0.5,
@@ -216,296 +220,8 @@ class ServiceUtil{
         })
     }
     
-        
-//    func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?], imageIndex: Int, iconId: Int){
-//        var delayNumber = 1.0
-////        print("something")
-////        switch iconId {
-////        case 1:
-////            delayNumber = 1.0
-////            print("case1")
-////
-////        case 2:
-////            delayNumber = 2.5
-////            print("case2")
-////
-////        case 3:
-////            delayNumber = 4.15
-////            print("case3")
-////
-////        default:
-////            delayNumber = 1.0
-////        }
-//
-//        if(imageIndex == imageArray.count){
-//              icon.image = imageArray[0]
-//        } else {
-//              icon.image = imageArray[imageIndex]
-//        }
-//
-//        var customTransform = icon.transform
-//        customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-//        customTransform = customTransform.translatedBy(x: parentView.frame.width/5, y: parentView.frame.height/1.03469388)
-//        print(parentView.frame.width)
-//        print(parentView.frame.height)
-//        customTransform = customTransform.rotated(by: .pi/8)
-//
-//        UIView.animate(withDuration: 0.6, delay: delayNumber, animations: {
-//
-//            icon.transform = customTransform
-//
-//        }, completion: { _ in
-//
-//            customTransform = customTransform.translatedBy(x: parentView.frame.width, y: parentView.frame.height/5.07)
-//            customTransform = customTransform.scaledBy(x: 2, y: 2)
-//            customTransform = customTransform.rotated(by: -.pi/10)
-//
-//            UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                icon.transform = customTransform
-//
-//            }, completion: { _ in
-//
-//                customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
-//                customTransform = customTransform.rotated(by: -.pi/3)
-//                UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                    icon.transform = customTransform.translatedBy(x: parentView.frame.width, y: 0)
-//
-//                }, completion: { _ in
-//                    icon.transform = .identity
-//                    if(!self.inBackground){
-//                        if(imageIndex == imageArray.count){
-//                             self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: 0, iconId: iconId)
-//                        } else {
-//                              self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: imageIndex+1, iconId: iconId)
-//                        }
-//                    }
-//                })
-//
-//            })
-//        })
-//    }
-//        func animateIcon2(icon: UIImageView, parentView: UIView, imageArray: [UIImage?], imageIndex: Int, iconId: Int){
-//            var delayNumber = 2.5
-//    //        print("something")
-//    //        switch iconId {
-//    //        case 1:
-//    //            delayNumber = 1.0
-//    //            print("case1")
-//    //
-//    //        case 2:
-//    //            delayNumber = 2.5
-//    //            print("case2")
-//    //
-//    //        case 3:
-//    //            delayNumber = 4.15
-//    //            print("case3")
-//    //
-//    //        default:
-//    //            delayNumber = 1.0
-//    //        }
-//
-//            if(imageIndex == imageArray.count){
-//                  icon.image = imageArray[0]
-//            } else {
-//                  icon.image = imageArray[imageIndex]
-//            }
-//
-//            var customTransform = icon.transform
-//            customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-//            customTransform = customTransform.translatedBy(x: 75, y: 245)
-//            customTransform = customTransform.rotated(by: .pi/8)
-//
-//            UIView.animate(withDuration: 0.6, delay: delayNumber, animations: {
-//
-//                icon.transform = customTransform
-//
-//            }, completion: { _ in
-//
-//                customTransform = customTransform.translatedBy(x: 375, y: 50)
-//                customTransform = customTransform.scaledBy(x: 2, y: 2)
-//                customTransform = customTransform.rotated(by: -.pi/10)
-//
-//                UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                    icon.transform = customTransform
-//
-//                }, completion: { _ in
-//
-//                    customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
-//                    customTransform = customTransform.rotated(by: -.pi/3)
-//                    UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                        icon.transform = customTransform.translatedBy(x: 300, y: 0)
-//
-//                    }, completion: { _ in
-//                        icon.transform = .identity
-//                        if(!self.inBackground){
-//                            if(imageIndex == imageArray.count){
-//                                 self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: 0, iconId: iconId)
-//                            } else {
-//                                  self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: imageIndex+1, iconId: iconId)
-//                            }
-//                        }
-//                    })
-//
-//                })
-//            })
-//        }
-//
-//        func animateIcon3(icon: UIImageView, parentView: UIView, imageArray: [UIImage?], imageIndex: Int, iconId: Int){
-//            var delayNumber = 4.15
-//    //        print("something")
-//    //        switch iconId {
-//    //        case 1:
-//    //            delayNumber = 1.0
-//    //            print("case1")
-//    //
-//    //        case 2:
-//    //            delayNumber = 2.5
-//    //            print("case2")
-//    //
-//    //        case 3:
-//    //            delayNumber = 4.15
-//    //            print("case3")
-//    //
-//    //        default:
-//    //            delayNumber = 1.0
-//    //        }
-//
-//            if(imageIndex == imageArray.count){
-//                  icon.image = imageArray[0]
-//            } else {
-//                  icon.image = imageArray[imageIndex]
-//            }
-//
-//            var customTransform = icon.transform
-//            customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-//            customTransform = customTransform.translatedBy(x: 75, y: 245)
-//            customTransform = customTransform.rotated(by: .pi/8)
-//
-//            UIView.animate(withDuration: 0.6, delay: delayNumber, animations: {
-//
-//                icon.transform = customTransform
-//
-//            }, completion: { _ in
-//
-//                customTransform = customTransform.translatedBy(x: 375, y: 50)
-//                customTransform = customTransform.scaledBy(x: 2, y: 2)
-//                customTransform = customTransform.rotated(by: -.pi/10)
-//
-//                UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                    icon.transform = customTransform
-//
-//                }, completion: { _ in
-//
-//                    customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
-//                    customTransform = customTransform.rotated(by: -.pi/3)
-//                    UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                        icon.transform = customTransform.translatedBy(x: 300, y: 0)
-//
-//                    }, completion: { _ in
-//                        icon.transform = .identity
-//                        if(!self.inBackground){
-//                            if(imageIndex == imageArray.count){
-//                                 self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: 0, iconId: iconId)
-//
-//                            } else {
-//                                  self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray, imageIndex: imageIndex+1, iconId: iconId)
-//                            }
-//                        }
-//                    })
-//
-//                })
-//            })
-//        }
-//
-//    var counter2 = 0
-//    func animateSecondIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
-//
-//        if(counter2 == imageArray.count-1){
-//            counter2 = 0
-//        }
-//        icon.image = imageArray[counter2]
-//        counter2 = counter2 + 1
-//
-//        var customTransform = icon.transform
-//        customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-//        customTransform = customTransform.translatedBy(x: 75, y: 245)
-//        customTransform = customTransform.rotated(by: .pi/8)
-//
-//        UIView.animate(withDuration: 0.6, delay: 2.5, animations: {
-//
-//            icon.transform = customTransform
-//
-//        }, completion: { _ in
-//
-//            customTransform = customTransform.translatedBy(x: 375, y: 50)
-//            customTransform = customTransform.scaledBy(x: 2, y: 2)
-//            customTransform = customTransform.rotated(by: -.pi/10)
-//
-//            UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                icon.transform = customTransform
-//
-//            }, completion: { _ in
-//
-//                customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
-//                customTransform = customTransform.rotated(by: -.pi/3)
-//                UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                    icon.transform = customTransform.translatedBy(x: 300, y: 0)
-//
-//                }, completion: { _ in
-//                    icon.transform = .identity
-//                    if(!self.inBackground){
-//                    self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
-//                    }
-//                })
-//
-//            })
-//        })
-//    }
-//        var counter3 = 0
-//        func animateThirdIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?]){
-//
-//            if(counter3 == imageArray.count-1){
-//                counter3 = 0
-//            }
-//            icon.image = imageArray[counter3]
-//            counter3 = counter3 + 1
-//
-//            var customTransform = icon.transform
-//            customTransform = customTransform.scaledBy(x: 0.7, y: 0.7)
-//            customTransform = customTransform.translatedBy(x: 75, y: 245)
-//            customTransform = customTransform.rotated(by: .pi/8)
-//
-//            UIView.animate(withDuration: 0.6, delay: 4.15, animations: {
-//
-//                icon.transform = customTransform
-//
-//            }, completion: { _ in
-//
-//                customTransform = customTransform.translatedBy(x: 375, y: 50)
-//                customTransform = customTransform.scaledBy(x: 2, y: 2)
-//                customTransform = customTransform.rotated(by: -.pi/10)
-//
-//                UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                    icon.transform = customTransform
-//
-//                }, completion: { _ in
-//
-//                    customTransform = customTransform.scaledBy(x: 2.5, y: 2.5)
-//                    customTransform = customTransform.rotated(by: -.pi/3)
-//                    UIView.animate(withDuration: 0.6, delay: 1, animations: {
-//                        icon.transform = customTransform.translatedBy(x: 300, y: 0)
-//
-//                    }, completion: { _ in
-//                        icon.transform = .identity
-//                        if(!self.inBackground){
-//                        self.animateIcon(icon: icon, parentView: parentView, imageArray: imageArray)
-//                        }
-//                    })
-//                })
-//            })
-//        }
-//
-//
+    //MARK: - Button Config
+
     func deselectButtons(button1: UIButton, button2:UIButton, button3:UIButton, button4:UIButton, buttonAll: UIButton, index: Int){
         if(index == 1){
             button2.setBackgroundImage(#imageLiteral(resourceName: "buttonMiddleWhite"), for: .normal)

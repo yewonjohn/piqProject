@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - Defining Delegate
+    //MARK: - Defining Delegate
 protocol RestaurantCardsDataSource {
     func numberOfCardsToShow() -> Int
     func card(at index: Int) -> RestaurantCardView

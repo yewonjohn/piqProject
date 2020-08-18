@@ -75,15 +75,12 @@ class RegisterViewController: UIViewController {
         
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
-        
+        self.navigationController?.setup()
+
         containerView.layer.cornerRadius = 20
         containerView.clipsToBounds = true
         
-        //making navigation bar transparent
-        self.navigationController?.setup()
-        //sets backgound
         service.setAuthBackground(view, backgroundView)
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,7 +97,7 @@ class RegisterViewController: UIViewController {
         //stops animation recursive func
          service.backgroundTrigger()
      }
-    // MARK: - IBActions & Objc Functions
+    // MARK: - User Interactions
     
     @IBAction func goToLogin(_ sender: Any) {
         	navigationController?.popViewController(animated: true)

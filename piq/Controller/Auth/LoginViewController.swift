@@ -65,22 +65,17 @@ class LoginViewController: UIViewController {
         icon3Height.constant = self.view.frame.height * 0.1339
         icon3Width.constant = self.view.frame.height * 0.1339
 
-
-//        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.70).isActive = true
-
+        
         if userDefault.bool(forKey: "usersignedin") {
             self.performSegue(withIdentifier: "LoginToMain", sender: self)
         }
         
         IQKeyboardManager.shared().isEnabled = true
         self.hideKeyboardWhenTappedAround()
+        self.navigationController?.setup()
 
-        //
         containerView.layer.cornerRadius = 20
         containerView.clipsToBounds = true
-        
-        //making navigation bar transparent
-        self.navigationController?.setup()
         
         service.setAuthBackground(view, backgroundView)
         
@@ -99,7 +94,7 @@ class LoginViewController: UIViewController {
         service.backgroundTrigger()
     }
 
-    // MARK: - IBActions & Objc Functions
+    // MARK: - User Interactions
     @IBAction func loginUser(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text{
             auth.login(viewController: self, email: email, password: password)
@@ -111,15 +106,3 @@ class LoginViewController: UIViewController {
     }
 
 }
-//    //MARK: -- Keyboard Management
-//extension LoginViewController {
-//    func hideKeyboardWhenTappedAround() {
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tap)
-//    }
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-//}
-

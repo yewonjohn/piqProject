@@ -15,36 +15,36 @@ import CoreLocation
 
 class SearchPageViewController: UIViewController{
     
-    
     // MARK: - Outlets
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
-    @IBOutlet weak var categoryCell: CategoryCell!
-    
     @IBOutlet weak var findFoodButton: FoodButton!
     @IBOutlet weak var piqLabel: UILabel!
-    
+
+    //outlets for all dollarSign buttons
     @IBOutlet weak var costStackView: UIStackView!
     @IBOutlet weak var costButton1: UIButton!
     @IBOutlet weak var costButton2: UIButton!
     @IBOutlet weak var costButton3: UIButton!
     @IBOutlet weak var costButton4: UIButton!
     @IBOutlet weak var costButtonAll: UIButton!
-    @IBOutlet weak var costRightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var costLeftConstraint: NSLayoutConstraint!
-    
+
+    //outlets for all distance buttons
     @IBOutlet weak var distanceStackView: UIStackView!
     @IBOutlet weak var walkButton: UIButton!
     @IBOutlet weak var bikeButton: UIButton!
     @IBOutlet weak var carButton: UIButton!
     @IBOutlet weak var farButton: UIButton!
     @IBOutlet weak var anyButton: UIButton!
+
+    //constraints
+    @IBOutlet weak var costRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var costLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var distanceRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var distanceLeftConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var categoryTitleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoryCollectionHeight: NSLayoutConstraint!
     
@@ -52,6 +52,9 @@ class SearchPageViewController: UIViewController{
     // MARK: - Properties
     let backgroundImageView = UIImageView()
     var locationManager = CLLocationManager()
+    let userDefault = UserDefaults.standard
+    let service = ServiceUtil()
+    var isFirstTimeOpening = true
 
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = HomePage.categoriesLabels
@@ -66,13 +69,8 @@ class SearchPageViewController: UIViewController{
     //translation var for dismiss gesture
     var viewTranslation = CGPoint(x: 0, y: 0)
     
-    let userDefault = UserDefaults.standard
-    let service = ServiceUtil()
-    var isFirstTimeOpening = true
-
     
     // MARK: - View Controller Life Cycle
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)

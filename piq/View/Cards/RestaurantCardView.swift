@@ -35,7 +35,7 @@ class RestaurantCardView : UIView {
     var yelpImgView: UIImageView!
     var arrowButton = UIButton()
 
-    //MARK: - Other Properties
+    //MARK: - Properties
     let favoritesManager = FavoritesManager()
     let service = ServiceUtil()
     var delegate : RestaurantCardsDelegate?
@@ -123,7 +123,7 @@ class RestaurantCardView : UIView {
         }
     }
 
-    //Action
+    //MARK: - Interactions
     @objc func goToURL() {
         guard let url = URL(string: (dataSource?.url)!) else { return }
         UIApplication.shared.open(url)
@@ -300,16 +300,7 @@ class RestaurantCardView : UIView {
         phoneView.minimumScaleFactor = 0.2
 
     }
-//    func configureButton() {
-//        swipeView.addSubview(favoriteButton)
-//        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-//        let image = UIImage(named: "plus-tab")?.withRenderingMode(.alwaysTemplate)
-//        favoriteButton.setImage(image, for: .normal)
-//        favoriteButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//        favoriteButton.layer.cornerRadius  = 7
-//        favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -20).isActive = true
-//        favoriteButton.centerYAnchor.constraint(equalTo: phoneView.centerYAnchor, constant: 0).isActive = true
-//    }
+
     func configureArrow(){
         swipeView.addSubview(arrowButton)
         let symbol = UIImage(systemName: "chevron.compact.down")
@@ -343,7 +334,7 @@ class RestaurantCardView : UIView {
     
     
     
-    //MARK: - Handlers
+    //MARK: - Gesture Handlers
     @objc func handlePanGesture(sender: UIPanGestureRecognizer){
         let card = sender.view as! RestaurantCardView
         let point = sender.translation(in: self)
