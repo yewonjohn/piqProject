@@ -33,7 +33,6 @@ class FavoritesViewController: UIViewController{
         favoriteManager.delegate = self
         favoriteManager.loadFavorites()
         view.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

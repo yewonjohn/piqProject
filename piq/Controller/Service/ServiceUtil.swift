@@ -201,6 +201,21 @@ class ServiceUtil{
         })
     }
     
+    func animatePiqd(label:UILabel){
+        label.isHidden = false
+        UIView.animate(withDuration: 0.5, animations: {
+            label.alpha = 1
+        }, completion:{ _ in
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                label.alpha = 0
+            }, completion: { _ in
+                label.isHidden = true
+            }
+            )
+        })
+    }
+    
         
 //    func animateIcon(icon: UIImageView, parentView: UIView, imageArray: [UIImage?], imageIndex: Int, iconId: Int){
 //        var delayNumber = 1.0

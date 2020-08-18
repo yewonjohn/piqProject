@@ -22,6 +22,8 @@ class RestaurantViewController: UIViewController {
     let shadowView = UIView()
     let loadingView = NVActivityIndicatorView(frame: .zero)
     let backgroundImageView = UIImageView()
+    let piqdLabel = UILabel()
+    
 
     var presentTransition: UIViewControllerAnimatedTransitioning?
     var dismissTransition: UIViewControllerAnimatedTransitioning?
@@ -36,6 +38,7 @@ class RestaurantViewController: UIViewController {
     var finalDist : Int?
     
     var locationManager = CLLocationManager()
+    var favoritesManager = FavoritesManager()
 
     let service = ServiceUtil()
     let homePage = SearchPageViewController()
@@ -68,6 +71,7 @@ class RestaurantViewController: UIViewController {
         setResetLabel()
         setShadowView()
         setLoadingView()
+        configurePiqdLabel()
 
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
@@ -182,6 +186,19 @@ class RestaurantViewController: UIViewController {
         loadingView.type = .pacman
         loadingView.color = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
     }
+    //favorited label popup
+    func configurePiqdLabel() {
+        view.addSubview(piqdLabel)
+        piqdLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
+        piqdLabel.text = "piq'd!"
+        piqdLabel.textAlignment = .center
+        piqdLabel.font = UIFont(name: "Montserrat-SemiBold", size: 55)
+        piqdLabel.translatesAutoresizingMaskIntoConstraints = false
+        piqdLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20).isActive = true
+        piqdLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        piqdLabel.isHidden = true
+    }
+    
 
     
     // MARK: - IBActions & Objc Functions
@@ -193,10 +210,16 @@ class RestaurantViewController: UIViewController {
         service.animateResetLabel(label: resetLabel)
     }
 }
-//MARK: - DataSource for StackContainerView (Delegate)
+//MARK: - DataSource/Delegate for StackContainerView (Delegate)
 
 extension RestaurantViewController : RestaurantCardsDataSource {
-
+    
+    //adds to favorites when cards swiped left.
+    func swipedLeft(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
+        favoritesManager.addToFavorites(user: userEmail, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoriesTitles)
+        service.animatePiqd(label: piqdLabel)
+    }
+    
     func numberOfCardsToShow() -> Int {
         return restaurantModelData.count
     }

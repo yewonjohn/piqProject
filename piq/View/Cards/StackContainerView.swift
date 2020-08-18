@@ -14,9 +14,11 @@ protocol RestaurantCardsDataSource {
     func card(at index: Int) -> RestaurantCardView
     func emptyView() -> Void
     func swipeStarted() -> Bool
+    func swipedLeft(data: RestaurantModel, userEmail: String, categoriesTitles: String)
 }
 
 class StackContainerView: UIView, RestaurantCardsDelegate {
+
 
     //MARK: - Properties
     var numberOfCardsToShow: Int = 0
@@ -125,6 +127,10 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         if(swipeStarted){
             swipeStarted = datasource.swipeStarted()
         }
+    }
+
+    func swipedLeft(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
+        dataSource?.swipedLeft(data: data, userEmail: userEmail, categoriesTitles: categoriesTitles)
     }
 }
 

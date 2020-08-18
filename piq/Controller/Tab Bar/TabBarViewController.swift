@@ -11,9 +11,15 @@ import UIKit
 
 class TabBarViewController: UITabBarController{
     
-    
+    //MARK:- UI Properties
+
+    let tutorialView = UIView()
+    let leftSwipeLabel = UILabel()
+    let rightSwipeLabel = UILabel()
+
     //MARK:- Properties
-    
+    let defaults = UserDefaults.standard
+
     //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = [String]()
@@ -23,6 +29,7 @@ class TabBarViewController: UITabBarController{
     //MARK:- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         delegate = self
 
@@ -34,10 +41,51 @@ class TabBarViewController: UITabBarController{
         vc.categoriesTitles = categoriesTitles
         vc.dollarSign = dollarSign
         vc.distance = distance
+        
+        if(!defaults.bool(forKey: "tutorialTriggered")){
+            configureTutorialView()
+            configureleftSwipeLabel()
+            defaults.set(true, forKey: "tutorialTriggered")
+        }
     }
     
-    // MARK: - IBActions & Objc Functions (Segues)
+    //MARK: - Layout Configurations
 
+    func configureTutorialView(){
+        view.addSubview(tutorialView)
+        tutorialView.translatesAutoresizingMaskIntoConstraints = false
+        tutorialView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        tutorialView.alpha = 0.7
+        tutorialView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tutorialView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tutorialView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tutorialView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(dismissTutorial))
+        tutorialView.isUserInteractionEnabled = true
+        tutorialView.addGestureRecognizer(singleTap)
+
+    }
+    
+    func configureleftSwipeLabel(){
+        view.addSubview(leftSwipeLabel)
+        leftSwipeLabel.text = "swipe left to favorite!"
+        leftSwipeLabel.textAlignment = .left
+        leftSwipeLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
+        leftSwipeLabel.font = UIFont(name: "Montserrat-Medium", size: 25)
+        leftSwipeLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftSwipeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        leftSwipeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+    }
+    
+    @objc func dismissTutorial() {
+        tutorialView.isHidden = true
+        leftSwipeLabel.isHidden = true
+    }
+    
+    
+    // MARK: - IBActions & Objc Functions (Segues)
+    
     //'Cancel' button segue
     @IBAction func unwindToCards(_ unwindSegue: UIStoryboardSegue) {
         

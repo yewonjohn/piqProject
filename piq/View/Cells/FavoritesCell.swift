@@ -20,6 +20,7 @@ class FavoritesCell: SwipeTableViewCell {
     @IBOutlet weak var favoritesPrice: UILabel!
     @IBOutlet weak var favoritesCategories: UILabel!
     
+    @IBOutlet weak var categoriesWidth: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +30,10 @@ class FavoritesCell: SwipeTableViewCell {
         favoritesImage.clipsToBounds = true
         
         favoritesTitle.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: 4).isActive = true
-        favoritesCategories.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: 4).isActive = true
+//        favoritesCategories.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: 4).isActive = true
+        
+        categoriesWidth.constant = containerView.frame.width * 0.55
+        print(containerView.frame.width * 0.55)
     }
     
 }

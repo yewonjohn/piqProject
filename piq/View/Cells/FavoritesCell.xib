@@ -27,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="468" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rest1" translatesAutoresizingMaskIntoConstraints="NO" id="NO2-sY-9Rj" userLabel="Image">
+                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NO2-sY-9Rj" userLabel="Image">
                         <rect key="frame" x="0.0" y="0.0" width="158" height="103"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="NO2-sY-9Rj" secondAttribute="height" multiplier="158:103" id="zYz-yJ-aSB"/>
@@ -58,15 +58,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXk-5T-W2o">
-                                <rect key="frame" x="32" y="54" width="7" height="18"/>
+                                <rect key="frame" x="32" y="52" width="7" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken, Korean, Brunch &amp; Breakfast" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VnL-oE-Ueo">
-                                <rect key="frame" x="42" y="54" width="180" height="32"/>
+                                <rect key="frame" x="42" y="54" width="237.5" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="RGk-8g-vQ1"/>
+                                    <constraint firstAttribute="width" constant="237.5" id="99f-Ch-Yfo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,7 +86,7 @@
                             <constraint firstItem="sIb-bt-MKF" firstAttribute="leading" secondItem="3HA-MA-dFt" secondAttribute="leading" constant="5" id="luN-7O-0jR"/>
                             <constraint firstItem="kfW-Gd-g5J" firstAttribute="top" secondItem="3HA-MA-dFt" secondAttribute="top" constant="5" id="qCi-zQ-6pO"/>
                             <constraint firstItem="HxG-w1-xGd" firstAttribute="leading" secondItem="e73-JF-vht" secondAttribute="trailing" constant="5" id="wZw-NN-BGS"/>
-                            <constraint firstItem="iXk-5T-W2o" firstAttribute="top" secondItem="e73-JF-vht" secondAttribute="bottom" constant="5" id="yLV-AK-i9n"/>
+                            <constraint firstItem="iXk-5T-W2o" firstAttribute="top" secondItem="e73-JF-vht" secondAttribute="bottom" constant="3" id="yLV-AK-i9n"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -104,6 +104,7 @@
             <color key="backgroundColor" red="0.89640919750000003" green="0.89207871829999996" blue="0.9007396768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="categoriesWidth" destination="99f-Ch-Yfo" id="oyj-Xo-egm"/>
                 <outlet property="containerView" destination="3HA-MA-dFt" id="bEx-hd-pn6"/>
                 <outlet property="contentVIew" destination="H2p-sc-9uM" id="qhN-sr-h5g"/>
                 <outlet property="favoritesCategories" destination="VnL-oE-Ueo" id="WDj-ED-oa6"/>
@@ -118,6 +119,5 @@
     </objects>
     <resources>
         <image name="regular_5" width="102" height="18"/>
-        <image name="rest1" width="1000" height="666"/>
     </resources>
 </document>

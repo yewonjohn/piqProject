@@ -14,8 +14,8 @@ import Firebase
 
 protocol RestaurantCardsDelegate {
     func swipeDidEnd(on view: RestaurantCardView)
+    func swipedLeft(data : RestaurantModel, userEmail : String, categoriesTitles : String)
 }
-
 class RestaurantCardView : UIView {
 
     //MARK: - UI Properties
@@ -120,7 +120,6 @@ class RestaurantCardView : UIView {
             }
             categoriesView.text = categoryTitles
             
-            favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         }
     }
 
@@ -130,14 +129,6 @@ class RestaurantCardView : UIView {
         UIApplication.shared.open(url)
     }
 
-    @objc func addToFavorites(){
-        if let data = dataSource, let user = Auth.auth().currentUser?.email{
-            favoritesManager.addToFavorites(user: user, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoryTitles)
-            
-            //animating button
-            service.animateButton(button: favoriteButton)
-        }
-    }
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -154,7 +145,6 @@ class RestaurantCardView : UIView {
         configureDistanceView()
         configurePhoneView()
         configureArrow()
-        configureButton()
         addPanGestureOnCards()
         configureTapGesture()
     }
@@ -199,8 +189,6 @@ class RestaurantCardView : UIView {
         imageContainView.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
         imageContainView.topAnchor.constraint(equalTo: swipeView.topAnchor).isActive = true
         imageContainView.widthAnchor.constraint(equalTo: self.swipeView.widthAnchor, multiplier: 1.0).isActive = true
-//        imageContainView.heightAnchor.constraint(equalToConstant: 350).isActive = true
-        print(swipeView.frame.height * 0.60)
         imageContainView.heightAnchor.constraint(equalTo: self.swipeView.heightAnchor, multiplier: 0.70).isActive = true
 
     }
@@ -312,16 +300,16 @@ class RestaurantCardView : UIView {
         phoneView.minimumScaleFactor = 0.2
 
     }
-    func configureButton() {
-        swipeView.addSubview(favoriteButton)
-        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(named: "plus-tab")?.withRenderingMode(.alwaysTemplate)
-        favoriteButton.setImage(image, for: .normal)
-        favoriteButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        favoriteButton.layer.cornerRadius  = 7
-        favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -20).isActive = true
-        favoriteButton.centerYAnchor.constraint(equalTo: phoneView.centerYAnchor, constant: 0).isActive = true
-    }
+//    func configureButton() {
+//        swipeView.addSubview(favoriteButton)
+//        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+//        let image = UIImage(named: "plus-tab")?.withRenderingMode(.alwaysTemplate)
+//        favoriteButton.setImage(image, for: .normal)
+//        favoriteButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        favoriteButton.layer.cornerRadius  = 7
+//        favoriteButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -20).isActive = true
+//        favoriteButton.centerYAnchor.constraint(equalTo: phoneView.centerYAnchor, constant: 0).isActive = true
+//    }
     func configureArrow(){
         swipeView.addSubview(arrowButton)
         let symbol = UIImage(systemName: "chevron.compact.down")
@@ -341,6 +329,7 @@ class RestaurantCardView : UIView {
         arrowButton.addGestureRecognizer(singleTap)
 
     }
+    
     
     func configureTapGesture() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
@@ -365,8 +354,8 @@ class RestaurantCardView : UIView {
         
         switch sender.state {
         case .ended:
-
-            if point.x > 100 {
+            //swiped right
+            if point.x > 120 {
                 var cardRightTransform = card.transform
                 cardRightTransform = cardRightTransform.translatedBy(x: card.frame.width*2 , y: -20)
                 UIView.animate(withDuration: 0.2, animations: {
@@ -378,7 +367,8 @@ class RestaurantCardView : UIView {
                     self.layoutIfNeeded()
                 })
                 return
-            }else if point.x < -100 {
+            //swiped left
+            }else if point.x < -120 {
                 var cardLeftTransform = card.transform
                 cardLeftTransform = cardLeftTransform.translatedBy(x: -card.frame.width*2 , y: -20)
                 UIView.animate(withDuration: 0.2, animations: {
@@ -388,9 +378,13 @@ class RestaurantCardView : UIView {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
+                    if let dataSource = self.dataSource, let email = Auth.auth().currentUser?.email{
+                        self.delegate?.swipedLeft(data: dataSource, userEmail: email, categoriesTitles: self.categoryTitles)
+                    }
                 })
                 return
             }
+            //goes back to initial spot if
             UIView.animate(withDuration: 0.2) {
                 card.transform = .identity
                 card.center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
@@ -407,7 +401,6 @@ class RestaurantCardView : UIView {
     
     @objc func handleTapGesture(sender: UITapGestureRecognizer){
     }
-    
     
 }
 

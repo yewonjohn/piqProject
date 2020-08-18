@@ -220,9 +220,9 @@
 			isa = PBXGroup;
 			children = (
 				44D201C1249D76F70074F315 /* Main.storyboard */,
-				448D78EC24E1EDEB006D55C3 /* Custom Cells */,
-				44712D7824A2682D0083B1AB /* CustomViews */,
-				44DA293E24B7E403003974AE /* CardsViews */,
+				448D78EC24E1EDEB006D55C3 /* Cells */,
+				44712D7824A2682D0083B1AB /* Buttons and Fields */,
+				44DA293E24B7E403003974AE /* Cards */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,7 +238,7 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		44712D7824A2682D0083B1AB /* CustomViews */ = {
+		44712D7824A2682D0083B1AB /* Buttons and Fields */ = {
 			isa = PBXGroup;
 			children = (
 				44712D7924A268650083B1AB /* AuthTextField.swift */,
@@ -246,10 +246,10 @@
 				44712D7A24A268650083B1AB /* LoginButton.swift */,
 				4496385A24D68DCE007576E1 /* FoodButton.swift */,
 			);
-			path = CustomViews;
+			path = "Buttons and Fields";
 			sourceTree = "<group>";
 		};
-		448D78EC24E1EDEB006D55C3 /* Custom Cells */ = {
+		448D78EC24E1EDEB006D55C3 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				44DA293624B7D359003974AE /* FavoritesCell.swift */,
@@ -258,7 +258,7 @@
 				448D78E824E0D052006D55C3 /* SettingsCell.swift */,
 				448D78E924E0D052006D55C3 /* SettingsCell.xib */,
 			);
-			path = "Custom Cells";
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		4496385624D68978007576E1 /* Fonts */ = {
@@ -350,13 +350,13 @@
 			path = SearchPage;
 			sourceTree = "<group>";
 		};
-		44DA293E24B7E403003974AE /* CardsViews */ = {
+		44DA293E24B7E403003974AE /* Cards */ = {
 			isa = PBXGroup;
 			children = (
 				44F9509324A56D0E0088748F /* RestaurantCardView.swift */,
 				44F9509524A56D480088748F /* StackContainerView.swift */,
 			);
-			path = CardsViews;
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		44DA293F24B7E7A3003974AE /* Tab Bar */ = {
