@@ -10,6 +10,10 @@ import UIKit
 import CoreLocation
 import NVActivityIndicatorView
 
+protocol RestaurantVCDelegate {
+    func shadowViewTriggered()
+}
+
 class RestaurantViewController: UIViewController {
     
     // MARK: - Properties
@@ -19,7 +23,6 @@ class RestaurantViewController: UIViewController {
     let signOutButton = UIButton()
     let resetButton = UIButton()
     let resetLabel = UILabel()
-    let shadowView = UIView()
     let loadingView = NVActivityIndicatorView(frame: .zero)
     let backgroundImageView = UIImageView()
     let piqdLabel = UILabel()
@@ -39,12 +42,14 @@ class RestaurantViewController: UIViewController {
     
     var locationManager = CLLocationManager()
     var favoritesManager = FavoritesManager()
+//    let tabVC = TabBarViewController()
 
     let service = ServiceUtil()
     let homePage = SearchPageViewController()
     let restaurantAPI = RestaurantManager()
     var isFirstTimeOpening = true
     let userDefault = UserDefaults.standard
+    var delegate: RestaurantVCDelegate?
 
 
     // MARK: - View Controller Life Cycle
@@ -69,7 +74,6 @@ class RestaurantViewController: UIViewController {
         setFilterButton()
         setResetButton()
         setResetLabel()
-        setShadowView()
         setLoadingView()
         configurePiqdLabel()
 
@@ -90,14 +94,14 @@ class RestaurantViewController: UIViewController {
     
     //MARK: - Layout Configurations
     //SETS CONTAINER CONSTRAINTS
-    func configureStackContainer() {
+    private func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
         stackContainer.widthAnchor.constraint(equalToConstant: view.frame.width * 0.83).isActive = true
         stackContainer.heightAnchor.constraint(equalToConstant: view.frame.height * 0.58).isActive = true
     }
     //SETS CARDS ARE EMPTY LABEL
-    func setLastLabel(){
+    private func setLastLabel(){
         self.view?.addSubview(emptyCardsLabel)
         emptyCardsLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
         emptyCardsLabel.textAlignment = .center
@@ -108,7 +112,7 @@ class RestaurantViewController: UIViewController {
         emptyCardsLabel.centerYAnchor.constraint(equalTo: self.view!.centerYAnchor).isActive = true
     }
 
-    func setPiqTitle(){
+    private func setPiqTitle(){
         self.view?.addSubview(piqTitle)
         piqTitle.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
         piqTitle.textAlignment = .center
@@ -119,7 +123,7 @@ class RestaurantViewController: UIViewController {
         piqTitle.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
     }
     
-    func setFilterButton(){
+    private func setFilterButton(){
         self.view?.addSubview(filterButton)
         filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: .normal)
         filterButton.translatesAutoresizingMaskIntoConstraints = false
@@ -131,7 +135,7 @@ class RestaurantViewController: UIViewController {
         filterButton.isUserInteractionEnabled = true
 
     }
-    func setResetButton(){
+    private func setResetButton(){
         self.view.addSubview(resetButton)
         let symbol = UIImage(systemName: "arrow.2.circlepath")
         resetButton.setImage(symbol, for: .normal)
@@ -150,7 +154,7 @@ class RestaurantViewController: UIViewController {
         resetButton.isUserInteractionEnabled = true
     }
     
-    func setResetLabel(){
+    private func setResetLabel(){
         self.view.addSubview(resetLabel)
         resetLabel.text = "reset"
         resetLabel.font = UIFont(name: "Montserrat-Medium", size: 8)
@@ -161,23 +165,8 @@ class RestaurantViewController: UIViewController {
         resetLabel.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 0).isActive = true
         resetLabel.isHidden = true
     }
-      func setShadowView(){
 
-        self.view.addSubview(shadowView)
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.backgroundColor = .black
-        shadowView.alpha = 0.7
-        shadowView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        shadowView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        shadowView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        shadowView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        shadowView.isHidden = true
-    }
-    func triggerShadowView(){
-        service.animateShadowView(view: shadowView)
-    }
-
-    func setLoadingView(){
+    private func setLoadingView(){
         self.view.addSubview(loadingView)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
@@ -188,7 +177,7 @@ class RestaurantViewController: UIViewController {
         loadingView.color = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
     }
     //favorited label popup
-    func configurePiqdLabel() {
+    private func configurePiqdLabel() {
         view.addSubview(piqdLabel)
         piqdLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
         piqdLabel.text = "piq'd!"
@@ -245,8 +234,9 @@ extension RestaurantViewController : RestaurantCardsDataSource {
 extension RestaurantViewController: UIViewControllerTransitioningDelegate{
     
     @objc public func buttonAction(){
-        
-        triggerShadowView()
+        //triggers shadowView
+        print("button clicked")
+        delegate?.shadowViewTriggered()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! SearchPageViewController

@@ -81,8 +81,6 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         var cardViewFrame = bounds
         let horizontalInset = (CGFloat(index) * self.horizontalInset)
         let verticalInset = CGFloat(index) * self.verticalInset
-        print(horizontalInset)
-        print(verticalInset)
         
         cardViewFrame.size.width -= 2 * horizontalInset
         cardViewFrame.origin.x += horizontalInset

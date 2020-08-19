@@ -12,14 +12,17 @@ import UIKit
 class TabBarViewController: UITabBarController{
     
     //MARK:- UI Properties
-
+    
+    let shadowView = UIView()
     let tutorialView = UIView()
     let leftSwipeLabel = UILabel()
     let rightSwipeLabel = UILabel()
 
     //MARK:- Properties
     let defaults = UserDefaults.standard
-
+    let service = ServiceUtil()
+    let restaurantVC = RestaurantViewController()
+    
     //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = [String]()
@@ -27,10 +30,12 @@ class TabBarViewController: UITabBarController{
     var distance : Double?
 
     //MARK:- Lifecycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        restaurantVC.delegate = self
+
+        setShadowView()
         delegate = self
 
         //passing info
@@ -50,8 +55,24 @@ class TabBarViewController: UITabBarController{
     }
     
     //MARK: - Layout Configurations
+    
+      private func setShadowView(){
 
-    func configureTutorialView(){
+        self.view.addSubview(shadowView)
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.backgroundColor = .black
+        shadowView.alpha = 0.7
+        shadowView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        shadowView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        shadowView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        shadowView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        shadowView.isHidden = true
+    }
+    private func triggerShadowView(){
+        service.animateShadowView(view: shadowView)
+    }
+
+    private func configureTutorialView(){
         view.addSubview(tutorialView)
         tutorialView.translatesAutoresizingMaskIntoConstraints = false
         tutorialView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -67,7 +88,7 @@ class TabBarViewController: UITabBarController{
 
     }
     
-    func configureleftSwipeLabel(){
+    private func configureleftSwipeLabel(){
         view.addSubview(leftSwipeLabel)
         leftSwipeLabel.text = "swipe right to favorite!"
         leftSwipeLabel.textAlignment = .left
@@ -89,9 +110,9 @@ class TabBarViewController: UITabBarController{
     //'Cancel' button segue
     @IBAction func unwindToCards(_ unwindSegue: UIStoryboardSegue) {
         
-        let viewControllers = self.viewControllers
-        let vc = viewControllers![0] as! RestaurantViewController
-        vc.triggerShadowView()
+//        let viewControllers = self.viewControllers
+//        let vc = viewControllers![0] as! RestaurantViewController
+        triggerShadowView()
     }
     //'Apply' button segue
     @IBAction func unwindWithInfo(_ unwindSegue: UIStoryboardSegue) {
@@ -99,7 +120,7 @@ class TabBarViewController: UITabBarController{
         let viewControllers = self.viewControllers
         let vc = viewControllers![0] as! RestaurantViewController
         
-        vc.triggerShadowView()
+        triggerShadowView()
         
         vc.categoriesArr = categoriesArr
         vc.categoriesTitles = categoriesTitles
@@ -121,4 +142,13 @@ extension TabBarViewController: UITabBarControllerDelegate{
         }
         return true
     }
+}
+
+extension TabBarViewController: RestaurantVCDelegate{
+    
+    func shadowViewTriggered() {
+        print("Trigger shadow inside Tab")
+        triggerShadowView()
+    }
+    
 }

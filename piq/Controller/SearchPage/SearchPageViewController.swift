@@ -199,7 +199,7 @@ class SearchPageViewController: UIViewController{
     }
     
     //Segues
-    @IBAction func goToCards(_ sender: UIButton) {
+    @IBAction func goSearch(_ sender: UIButton) {
         switch sidePresented {
         case true:
             self.performSegue(withIdentifier: "unwindWithInfo", sender: self)
@@ -230,6 +230,8 @@ class SearchPageViewController: UIViewController{
         //setting shadowView in RestaurantVC to hidden
     }
 }
+
+
 
 //MARK: -- 	Search Configuration
 extension SearchPageViewController{

@@ -34,6 +34,7 @@ class FavoritesManager{
     //MARK: - Functions (ADD)
     func addToFavorites(user:String?, id: String?, name: String?, ratings: Float?, reviewCount: Int?, price: String?, distance: Double?, phone: String?, isClosed: Bool?, url: String?, img_url: String?, categories: String?){
         
+        timeStamp = NSDate().timeIntervalSince1970
         // CHECK IF CURRENT USER HAS THIS FAVORITED ALREADY
         let docRef = db.collection("favorites")
         var exists = false
@@ -109,7 +110,7 @@ class FavoritesManager{
     
             db.collection("favorites")
                 .whereField("user", isEqualTo: currentUser)
-                .order(by: "date_added")
+                .order(by: "date_added", descending: false)
                 .getDocuments{ (QuerySnapshot, Error) in
                     if let e = Error{
                         self.delegate?.didFailWithError(error: e)
