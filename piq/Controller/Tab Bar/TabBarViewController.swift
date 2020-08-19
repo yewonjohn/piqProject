@@ -69,13 +69,13 @@ class TabBarViewController: UITabBarController{
     
     func configureleftSwipeLabel(){
         view.addSubview(leftSwipeLabel)
-        leftSwipeLabel.text = "swipe left to favorite!"
+        leftSwipeLabel.text = "swipe right to favorite!"
         leftSwipeLabel.textAlignment = .left
         leftSwipeLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
         leftSwipeLabel.font = UIFont(name: "Montserrat-Medium", size: 25)
         leftSwipeLabel.translatesAutoresizingMaskIntoConstraints = false
         leftSwipeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        leftSwipeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        leftSwipeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
     }
     
     @objc func dismissTutorial() {

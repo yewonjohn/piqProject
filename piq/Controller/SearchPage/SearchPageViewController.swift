@@ -132,7 +132,7 @@ class SearchPageViewController: UIViewController{
         }
     }
     
-    // MARK: - IBActions & Objc Functions
+    // MARK: - User Interactions
     @IBAction func costButtonClicked(_ sender: UIButton) {
         switch sender {
         case costButton1:

@@ -14,24 +14,24 @@ protocol RestaurantCardsDataSource {
     func card(at index: Int) -> RestaurantCardView
     func emptyView() -> Void
     func swipeStarted() -> Bool
-    func swipedLeft(data: RestaurantModel, userEmail: String, categoriesTitles: String)
+    func swipedRight(data: RestaurantModel, userEmail: String, categoriesTitles: String)
 }
 
 class StackContainerView: UIView, RestaurantCardsDelegate {
 
 
     //MARK: - Properties
-    var numberOfCardsToShow: Int = 0
-    var lastCardCounter = 0
-    var cardsToBeVisible: Int = 3
-    var cardViews : [RestaurantCardView] = []
-    var remainingcards: Int = 0
-    var swipeStarted = true
+    private var numberOfCardsToShow: Int = 0
+    private var lastCardCounter = 0
+    private var cardsToBeVisible: Int = 3
+//    private var cardViews : [RestaurantCardView] = []
+    private var remainingcards: Int = 0
+    private var swipeStarted = true
     
-    let horizontalInset: CGFloat = 10.0
-    let verticalInset: CGFloat = 10.0
+    private let horizontalInset: CGFloat = 10.0
+    private let verticalInset: CGFloat = 10.0
     
-    var visibleCards: [RestaurantCardView] {
+    private var visibleCards: [RestaurantCardView] {
         return subviews as? [RestaurantCardView] ?? []
     }
     var dataSource: RestaurantCardsDataSource? {
@@ -49,9 +49,10 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    //resets & sets dataSource data to properties
     func reloadData() {
         swipeStarted = true
+        
         removeAllCardViews()
         guard let datasource = dataSource else { return }
         setNeedsLayout()
@@ -59,27 +60,29 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         numberOfCardsToShow = datasource.numberOfCardsToShow()
         remainingcards = numberOfCardsToShow
         lastCardCounter = numberOfCardsToShow
-        
+        //adds 3 or less cards to the view
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: datasource.card(at: i), atIndex: i )
-            
         }
     }
 
     //MARK: - Configurations
-
-    private func addCardView(cardView: RestaurantCardView, atIndex index: Int) {
+    
+    //Adds card to container for visiblity
+    func addCardView(cardView: RestaurantCardView, atIndex index: Int) {
         cardView.delegate = self
         addCardFrame(index: index, cardView: cardView)
-        cardViews.append(cardView)
+//        cardViews.append(cardView)
         insertSubview(cardView, at: 0)
         remainingcards -= 1
     }
-    
-    func addCardFrame(index: Int, cardView: RestaurantCardView) {
+    //Sets card frame + placement based on index of the card
+    private func addCardFrame(index: Int, cardView: RestaurantCardView) {
         var cardViewFrame = bounds
         let horizontalInset = (CGFloat(index) * self.horizontalInset)
         let verticalInset = CGFloat(index) * self.verticalInset
+        print(horizontalInset)
+        print(verticalInset)
         
         cardViewFrame.size.width -= 2 * horizontalInset
         cardViewFrame.origin.x += horizontalInset
@@ -92,7 +95,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         for cardView in visibleCards {
             cardView.removeFromSuperview()
         }
-        cardViews = []
+//        cardViews = []
     }
         
     func swipeDidEnd(on view: RestaurantCardView) {
@@ -129,8 +132,8 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         }
     }
 
-    func swipedLeft(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
-        dataSource?.swipedLeft(data: data, userEmail: userEmail, categoriesTitles: categoriesTitles)
+    func swipedRight(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
+        dataSource?.swipedRight(data: data, userEmail: userEmail, categoriesTitles: categoriesTitles)
     }
 }
 

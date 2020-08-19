@@ -83,6 +83,7 @@ class RestaurantViewController: UIViewController {
         super.viewDidLayoutSubviews()
         if isFirstTimeOpening{
             isFirstTimeOpening = false
+            //calling this here because we're using view.frame for dynamic heigh/width
             configureStackContainer()
         }
     }
@@ -214,26 +215,26 @@ class RestaurantViewController: UIViewController {
 
 extension RestaurantViewController : RestaurantCardsDataSource {
     
-    //adds to favorites when cards swiped left.
-    func swipedLeft(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
+    //Adds to favorites when cards swiped right.
+    func swipedRight(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
         favoritesManager.addToFavorites(user: userEmail, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoriesTitles)
         service.animatePiqd(label: piqdLabel)
     }
-    
+    //provides total number of cards to StackContainerView
     func numberOfCardsToShow() -> Int {
         return restaurantModelData.count
     }
-    
+    //provides all the data objects for the cards to StackContainerView
     func card(at index: Int) -> RestaurantCardView {
         let card = RestaurantCardView()
         card.dataSource = restaurantModelData[index]
         return card
     }
-    
+    //triggers when last card is swiped
     func emptyView() -> Void {
         emptyCardsLabel.isHidden = false
     }
-    
+    //triggers when swiping starts
     func swipeStarted() -> Bool {
         service.animateResetButton(button: resetButton)
         service.animateResetLabel(label: resetLabel)
@@ -330,7 +331,7 @@ extension RestaurantViewController{
     
     func getRestaurantCards(){
         
-        //make sure empty label and reset button is hidden when new search
+        //make sure empty label and reset button is hidden when new search is initialized
         resetButton.isHidden = true
         resetLabel.isHidden = true
         emptyCardsLabel.isHidden = true

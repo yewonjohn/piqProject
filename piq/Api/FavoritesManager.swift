@@ -99,8 +99,6 @@ class FavoritesManager{
             }
         }
         
-        
-        
     }
         func loadFavorites(){
             

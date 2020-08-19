@@ -34,22 +34,7 @@ class ServiceUtil{
         backgroundImageView.contentMode = .scaleAspectFill
         view.sendSubviewToBack(backgroundImageView)
     }
-    
-//    func animateButton(button: UIButton){
-//        button.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-//        UIView.animate(withDuration: 2.0,
-//                       delay: 0,
-//                       usingSpringWithDamping: CGFloat(0.20),
-//                       initialSpringVelocity: CGFloat(6.0),
-//                       options: UIView.AnimationOptions.allowUserInteraction,
-//                       animations: {
-//                        button.transform = CGAffineTransform.identity
-//                        button.tintColor = #colorLiteral(red: 0.6624035239, green: 0, blue: 0.08404419571, alpha: 1)
-//
-//        },
-//                       completion: { _ in }
-//        )
-//    }
+
     //MARK: - Animations
 
     func animateResetButton(button: UIButton){
@@ -129,7 +114,7 @@ class ServiceUtil{
             )
         }
     }
-    //stops animation
+    //stops animation for Icon
     var inBackground = false
     func backgroundTrigger(){
         inBackground = true
@@ -207,11 +192,11 @@ class ServiceUtil{
     
     func animatePiqd(label:UILabel){
         label.isHidden = false
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             label.alpha = 1
         }, completion:{ _ in
             
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 1.0, animations: {
                 label.alpha = 0
             }, completion: { _ in
                 label.isHidden = true
@@ -220,7 +205,7 @@ class ServiceUtil{
         })
     }
     
-    //MARK: - Button Config
+    //MARK: - Button Config (Animations)
 
     func deselectButtons(button1: UIButton, button2:UIButton, button3:UIButton, button4:UIButton, buttonAll: UIButton, index: Int){
         if(index == 1){

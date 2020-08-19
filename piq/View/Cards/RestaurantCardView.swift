@@ -14,35 +14,35 @@ import Firebase
 
 protocol RestaurantCardsDelegate {
     func swipeDidEnd(on view: RestaurantCardView)
-    func swipedLeft(data : RestaurantModel, userEmail : String, categoriesTitles : String)
+    func swipedRight(data : RestaurantModel, userEmail : String, categoriesTitles : String)
 }
 class RestaurantCardView : UIView {
 
     //MARK: - UI Properties
-    var shadowView : UIView!
-    var swipeView : UIView!
-    var imageContainView: UIView!
-    var imageView: UIImageView!
-    var titleLabel = UILabel()
-    var ratingsView: UIImageView!
-    var ratingsCountView = UILabel()
-    var dollarSignsView = UILabel()
-    var categoriesView = UILabel()
-    var distanceView = UILabel()
-    var phoneView = UILabel()
-    var addressView = UILabel()
-    var favoriteButton = UIButton()
-    var yelpImgView: UIImageView!
-    var arrowButton = UIButton()
+    private var shadowView : UIView!
+    private var swipeView : UIView!
+    private var imageContainView: UIView!
+    private var imageView: UIImageView!
+    private var titleLabel = UILabel()
+    private var ratingsView: UIImageView!
+    private var ratingsCountView = UILabel()
+    private var dollarSignsView = UILabel()
+    private var categoriesView = UILabel()
+    private var distanceView = UILabel()
+    private var phoneView = UILabel()
+    private var addressView = UILabel()
+    private var favoriteButton = UIButton()
+    private var yelpImgView: UIImageView!
+    private var arrowButton = UIButton()
 
     //MARK: - Properties
-    let favoritesManager = FavoritesManager()
-    let service = ServiceUtil()
+    private let favoritesManager = FavoritesManager()
+    private let service = ServiceUtil()
     var delegate : RestaurantCardsDelegate?
     
-    var categoryTitles = ""
-    var divisor : CGFloat = 0
-    let baseView = UIView()
+    private var categoryTitles = ""
+    private var divisor : CGFloat = 0
+    private let baseView = UIView()
     
     
     var dataSource : RestaurantModel? {
@@ -124,7 +124,7 @@ class RestaurantCardView : UIView {
     }
 
     //MARK: - Interactions
-    @objc func goToURL() {
+    @objc private func goToURL() {
         guard let url = URL(string: (dataSource?.url)!) else { return }
         UIApplication.shared.open(url)
     }
@@ -155,7 +155,7 @@ class RestaurantCardView : UIView {
     
     //MARK: - Configuration
     
-    func configureShadowView() {
+    private func configureShadowView() {
         shadowView = UIView()
         shadowView.backgroundColor = .clear
         shadowView.layer.shadowColor = UIColor.black.cgColor
@@ -170,7 +170,7 @@ class RestaurantCardView : UIView {
         shadowView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     }
     
-    func configureSwipeView() {
+    private func configureSwipeView() {
         swipeView = UIView()
         swipeView.layer.cornerRadius = 25
         swipeView.clipsToBounds = true
@@ -181,7 +181,7 @@ class RestaurantCardView : UIView {
         swipeView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor).isActive = true
         swipeView.topAnchor.constraint(equalTo: shadowView.topAnchor).isActive = true
     }
-    func configureImageContainerView() {
+    private func configureImageContainerView() {
         imageContainView = UIView()
         imageContainView.clipsToBounds = true
         swipeView.addSubview(imageContainView)
@@ -193,7 +193,7 @@ class RestaurantCardView : UIView {
 
     }
     
-    func configureImageView() {
+    private func configureImageView() {
         imageView = UIImageView()
         imageContainView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFill
@@ -204,7 +204,7 @@ class RestaurantCardView : UIView {
         imageView.heightAnchor.constraint(equalTo: self.imageContainView.heightAnchor, multiplier: 1.0).isActive = true
     }
     
-    func configureTitleView() {
+    private func configureTitleView() {
         imageContainView.addSubview(titleLabel)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .left
@@ -220,7 +220,7 @@ class RestaurantCardView : UIView {
         titleLabel.bottomAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: -4).isActive = true
     }
     
-    func configureRatingsView() {
+    private func configureRatingsView() {
         ratingsView = UIImageView()
         ratingsView.image = UIImage(named: "regular_0")
         swipeView.addSubview(ratingsView)
@@ -234,7 +234,7 @@ class RestaurantCardView : UIView {
         ratingsView.heightAnchor.constraint(equalTo: swipeView.heightAnchor, multiplier: 0.10).isActive = true
     }
     
-    func configureRatingsCountView() {
+    private func configureRatingsCountView() {
         swipeView.addSubview(ratingsCountView)
         ratingsCountView.textColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
         ratingsCountView.textAlignment = .left
@@ -247,7 +247,7 @@ class RestaurantCardView : UIView {
 
     }
     
-    func configureDollarSignsView() {
+    private func configureDollarSignsView() {
         swipeView.addSubview(dollarSignsView)
         dollarSignsView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
         dollarSignsView.textAlignment = .left
@@ -259,7 +259,7 @@ class RestaurantCardView : UIView {
         dollarSignsView.minimumScaleFactor = 0.2
     }
     
-    func configureCategoriesView() {
+    private func configureCategoriesView() {
         swipeView.addSubview(categoriesView)
         categoriesView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
         categoriesView.textAlignment = .left
@@ -274,7 +274,7 @@ class RestaurantCardView : UIView {
         categoriesView.minimumScaleFactor = 0.2
     }
     
-    func configureDistanceView() {
+    private func configureDistanceView() {
         swipeView.addSubview(distanceView)
         distanceView.textAlignment = .left
         distanceView.font = UIFont(name: "Montserrat-Medium", size: 15)
@@ -287,7 +287,7 @@ class RestaurantCardView : UIView {
         
     }
     
-    func configurePhoneView() {
+    private func configurePhoneView() {
         swipeView.addSubview(phoneView)
         phoneView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
         phoneView.textAlignment = .left
@@ -301,7 +301,7 @@ class RestaurantCardView : UIView {
 
     }
 
-    func configureArrow(){
+    private func configureArrow(){
         swipeView.addSubview(arrowButton)
         let symbol = UIImage(systemName: "chevron.compact.down")
         arrowButton.setImage(symbol, for: .normal)
@@ -322,12 +322,12 @@ class RestaurantCardView : UIView {
     }
     
     
-    func configureTapGesture() {
+    private func configureTapGesture() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
     }
     
     
-    func addPanGestureOnCards() {
+    private func addPanGestureOnCards() {
         self.isUserInteractionEnabled = true
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture)))
     }
@@ -335,7 +335,7 @@ class RestaurantCardView : UIView {
     
     
     //MARK: - Gesture Handlers
-    @objc func handlePanGesture(sender: UIPanGestureRecognizer){
+    @objc private func handlePanGesture(sender: UIPanGestureRecognizer){
         let card = sender.view as! RestaurantCardView
         let point = sender.translation(in: self)
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
@@ -356,6 +356,9 @@ class RestaurantCardView : UIView {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
+                    if let dataSource = self.dataSource, let email = Auth.auth().currentUser?.email{
+                        self.delegate?.swipedRight(data: dataSource, userEmail: email, categoriesTitles: self.categoryTitles)
+                    }
                 })
                 return
             //swiped left
@@ -369,9 +372,6 @@ class RestaurantCardView : UIView {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-                    if let dataSource = self.dataSource, let email = Auth.auth().currentUser?.email{
-                        self.delegate?.swipedLeft(data: dataSource, userEmail: email, categoriesTitles: self.categoryTitles)
-                    }
                 })
                 return
             }
@@ -390,7 +390,7 @@ class RestaurantCardView : UIView {
         }
     }
     
-    @objc func handleTapGesture(sender: UITapGestureRecognizer){
+    @objc private func handleTapGesture(sender: UITapGestureRecognizer){
     }
     
 }
