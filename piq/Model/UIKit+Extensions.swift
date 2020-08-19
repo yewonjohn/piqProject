@@ -19,6 +19,7 @@ extension UINavigationController {
 }
 
 extension UIViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -27,23 +28,7 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-}
-extension String {
-    func applyPatternOnNumbers(pattern: String, replacmentCharacter: Character) -> String {
-        var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
-        for index in 0 ..< pattern.count {
-            guard index < pureNumber.count else { return pureNumber }
-            let stringIndex = String.Index(encodedOffset: index)
-            let patternCharacter = pattern[stringIndex]
-            guard patternCharacter != replacmentCharacter else { continue }
-            pureNumber.insert(patternCharacter, at: stringIndex)
-        }
-        return pureNumber
-    }
-}
-
-//MARK:- hexColor Method
-extension UIViewController{
+    //MARK:- hexColor Method
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
@@ -64,5 +49,38 @@ extension UIViewController{
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    func presentDarkLayer(darkLayer: UIView) {
+            darkLayer.frame = view.frame
+            darkLayer.translatesAutoresizingMaskIntoConstraints = false
+
+        let currentWindow: UIWindow? = SceneDelegate.shared?.window
+            currentWindow?.addSubview(darkLayer)
+
+            darkLayer.leadingAnchor.constraint(equalTo: currentWindow!.leadingAnchor).isActive = true
+            darkLayer.trailingAnchor.constraint(equalTo: currentWindow!.trailingAnchor).isActive = true
+            darkLayer.topAnchor.constraint(equalTo: currentWindow!.topAnchor).isActive = true
+            darkLayer.bottomAnchor.constraint(equalTo: currentWindow!.bottomAnchor).isActive = true
+
+            darkLayer.layer.backgroundColor = UIColor.black.cgColor
+            darkLayer.layer.opacity = 0.5
+            darkLayer.isHidden = true
+    //         attempt
+            SceneDelegate.shared?.window?.bringSubviewToFront(darkLayer)
+        }
+    
+}
+extension String {
+    func applyPatternOnNumbers(pattern: String, replacmentCharacter: Character) -> String {
+        var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
+        for index in 0 ..< pattern.count {
+            guard index < pureNumber.count else { return pureNumber }
+            let stringIndex = String.Index(encodedOffset: index)
+            let patternCharacter = pattern[stringIndex]
+            guard patternCharacter != replacmentCharacter else { continue }
+            pureNumber.insert(patternCharacter, at: stringIndex)
+        }
+        return pureNumber
     }
 }

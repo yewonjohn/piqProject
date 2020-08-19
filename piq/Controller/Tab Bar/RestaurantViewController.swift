@@ -10,9 +10,6 @@ import UIKit
 import CoreLocation
 import NVActivityIndicatorView
 
-protocol RestaurantVCDelegate {
-    func shadowViewTriggered()
-}
 
 class RestaurantViewController: UIViewController {
     
@@ -26,7 +23,7 @@ class RestaurantViewController: UIViewController {
     let loadingView = NVActivityIndicatorView(frame: .zero)
     let backgroundImageView = UIImageView()
     let piqdLabel = UILabel()
-    
+    let shadowView = UIView()
 
     var presentTransition: UIViewControllerAnimatedTransitioning?
     var dismissTransition: UIViewControllerAnimatedTransitioning?
@@ -42,14 +39,12 @@ class RestaurantViewController: UIViewController {
     
     var locationManager = CLLocationManager()
     var favoritesManager = FavoritesManager()
-//    let tabVC = TabBarViewController()
 
     let service = ServiceUtil()
     let homePage = SearchPageViewController()
     let restaurantAPI = RestaurantManager()
     var isFirstTimeOpening = true
     let userDefault = UserDefaults.standard
-    var delegate: RestaurantVCDelegate?
 
 
     // MARK: - View Controller Life Cycle
@@ -76,7 +71,7 @@ class RestaurantViewController: UIViewController {
         setResetLabel()
         setLoadingView()
         configurePiqdLabel()
-
+        presentDarkLayer(darkLayer: shadowView)
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
 
@@ -93,6 +88,10 @@ class RestaurantViewController: UIViewController {
     }
     
     //MARK: - Layout Configurations
+    func triggerShadowView(){
+        service.animateShadowView(view: shadowView)
+    }
+    
     //SETS CONTAINER CONSTRAINTS
     private func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -235,8 +234,7 @@ extension RestaurantViewController: UIViewControllerTransitioningDelegate{
     
     @objc public func buttonAction(){
         //triggers shadowView
-        print("button clicked")
-        delegate?.shadowViewTriggered()
+        triggerShadowView()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pvc = storyboard.instantiateViewController(withIdentifier: "HomePageViewController") as! SearchPageViewController
