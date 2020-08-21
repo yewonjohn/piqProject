@@ -61,7 +61,7 @@ class RestaurantCardView : UIView {
                 dollarSignsView.text = "? •"
             }
             if let number = phoneNumber {
-                phoneView.text = " • "+"\(number)"
+                phoneView.text = number
             }
             let url = URL(string: dataSource?.img_url ?? "")
             imageView.kf.setImage(with: url)
@@ -81,8 +81,8 @@ class RestaurantCardView : UIView {
             } else if distInMiles > 2 {
                 distanceView.textColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
             }
-            if let addressStreet = dataSource?.addressStreet, let addressCity = dataSource?.addressCity{
-                addressView.text = "\(addressStreet)"+" , "+"\(addressCity)"
+            if let street = dataSource?.addressStreet, let city = dataSource?.addressCity{
+                addressView.text = "\(street)"+" • "+"\(city)"
             }
             
             //SETTING RATINGS BAR
@@ -191,7 +191,7 @@ class RestaurantCardView : UIView {
         imageContainerView.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
         imageContainerView.topAnchor.constraint(equalTo: swipeView.topAnchor).isActive = true
         imageContainerView.widthAnchor.constraint(equalTo: self.swipeView.widthAnchor, multiplier: 1.0).isActive = true
-        imageContainerView.heightAnchor.constraint(equalTo: self.swipeView.heightAnchor, multiplier: 0.65).isActive = true
+        imageContainerView.heightAnchor.constraint(equalTo: self.swipeView.heightAnchor, multiplier: 0.67).isActive = true
     }
     
     private func configureImageView() {
@@ -273,6 +273,7 @@ class RestaurantCardView : UIView {
         categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 4).isActive = true
         categoriesView.adjustsFontSizeToFitWidth = true
         categoriesView.minimumScaleFactor = 0.5
+        categoriesView.heightAnchor.constraint(greaterThanOrEqualTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
     }
     
     private func configureDistanceView() {
@@ -285,21 +286,7 @@ class RestaurantCardView : UIView {
         distanceView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
         distanceView.adjustsFontSizeToFitWidth = true
         distanceView.minimumScaleFactor = 0.5
-    }
-   
-    private func configureAddresView(){
-        swipeView.addSubview(addressView)
-        addressView.textAlignment = .left
-        addressView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
-        addressView.font = UIFont(name: "Montserrat-Medium", size: 15)
-        addressView.text = "address • city"
-        addressView.numberOfLines = 0
-        addressView.translatesAutoresizingMaskIntoConstraints = false
-        addressView.topAnchor.constraint(equalTo: distanceView.bottomAnchor, constant: 10).isActive = true
-        addressView.leadingAnchor.constraint(equalTo: swipeView.leadingAnchor, constant: 10).isActive = true
-        addressView.trailingAnchor.constraint(equalTo: swipeView.trailingAnchor, constant: 4).isActive = true
-        addressView.adjustsFontSizeToFitWidth = true
-        addressView.minimumScaleFactor = 0.5
+        distanceView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
     }
     
     private func configurePhoneView() {
@@ -313,9 +300,26 @@ class RestaurantCardView : UIView {
         phoneView.centerYAnchor.constraint(equalTo: distanceView.centerYAnchor, constant: 0).isActive = true
         phoneView.adjustsFontSizeToFitWidth = true
         phoneView.minimumScaleFactor = 0.5
+        phoneView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
+
 
     }
-
+     private func configureAddresView(){
+         swipeView.addSubview(addressView)
+         addressView.textAlignment = .left
+         addressView.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+         addressView.font = UIFont(name: "Montserrat-Medium", size: 10)
+         addressView.text = "address • city"
+         addressView.numberOfLines = 0
+         addressView.translatesAutoresizingMaskIntoConstraints = false
+         addressView.topAnchor.constraint(equalTo: distanceView.bottomAnchor, constant: 5).isActive = true
+         addressView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
+//         addressView.trailingAnchor.constraint(equalTo: swipeView.trailingAnchor, constant: 4).isActive = true
+         addressView.adjustsFontSizeToFitWidth = true
+         addressView.minimumScaleFactor = 0.5
+         addressView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
+     }
+    
     private func configureArrow(){
         swipeView.addSubview(arrowButton)
         let symbol = UIImage(systemName: "chevron.compact.down")
