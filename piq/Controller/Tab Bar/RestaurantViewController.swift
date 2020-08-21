@@ -212,7 +212,7 @@ extension RestaurantViewController : RestaurantCardsDataSource {
     func numberOfCardsToShow() -> Int {
         return restaurantModelData.count
     }
-    //provides all the data objects for the cards to StackContainerView
+    //creates one card obj and sends to StackContainerView
     func card(at index: Int) -> RestaurantCardView {
         let card = RestaurantCardView()
         card.dataSource = restaurantModelData[index]

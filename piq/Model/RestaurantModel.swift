@@ -22,6 +22,8 @@ struct RestaurantModel{
     var categories: [Categories]
     var url: String?
     var img_url: String?
+    var addressCity: String?
+    var addressStreet: String?
 }
 
 struct Categories{

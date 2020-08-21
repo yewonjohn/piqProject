@@ -118,7 +118,10 @@ class RestaurantManager{
                                                      phone: business["phone"].stringValue,
                                                      categories: categoryArr,
                                                      url: business["url"].stringValue,
-                                                     img_url: business["image_url"].stringValue
+                                                     img_url: business["image_url"].stringValue,
+                                                     addressCity: business["location"]["city"].stringValue,
+                                                     addressStreet: business["location"]["address1"].stringValue
+                                                     
                     )
                     businesses?.append(businessUnit)
                 }
@@ -126,7 +129,6 @@ class RestaurantManager{
             case let .failure(error):
                 print(error)
             }
-            //FIX THIS FORCE UNWRAP LATER
             completion(businesses!)
         }
     }
