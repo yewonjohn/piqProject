@@ -23,6 +23,7 @@ class RestaurantCardView : UIView {
     private var swipeView : UIView!
     private var imageContainerView: UIView!
     private var imageView: UIImageView!
+    private var imageGradientView = UIView()
     private var titleLabel = UILabel()
     private var ratingsView: UIImageView!
     private var ratingsCountView = UILabel()
@@ -70,9 +71,9 @@ class RestaurantCardView : UIView {
             if let dist = dataSource?.distance{
                 distInMiles = dist/1609
                 distInMiles = Double(round(10*distInMiles)/10)
-                distanceView.text = String(distInMiles)+" mi"
+                distanceView.text = String(distInMiles)+" mi •"
             } else{
-                distanceView.text = "? mi"
+                distanceView.text = "? mi •"
             }
             if distInMiles >= 0 && distInMiles <= 1 {
                 distanceView.textColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
@@ -138,6 +139,7 @@ class RestaurantCardView : UIView {
         configureSwipeView()
         configureImageContainerView()
         configureImageView()
+//        configureGradientView()
         configureTitleView()
         configureRatingsView()
         configureRatingsCountView()
@@ -162,7 +164,7 @@ class RestaurantCardView : UIView {
         shadowView.backgroundColor = .clear
         shadowView.layer.shadowColor = UIColor.black.cgColor
         shadowView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        shadowView.layer.shadowOpacity = 0.8
+        shadowView.layer.shadowOpacity = 0.1
         shadowView.layer.shadowRadius = 4.0
         addSubview(shadowView)
         shadowView.translatesAutoresizingMaskIntoConstraints = false
@@ -203,6 +205,26 @@ class RestaurantCardView : UIView {
         imageView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor).isActive = true
         imageView.widthAnchor.constraint(equalTo: self.imageContainerView.widthAnchor, multiplier: 1.0).isActive = true
         imageView.heightAnchor.constraint(equalTo: self.imageContainerView.heightAnchor, multiplier: 1.0).isActive = true
+        
+        imageView.addBlackGradientLayerInForeground(frame: imageView.bounds, colors: [.clear, .black])
+
+    }
+    
+    private func configureGradientView(){
+        imageView.addSubview(imageGradientView)
+        imageGradientView.translatesAutoresizingMaskIntoConstraints = false
+        imageGradientView.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+        imageGradientView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+        imageGradientView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+        imageGradientView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
+        let gradient = CAGradientLayer()
+        gradient.frame = imageGradientView.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.red.cgColor]
+        gradient.locations = [0.0, 1.0]
+        imageGradientView.layer.addSublayer(gradient)
+//        imageGradientView.layer.insertSublayer(gradient, at: 0)
+        imageView.bringSubviewToFront(imageGradientView)
+
     }
     
     private func configureTitleView() {
@@ -214,7 +236,7 @@ class RestaurantCardView : UIView {
         titleLabel.layer.shadowColor = UIColor.black.cgColor
         titleLabel.layer.shadowOpacity = 1
         titleLabel.layer.shadowOffset = .zero
-        titleLabel.layer.shadowRadius = 10
+        titleLabel.layer.shadowRadius = 15
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leftAnchor.constraint(equalTo: imageContainerView.leftAnchor, constant: 10).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: imageContainerView.rightAnchor).isActive = true
@@ -257,7 +279,7 @@ class RestaurantCardView : UIView {
         dollarSignsView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
         dollarSignsView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
         dollarSignsView.adjustsFontSizeToFitWidth = true
-        dollarSignsView.minimumScaleFactor = 0.5
+        dollarSignsView.minimumScaleFactor = 0.2
     }
     
     private func configureCategoriesView() {
@@ -269,37 +291,39 @@ class RestaurantCardView : UIView {
         categoriesView.numberOfLines = 0
         categoriesView.translatesAutoresizingMaskIntoConstraints = false
         categoriesView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
-        categoriesView.leftAnchor.constraint(equalTo: dollarSignsView.rightAnchor, constant: 4).isActive = true
-        categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: 4).isActive = true
+        categoriesView.leadingAnchor.constraint(equalTo: dollarSignsView.trailingAnchor, constant: 4).isActive = true
+//        categoriesView.trailingAnchor.constraint(equalTo: swipeView.trailingAnchor, constant: 10).isActive = true
         categoriesView.adjustsFontSizeToFitWidth = true
-        categoriesView.minimumScaleFactor = 0.5
+        categoriesView.minimumScaleFactor = 0.2
+        //this width makes category cut off perfectly..
+        categoriesView.widthAnchor.constraint(lessThanOrEqualTo: swipeView.widthAnchor, multiplier: 1.0).isActive = true
         categoriesView.heightAnchor.constraint(greaterThanOrEqualTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
     }
     
     private func configureDistanceView() {
         swipeView.addSubview(distanceView)
         distanceView.textAlignment = .left
-        distanceView.font = UIFont(name: "Montserrat-Medium", size: 15)
+        distanceView.font = UIFont(name: "Montserrat-Medium", size: 13)
         distanceView.text = "distance •"
         distanceView.translatesAutoresizingMaskIntoConstraints = false
         distanceView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         distanceView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
         distanceView.adjustsFontSizeToFitWidth = true
-        distanceView.minimumScaleFactor = 0.5
+        distanceView.minimumScaleFactor = 0.2
         distanceView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
     }
     
     private func configurePhoneView() {
         swipeView.addSubview(phoneView)
-        phoneView.textColor = #colorLiteral(red: 0.3098039216, green: 0.3098039216, blue: 0.3098039216, alpha: 1)
+        phoneView.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         phoneView.textAlignment = .left
-        phoneView.font = UIFont(name: "Montserrat-Medium", size: 15)
+        phoneView.font = UIFont(name: "Montserrat-Medium", size: 13)
         phoneView.translatesAutoresizingMaskIntoConstraints = false
         phoneView.topAnchor.constraint(equalTo: categoriesView.bottomAnchor, constant: 10).isActive = true
         phoneView.leftAnchor.constraint(equalTo: distanceView.rightAnchor, constant: 4).isActive = true
         phoneView.centerYAnchor.constraint(equalTo: distanceView.centerYAnchor, constant: 0).isActive = true
         phoneView.adjustsFontSizeToFitWidth = true
-        phoneView.minimumScaleFactor = 0.5
+        phoneView.minimumScaleFactor = 0.2
         phoneView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
 
 
@@ -308,7 +332,7 @@ class RestaurantCardView : UIView {
          swipeView.addSubview(addressView)
          addressView.textAlignment = .left
          addressView.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-         addressView.font = UIFont(name: "Montserrat-Medium", size: 10)
+         addressView.font = UIFont(name: "Montserrat-Medium", size: 13)
          addressView.text = "address • city"
          addressView.numberOfLines = 0
          addressView.translatesAutoresizingMaskIntoConstraints = false
@@ -316,7 +340,7 @@ class RestaurantCardView : UIView {
          addressView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
 //         addressView.trailingAnchor.constraint(equalTo: swipeView.trailingAnchor, constant: 4).isActive = true
          addressView.adjustsFontSizeToFitWidth = true
-         addressView.minimumScaleFactor = 0.5
+         addressView.minimumScaleFactor = 0.2
          addressView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
      }
     

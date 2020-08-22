@@ -138,9 +138,8 @@ class RestaurantViewController: UIViewController {
         self.view.addSubview(resetButton)
         let symbol = UIImage(systemName: "arrow.2.circlepath")
         resetButton.setImage(symbol, for: .normal)
-        let configuration = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .light, scale: .default)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .regular, scale: .default)
         resetButton.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
-        
         resetButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         resetButton.alpha = 0
         resetButton.isHidden = true
@@ -156,7 +155,7 @@ class RestaurantViewController: UIViewController {
     private func setResetLabel(){
         self.view.addSubview(resetLabel)
         resetLabel.text = "reset"
-        resetLabel.font = UIFont(name: "Montserrat-Medium", size: 8)
+        resetLabel.font = UIFont(name: "Montserrat-SemiBold", size: 9)
         resetLabel.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         resetLabel.textAlignment = .center
         resetLabel.translatesAutoresizingMaskIntoConstraints = false

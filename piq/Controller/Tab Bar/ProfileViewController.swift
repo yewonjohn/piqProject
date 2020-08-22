@@ -35,7 +35,6 @@ class ProfileViewController: UIViewController{
         tableView.register(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "SettingsCell")
         tableView.layer.cornerRadius = 30
         
-        print(view.frame.height * 0.5)
         tableViewHeight.constant = view.frame.height * 0.4
         
         //setting two different colors on one label

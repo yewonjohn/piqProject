@@ -732,10 +732,15 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
+                        <segue destination="feY-MG-5EK" kind="relationship" relationship="viewControllers" id="XCO-ur-VN4"/>
                         <segue destination="N3k-EI-wXm" kind="relationship" relationship="viewControllers" id="WZG-aa-FG0"/>
                         <segue destination="BcM-07-CdQ" kind="relationship" relationship="viewControllers" id="cq8-Y9-WTO"/>
-                        <segue destination="feY-MG-5EK" kind="relationship" relationship="viewControllers" id="XCO-ur-VN4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOh-Xy-DK6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -860,7 +865,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maz-XI-fSk">
-                                <rect key="frame" x="31" y="293.5" width="148.5" height="21"/>
+                                <rect key="frame" x="40" y="293.5" width="148.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -874,7 +879,7 @@
                             <constraint firstItem="bh4-gG-5b2" firstAttribute="leading" secondItem="OCb-3r-DNi" secondAttribute="leading" constant="40" id="Efk-bI-UL5"/>
                             <constraint firstItem="maz-XI-fSk" firstAttribute="top" secondItem="NcT-8D-2gu" secondAttribute="bottom" constant="76" id="aTa-Bt-ssH"/>
                             <constraint firstItem="NcT-8D-2gu" firstAttribute="top" secondItem="OCb-3r-DNi" secondAttribute="top" constant="100" id="i2M-yf-kTN"/>
-                            <constraint firstItem="maz-XI-fSk" firstAttribute="leading" secondItem="OCb-3r-DNi" secondAttribute="leading" constant="31" id="iN2-PY-gsS"/>
+                            <constraint firstItem="maz-XI-fSk" firstAttribute="leading" secondItem="OCb-3r-DNi" secondAttribute="leading" constant="40" id="iN2-PY-gsS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OCb-3r-DNi"/>
                     </view>

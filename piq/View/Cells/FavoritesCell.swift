@@ -26,7 +26,7 @@ class FavoritesCell: SwipeTableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        favoritesImage.layer.cornerRadius = 15
+        favoritesImage.layer.cornerRadius = 4
         favoritesImage.clipsToBounds = true
         
         favoritesTitle.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: 4).isActive = true

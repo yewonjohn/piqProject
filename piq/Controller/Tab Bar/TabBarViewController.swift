@@ -38,7 +38,7 @@ class TabBarViewController: UITabBarController{
 
         //passing info
         let viewControllers = self.viewControllers
-        let vc = viewControllers![0] as! RestaurantViewController
+        let vc = viewControllers![1] as! RestaurantViewController
     
         vc.categoriesArr = categoriesArr
         vc.categoriesTitles = categoriesTitles
@@ -93,14 +93,14 @@ class TabBarViewController: UITabBarController{
     @IBAction func unwindToCards(_ unwindSegue: UIStoryboardSegue) {
         
         let viewControllers = self.viewControllers
-        let vc = viewControllers![0] as! RestaurantViewController
+        let vc = viewControllers![1] as! RestaurantViewController
         vc.triggerShadowView()
     }
     //'Apply' button segue
     @IBAction func unwindWithInfo(_ unwindSegue: UIStoryboardSegue) {
         
         let viewControllers = self.viewControllers
-        let vc = viewControllers![0] as! RestaurantViewController
+        let vc = viewControllers![1] as! RestaurantViewController
         
         vc.triggerShadowView()
         
@@ -125,12 +125,3 @@ extension TabBarViewController: UITabBarControllerDelegate{
         return true
     }
 }
-
-//extension TabBarViewController: RestaurantVCDelegate{
-//    
-//    func shadowViewTriggered() {
-//        print("Trigger shadow inside Tab")
-//        triggerShadowView()
-//    }
-//    
-//}
