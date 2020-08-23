@@ -218,11 +218,15 @@ extension RestaurantViewController : RestaurantCardsDataSource {
     //creates one card obj and sends to StackContainerView
     func card(at index: Int) -> RestaurantCardView {
         let card = RestaurantCardView()
+        //setting delegate for TabBarView here
+        if let tabBar = self.tabBarController as? TabBarViewController{
+            card.tutorialDelegate = tabBar
+        }
         card.dataSource = restaurantModelData[index]
         return card
     }
     //triggers when last card is swiped
-    func emptyView() -> Void {
+    func emptyView() -> Void {			
         emptyCardsLabel.isHidden = false
     }
     //triggers when swiping starts

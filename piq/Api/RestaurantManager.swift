@@ -11,13 +11,13 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 
-protocol RestaurantManagerDelegate {
+protocol RestaurantManagerDelegate: class {
     func isLoading()
 }
 //Network calls to fetching yelp restaurant info
 class RestaurantManager{
     
-    var delegate: RestaurantManagerDelegate?
+    weak var delegate: RestaurantManagerDelegate?
     
     //MARK: - Functions (GET)
     func getLocalRestaurants(distance: Int?, latitude: Double, longitude: Double, category: String?, dollarSigns: String?, completion: @escaping ((_ businesses:[RestaurantModel])->Void)){

@@ -11,7 +11,7 @@ import Kingfisher
 import FirebaseFirestore
 import Firebase
 
-protocol RestaurantCardTutorialDelegate {
+protocol RestaurantCardTutorialDelegate: class {
     func swipingLeft()
     func swipingRight()
 }
@@ -43,7 +43,7 @@ class RestaurantCardView : UIView {
     //MARK: - Properties
     private let service = ServiceUtil()
     var delegate : RestaurantCardsDelegate?
-    var tutorialDelegate : RestaurantCardTutorialDelegate?
+    weak var tutorialDelegate : RestaurantCardTutorialDelegate?
     
     private var categoryTitles = ""
     private var divisor : CGFloat = 0
@@ -379,6 +379,8 @@ class RestaurantCardView : UIView {
         case .ended:
             //swiped right
             if point.x > 120 {
+                tutorialDelegate?.swipingRight()
+
                 var cardRightTransform = card.transform
                 cardRightTransform = cardRightTransform.translatedBy(x: card.frame.width*2 , y: -20)
                 UIView.animate(withDuration: 0.2, animations: {
@@ -395,6 +397,8 @@ class RestaurantCardView : UIView {
                 return
             //swiped left
             }else if point.x < -120 {
+                tutorialDelegate?.swipingLeft()
+
                 var cardLeftTransform = card.transform
                 cardLeftTransform = cardLeftTransform.translatedBy(x: -card.frame.width*2 , y: -20)
                 UIView.animate(withDuration: 0.2, animations: {
@@ -418,13 +422,10 @@ class RestaurantCardView : UIView {
             card.transform = CGAffineTransform(rotationAngle: rotation)
             
             //tutorial triggers
-            if(point.x < -120){
-                print("triggered")
-                tutorialDelegate?.swipingLeft()
-            }
-            if(point.x > 120){
-                tutorialDelegate?.swipingRight()
-            }
+//            if(point.x < -120){
+//            }
+//            if(point.x > 120){
+//            }
             
         default:
             break

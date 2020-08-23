@@ -22,7 +22,6 @@ class TabBarViewController: UITabBarController{
     //MARK:- Properties
     let defaults = UserDefaults.standard
     let service = ServiceUtil()
-    let cardView = RestaurantCardView()
     
     //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
@@ -35,7 +34,6 @@ class TabBarViewController: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cardView.tutorialDelegate = self
         delegate = self
 
         //passing info
@@ -95,7 +93,7 @@ class TabBarViewController: UITabBarController{
         tutorialContainerView.addSubview(tutorialIconView)
         tutorialIconView.translatesAutoresizingMaskIntoConstraints = false
 //        tutorialIconView.centerYAnchor.constraint(equalTo: tutorialContainerView.centerYAnchor, constant: -30).isActive = true
-        tutorialIconView.topAnchor.constraint(equalTo: tutorialContainerView.topAnchor, constant: 15).isActive = true
+        tutorialIconView.topAnchor.constraint(equalTo: tutorialContainerView.topAnchor, constant: 20).isActive = true
         tutorialIconView.centerXAnchor.constraint(equalTo: tutorialContainerView.centerXAnchor).isActive = true
         tutorialIconView.heightAnchor.constraint(equalTo: tutorialContainerView.heightAnchor, multiplier: 0.4, constant: 0).isActive = true
         tutorialIconView.widthAnchor.constraint(equalTo: tutorialContainerView.heightAnchor, multiplier: 0.4, constant: 0).isActive = true
@@ -184,27 +182,7 @@ extension TabBarViewController: UITabBarControllerDelegate{
 //MARK:- RestaurantCard Delegate (Tutorial Triggers)
 extension TabBarViewController: RestaurantCardTutorialDelegate{
     func swipingLeft() {
-        print("swipingLeft")
-        
-        if(!defaults.bool(forKey: "tutorialLeftTriggered")){
-            tutorialIconView.image = #imageLiteral(resourceName: "favorite_heart")
-            tutorialTitleLabel.text = "You want it? You got it."
-            tutorialDescLabel.text = "Everytime you swipe right, your piq is saved in your favorites menu."
-            tutorialView.isHidden = false
-            tutorialContainerView.isHidden = false
-            tutorialIconView.isHidden = false
-            tutorialTitleLabel.isHidden = false
-            tutorialDescLabel.isHidden = false
-            
-            defaults.set(true, forKey: "tutorialLeftTriggered")
-        }
-
-        
-    }
-    
-    func swipingRight() {
-        print("swipingRight")
-        if(!defaults.bool(forKey: "tutorialRightTriggered")){
+        if(defaults.bool(forKey: "tutorialLeftTriggered")){
             tutorialIconView.image = #imageLiteral(resourceName: "skip_icon")
             tutorialTitleLabel.text = "In the mood for something else?"
             tutorialDescLabel.text = "Swipe left and your next meal could be the next thing you see."
@@ -213,6 +191,21 @@ extension TabBarViewController: RestaurantCardTutorialDelegate{
             tutorialIconView.isHidden = false
             tutorialTitleLabel.isHidden = false
             tutorialDescLabel.isHidden = false
+            
+            defaults.set(true, forKey: "tutorialLeftTriggered")
+        }
+    }
+    
+    func swipingRight() {
+        if(defaults.bool(forKey: "tutorialRightTriggered")){
+            tutorialIconView.image = #imageLiteral(resourceName: "favorite_heart")
+             tutorialTitleLabel.text = "You want it? You got it."
+             tutorialDescLabel.text = "Everytime you swipe right, your piq is saved in your favorites menu."
+             tutorialView.isHidden = false
+             tutorialContainerView.isHidden = false
+             tutorialIconView.isHidden = false
+             tutorialTitleLabel.isHidden = false
+             tutorialDescLabel.isHidden = false
             
             defaults.set(true, forKey: "tutorialRightTriggered")
         }
