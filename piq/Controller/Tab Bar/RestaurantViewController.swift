@@ -95,7 +95,7 @@ class RestaurantViewController: UIViewController {
     //SETS CONTAINER CONSTRAINTS
     private func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
+        stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20).isActive = true
         stackContainer.widthAnchor.constraint(equalToConstant: view.frame.width * 0.83).isActive = true
         stackContainer.heightAnchor.constraint(equalToConstant: view.frame.height * 0.58).isActive = true
     }
@@ -150,6 +150,8 @@ class RestaurantViewController: UIViewController {
         resetButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         resetButton.addTarget(self, action: #selector(resetTapped), for: .touchUpInside)
         resetButton.isUserInteractionEnabled = true
+        view.sendSubviewToBack(resetButton)
+
     }
     
     private func setResetLabel(){
@@ -162,6 +164,8 @@ class RestaurantViewController: UIViewController {
         resetLabel.centerXAnchor.constraint(equalTo: resetButton.centerXAnchor, constant: 0).isActive = true
         resetLabel.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 0).isActive = true
         resetLabel.isHidden = true
+        view.sendSubviewToBack(resetLabel)
+
     }
 
     private func setLoadingView(){

@@ -129,7 +129,9 @@ class RestaurantManager{
             case let .failure(error):
                 print(error)
             }
-            completion(businesses ?? [RestaurantModel]())
+            if let busi = businesses {
+                completion(busi)
+            }
         }
     }
     

@@ -322,7 +322,6 @@ extension SearchPageViewController{
     @objc func handleDismiss(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .changed:
-            print(viewTranslation.x)
             viewTranslation = sender.translation(in: view)
             
             if(viewTranslation.x > 0){

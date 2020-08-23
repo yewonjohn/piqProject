@@ -14,13 +14,15 @@ class TabBarViewController: UITabBarController{
     //MARK:- UI Properties
     
     let tutorialView = UIView()
-    let leftSwipeLabel = UILabel()
-    let rightSwipeLabel = UILabel()
+    let tutorialContainerView = UIView()
+    let tutorialIconView = UIImageView()
+    let tutorialTitleLabel = UILabel()
+    let tutorialDescLabel = UILabel()
 
     //MARK:- Properties
     let defaults = UserDefaults.standard
     let service = ServiceUtil()
-    let restaurantVC = RestaurantViewController()
+    let cardView = RestaurantCardView()
     
     //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
@@ -32,8 +34,8 @@ class TabBarViewController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        restaurantVC.delegate = self
 
+        cardView.tutorialDelegate = self
         delegate = self
 
         //passing info
@@ -45,11 +47,13 @@ class TabBarViewController: UITabBarController{
         vc.dollarSign = dollarSign
         vc.distance = distance
         
-        if(!defaults.bool(forKey: "tutorialTriggered")){
-            configureTutorialView()
-            configureleftSwipeLabel()
-            defaults.set(true, forKey: "tutorialTriggered")
-        }
+        
+        configureTutorialView()
+        configureContainerView()
+        configureIconView()
+        configureTitleLabel()
+        configureDescLabel()
+        
     }
     
     //MARK: - Layout Configurations
@@ -63,27 +67,79 @@ class TabBarViewController: UITabBarController{
         tutorialView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tutorialView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tutorialView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
+        tutorialView.isHidden = true
+
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(dismissTutorial))
         tutorialView.isUserInteractionEnabled = true
         tutorialView.addGestureRecognizer(singleTap)
 
     }
-    
-    private func configureleftSwipeLabel(){
-        view.addSubview(leftSwipeLabel)
-        leftSwipeLabel.text = "swipe right to favorite!"
-        leftSwipeLabel.textAlignment = .left
-        leftSwipeLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
-        leftSwipeLabel.font = UIFont(name: "Montserrat-Medium", size: 25)
-        leftSwipeLabel.translatesAutoresizingMaskIntoConstraints = false
-        leftSwipeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        leftSwipeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+    private func configureContainerView(){
+        view.addSubview(tutorialContainerView)
+        tutorialContainerView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
+        tutorialContainerView.translatesAutoresizingMaskIntoConstraints = false
+        tutorialContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
+        tutorialContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tutorialContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3, constant: 0).isActive = true
+        tutorialContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9, constant: 0).isActive = true
+        tutorialContainerView.layer.cornerRadius = 15
+        tutorialContainerView.clipsToBounds = true
+        tutorialContainerView.isHidden = true
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(dismissTutorial))
+        tutorialContainerView.isUserInteractionEnabled = true
+        tutorialContainerView.addGestureRecognizer(singleTap)
     }
+    
+    private func configureIconView(){
+        tutorialContainerView.addSubview(tutorialIconView)
+        tutorialIconView.translatesAutoresizingMaskIntoConstraints = false
+//        tutorialIconView.centerYAnchor.constraint(equalTo: tutorialContainerView.centerYAnchor, constant: -30).isActive = true
+        tutorialIconView.topAnchor.constraint(equalTo: tutorialContainerView.topAnchor, constant: 15).isActive = true
+        tutorialIconView.centerXAnchor.constraint(equalTo: tutorialContainerView.centerXAnchor).isActive = true
+        tutorialIconView.heightAnchor.constraint(equalTo: tutorialContainerView.heightAnchor, multiplier: 0.4, constant: 0).isActive = true
+        tutorialIconView.widthAnchor.constraint(equalTo: tutorialContainerView.heightAnchor, multiplier: 0.4, constant: 0).isActive = true
+        tutorialIconView.image = #imageLiteral(resourceName: "favorite_heart")
+        tutorialIconView.isHidden = true
+    }
+    
+    private func configureTitleLabel(){
+        tutorialContainerView.addSubview(tutorialTitleLabel)
+        tutorialTitleLabel.text = "You want it? You got it."
+        tutorialTitleLabel.font = UIFont(name: "Montserrat-SemiBold", size: 18)
+        tutorialTitleLabel.textColor = .black
+        tutorialTitleLabel.numberOfLines = 0
+        tutorialTitleLabel.textAlignment = .center
+        tutorialTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        tutorialTitleLabel.topAnchor.constraint(equalTo: tutorialIconView.bottomAnchor, constant: 10).isActive = true
+        tutorialTitleLabel.centerXAnchor.constraint(equalTo: tutorialContainerView.centerXAnchor).isActive = true
+        tutorialTitleLabel.widthAnchor.constraint(equalTo: tutorialContainerView.widthAnchor, multiplier: 0.9, constant: 0).isActive = true
+        tutorialTitleLabel.isHidden = true
+    }
+    
+    private func configureDescLabel(){
+        tutorialContainerView.addSubview(tutorialDescLabel)
+        tutorialDescLabel.text = "Everytime you swipe right, your piq is saved in your favorites menu. "
+        tutorialDescLabel.font = UIFont(name: "Montserrat-Regular", size: 14)
+        tutorialDescLabel.textColor = .black
+        tutorialDescLabel.numberOfLines = 0
+        tutorialDescLabel.textAlignment = .center
+        tutorialDescLabel.translatesAutoresizingMaskIntoConstraints = false
+        tutorialDescLabel.topAnchor.constraint(equalTo: tutorialTitleLabel.bottomAnchor, constant: 10).isActive = true
+        tutorialDescLabel.centerXAnchor.constraint(equalTo: tutorialContainerView.centerXAnchor).isActive = true
+        tutorialDescLabel.widthAnchor.constraint(equalTo: tutorialContainerView.widthAnchor, multiplier: 0.9, constant: 0).isActive = true
+        tutorialDescLabel.isHidden = true
+
+    }
+
     
     @objc func dismissTutorial() {
         tutorialView.isHidden = true
-        leftSwipeLabel.isHidden = true
+        tutorialTitleLabel.isHidden = true
+        tutorialContainerView.isHidden = true
+        tutorialIconView.isHidden = true
+        tutorialTitleLabel.isHidden = true
+        tutorialDescLabel.isHidden = true
     }
     
     
@@ -123,5 +179,43 @@ extension TabBarViewController: UITabBarControllerDelegate{
             UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
         }
         return true
+    }
+}
+//MARK:- RestaurantCard Delegate (Tutorial Triggers)
+extension TabBarViewController: RestaurantCardTutorialDelegate{
+    func swipingLeft() {
+        print("swipingLeft")
+        
+        if(!defaults.bool(forKey: "tutorialLeftTriggered")){
+            tutorialIconView.image = #imageLiteral(resourceName: "favorite_heart")
+            tutorialTitleLabel.text = "You want it? You got it."
+            tutorialDescLabel.text = "Everytime you swipe right, your piq is saved in your favorites menu."
+            tutorialView.isHidden = false
+            tutorialContainerView.isHidden = false
+            tutorialIconView.isHidden = false
+            tutorialTitleLabel.isHidden = false
+            tutorialDescLabel.isHidden = false
+            
+            defaults.set(true, forKey: "tutorialLeftTriggered")
+        }
+
+        
+    }
+    
+    func swipingRight() {
+        print("swipingRight")
+        if(!defaults.bool(forKey: "tutorialRightTriggered")){
+            tutorialIconView.image = #imageLiteral(resourceName: "skip_icon")
+            tutorialTitleLabel.text = "In the mood for something else?"
+            tutorialDescLabel.text = "Swipe left and your next meal could be the next thing you see."
+            tutorialView.isHidden = false
+            tutorialContainerView.isHidden = false
+            tutorialIconView.isHidden = false
+            tutorialTitleLabel.isHidden = false
+            tutorialDescLabel.isHidden = false
+            
+            defaults.set(true, forKey: "tutorialRightTriggered")
+        }
+
     }
 }

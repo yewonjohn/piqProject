@@ -11,6 +11,10 @@ import Kingfisher
 import FirebaseFirestore
 import Firebase
 
+protocol RestaurantCardTutorialDelegate {
+    func swipingLeft()
+    func swipingRight()
+}
 
 protocol RestaurantCardsDelegate {
     func swipeDidEnd(on view: RestaurantCardView)
@@ -39,6 +43,7 @@ class RestaurantCardView : UIView {
     //MARK: - Properties
     private let service = ServiceUtil()
     var delegate : RestaurantCardsDelegate?
+    var tutorialDelegate : RestaurantCardTutorialDelegate?
     
     private var categoryTitles = ""
     private var divisor : CGFloat = 0
@@ -150,7 +155,7 @@ class RestaurantCardView : UIView {
         configurePhoneView()
         configureArrow()
         addPanGestureOnCards()
-        configureTapGesture()
+//        configureTapGesture()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -177,6 +182,9 @@ class RestaurantCardView : UIView {
     private func configureSwipeView() {
         swipeView = UIView()
         swipeView.layer.cornerRadius = 25
+        swipeView.layer.borderWidth = 1
+        swipeView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        swipeView.layer.cornerRadius = 25
         swipeView.clipsToBounds = true
         shadowView.addSubview(swipeView)
         swipeView.translatesAutoresizingMaskIntoConstraints = false
@@ -197,7 +205,7 @@ class RestaurantCardView : UIView {
     }
     
     private func configureImageView() {
-        imageView = UIImageView()
+        imageView = GradientImageView(colors: [#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)], gradientDirection: .upDown)
         imageContainerView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -205,25 +213,6 @@ class RestaurantCardView : UIView {
         imageView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor).isActive = true
         imageView.widthAnchor.constraint(equalTo: self.imageContainerView.widthAnchor, multiplier: 1.0).isActive = true
         imageView.heightAnchor.constraint(equalTo: self.imageContainerView.heightAnchor, multiplier: 1.0).isActive = true
-        
-        imageView.addBlackGradientLayerInForeground(frame: imageView.bounds, colors: [.clear, .black])
-
-    }
-    
-    private func configureGradientView(){
-        imageView.addSubview(imageGradientView)
-        imageGradientView.translatesAutoresizingMaskIntoConstraints = false
-        imageGradientView.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
-        imageGradientView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-        imageGradientView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
-        imageGradientView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
-        let gradient = CAGradientLayer()
-        gradient.frame = imageGradientView.frame
-        gradient.colors = [UIColor.clear.cgColor, UIColor.red.cgColor]
-        gradient.locations = [0.0, 1.0]
-        imageGradientView.layer.addSublayer(gradient)
-//        imageGradientView.layer.insertSublayer(gradient, at: 0)
-        imageView.bringSubviewToFront(imageGradientView)
 
     }
     
@@ -233,10 +222,10 @@ class RestaurantCardView : UIView {
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont(name: "Montserrat-SemiBold", size: 25)
         titleLabel.numberOfLines = 0
-        titleLabel.layer.shadowColor = UIColor.black.cgColor
-        titleLabel.layer.shadowOpacity = 1
-        titleLabel.layer.shadowOffset = .zero
-        titleLabel.layer.shadowRadius = 15
+//        titleLabel.layer.shadowColor = UIColor.black.cgColor
+//        titleLabel.layer.shadowOpacity = 1
+//        titleLabel.layer.shadowOffset = .zero
+//        titleLabel.layer.shadowRadius = 15
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leftAnchor.constraint(equalTo: imageContainerView.leftAnchor, constant: 10).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: imageContainerView.rightAnchor).isActive = true
@@ -365,9 +354,9 @@ class RestaurantCardView : UIView {
     }
     
     
-    private func configureTapGesture() {
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
-    }
+//    private func configureTapGesture() {
+//        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
+//    }
     
     
     private func addPanGestureOnCards() {
@@ -427,6 +416,15 @@ class RestaurantCardView : UIView {
         case .changed:
             let rotation = tan(point.x / (self.frame.width * 2.0))
             card.transform = CGAffineTransform(rotationAngle: rotation)
+            
+            //tutorial triggers
+            if(point.x < -120){
+                print("triggered")
+                tutorialDelegate?.swipingLeft()
+            }
+            if(point.x > 120){
+                tutorialDelegate?.swipingRight()
+            }
             
         default:
             break
