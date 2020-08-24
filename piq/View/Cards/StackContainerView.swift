@@ -12,9 +12,12 @@ import UIKit
 protocol RestaurantCardsDataSource {
     func numberOfCardsToShow() -> Int
     func card(at index: Int) -> RestaurantCardView
+    
+    //delegates
     func emptyView() -> Void
     func swipeStarted() -> Bool
     func swipedRight(data: RestaurantModel, userEmail: String, categoriesTitles: String)
+    func currentFrontCard(card:RestaurantCardView)
 }
 
 class StackContainerView: UIView, RestaurantCardsDelegate {
@@ -24,9 +27,10 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     private var numberOfCardsToShow: Int = 0
     private var lastCardCounter = 0
     private var cardsToBeVisible: Int = 3
-//    private var cardViews : [RestaurantCardView] = []
+    private var cardViews : [RestaurantCardView] = []
     private var remainingcards: Int = 0
     private var swipeStarted = true
+    private var frontCardIndex = 0
     
     private let horizontalInset: CGFloat = 10.0
     private let verticalInset: CGFloat = 10.0
@@ -49,8 +53,9 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //resets & sets dataSource data to properties
+    //resets & sets dataSource data to properties (initial setup)
     func reloadData() {
+        frontCardIndex = 0
         swipeStarted = true
         
         removeAllCardViews()
@@ -68,13 +73,19 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
 
     //MARK: - Configurations
     
-    //Adds card to container for visiblity
+    //Adds card to container to present
     func addCardView(cardView: RestaurantCardView, atIndex index: Int) {
+        //passing front card to delegate
+        if(index == 0){
+            print("triggerredIF")
+            dataSource?.currentFrontCard(card: cardView)
+        }
+        
         cardView.delegate = self
         addCardFrame(index: index, cardView: cardView)
-//        cardViews.append(cardView)
         insertSubview(cardView, at: 0)
         remainingcards -= 1
+        cardViews.append(cardView)
     }
     //Sets card frame + placement based on index of the card
     private func addCardFrame(index: Int, cardView: RestaurantCardView) {
@@ -93,12 +104,21 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         for cardView in visibleCards {
             cardView.removeFromSuperview()
         }
-//        cardViews = []
+        cardViews = []
     }
-        
+    //delegate method
     func swipeDidEnd(on view: RestaurantCardView) {
         guard let datasource = dataSource else { return }
         view.removeFromSuperview()
+        
+        //passing front card to delegate
+        if(frontCardIndex < numberOfCardsToShow){
+            print("triggered frontCardIndex")
+            frontCardIndex += 1
+            dataSource?.currentFrontCard(card: cardViews[frontCardIndex])
+
+        }
+        
         if remainingcards > 0 {
             let newIndex = datasource.numberOfCardsToShow() - remainingcards
             addCardView(cardView: datasource.card(at: newIndex), atIndex: 2)
@@ -130,6 +150,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         }
     }
 
+    //just passing info along from RestaurantCard to RestaurantVC (chained delegate)
     func swipedRight(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
         dataSource?.swipedRight(data: data, userEmail: userEmail, categoriesTitles: categoriesTitles)
     }

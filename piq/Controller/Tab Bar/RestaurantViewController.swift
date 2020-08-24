@@ -220,8 +220,10 @@ extension RestaurantViewController : RestaurantCardsDataSource {
         let card = RestaurantCardView()
         //setting delegate for TabBarView here
         if let tabBar = self.tabBarController as? TabBarViewController{
+            //setting two delegates here, because these two objects are listening to each other.
             card.tutorialDelegate = tabBar
         }
+        
         card.dataSource = restaurantModelData[index]
         return card
     }
@@ -234,6 +236,12 @@ extension RestaurantViewController : RestaurantCardsDataSource {
         service.animateResetButton(button: resetButton)
         service.animateResetLabel(label: resetLabel)
         return false
+    }
+    //tracking FRONT card for dismissing tutorial
+    func currentFrontCard(card: RestaurantCardView) {
+        if let tabBar = self.tabBarController as? TabBarViewController{
+            tabBar.tabDelegate = card
+        }
     }
 }
 //MARK:-- Custom Transition (Delegate)

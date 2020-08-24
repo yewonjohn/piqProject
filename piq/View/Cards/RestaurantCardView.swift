@@ -48,7 +48,7 @@ class RestaurantCardView : UIView {
     private var categoryTitles = ""
     private var divisor : CGFloat = 0
     private let baseView = UIView()
-    
+    private let defaults = UserDefaults.standard    
     
     var dataSource : RestaurantModel? {
         didSet {
@@ -140,11 +140,12 @@ class RestaurantCardView : UIView {
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
+        
         configureShadowView()
         configureSwipeView()
         configureImageContainerView()
         configureImageView()
-//        configureGradientView()
         configureTitleView()
         configureRatingsView()
         configureRatingsCountView()
@@ -155,7 +156,6 @@ class RestaurantCardView : UIView {
         configurePhoneView()
         configureArrow()
         addPanGestureOnCards()
-//        configureTapGesture()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -183,7 +183,7 @@ class RestaurantCardView : UIView {
         swipeView = UIView()
         swipeView.layer.cornerRadius = 25
         swipeView.layer.borderWidth = 1
-        swipeView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        swipeView.layer.borderColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
         swipeView.layer.cornerRadius = 25
         swipeView.clipsToBounds = true
         shadowView.addSubview(swipeView)
@@ -222,10 +222,6 @@ class RestaurantCardView : UIView {
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont(name: "Montserrat-SemiBold", size: 25)
         titleLabel.numberOfLines = 0
-//        titleLabel.layer.shadowColor = UIColor.black.cgColor
-//        titleLabel.layer.shadowOpacity = 1
-//        titleLabel.layer.shadowOffset = .zero
-//        titleLabel.layer.shadowRadius = 15
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leftAnchor.constraint(equalTo: imageContainerView.leftAnchor, constant: 10).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: imageContainerView.rightAnchor).isActive = true
@@ -240,8 +236,6 @@ class RestaurantCardView : UIView {
         ratingsView.translatesAutoresizingMaskIntoConstraints = false
         ratingsView.topAnchor.constraint(equalTo: imageContainerView.bottomAnchor).isActive = true
         ratingsView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
-//        ratingsView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-//        ratingsView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         ratingsView.widthAnchor.constraint(equalTo: swipeView.widthAnchor, multiplier: 0.45).isActive = true
         ratingsView.heightAnchor.constraint(equalTo: swipeView.heightAnchor, multiplier: 0.10).isActive = true
     }
@@ -252,8 +246,6 @@ class RestaurantCardView : UIView {
         ratingsCountView.textAlignment = .left
         ratingsCountView.font = UIFont(name: "Montserrat-Medium", size: 12)
         ratingsCountView.translatesAutoresizingMaskIntoConstraints = false
-//        ratingsCountView.centerXAnchor.constraint(equalTo: ratingsView.centerXAnchor).isActive = true
-//        ratingsCountView.topAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: 16).isActive = true
         ratingsCountView.leftAnchor.constraint(equalTo: ratingsView.rightAnchor, constant: 8).isActive = true
         ratingsCountView.centerYAnchor.constraint(equalTo: ratingsView.centerYAnchor, constant: 0).isActive = true
 
@@ -281,7 +273,6 @@ class RestaurantCardView : UIView {
         categoriesView.translatesAutoresizingMaskIntoConstraints = false
         categoriesView.topAnchor.constraint(equalTo: ratingsView.bottomAnchor, constant: 4).isActive = true
         categoriesView.leadingAnchor.constraint(equalTo: dollarSignsView.trailingAnchor, constant: 4).isActive = true
-//        categoriesView.trailingAnchor.constraint(equalTo: swipeView.trailingAnchor, constant: 10).isActive = true
         categoriesView.adjustsFontSizeToFitWidth = true
         categoriesView.minimumScaleFactor = 0.2
         //this width makes category cut off perfectly..
@@ -327,7 +318,6 @@ class RestaurantCardView : UIView {
          addressView.translatesAutoresizingMaskIntoConstraints = false
          addressView.topAnchor.constraint(equalTo: distanceView.bottomAnchor, constant: 5).isActive = true
          addressView.leftAnchor.constraint(equalTo: swipeView.leftAnchor, constant: 10).isActive = true
-//         addressView.trailingAnchor.constraint(equalTo: swipeView.trailingAnchor, constant: 4).isActive = true
          addressView.adjustsFontSizeToFitWidth = true
          addressView.minimumScaleFactor = 0.2
          addressView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
@@ -353,12 +343,6 @@ class RestaurantCardView : UIView {
 
     }
     
-    
-//    private func configureTapGesture() {
-//        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
-//    }
-    
-    
     private func addPanGestureOnCards() {
         self.isUserInteractionEnabled = true
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture)))
@@ -369,6 +353,7 @@ class RestaurantCardView : UIView {
     //MARK: - Gesture Handlers
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer){
         let card = sender.view as! RestaurantCardView
+//        currentCard = card
         let point = sender.translation(in: self)
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         card.center = CGPoint(x: centerOfParentContainer.x + point.x, y: centerOfParentContainer.y + point.y)
@@ -379,7 +364,6 @@ class RestaurantCardView : UIView {
         case .ended:
             //swiped right
             if point.x > 120 {
-                tutorialDelegate?.swipingRight()
 
                 var cardRightTransform = card.transform
                 cardRightTransform = cardRightTransform.translatedBy(x: card.frame.width*2 , y: -20)
@@ -397,8 +381,6 @@ class RestaurantCardView : UIView {
                 return
             //swiped left
             }else if point.x < -120 {
-                tutorialDelegate?.swipingLeft()
-
                 var cardLeftTransform = card.transform
                 cardLeftTransform = cardLeftTransform.translatedBy(x: -card.frame.width*2 , y: -20)
                 UIView.animate(withDuration: 0.2, animations: {
@@ -422,19 +404,39 @@ class RestaurantCardView : UIView {
             card.transform = CGAffineTransform(rotationAngle: rotation)
             
             //tutorial triggers
-//            if(point.x < -120){
-//            }
-//            if(point.x > 120){
-//            }
+            if(!defaults.bool(forKey: "tutorialLeftTriggered")){
+
+                if(point.x < -100){
+                    sender.cancel()
+                    tutorialDelegate?.swipingLeft()
+                    defaults.set(true, forKey: "tutorialLeftTriggered")
+                }
+            }
+
+            if(!defaults.bool(forKey: "tutorialRightTriggered")){
+
+                if(point.x > 100){
+                    sender.cancel()
+                    tutorialDelegate?.swipingRight()
+                    defaults.set(true, forKey: "tutorialRightTriggered")
+                }
+            }
             
         default:
             break
         }
     }
     
-    @objc private func handleTapGesture(sender: UITapGestureRecognizer){
-    }
-    
 }
 
-
+extension RestaurantCardView : TabBarViewControllerDelegate{
+    func didDismissTutorial() {
+        UIView.animate(withDuration: 0.2,
+                       delay: 0,
+                        animations:{
+                            self.transform = .identity
+                            self.center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+                            self.layoutIfNeeded()
+        })
+    }
+}
