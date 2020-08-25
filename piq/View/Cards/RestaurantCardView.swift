@@ -130,7 +130,7 @@ class RestaurantCardView : UIView {
         }
     }
 
-    //MARK: - Interactions
+    // MARK: - User Interactions (Segues)
     @objc private func goToURL() {
         guard let url = URL(string: (dataSource?.url)!) else { return }
         UIApplication.shared.open(url)

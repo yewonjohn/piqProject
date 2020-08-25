@@ -193,7 +193,7 @@ class RestaurantViewController: UIViewController {
     
 
     
-    // MARK: - IBActions & Objc Functions
+    // MARK: - User Interactionßß
     
     @objc func resetTapped() {
         stackContainer.reloadData()
