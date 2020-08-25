@@ -187,7 +187,7 @@
                                             <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SH0-4Z-xnj"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="yewonjohnkim@gmail.com" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVj-xe-OE4" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVj-xe-OE4" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
                                         <rect key="frame" x="50" y="160" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="cF7-Ji-O8N"/>
@@ -195,7 +195,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123123q" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Wc-gTJ" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Wc-gTJ" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
                                         <rect key="frame" x="50" y="215" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="4Pr-yd-KMK"/>
@@ -896,7 +896,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YzQ-Mu-wf5"/>
+        <segue reference="XKc-xF-yZK"/>
         <segue reference="Wa3-QC-iue"/>
     </inferredMetricsTieBreakers>
     <resources>
