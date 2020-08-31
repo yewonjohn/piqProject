@@ -24,12 +24,19 @@ class ProfileViewController: UIViewController{
     var accountSettingsImages = [UIImage]()
     let userDefault = UserDefaults.standard
     let auth = AuthManager()
+    let currentUser = Auth.auth().currentUser
+
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         
         accountSettingsLabel = ["Search History", "Password", "Rate Us", "App Feedback", "Logout"]
-        accountSettingsImages = [#imageLiteral(resourceName: "fa-solid_history"),#imageLiteral(resourceName: "Vector"),#imageLiteral(resourceName: "Vector-1"),#imageLiteral(resourceName: "Vector-2"),#imageLiteral(resourceName: "Vector-3")]
+        accountSettingsImages = [#imageLiteral(resourceName: "History"),#imageLiteral(resourceName: "Lock"),#imageLiteral(resourceName: "Thumbs Up"),#imageLiteral(resourceName: "Comment"),#imageLiteral(resourceName: "Sign Out")]
+        
+        if((currentUser) == nil){
+            accountSettingsLabel[4] = "Login"
+            accountSettingsImages[4] = #imageLiteral(resourceName: "Login")
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "SettingsCell")
@@ -56,8 +63,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
         
-        cell.settingsImageView.image = accountSettingsImages[indexPath.row]
-        cell.settingsLabel.text = accountSettingsLabel[indexPath.row]
+        //strikethrough labels not yet implemented
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: accountSettingsLabel[indexPath.row])
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        
+        if(indexPath.row != 4){
+            cell.settingsImageView.image = accountSettingsImages[indexPath.row]
+            cell.settingsLabel.attributedText = attributeString
+        }else {
+            cell.settingsImageView.image = accountSettingsImages[indexPath.row]
+            cell.settingsLabel.text = accountSettingsLabel[indexPath.row]
+        }
+
         
         return cell
     }
@@ -73,6 +90,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         tableView.deselectRow(at: indexPath, animated: true)
         
         if(indexPath.row == 4){
+            if((currentUser) != nil){
             let alert = UIAlertController(title: "Logout?", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .default))
             alert.addAction(UIAlertAction(title: "Yes, logout", style: .destructive, handler: { action in
@@ -90,6 +108,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
                 }}))
             
             self.present(alert, animated: true, completion: nil)
+            } else{
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
 }

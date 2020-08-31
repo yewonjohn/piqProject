@@ -77,7 +77,6 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     func addCardView(cardView: RestaurantCardView, atIndex index: Int) {
         //passing front card to delegate
         if(index == 0){
-            print("triggerredIF")
             dataSource?.currentFrontCard(card: cardView)
         }
         
@@ -113,7 +112,6 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         
         //passing front card to delegate
         if(frontCardIndex < numberOfCardsToShow){
-            print("triggered frontCardIndex")
             frontCardIndex += 1
             dataSource?.currentFrontCard(card: cardViews[frontCardIndex])
 

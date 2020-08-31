@@ -325,16 +325,18 @@ class RestaurantCardView : UIView {
     
     private func configureArrow(){
         swipeView.addSubview(arrowButton)
-        let symbol = UIImage(systemName: "chevron.compact.down")
-        arrowButton.setImage(symbol, for: .normal)
-        let configuration = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .regular, scale: .large)
-        arrowButton.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
+//        let symbol = UIImage(systemName: "chevron.compact.down")
+//        arrowButton.setImage(symbol, for: .normal)
+//        let configuration = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .regular, scale: .large)
+//        arrowButton.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
+        arrowButton.setBackgroundImage(#imageLiteral(resourceName: "yelp_icon"), for: .normal)
         arrowButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         arrowButton.translatesAutoresizingMaskIntoConstraints = false
         arrowButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        arrowButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        arrowButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: 5).isActive = true
-        arrowButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
+        arrowButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        arrowButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -10).isActive = true
+        arrowButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -10).isActive = true
+//        arrowButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
         arrowButton.topAnchor.constraint(greaterThanOrEqualTo: addressView.bottomAnchor, constant: 5).isActive = true
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(goToURL))

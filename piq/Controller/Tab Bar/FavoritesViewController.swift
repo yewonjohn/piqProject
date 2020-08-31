@@ -23,6 +23,7 @@ class FavoritesViewController: UIViewController{
     let favoriteManager = FavoritesManager()
     var favoritesArray : [FavoritesModel]?
     let backgroundImageView = UIImageView()
+    let currentUser = Auth.auth().currentUser
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
@@ -30,13 +31,26 @@ class FavoritesViewController: UIViewController{
         tableView.dataSource = self
         tableView.register(UINib(nibName: "FavoritesCell", bundle: nil), forCellReuseIdentifier: "FavoritesCell")
         
-        favoriteManager.delegate = self
-        favoriteManager.loadFavorites()
+        //check if user is logged in, if not, trigger alert
+        if((currentUser) != nil){
+            favoriteManager.delegate = self
+            favoriteManager.loadFavorites()
+        }else{
+            let alert = UIAlertController(title: "Favorites", message: "Please Login to access favorites!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action in}))
+            self.present(alert, animated: true, completion: nil)
+        }
         view.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        favoriteManager.loadFavorites()
+        if((currentUser) != nil){
+            favoriteManager.loadFavorites()
+        }else{
+            let alert = UIAlertController(title: "Favorites", message: "Please Login to access favorites!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action in}))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
 }

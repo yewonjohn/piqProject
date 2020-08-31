@@ -16,6 +16,9 @@ class AuthViewController: UIViewController{
     //MARK: - Properties
     let userDefault = UserDefaults.standard
     
+    @IBAction func skipForNow(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "AuthToHome", sender: self)
+    }
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()

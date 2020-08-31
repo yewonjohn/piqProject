@@ -70,7 +70,7 @@ class FavoritesManager{
                             print("succesfully saved favorites")
                         }
                     }
-                    //saving to realm
+                    //saving to realm (not really using this yet)
                     let favorite = FavoritesModel()
                     favorite.userEmail = user
                     favorite.name = name
