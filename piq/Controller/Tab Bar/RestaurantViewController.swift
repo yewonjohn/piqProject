@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import NVActivityIndicatorView
+import Firebase
 
 
 class RestaurantViewController: UIViewController {
@@ -45,6 +46,7 @@ class RestaurantViewController: UIViewController {
     let restaurantAPI = RestaurantManager()
     var isFirstTimeOpening = true
     let userDefault = UserDefaults.standard
+    let currentUser = Auth.auth().currentUser
 
 
     // MARK: - View Controller Life Cycle
@@ -208,8 +210,10 @@ extension RestaurantViewController : RestaurantCardsDataSource {
     
     //Adds to favorites when cards swiped right.
     func swipedRight(data: RestaurantModel, userEmail: String, categoriesTitles: String) {
-        favoritesManager.addToFavorites(user: userEmail, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoriesTitles)
-        service.animatePiqd(label: piqdLabel)
+        if(currentUser != nil){
+            favoritesManager.addToFavorites(user: userEmail, id: data.id, name: data.name, ratings: data.rating, reviewCount: data.reviewCount, price: data.price, distance: data.distance, phone: data.phone, isClosed: data.isClosed, url: data.url, img_url: data.img_url, categories: categoriesTitles)
+            service.animatePiqd(label: piqdLabel)
+        }
     }
     //provides total number of cards to StackContainerView
     func numberOfCardsToShow() -> Int {
