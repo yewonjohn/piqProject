@@ -33,56 +33,47 @@ class RestaurantManager{
         if(distance != nil && category != nil && dollarSigns != nil){
             if let dist = distance, let price = dollarSigns, let cat = category{
                 requestParams = ["limit": 50,"radius":dist,"latitude": latitude,"longitude": longitude,"categories": cat,"price": price]
-                print("1")
             }
         }
         //distance
         else if(distance != nil && category == nil && dollarSigns == nil){
             if let dist = distance{
                 requestParams = ["limit": 50,"radius":dist,"latitude": latitude,"longitude": longitude]
-                print("2")
             }
         }
         //dollarSigns
         else if(distance == nil && category == nil && dollarSigns != nil){
             if let price = dollarSigns{
                 requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude,"price": price]
-                print("3")
             }
         }
         //category
         else if(distance == nil && category != nil && dollarSigns == nil){
             if let cat = category{
                 requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude,"categories": cat]
-                print(cat)
-                print("4")
             }
         }
         //distance and dollarSigns
         else if(distance != nil && category == nil && dollarSigns != nil){
             if let price = dollarSigns, let dist = distance{
                 requestParams = ["limit": 50,"radius":dist,"latitude": latitude,"longitude": longitude,"price": price]
-                print("5")
             }
         }
         //distance and category
         else if(distance != nil && category != nil && dollarSigns == nil){
             if let cat = category, let dist = distance{
                 requestParams = ["limit": 50,"radius":dist,"latitude": latitude,"longitude": longitude,"categories": cat]
-                print("6")
             }
         }
         //category and dollarSigns
         else if(distance == nil && category != nil && dollarSigns != nil){
             if let price = dollarSigns, let cat = category{
                 requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude,"categories": cat,"price": price]
-                print("7")
             }
         }
         //none
         else {
             requestParams = ["limit": 50,"latitude": latitude,"longitude": longitude]
-            print("8")
         }
 
         

@@ -33,22 +33,24 @@ class TabBarViewController: UITabBarController{
     var categoriesTitles = [String]()
     var dollarSign : String?
     var distance : Double?
+    var first: Bool = true
 
     //MARK:- Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if(first){
+        print("ViewDidLoad in TabBar")
         delegate = self
 
         //passing info
         let viewControllers = self.viewControllers
         let vc = viewControllers![1] as! RestaurantViewController
-    
         vc.categoriesArr = categoriesArr
         vc.categoriesTitles = categoriesTitles
         vc.dollarSign = dollarSign
         vc.distance = distance
+//        vc.getRestaurantCards()
         
         
         configureTutorialView()
@@ -58,7 +60,12 @@ class TabBarViewController: UITabBarController{
         configureTitleLabel()
         configureDescLabel()
         configureArrow()
-        
+            first = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+
     }
     
     //MARK: - Layout Configurations
@@ -81,7 +88,6 @@ class TabBarViewController: UITabBarController{
     }
     
     private func configureCircleOverlay(){
-        print(view.frame.height*0.05)
         tutorialOverlayView = createOverlay(frame: view.frame,
                                             xOffset: view.frame.width - view.frame.width*0.16,
                                     yOffset: view.frame.height - view.frame.height*0.06,
