@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var animationContainer: UIView!
     @IBOutlet weak var animationIcon: UIImageView!
     @IBOutlet weak var animationIcon2: UIImageView!
@@ -22,6 +23,7 @@ class LoginViewController: UIViewController {
 
     //constraints
     @IBOutlet weak var containerHeight: NSLayoutConstraint!
+    @IBOutlet weak var introLabelHeight: NSLayoutConstraint!
     @IBOutlet weak var emailHeight: NSLayoutConstraint!
     @IBOutlet weak var passwordHeight: NSLayoutConstraint!
     @IBOutlet weak var signInHeight: NSLayoutConstraint!

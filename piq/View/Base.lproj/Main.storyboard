@@ -204,7 +204,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVj-xe-OE4" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="160" width="314" height="50"/>
+                                        <rect key="frame" x="50" y="153" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="cF7-Ji-O8N"/>
                                         </constraints>
@@ -212,18 +212,15 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Wc-gTJ" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="215" width="314" height="50"/>
+                                        <rect key="frame" x="50" y="208" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="4Pr-yd-KMK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's nice to see you again!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vY6-41-mLt">
-                                        <rect key="frame" x="52" y="30" width="310" height="90"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="90" id="X7u-ht-Eo8"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's nice to see you again!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vY6-41-mLt">
+                                        <rect key="frame" x="5" y="30" width="404" height="83"/>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="34"/>
                                         <color key="textColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -254,8 +251,8 @@
                                     <constraint firstItem="aVj-xe-OE4" firstAttribute="top" secondItem="vY6-41-mLt" secondAttribute="bottom" constant="40" id="tqR-UZ-xa5"/>
                                     <constraint firstAttribute="trailing" secondItem="GOp-T4-t4P" secondAttribute="trailing" constant="50" id="wE6-au-4U3"/>
                                     <constraint firstItem="gd5-VI-0TU" firstAttribute="centerX" secondItem="wsr-FN-efO" secondAttribute="centerX" id="wnd-mJ-NbM"/>
-                                    <constraint firstItem="vY6-41-mLt" firstAttribute="leading" secondItem="wsr-FN-efO" secondAttribute="leading" constant="52" id="zGd-EU-NXa"/>
-                                    <constraint firstAttribute="trailing" secondItem="vY6-41-mLt" secondAttribute="trailing" constant="52" id="zvL-NQ-DFt"/>
+                                    <constraint firstItem="vY6-41-mLt" firstAttribute="leading" secondItem="wsr-FN-efO" secondAttribute="leading" constant="5" id="zGd-EU-NXa"/>
+                                    <constraint firstAttribute="trailing" secondItem="vY6-41-mLt" secondAttribute="trailing" constant="5" id="zvL-NQ-DFt"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -289,6 +286,7 @@
                         <outlet property="icon3Width" destination="eSd-F2-MY8" id="fLv-9Q-6J0"/>
                         <outlet property="iconHeight" destination="BoI-uB-U7E" id="VaU-Up-dXA"/>
                         <outlet property="iconWidth" destination="bIx-6o-s3u" id="CIJ-Lb-xKH"/>
+                        <outlet property="introLabel" destination="vY6-41-mLt" id="hhv-y4-Are"/>
                         <outlet property="passwordHeight" destination="4Pr-yd-KMK" id="V5n-4c-b8R"/>
                         <outlet property="passwordTextField" destination="lyw-Wc-gTJ" id="RBl-2q-pAt"/>
                         <outlet property="signInHeight" destination="nhJ-tp-OwS" id="AnZ-tP-Jae"/>
@@ -347,7 +345,7 @@
                                 <rect key="frame" x="0.0" y="308" width="414" height="588"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gOz-Oy-WY5" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="128" width="314" height="50"/>
+                                        <rect key="frame" x="50" y="99.5" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="t5e-qK-xIU"/>
                                         </constraints>
@@ -355,7 +353,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BoK-Ns-gkO" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="188" width="314" height="50"/>
+                                        <rect key="frame" x="50" y="159.5" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="L98-Id-7LG"/>
                                         </constraints>
@@ -373,7 +371,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfU-DY-JQE" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="248" width="314" height="50"/>
+                                        <rect key="frame" x="50" y="219.5" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="py1-tY-m6V"/>
                                         </constraints>
@@ -381,7 +379,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fxi-Sg-7ff" userLabel="Password Validate Field" customClass="AuthTextField" customModule="piq" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="308" width="314" height="50"/>
+                                        <rect key="frame" x="50" y="279.5" width="314" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="8u8-fP-yUQ"/>
                                         </constraints>
@@ -389,9 +387,9 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsV-j4-QGX">
-                                        <rect key="frame" x="59" y="515" width="296" height="33"/>
+                                        <rect key="frame" x="59.5" y="515" width="295" height="33"/>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
-                                        <state key="normal" title="Already have an account? SIgn in.">
+                                        <state key="normal" title="Already have an account? Sign in.">
                                             <color key="titleColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -399,11 +397,8 @@
                                             <action selector="goToRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="beo-PE-3YD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glad to meet you!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="34" translatesAutoresizingMaskIntoConstraints="NO" id="Fcg-WW-ixf">
-                                        <rect key="frame" x="50" y="30" width="314" height="70"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="K7h-Z9-DHF"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glad to meet you!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="34" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcg-WW-ixf">
+                                        <rect key="frame" x="5" y="30" width="404" height="41.5"/>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="34"/>
                                         <color key="textColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -421,7 +416,7 @@
                                     <constraint firstAttribute="trailing" secondItem="BoK-Ns-gkO" secondAttribute="trailing" constant="50" id="HRJ-SL-i42"/>
                                     <constraint firstAttribute="trailing" secondItem="ZvZ-lp-Qpf" secondAttribute="trailing" constant="50" id="LmO-6i-bKR"/>
                                     <constraint firstItem="gOz-Oy-WY5" firstAttribute="leading" secondItem="ZCx-VA-EbG" secondAttribute="leading" constant="50" id="MgX-1z-GBi"/>
-                                    <constraint firstAttribute="trailing" secondItem="Fcg-WW-ixf" secondAttribute="trailing" constant="50" id="Mjk-rf-eVv"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fcg-WW-ixf" secondAttribute="trailing" constant="5" id="Mjk-rf-eVv"/>
                                     <constraint firstItem="BoK-Ns-gkO" firstAttribute="top" secondItem="gOz-Oy-WY5" secondAttribute="bottom" constant="10" id="OjV-Cw-MPU"/>
                                     <constraint firstItem="BoK-Ns-gkO" firstAttribute="leading" secondItem="ZCx-VA-EbG" secondAttribute="leading" constant="50" id="TzG-9k-jH7"/>
                                     <constraint firstItem="XfU-DY-JQE" firstAttribute="top" secondItem="BoK-Ns-gkO" secondAttribute="bottom" constant="10" id="Xae-kz-rGw"/>
@@ -430,7 +425,7 @@
                                     <constraint firstItem="gOz-Oy-WY5" firstAttribute="top" secondItem="Fcg-WW-ixf" secondAttribute="bottom" constant="28" id="ejb-OI-Mz0"/>
                                     <constraint firstItem="ZvZ-lp-Qpf" firstAttribute="leading" secondItem="ZCx-VA-EbG" secondAttribute="leading" constant="50" id="p5S-pa-IAp"/>
                                     <constraint firstAttribute="height" constant="588" id="taz-NZ-kba"/>
-                                    <constraint firstItem="Fcg-WW-ixf" firstAttribute="leading" secondItem="ZCx-VA-EbG" secondAttribute="leading" constant="50" id="vSq-l8-DNu"/>
+                                    <constraint firstItem="Fcg-WW-ixf" firstAttribute="leading" secondItem="ZCx-VA-EbG" secondAttribute="leading" constant="5" id="vSq-l8-DNu"/>
                                     <constraint firstItem="XfU-DY-JQE" firstAttribute="leading" secondItem="ZCx-VA-EbG" secondAttribute="leading" constant="50" id="wYJ-wv-l8S"/>
                                 </constraints>
                             </view>
@@ -459,7 +454,7 @@
                         <outlet property="containerView" destination="ZCx-VA-EbG" id="gsX-ro-hdt"/>
                         <outlet property="emailHeight" destination="L98-Id-7LG" id="XGF-Ev-3k4"/>
                         <outlet property="emailTextField" destination="BoK-Ns-gkO" id="VfD-BF-VNS"/>
-                        <outlet property="greetingHeight" destination="K7h-Z9-DHF" id="hMZ-VA-7dI"/>
+                        <outlet property="greetingLabel" destination="Fcg-WW-ixf" id="6bq-2u-VdN"/>
                         <outlet property="icon2Height" destination="K05-Vi-by6" id="N8s-2e-ZYL"/>
                         <outlet property="icon2Width" destination="yRH-iV-rWx" id="z3O-NY-Aph"/>
                         <outlet property="icon3Height" destination="ubl-yp-mqV" id="8gQ-zQ-bqK"/>
@@ -912,8 +907,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3FS-M9-wVM"/>
-        <segue reference="khG-tN-Ap4"/>
+        <segue reference="YzQ-Mu-wf5"/>
+        <segue reference="Wa3-QC-iue"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Landing" width="824" height="1030"/>

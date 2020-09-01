@@ -76,7 +76,9 @@ class RestaurantViewController: UIViewController {
         presentDarkLayer(darkLayer: shadowView)
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
-
+        print("distance")
+        print(distance)
+        print(dollarSign)
         getRestaurantCards()
     }
     
@@ -367,6 +369,10 @@ extension RestaurantViewController{
                 finalDist = Int(dist * 1609)
             }
         }
+        
+//        print(dollarSign)
+//        print(distance)
+//        print(categoryAlias)
         
         var currentLoc: CLLocation!
 

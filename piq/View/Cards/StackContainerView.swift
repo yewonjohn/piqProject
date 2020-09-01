@@ -111,7 +111,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
         view.removeFromSuperview()
         
         //passing front card to delegate
-        if(frontCardIndex < numberOfCardsToShow){
+        if(frontCardIndex < numberOfCardsToShow-1){
             frontCardIndex += 1
             dataSource?.currentFrontCard(card: cardViews[frontCardIndex])
 

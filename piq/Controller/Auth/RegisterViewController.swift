@@ -14,6 +14,7 @@ class RegisterViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var animationContainer: UIView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var nameTextField: AuthTextField!
     @IBOutlet weak var emailTextField: AuthTextField!
     @IBOutlet weak var passwordTextField: AuthTextField!
@@ -56,9 +57,9 @@ class RegisterViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         containerHeight.constant = self.view.frame.height * 0.65
-        greetingHeight.constant = self.view.frame.height * 0.05
         nameHeight.constant = self.view.frame.height * 0.055
         emailHeight.constant = self.view.frame.height * 0.055
         passwordHeight.constant = self.view.frame.height * 0.055
