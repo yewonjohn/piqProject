@@ -48,7 +48,6 @@ class RestaurantViewController: UIViewController {
     let userDefault = UserDefaults.standard
     let currentUser = Auth.auth().currentUser
 
-    var first = true
     // MARK: - View Controller Life Cycle
 
     override func loadView() {
@@ -78,6 +77,7 @@ class RestaurantViewController: UIViewController {
         ServiceUtil().setBackground(view,backgroundImageView)
 
         getRestaurantCards()
+
     }
     
     override func viewDidLayoutSubviews() {

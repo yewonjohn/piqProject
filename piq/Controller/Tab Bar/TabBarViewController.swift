@@ -33,13 +33,11 @@ class TabBarViewController: UITabBarController{
     var categoriesTitles = [String]()
     var dollarSign : String?
     var distance : Double?
-    var first: Bool = true
 
     //MARK:- Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(first){
         print("ViewDidLoad in TabBar")
         delegate = self
 
@@ -60,8 +58,7 @@ class TabBarViewController: UITabBarController{
         configureTitleLabel()
         configureDescLabel()
         configureArrow()
-            first = false
-        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
