@@ -196,7 +196,7 @@ class ServiceUtil{
             label.alpha = 1
         }, completion:{ _ in
             
-            UIView.animate(withDuration: 1.0, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 label.alpha = 0
             }, completion: { _ in
                 label.isHidden = true
@@ -273,7 +273,6 @@ class ServiceUtil{
             buttonDist4.setBackgroundImage(#imageLiteral(resourceName: "far_unselected"), for: .normal)
             buttonDistAll.setBackgroundImage(#imageLiteral(resourceName: "buttonRightWhite"), for: .normal)
             buttonDistAll.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
-            print("1")
         }
         else if(index == 2){
             buttonDist1.setBackgroundImage(#imageLiteral(resourceName: "walk_unselected"), for: .normal)

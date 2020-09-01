@@ -48,11 +48,9 @@ class RestaurantViewController: UIViewController {
     let userDefault = UserDefaults.standard
     let currentUser = Auth.auth().currentUser
 
-
     // MARK: - View Controller Life Cycle
 
     override func loadView() {
-
         view = UIView()
         stackContainer = StackContainerView()
         view.addSubview(stackContainer)
@@ -63,7 +61,8 @@ class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("viewDidLoad in RestaurantVC")
+
         //creates views for this page
         setLastLabel()
         emptyCardsLabel.isHidden = true
@@ -76,10 +75,13 @@ class RestaurantViewController: UIViewController {
         presentDarkLayer(darkLayer: shadowView)
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
+
         getRestaurantCards()
+
     }
     
     override func viewDidLayoutSubviews() {
+
         super.viewDidLayoutSubviews()
         if isFirstTimeOpening{
             isFirstTimeOpening = false
@@ -119,7 +121,7 @@ class RestaurantViewController: UIViewController {
         piqTitle.font = UIFont(name: "Montserrat-SemiBold", size: 36)
         piqTitle.text = "piq"
         piqTitle.translatesAutoresizingMaskIntoConstraints = false
-        piqTitle.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        piqTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         piqTitle.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor).isActive = true
     }
     
@@ -336,7 +338,7 @@ extension RestaurantViewController: RestaurantManagerDelegate{
 extension RestaurantViewController{
     
     func getRestaurantCards(){
-        
+        print("getRestaurantCards")
         //make sure empty label and reset button is hidden when new search is initialized
         resetButton.isHidden = true
         resetLabel.isHidden = true

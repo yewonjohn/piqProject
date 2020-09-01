@@ -209,6 +209,7 @@ class SearchPageViewController: UIViewController{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToCards" {
+            print("prepare")
             setCategoriesTitles()
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
