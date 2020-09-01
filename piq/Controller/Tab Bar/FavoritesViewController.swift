@@ -36,9 +36,9 @@ class FavoritesViewController: UIViewController{
             favoriteManager.delegate = self
             favoriteManager.loadFavorites()
         }else{
-            let alert = UIAlertController(title: "Favorites", message: "Please Login to access favorites!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action in}))
-            self.present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "Favorites", message: "Please Login to access favorites!", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action in}))
+//            self.present(alert, animated: true, completion: nil)
         }
         view.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
     }

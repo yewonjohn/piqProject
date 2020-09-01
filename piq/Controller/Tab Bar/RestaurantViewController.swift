@@ -76,9 +76,6 @@ class RestaurantViewController: UIViewController {
         presentDarkLayer(darkLayer: shadowView)
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
-        print("distance")
-        print(distance)
-        print(dollarSign)
         getRestaurantCards()
     }
     
