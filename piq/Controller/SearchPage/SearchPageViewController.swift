@@ -209,13 +209,13 @@ class SearchPageViewController: UIViewController{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "HomeToCards" {
-            print("prepare")
             setCategoriesTitles()
             let controller = segue.destination as! TabBarViewController
             controller.categoriesArr = categoriesArr
             controller.categoriesTitles = categoriesTitlesParam
             controller.dollarSign = dollarSignsParam
             controller.distance = distanceParam
+            controller.selectedIndex = 1
         }
         if segue.identifier == "unwindWithInfo" {
             setCategoriesTitles()
@@ -283,7 +283,6 @@ extension SearchPageViewController: UICollectionViewDelegate{
                 categoriesTitlesParam.append(categoriesTitles[tempIndex])
             }
         }
-        print(categoriesTitlesParam)
     }
 }
 

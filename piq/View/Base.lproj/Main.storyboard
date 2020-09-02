@@ -743,11 +743,6 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBar>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
-                            <integer key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="feY-MG-5EK" kind="relationship" relationship="viewControllers" id="XCO-ur-VN4"/>
                         <segue destination="N3k-EI-wXm" kind="relationship" relationship="viewControllers" id="WZG-aa-FG0"/>

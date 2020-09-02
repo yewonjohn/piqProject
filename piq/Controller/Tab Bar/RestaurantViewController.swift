@@ -55,16 +55,14 @@ class RestaurantViewController: UIViewController {
         stackContainer = StackContainerView()
         view.addSubview(stackContainer)
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
-        restaurantAPI.delegate = self
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad in RestaurantVC")
 
         //creates views for this page
-        setLastLabel()
+        setCardsEmpterLabel()
         emptyCardsLabel.isHidden = true
         setPiqTitle()
         setFilterButton()
@@ -77,7 +75,7 @@ class RestaurantViewController: UIViewController {
         ServiceUtil().setBackground(view,backgroundImageView)
 
         getRestaurantCards()
-
+        restaurantAPI.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -103,7 +101,7 @@ class RestaurantViewController: UIViewController {
         stackContainer.heightAnchor.constraint(equalToConstant: view.frame.height * 0.58).isActive = true
     }
     //SETS CARDS ARE EMPTY LABEL
-    private func setLastLabel(){
+    private func setCardsEmpterLabel(){
         self.view?.addSubview(emptyCardsLabel)
         emptyCardsLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
         emptyCardsLabel.textAlignment = .center
@@ -187,7 +185,7 @@ class RestaurantViewController: UIViewController {
         piqdLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
         piqdLabel.text = "piq'd!"
         piqdLabel.textAlignment = .center
-        piqdLabel.font = UIFont(name: "Montserrat-SemiBold", size: 55)
+        piqdLabel.font = UIFont(name: "Montserrat-Medium", size: 90)
         piqdLabel.translatesAutoresizingMaskIntoConstraints = false
         piqdLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20).isActive = true
         piqdLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
@@ -206,7 +204,6 @@ class RestaurantViewController: UIViewController {
     }
 }
 //MARK: - DataSource/Delegate for StackContainerView (Delegate)
-
 extension RestaurantViewController : RestaurantCardsDataSource {
     
     //Adds to favorites when cards swiped right.
@@ -218,6 +215,9 @@ extension RestaurantViewController : RestaurantCardsDataSource {
     }
     //provides total number of cards to StackContainerView
     func numberOfCardsToShow() -> Int {
+        if(restaurantModelData.count == 0){
+            emptyCardsLabel.isHidden = false
+        }
         return restaurantModelData.count
     }
     //creates one card obj and sends to StackContainerView
@@ -338,7 +338,6 @@ extension RestaurantViewController: RestaurantManagerDelegate{
 extension RestaurantViewController{
     
     func getRestaurantCards(){
-        print("getRestaurantCards")
         //make sure empty label and reset button is hidden when new search is initialized
         resetButton.isHidden = true
         resetLabel.isHidden = true
@@ -368,10 +367,6 @@ extension RestaurantViewController{
                 finalDist = Int(dist * 1609)
             }
         }
-        
-//        print(dollarSign)
-//        print(distance)
-//        print(categoryAlias)
         
         var currentLoc: CLLocation!
 

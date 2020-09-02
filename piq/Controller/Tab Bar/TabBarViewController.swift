@@ -27,7 +27,7 @@ class TabBarViewController: UITabBarController{
     //MARK:- Properties
     let service = ServiceUtil()
     weak var tabDelegate : TabBarViewControllerDelegate?
-    
+    var didAppearOnce = false
     //RestaurantVC properties to pass
     var categoriesArr = [CategoryModel]()
     var categoriesTitles = [String]()
@@ -38,19 +38,8 @@ class TabBarViewController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewDidLoad in TabBar")
         delegate = self
 
-        //passing info
-        let viewControllers = self.viewControllers
-        let vc = viewControllers![1] as! RestaurantViewController
-        vc.categoriesArr = categoriesArr
-        vc.categoriesTitles = categoriesTitles
-        vc.dollarSign = dollarSign
-        vc.distance = distance
-//        vc.getRestaurantCards()
-        
-        
         configureTutorialView()
         configureCircleOverlay()
         configureContainerView()
@@ -61,13 +50,23 @@ class TabBarViewController: UITabBarController{
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-
-    }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        //anything
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if(!didAppearOnce){
+            didAppearOnce = true
+//            self.tabBarController?.selectedIndex = 1
+            //passing info
+            let viewControllers = self.viewControllers
+            let vc = viewControllers![1] as! RestaurantViewController
+            vc.categoriesArr = categoriesArr
+            vc.categoriesTitles = categoriesTitles
+            vc.dollarSign = dollarSign
+            vc.distance = distance
+//            vc.getRestaurantCards()
+        }
+    }
     
     //MARK: - Layout Configurations
 
