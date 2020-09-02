@@ -74,7 +74,7 @@ class RestaurantViewController: UIViewController {
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
 
-        getRestaurantCards()
+//        getRestaurantCards()
         restaurantAPI.delegate = self
     }
     

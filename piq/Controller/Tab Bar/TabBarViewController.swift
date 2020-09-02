@@ -56,7 +56,6 @@ class TabBarViewController: UITabBarController{
         
         if(!didAppearOnce){
             didAppearOnce = true
-//            self.tabBarController?.selectedIndex = 1
             //passing info
             let viewControllers = self.viewControllers
             let vc = viewControllers![1] as! RestaurantViewController
@@ -64,7 +63,7 @@ class TabBarViewController: UITabBarController{
             vc.categoriesTitles = categoriesTitles
             vc.dollarSign = dollarSign
             vc.distance = distance
-//            vc.getRestaurantCards()
+            vc.getRestaurantCards()
         }
     }
     
