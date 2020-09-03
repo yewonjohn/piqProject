@@ -42,16 +42,9 @@ class LoginViewController: UIViewController {
     let service = ServiceUtil()
     let auth = AuthManager()
     var backgroundView = UIImageView()
-    var isFirstTimeOpening = true
 
     
     // MARK: - View Controller Life Cycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,14 +75,14 @@ class LoginViewController: UIViewController {
         service.setAuthBackground(view, backgroundView)
         
     }
-    override func viewDidLayoutSubviews() {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         
-        if isFirstTimeOpening {
-              isFirstTimeOpening = false
-              service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
-              service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
-              service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
-        }
+        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
+        service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
+        service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

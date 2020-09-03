@@ -25,6 +25,7 @@ class RestaurantViewController: UIViewController {
     let backgroundImageView = UIImageView()
     let piqdLabel = UILabel()
     let shadowView = UIView()
+    let locationSettingsLabel = UILabel()
 
     var presentTransition: UIViewControllerAnimatedTransitioning?
     var dismissTransition: UIViewControllerAnimatedTransitioning?
@@ -70,6 +71,7 @@ class RestaurantViewController: UIViewController {
         setResetLabel()
         setLoadingView()
         configurePiqdLabel()
+        configureLocationDescription()
         presentDarkLayer(darkLayer: shadowView)
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
@@ -166,7 +168,6 @@ class RestaurantViewController: UIViewController {
         resetLabel.topAnchor.constraint(equalTo: resetButton.bottomAnchor, constant: 0).isActive = true
         resetLabel.isHidden = true
         view.sendSubviewToBack(resetLabel)
-
     }
 
     private func setLoadingView(){
@@ -190,6 +191,21 @@ class RestaurantViewController: UIViewController {
         piqdLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20).isActive = true
         piqdLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         piqdLabel.isHidden = true
+    }
+    
+    private func configureLocationDescription(){
+        view.addSubview(locationSettingsLabel)
+        locationSettingsLabel.text = "Please authorize location permissions in your phone settings"
+        locationSettingsLabel.textColor = #colorLiteral(red: 0.9098039216, green: 0.3764705882, blue: 0.2588235294, alpha: 1)
+        locationSettingsLabel.numberOfLines = 0
+        locationSettingsLabel.textAlignment = .center
+        locationSettingsLabel.font = UIFont(name: "Montserrat-Medium", size: 20)
+        locationSettingsLabel.translatesAutoresizingMaskIntoConstraints = false
+        locationSettingsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        locationSettingsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        locationSettingsLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        locationSettingsLabel.isHidden = true
+
     }
     
 
@@ -372,6 +388,7 @@ extension RestaurantViewController{
 
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == .authorizedAlways) {
+            locationSettingsLabel.isHidden = true
             currentLoc = locationManager.location
             
             //Calling API for all the Cards Data using current location
@@ -381,6 +398,9 @@ extension RestaurantViewController{
                 //stop loading animation here
                 self.loadingView.stopAnimating()
             }
+        }
+        else {
+            locationSettingsLabel.isHidden = false
         }
     }
     //making sure data refreshes once user clicks 'allow' to location

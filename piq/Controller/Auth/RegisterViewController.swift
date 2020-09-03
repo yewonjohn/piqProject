@@ -46,18 +46,13 @@ class RegisterViewController: UIViewController {
     // MARK: - Properties
     let auth = AuthManager()
     let service = ServiceUtil()
-    var isFirstTimeOpening = true
     var backgroundView = UIImageView()
 
 
     // MARK: - View Controller Life Cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
         containerHeight.constant = self.view.frame.height * 0.65
         nameHeight.constant = self.view.frame.height * 0.055
@@ -84,14 +79,12 @@ class RegisterViewController: UIViewController {
         service.setAuthBackground(view, backgroundView)
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         
-        if isFirstTimeOpening {
-              isFirstTimeOpening = false
-              service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
-              service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
-              service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
-        }
+        service.animateIcon(icon: animationIcon, parentView: animationContainer, imageArray: AuthPage.animationIcons, imageIndex: 0, iconId: 1, firstTimeCalled: true)
+        service.animateIcon(icon: animationIcon2, parentView: animationContainer, imageArray: AuthPage.animationIcons2, imageIndex: 0, iconId: 2, firstTimeCalled: true)
+        service.animateIcon(icon: animationIcon3, parentView: animationContainer, imageArray: AuthPage.animationIcons3, imageIndex: 0, iconId: 3, firstTimeCalled: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
