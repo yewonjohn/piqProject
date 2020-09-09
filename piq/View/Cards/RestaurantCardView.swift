@@ -11,11 +11,12 @@ import Kingfisher
 import FirebaseFirestore
 import Firebase
 
+//tutorial pages purposes (inherited by Tab Bar)
 protocol RestaurantCardTutorialDelegate: class {
     func swipingLeft()
     func swipingRight()
 }
-
+//inherited by StackContainerView
 protocol RestaurantCardsDelegate {
     func swipeDidEnd(on view: RestaurantCardView)
     func swipedRight(data : RestaurantModel, userEmail : String, categoriesTitles : String)
@@ -49,7 +50,7 @@ class RestaurantCardView : UIView {
     private var divisor : CGFloat = 0
     private let baseView = UIView()
     private let defaults = UserDefaults.standard    
-    
+    //not delegate, but a property
     var dataSource : RestaurantModel? {
         didSet {
             //reformatting phoneNumber
@@ -413,21 +414,21 @@ class RestaurantCardView : UIView {
             card.transform = CGAffineTransform(rotationAngle: rotation)
             
             //tutorial triggers
-            if(!defaults.bool(forKey: "tutorialLeftTriggered")){
+            if(!defaults.bool(forKey: RestaturantCardPage.tutorialLeftKey)){
 
                 if(point.x < -100){
                     sender.cancel()
                     tutorialDelegate?.swipingLeft()
-                    defaults.set(true, forKey: "tutorialLeftTriggered")
+                    defaults.set(true, forKey: RestaturantCardPage.tutorialLeftKey)
                 }
             }
 
-            if(!defaults.bool(forKey: "tutorialRightTriggered")){
+            if(!defaults.bool(forKey: RestaturantCardPage.tutorialRightKey)){
 
                 if(point.x > 100){
                     sender.cancel()
                     tutorialDelegate?.swipingRight()
-                    defaults.set(true, forKey: "tutorialRightTriggered")
+                    defaults.set(true, forKey: RestaturantCardPage.tutorialRightKey)
                 }
             }
             

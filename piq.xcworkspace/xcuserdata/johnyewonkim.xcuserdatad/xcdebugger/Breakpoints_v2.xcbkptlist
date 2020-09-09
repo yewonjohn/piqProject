@@ -14,8 +14,8 @@
             filePath = "piq/Controller/Tab Bar/RestaurantViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "getRestaurantCards()"
             landmarkType = "7">
          </BreakpointContent>

@@ -57,8 +57,8 @@ class SearchPageViewController: UIViewController{
     var isFirstTimeOpening = true
 
     var categoriesArr = [CategoryModel]()
-    var categoriesTitles = HomePage.categoriesLabels
-    var categoriesImages = HomePage.categoriesUIImages
+    var categoriesTitles = SearchPage.categoriesLabels
+    var categoriesImages = SearchPage.categoriesUIImages
     var categoriesIndexArr = [Int]()
     var categoriesTitlesParam = [String]()
     var dollarSignsParam = String()

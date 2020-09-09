@@ -239,9 +239,8 @@ extension RestaurantViewController : RestaurantCardsDataSource {
     //creates one card obj and sends to StackContainerView
     func card(at index: Int) -> RestaurantCardView {
         let card = RestaurantCardView()
-        //setting delegate for TabBarView here
+        //setting delegate for TAB BAR VC here because the instance of the current card is here (Tutorial purposes)
         if let tabBar = self.tabBarController as? TabBarViewController{
-            //setting two delegates here, because these two objects are listening to each other.
             card.tutorialDelegate = tabBar
         }
         

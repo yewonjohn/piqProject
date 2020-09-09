@@ -32,7 +32,7 @@ struct RestaurantVC {
     static let emptyCardsText = "No more cards!"
 }
 
-struct HomePage {
+struct SearchPage {
     static let categoriesLabels = ["All","Breakfast & Brunch","Burgers","Pizza","Mexican","Chinese","Seafood","Thai", "Sandwiches","Italian","Steakhouses","Korean","Japanese","Vietnamese","Vegetarian","Sushi Bars","American (New)"]
     
     static let categoriesUIImages = [UIImage(named: "all_food"), UIImage(named: "breakfast"), UIImage(named: "burger"), UIImage(named: "pizza"),UIImage(named: "taco"),UIImage(named: "chinese"),UIImage(named: "seafood"),UIImage(named: "thai"),UIImage(named: "sandwich"),UIImage(named: "spaghetti"),UIImage(named: "steak"),UIImage(named: "korean"),UIImage(named: "japanese"),UIImage(named: "vietnamese"),UIImage(named: "salad"),UIImage(named: "sushi"),UIImage(named: "american")]
@@ -47,3 +47,8 @@ struct AuthPage {
 }
 
 
+struct RestaturantCardPage{
+    static let tutorialLeftKey = "tutorialLeftTriggered"
+    static let tutorialRightKey = "tutorialRightTriggered"
+    
+}
