@@ -83,7 +83,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         return (view.frame.height * 0.4)/5
     }
     
-    //Takes user to yelp page of selected favorite item
+    //Takes user to yelp page of selected favorite item.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //deselects after selecting
