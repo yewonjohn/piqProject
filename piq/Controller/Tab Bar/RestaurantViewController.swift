@@ -210,7 +210,7 @@ class RestaurantViewController: UIViewController {
     
 
     
-    // MARK: - User Interactionßß
+    // MARK: - User Interaction
     
     @objc func resetTapped() {
         stackContainer.reloadData()
