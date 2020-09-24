@@ -15,7 +15,6 @@ import Firebase
 class RestaurantViewController: UIViewController {
     
     // MARK: - Properties
-    //objects
     let piqTitle = UILabel()
     let filterButton = UIButton()
     let emptyCardsLabel = UILabel()
@@ -77,7 +76,6 @@ class RestaurantViewController: UIViewController {
         //set background
         ServiceUtil().setBackground(view,backgroundImageView)
 
-//        getRestaurantCards()
         restaurantAPI.delegate = self
     }
     
