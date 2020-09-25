@@ -278,11 +278,6 @@ class RestaurantCardView : UIView {
         categoriesView.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -10).isActive = true
         categoriesView.heightAnchor.constraint(equalTo: swipeView.heightAnchor, multiplier: 0.04).isActive = true
 
-//        categoriesView.adjustsFontSizeToFitWidth = true
-//        categoriesView.minimumScaleFactor = 0.2
-        //this width makes category cut off perfectly..
-//        categoriesView.widthAnchor.constraint(equalTo: swipeView.widthAnchor, multiplier: 1.0).isActive = true
-//        categoriesView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
     }
     
     private func configureDistanceView() {
