@@ -31,7 +31,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
     private var remainingcards: Int = 0
     private var swipeStarted = true
     private var frontCardIndex = 0
-    
+    //track layout of card onset
     private let horizontalInset: CGFloat = 10.0
     private let verticalInset: CGFloat = 10.0
     
