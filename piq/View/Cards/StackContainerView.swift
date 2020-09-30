@@ -136,7 +136,7 @@ class StackContainerView: UIView, RestaurantCardsDelegate {
                 })
             }
         }
-        //keeping track of last card
+        //keeping track of last card 
         lastCardCounter -= 1
         if(lastCardCounter == 0){
             dataSource?.emptyView()
