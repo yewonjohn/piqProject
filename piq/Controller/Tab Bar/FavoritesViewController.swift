@@ -178,14 +178,11 @@ extension FavoritesViewController: SwipeTableViewCellDelegate{
 
 extension FavoritesViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("something")
         if(searchText == "" || searchText == nil){
             filteredFavorites = favoritesArray
             tableView.reloadData()
         }else{
-                            
             filteredFavorites = []
-
             let filter = searchText.lowercased()
             if let favoritesArray = favoritesArray{
                 for favorite in favoritesArray{

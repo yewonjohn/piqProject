@@ -61,7 +61,6 @@ class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         //creates views for this page
         setCardsEmpterLabel()
         emptyCardsLabel.isHidden = true

@@ -748,6 +748,7 @@
                     <connections>
                         <segue destination="feY-MG-5EK" kind="relationship" relationship="viewControllers" id="XCO-ur-VN4"/>
                         <segue destination="N3k-EI-wXm" kind="relationship" relationship="viewControllers" id="WZG-aa-FG0"/>
+                        <segue destination="rwW-MF-lS3" kind="relationship" relationship="viewControllers" id="ACe-R0-q4v"/>
                         <segue destination="BcM-07-CdQ" kind="relationship" relationship="viewControllers" id="cq8-Y9-WTO"/>
                     </connections>
                 </tabBarController>
@@ -911,6 +912,52 @@
             </objects>
             <point key="canvasLocation" x="3767" y="-1231"/>
         </scene>
+        <!--Events-->
+        <scene sceneID="czS-Wg-4ph">
+            <objects>
+                <viewController id="rwW-MF-lS3" customClass="EventViewController" customModule="piq" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i2x-ae-9mm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="piq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMR-wz-fbx">
+                                <rect key="frame" x="177" y="98" width="60" height="44"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="36"/>
+                                <color key="textColor" red="0.90980392160000001" green="0.37647058820000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LuK-su-J5s">
+                                <rect key="frame" x="5" y="172" width="404" height="641"/>
+                                <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ebB-W6-Xfi">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="W23-jN-Bbf"/>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qMR-wz-fbx" firstAttribute="top" secondItem="W23-jN-Bbf" secondAttribute="top" constant="10" id="8Qi-Zv-6Ed"/>
+                            <constraint firstItem="W23-jN-Bbf" firstAttribute="trailing" secondItem="LuK-su-J5s" secondAttribute="trailing" constant="5" id="B7K-6L-Zqw"/>
+                            <constraint firstItem="LuK-su-J5s" firstAttribute="top" secondItem="qMR-wz-fbx" secondAttribute="bottom" constant="30" id="JDi-sI-5Ss"/>
+                            <constraint firstItem="W23-jN-Bbf" firstAttribute="bottom" secondItem="LuK-su-J5s" secondAttribute="bottom" id="Wht-Yh-Uft"/>
+                            <constraint firstItem="LuK-su-J5s" firstAttribute="leading" secondItem="W23-jN-Bbf" secondAttribute="leading" constant="5" id="nF4-wK-OdV"/>
+                            <constraint firstItem="qMR-wz-fbx" firstAttribute="centerX" secondItem="i2x-ae-9mm" secondAttribute="centerX" id="qK8-tQ-jGx"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Events" image="pin" catalog="system" id="9nw-qH-Eh3"/>
+                    <connections>
+                        <outlet property="eventCollectionView" destination="LuK-su-J5s" id="usJ-Af-uUk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jfr-Hi-loq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3767" y="-587"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="XKc-xF-yZK"/>
@@ -926,6 +973,7 @@
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="far_unselected" width="130" height="80"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="pin" catalog="system" width="119" height="128"/>
         <image name="walk_unselected" width="130" height="80"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
