@@ -15,22 +15,22 @@ import Firebase
 class RestaurantViewController: UIViewController {
     
     // MARK: - Properties
-    let piqTitle = UILabel()
-    let filterButton = UIButton()
-    let emptyCardsLabel = UILabel()
-    let signOutButton = UIButton()
-    let resetButton = UIButton()
-    let resetLabel = UILabel()
-    let loadingView = NVActivityIndicatorView(frame: .zero)
-    let backgroundImageView = UIImageView()
-    let piqdLabel = UILabel()
-    let shadowView = UIView()
-    let locationSettingsLabel = UILabel()
+    private let piqTitle = UILabel()
+    private let filterButton = UIButton()
+    private let emptyCardsLabel = UILabel()
+    private let signOutButton = UIButton()
+    private let resetButton = UIButton()
+    private let resetLabel = UILabel()
+    private let loadingView = NVActivityIndicatorView(frame: .zero)
+    private let backgroundImageView = UIImageView()
+    private let piqdLabel = UILabel()
+    private let shadowView = UIView()
+    private let locationSettingsLabel = UILabel()
 
-    var presentTransition: UIViewControllerAnimatedTransitioning?
-    var dismissTransition: UIViewControllerAnimatedTransitioning?
+    private var presentTransition: UIViewControllerAnimatedTransitioning?
+    private var dismissTransition: UIViewControllerAnimatedTransitioning?
 
-    var stackContainer : StackContainerView!
+    private var stackContainer : StackContainerView!
     
     var restaurantModelData = [RestaurantModel]()
     var categoriesArr = [CategoryModel]()
@@ -39,15 +39,15 @@ class RestaurantViewController: UIViewController {
     var distance : Double?
     var finalDist : Int?
     
-    var locationManager = CLLocationManager()
-    var favoritesManager = FavoritesManager()
+    private var locationManager = CLLocationManager()
+    private var favoritesManager = FavoritesManager()
 
-    let service = ServiceUtil()
-    let homePage = SearchPageViewController()
-    let restaurantAPI = RestaurantManager()
-    var isFirstTimeOpening = true
-    let userDefault = UserDefaults.standard
-    let currentUser = Auth.auth().currentUser
+    private let service = ServiceUtil()
+    private let homePage = SearchPageViewController()
+    private let restaurantAPI = RestaurantManager()
+    private var isFirstTimeOpening = true
+    private let userDefault = UserDefaults.standard
+    private let currentUser = Auth.auth().currentUser
 
     // MARK: - View Controller Life Cycle
 
@@ -129,7 +129,7 @@ class RestaurantViewController: UIViewController {
         filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: .normal)
         filterButton.translatesAutoresizingMaskIntoConstraints = false
         filterButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        filterButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
+        filterButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
         filterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         filterButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
@@ -210,7 +210,6 @@ class RestaurantViewController: UIViewController {
 
     
     // MARK: - User Interaction
-    
     @objc func resetTapped() {
         stackContainer.reloadData()
         emptyCardsLabel.isHidden = true
@@ -356,7 +355,6 @@ extension RestaurantViewController{
         resetButton.isHidden = true
         resetLabel.isHidden = true
         emptyCardsLabel.isHidden = true
-
         
         //get category title alias
         var categoryAlias: String? = nil

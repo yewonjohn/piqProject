@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsCell: UITableViewCell {
     
+    static let identifier = "SettingsCell"
+    
     @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var settingsLabel: UILabel!
     

@@ -52,3 +52,8 @@ struct RestaturantCardPage{
     static let tutorialRightKey = "tutorialRightTriggered"
     
 }
+
+struct ProfilePage{
+    static let accountSettingsLabel = ["Search History", "Password", "Rate Us", "App Feedback", "Logout"]
+    static let accountSettingsImages = [#imageLiteral(resourceName: "History"),#imageLiteral(resourceName: "Lock"),#imageLiteral(resourceName: "Thumbs Up"),#imageLiteral(resourceName: "Comment"),#imageLiteral(resourceName: "Sign Out")]
+}

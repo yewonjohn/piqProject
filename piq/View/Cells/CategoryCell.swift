@@ -11,6 +11,8 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell{
     
+    static let identifier =  "CategoryCell"
+    
     var dataTitle: String?{
         didSet{
             guard let dataTitle = dataTitle else{ return }

@@ -291,7 +291,6 @@ class RestaurantCardView : UIView {
         distanceView.heightAnchor.constraint(equalTo: swipeView.heightAnchor, multiplier: 0.03).isActive = true
         distanceView.adjustsFontSizeToFitWidth = true
         distanceView.minimumScaleFactor = 0.2
-//        distanceView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
         
     }
     
@@ -306,7 +305,6 @@ class RestaurantCardView : UIView {
         phoneView.heightAnchor.constraint(equalTo: swipeView.heightAnchor, multiplier: 0.03).isActive = true
         phoneView.adjustsFontSizeToFitWidth = true
         phoneView.minimumScaleFactor = 0.2
-//        phoneView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
 
 
     }
@@ -323,15 +321,10 @@ class RestaurantCardView : UIView {
          addressView.heightAnchor.constraint(equalTo: swipeView.heightAnchor, multiplier: 0.03).isActive = true
          addressView.adjustsFontSizeToFitWidth = true
          addressView.minimumScaleFactor = 0.2
-//         addressView.heightAnchor.constraint(equalTo: dollarSignsView.heightAnchor, multiplier: 1.0).isActive = true
      }
     
     private func configureArrow(){
         swipeView.addSubview(arrowButton)
-//        let symbol = UIImage(systemName: "chevron.compact.down")
-//        arrowButton.setImage(symbol, for: .normal)
-//        let configuration = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .regular, scale: .large)
-//        arrowButton.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
         arrowButton.setBackgroundImage(#imageLiteral(resourceName: "yelp_icon"), for: .normal)
         arrowButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         arrowButton.translatesAutoresizingMaskIntoConstraints = false
@@ -339,8 +332,6 @@ class RestaurantCardView : UIView {
         arrowButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         arrowButton.bottomAnchor.constraint(equalTo: swipeView.bottomAnchor, constant: -12).isActive = true
         arrowButton.rightAnchor.constraint(equalTo: swipeView.rightAnchor, constant: -12).isActive = true
-//        arrowButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
-//        arrowButton.topAnchor.constraint(greaterThanOrEqualTo: addressView.bottomAnchor, constant: 5).isActive = true
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(goToURL))
         arrowButton.isUserInteractionEnabled = true

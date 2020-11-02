@@ -20,30 +20,39 @@ class ProfileViewController: UIViewController{
     
     
     //MARK: - Properties
-    var accountSettingsLabel = [String]()
-    var accountSettingsImages = [UIImage]()
-    let userDefault = UserDefaults.standard
-    let auth = AuthManager()
-    let currentUser = Auth.auth().currentUser
+    private var accountSettingsLabel = [String]()
+    private var accountSettingsImages = [UIImage]()
+    private let userDefault = UserDefaults.standard
+    private let auth = AuthManager()
+    private let currentUser = Auth.auth().currentUser
 
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         
-        accountSettingsLabel = ["Search History", "Password", "Rate Us", "App Feedback", "Logout"]
-        accountSettingsImages = [#imageLiteral(resourceName: "History"),#imageLiteral(resourceName: "Lock"),#imageLiteral(resourceName: "Thumbs Up"),#imageLiteral(resourceName: "Comment"),#imageLiteral(resourceName: "Sign Out")]
+        tableViewConfig()
+        labelConfig()
+    }
+    
+    //MARK:- UI Layout Config
+    
+    private func tableViewConfig(){
+        accountSettingsLabel = ProfilePage.accountSettingsLabel
+        accountSettingsImages = ProfilePage.accountSettingsImages
         
         if((currentUser) == nil){
             accountSettingsLabel[4] = "Login"
             accountSettingsImages[4] = #imageLiteral(resourceName: "Login")
         }
+        
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "SettingsCell")
+        tableView.register(UINib(nibName: SettingsCell.identifier, bundle: nil), forCellReuseIdentifier: SettingsCell.identifier)
         tableView.layer.cornerRadius = 30
         
         tableViewHeight.constant = view.frame.height * 0.4
-        
+    }
+    private func labelConfig(){
         //setting two different colors on one label
         let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 24), NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "#828282")]
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 24), NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "#E86042")]
@@ -52,6 +61,7 @@ class ProfileViewController: UIViewController{
         attributedString1.append(attributedString2)
         fullNameLabel.attributedText = attributedString1
     }
+    
 }
 //MARK: -- TableView DataSource and Delegate
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
@@ -61,9 +71,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.identifier, for: indexPath) as! SettingsCell
         
-        //strikethrough labels not yet implemented
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: accountSettingsLabel[indexPath.row])
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         

@@ -209,11 +209,10 @@
 		44712D7524A267D80083B1AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				44A7883424E87EDB005789E5 /* UIKit+Extensions.swift */,
-				44712D7D24A26CF40083B1AB /* Constants.swift */,
 				4476A20C24A416600009719D /* RestaurantModel.swift */,
 				44DA293924B7E137003974AE /* FavoritesModel.swift */,
 				44E09CC724C8CF13009C3370 /* CategoryModel.swift */,
+				441B918624DF7F29004B27D9 /* Api */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,7 +231,6 @@
 		44712D7724A267EA0083B1AB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				44E79B5E24A2FDAA00DDC48E /* Service */,
 				44DA293C24B7E1EC003974AE /* Auth */,
 				44DA293D24B7E1F6003974AE /* SearchPage */,
 				44DA293F24B7E7A3003974AE /* Tab Bar */,
@@ -303,13 +301,13 @@
 			children = (
 				44D201BB249D76F70074F315 /* AppDelegate.swift */,
 				44D201BD249D76F70074F315 /* SceneDelegate.swift */,
-				441B918624DF7F29004B27D9 /* Api */,
 				44712D7524A267D80083B1AB /* Model */,
 				44712D7624A267E30083B1AB /* View */,
 				44712D7724A267EA0083B1AB /* Controller */,
+				4496385624D68978007576E1 /* Fonts */,
+				44E79B5E24A2FDAA00DDC48E /* Service */,
 				44E79B5C24A2FC0F00DDC48E /* Assets.xcassets */,
 				44D201C6249D76F90074F315 /* LaunchScreen.storyboard */,
-				4496385624D68978007576E1 /* Fonts */,
 				44E09CC524C8CDA7009C3370 /* categories.json */,
 				44D201C9249D76F90074F315 /* Info.plist */,
 				442A123D24D1EFA8004E5D7A /* GoogleService-Info.plist */,
@@ -376,6 +374,8 @@
 		44E79B5E24A2FDAA00DDC48E /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				44A7883424E87EDB005789E5 /* UIKit+Extensions.swift */,
+				44712D7D24A26CF40083B1AB /* Constants.swift */,
 				44E79B6124A2FEAB00DDC48E /* ServiceUtil.swift */,
 			);
 			path = Service;

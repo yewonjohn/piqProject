@@ -69,7 +69,6 @@ class SearchPageViewController: UIViewController{
     //translation var for dismiss gesture
     var viewTranslation = CGPoint(x: 0, y: 0)
     
-    
     // MARK: - View Controller Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -79,27 +78,11 @@ class SearchPageViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        costStackView.heightAnchor.constraint(equalTo: costStackView.widthAnchor, multiplier: 0.13).isActive = true
-        distanceStackView.heightAnchor.constraint(equalTo: distanceStackView.widthAnchor, multiplier: 0.13).isActive = true
-        
-        categoryTitleTopConstraint.constant = self.view.frame.height * 0.2
-        categoryCollectionHeight.constant = self.view.frame.height * 0.2
 
-        //Fetching categories data from json file
-        guard let jsonCategories = readLocalFile(forName: "categories") else { return }
-        parse(jsonData: jsonCategories)
+        layoutConfig()
+        fetchCategories()
+        collectionViewConfig()
         
-        //Sets background
-        ServiceUtil().setBackground(view,backgroundImageView)
-        
-        categoryCollectionView.delegate = self
-        categoryCollectionView.dataSource = self
-        categoryCollectionView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9647058824, blue: 0.9529411765, alpha: 1)
-        categoryCollectionView.allowsSelection = true
-        categoryCollectionView.allowsMultipleSelection = true
-        categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
-        
-        dollarSignsParam = "0"
     }
     
     override func viewWillLayoutSubviews() {
@@ -111,19 +94,7 @@ class SearchPageViewController: UIViewController{
             //sets views differently depending where this VC is called
               switch sidePresented {
               case true:
-                  findFoodButton.setTitle("Apply", for: .normal)
-                  cancelButton.isHidden = false
-                  piqLabel.isHidden = true
-                  
-                  //set constraints
-                  costLeftConstraint.constant = 25
-                  costRightConstraint.constant = 25
-                  distanceLeftConstraint.constant = 25
-                  distanceRightConstraint.constant = 25
-                  
-                  let gesturePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
-                  view.addGestureRecognizer(gesturePan)
-                  
+                sidePresentedConfig()
               default:
                   findFoodButton.setTitle("Find my meal!", for: .normal)
                   cancelButton.isHidden = true
@@ -131,6 +102,47 @@ class SearchPageViewController: UIViewController{
               }
         }
     }
+    // MARK:- UI Configurations
+    
+    func collectionViewConfig(){
+        categoryCollectionView.delegate = self
+        categoryCollectionView.dataSource = self
+        categoryCollectionView.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        categoryCollectionView.allowsSelection = true
+        categoryCollectionView.allowsMultipleSelection = true
+        categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
+    }
+    func layoutConfig(){
+        costStackView.heightAnchor.constraint(equalTo: costStackView.widthAnchor, multiplier: 0.13).isActive = true
+        distanceStackView.heightAnchor.constraint(equalTo: distanceStackView.widthAnchor, multiplier: 0.13).isActive = true
+        categoryTitleTopConstraint.constant = self.view.frame.height * 0.2
+        categoryCollectionHeight.constant = self.view.frame.height * 0.2
+        
+        dollarSignsParam = "0"
+        //Sets background
+        ServiceUtil().setBackground(view,backgroundImageView)
+    }
+    func fetchCategories(){
+        //Fetching categories data from json file
+        guard let jsonCategories = readLocalFile(forName: "categories") else { return }
+        parse(jsonData: jsonCategories)
+    }
+    
+    func sidePresentedConfig(){
+        findFoodButton.setTitle("Apply", for: .normal)
+        cancelButton.isHidden = false
+        piqLabel.isHidden = true
+        
+        //set constraints
+        costLeftConstraint.constant = 25
+        costRightConstraint.constant = 25
+        distanceLeftConstraint.constant = 25
+        distanceRightConstraint.constant = 25
+        
+        let gesturePan = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
+        view.addGestureRecognizer(gesturePan)
+    }
+    
     
     // MARK: - User Interactions
     @IBAction func costButtonClicked(_ sender: UIButton) {
@@ -293,7 +305,7 @@ extension SearchPageViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         cell.layer.cornerRadius = 15
         cell.layer.masksToBounds = true
         cell.dataImage = categoriesImages[indexPath.row]

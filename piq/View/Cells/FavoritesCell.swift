@@ -10,6 +10,8 @@ import UIKit
 import SwipeCellKit
 
 class FavoritesCell: SwipeTableViewCell {
+    
+    static let identifier = "FavoritesCell"
 
     @IBOutlet weak var contentVIew: UIView!
     @IBOutlet weak var containerView: UIView!

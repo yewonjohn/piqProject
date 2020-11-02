@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,7 +74,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.97254901960784312" green="0.96470588235294119" blue="0.95294117647058818" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="e73-JF-vht" firstAttribute="top" secondItem="kfW-Gd-g5J" secondAttribute="bottom" constant="5" id="3On-Ma-sAo"/>
                             <constraint firstItem="e73-JF-vht" firstAttribute="leading" secondItem="3HA-MA-dFt" secondAttribute="leading" constant="5" id="BEZ-FZ-fpp"/>
@@ -90,7 +91,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.97254901960784312" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="NO2-sY-9Rj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KmW-r9-0SG"/>
                     <constraint firstItem="NO2-sY-9Rj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Mey-xC-I64"/>
@@ -101,8 +102,8 @@
                     <constraint firstItem="3HA-MA-dFt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ufF-qe-mef"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.89640919750000003" green="0.89207871829999996" blue="0.9007396768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="0.89640919750000003" green="0.89207871829999996" blue="0.9007396768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
                 <outlet property="categoriesWidth" destination="99f-Ch-Yfo" id="oyj-Xo-egm"/>
                 <outlet property="containerView" destination="3HA-MA-dFt" id="bEx-hd-pn6"/>

@@ -16,13 +16,13 @@ class TabBarViewController: UITabBarController{
     
     //MARK:- UI Properties
     
-    var tutorialOverlayView = UIView()
-    let tutorialView = UIView()
-    let tutorialContainerView = UIView()
-    let tutorialIconView = UIImageView()
-    let tutorialTitleLabel = UILabel()
-    let tutorialDescLabel = UILabel()
-    let tutorialArrowImage = UIImageView()
+    private var tutorialOverlayView = UIView()
+    private let tutorialView = UIView()
+    private let tutorialContainerView = UIView()
+    private let tutorialIconView = UIImageView()
+    private let tutorialTitleLabel = UILabel()
+    private let tutorialDescLabel = UILabel()
+    private let tutorialArrowImage = UIImageView()
 
     //MARK:- Properties
     let service = ServiceUtil()

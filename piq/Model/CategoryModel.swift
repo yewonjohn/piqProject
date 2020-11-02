@@ -1,7 +1,10 @@
 //
-//  RootClass.swift
-//  Model Generated using http://www.jsoncafe.com/
-//  Created on July 23, 2020
+//  CategoryModel.swift
+//  piq
+//
+//  Created by John Kim on 6/24/20.
+//  Copyright © 2020 John Yewon Kim. All rights reserved.
+//
 
 import Foundation
 
