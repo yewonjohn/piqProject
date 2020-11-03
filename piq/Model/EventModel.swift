@@ -10,6 +10,7 @@ import Foundation
 
 struct EventResponse : Decodable{
     var events: [EventModel]?
+    
 }
 
 struct EventModel : Decodable{

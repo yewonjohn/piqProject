@@ -30,7 +30,6 @@ class EventManager {
         
         
         let task = session.dataTask(with: request, completionHandler: { data, response, error in
-            print(response)
             if(error != nil){
                 print(error?.localizedDescription)
             }

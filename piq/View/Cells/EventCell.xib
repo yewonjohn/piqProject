@@ -25,25 +25,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="167" height="252"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGv-ht-JZ1">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGv-ht-JZ1">
                         <rect key="frame" x="0.0" y="0.0" width="167" height="252"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-9u-hMZ" userLabel="Card View">
-                                <rect key="frame" x="0.0" y="60" width="167" height="192"/>
+                                <rect key="frame" x="0.0" y="0.0" width="167" height="252"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MpT-P5-qn3">
-                                        <rect key="frame" x="0.0" y="0.0" width="167" height="192"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MpT-P5-qn3">
+                                        <rect key="frame" x="0.0" y="0.0" width="167" height="252"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7T-5V-AwV">
                                         <rect key="frame" x="5" y="5" width="157" height="21"/>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKT-So-w2I">
                                         <rect key="frame" x="5" y="31" width="157" height="13.5"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -70,7 +70,7 @@
                             <constraint firstAttribute="bottom" secondItem="oSf-9u-hMZ" secondAttribute="bottom" id="JnN-6Z-vJY"/>
                             <constraint firstAttribute="trailing" secondItem="oSf-9u-hMZ" secondAttribute="trailing" id="OHG-38-0mf"/>
                             <constraint firstItem="oSf-9u-hMZ" firstAttribute="leading" secondItem="cGv-ht-JZ1" secondAttribute="leading" id="Vsq-KP-Nf4"/>
-                            <constraint firstItem="oSf-9u-hMZ" firstAttribute="top" secondItem="cGv-ht-JZ1" secondAttribute="top" constant="60" id="tWB-dE-mRj"/>
+                            <constraint firstItem="oSf-9u-hMZ" firstAttribute="top" secondItem="cGv-ht-JZ1" secondAttribute="top" id="tWB-dE-mRj"/>
                         </constraints>
                     </view>
                 </subviews>
